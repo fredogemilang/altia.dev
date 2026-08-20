@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-ivory: #FFF6E8;
+  --color-cream: #F0E6D3;
+  --color-vermilion: #E34234;
+  --color-terracotta: #C46B4E;
+  --color-charcoal: #2F2A26;
+  --color-warm-gray: #8A8078;
+}
+
+/* Lenis smooth scrolling base */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Global Selection & Base */
+::selection {
+  background-color: #E34234;
+  color: #FFF6E8;
+}
+
+::-moz-selection {
+  background-color: #E34234;
+  color: #FFF6E8;
+}
+
+body {
+  background-color: #FFF6E8;
+  color: #2F2A26;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom warm scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0E6D3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C46B4E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E34234;
+}
+
+/* Animation & Masking utilities */
+.split-word-wrapper,
+.split-char-wrapper {
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.will-change-transform {
+  will-change: transform, opacity;
+}
+
+/* Noise overlay for organic texture */
+.bg-noise {
+  background-image: radial-gradient(rgba(47, 42, 38, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphism warm card */
+.glass-warm {
+  background: rgba(255, 246, 232, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 223, 211, 0.8);
+}
+
+/* Infinite Marquee */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
