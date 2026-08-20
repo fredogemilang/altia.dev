@@ -71,7 +71,7 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto right-1/2 top-0 h-64 sm:h-80 overflow-visible w-[30rem] bg-gradient-conic from-vermilion via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
+            className="absolute inset-auto right-[calc(50%-1px)] top-0 h-64 sm:h-80 overflow-visible w-[30rem] bg-gradient-conic from-vermilion via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
           >
             {/* Bottom fade mask to ivory */}
             <div className="absolute w-[100%] left-0 bg-ivory h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
@@ -91,7 +91,7 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
             style={{
               backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
             }}
-            className="absolute inset-auto left-1/2 top-0 h-64 sm:h-80 w-[30rem] bg-gradient-conic from-transparent via-transparent to-vermilion text-white [--conic-position:from_290deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
+            className="absolute inset-auto left-[calc(50%-1px)] top-0 h-64 sm:h-80 w-[30rem] bg-gradient-conic from-transparent via-transparent to-vermilion text-white [--conic-position:from_290deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
           >
             {/* Right fade mask to ivory */}
             <div className="absolute w-36 h-[100%] right-0 bg-ivory bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
@@ -99,7 +99,10 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
             <div className="absolute w-[100%] right-0 bg-ivory h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
           </motion.div>
 
-          {/* Diffuser Core Glow Sphere (8rem -> 16rem growth) */}
+          {/* Central Seamless Fusion Cone (Eliminates the vertical hairline completely) */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 h-52 sm:h-64 w-28 sm:w-36 bg-[radial-gradient(ellipse_at_top,_rgba(227,66,52,0.32)_0%,_rgba(227,66,52,0.12)_45%,_transparent_75%)] mix-blend-multiply blur-[1px] pointer-events-none" />
+
+          {/* Diffuser Core Glow Sphere (8rem -> 18rem growth) */}
           <motion.div
             initial={{ width: "8rem" }}
             whileInView={{ width: "18rem" }}
@@ -108,7 +111,7 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="absolute top-0 z-20 h-24 sm:h-32 w-72 rounded-full bg-vermilion/30 blur-2xl pointer-events-none"
+            className="absolute top-0 z-20 h-24 sm:h-32 w-72 rounded-full bg-vermilion/25 blur-2xl pointer-events-none"
           />
 
           {/* Atmosphere Ambient Radial Wash */}
