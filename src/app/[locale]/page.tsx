@@ -60,18 +60,18 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* ─────────────────────────────────────────────────────────── */}
       {/* 1. HERO SECTION (Pure Vermilion Lamp on Warm Ivory Stage)   */}
       {/* ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-16 pb-16 sm:pt-20 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-8 pb-12 sm:pt-20 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
         <HeroLamp>
           <Container size="large">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10 pt-4 sm:pt-6">
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10 pt-2 sm:pt-6">
               {/* Studio Badge */}
               <Badge
                 variant="vermilion"
-                size="md"
-                className="mb-4 sm:mb-6 px-3.5 py-1 shadow-sm text-xs uppercase font-bold tracking-widest border border-vermilion/30"
+                size="sm"
+                className="mb-3.5 sm:mb-6 px-3 py-1 sm:px-3.5 sm:py-1 text-[10px] sm:text-xs shadow-sm uppercase font-bold tracking-wider sm:tracking-widest border border-vermilion/30 max-w-[92vw]"
               >
-                <Sparkles className="w-3.5 h-3.5 text-vermilion animate-pulse-soft" />
-                <span>{tHero("badge")}</span>
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-vermilion animate-pulse-soft shrink-0" />
+                <span className="truncate sm:overflow-visible">{tHero("badge")}</span>
               </Badge>
 
               {/* Main Headline */}
@@ -82,17 +82,17 @@ export default async function HomePage({ params }: HomePageProps) {
               />
 
               {/* Subtitle with Relaxed Leading */}
-              <p className="text-sm sm:text-base md:text-lg text-charcoal-muted max-w-lg leading-relaxed mb-8 sm:mb-10 font-normal">
+              <p className="text-xs sm:text-base md:text-lg text-charcoal-muted max-w-lg leading-relaxed mb-6 sm:mb-10 font-normal px-2 sm:px-0">
                 {tHero("subtitle")}
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 pb-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto pb-4">
                 <Button
                   href="/contact"
                   variant="primary"
                   size="md"
-                  className="sm:text-base sm:px-7 sm:py-3.5 shadow-vermilion-glow"
+                  className="w-full sm:w-auto text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-3.5 shadow-vermilion-glow justify-center"
                   cursorText="START"
                 >
                   <span>{tHero("primaryCta")}</span>
@@ -102,7 +102,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   href="/portfolio"
                   variant="secondary"
                   size="md"
-                  className="sm:text-base sm:px-7 sm:py-3.5"
+                  className="w-full sm:w-auto text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-3.5 justify-center"
                   cursorText="VIEW"
                 >
                   <span>{tHero("secondaryCta")}</span>
