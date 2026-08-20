@@ -64,20 +64,21 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* ─────────────────────────────────────────────────────────── */}
       {/* 1. HERO SECTION (Pure Vermilion Lamp on Warm Ivory Stage)   */}
       {/* ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-8 pb-12 sm:pt-20 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
-        <HeroLamp>
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-6 pb-12 sm:pt-16 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
+        <HeroLamp
+          badge={
+            <Badge
+              variant="vermilion"
+              size="sm"
+              className="px-3 py-1 sm:px-3.5 sm:py-1 text-[10px] sm:text-xs shadow-sm uppercase font-bold tracking-wider sm:tracking-widest border border-vermilion/30 max-w-[92vw]"
+            >
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-vermilion animate-pulse-soft shrink-0" />
+              <span className="truncate sm:overflow-visible">{tHero("badge")}</span>
+            </Badge>
+          }
+        >
           <Container size="large">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10 pt-2 sm:pt-6">
-              {/* Studio Badge */}
-              <Badge
-                variant="vermilion"
-                size="sm"
-                className="mb-3.5 sm:mb-6 px-3 py-1 sm:px-3.5 sm:py-1 text-[10px] sm:text-xs shadow-sm uppercase font-bold tracking-wider sm:tracking-widest border border-vermilion/30 max-w-[92vw]"
-              >
-                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-vermilion animate-pulse-soft shrink-0" />
-                <span className="truncate sm:overflow-visible">{tHero("badge")}</span>
-              </Badge>
-
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10 pt-1 sm:pt-2">
               {/* Main Headline */}
               <HeroTitleAnimation
                 line1={tHero("titleLine1")}
