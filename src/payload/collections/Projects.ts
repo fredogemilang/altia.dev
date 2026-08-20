@@ -110,12 +110,17 @@ export const Projects: CollectionConfig = {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
+      label: 'Cover / Featured Image (Upload from Computer)',
+      admin: {
+        description: 'Upload file gambar proyek (.png, .jpg, .webp) langsung dari perangkat Anda.',
+      },
     },
     {
       name: 'imageUrl',
       type: 'text',
+      label: 'Or External / Static Image URL (Optional)',
       admin: {
-        description: 'Direct fallback image path (e.g. /projects/fintech.jpg)',
+        description: 'Opsional: URL gambar eksternal jika tidak ingin mengupload berkas langsung.',
       },
     },
     {

@@ -55,10 +55,9 @@ export async function getCmsProjects(): Promise<Project[]> {
           },
           stack: Array.isArray(d.tags) ? (d.tags as Array<{ tag: string }>).map((t) => t.tag) : [],
           image:
-            (d.imageUrl as string) ||
             (typeof d.featuredImage === 'object' && d.featuredImage !== null && 'url' in d.featuredImage
               ? (d.featuredImage as { url: string }).url
-              : '/projects/fintech.jpg'),
+              : (d.imageUrl as string)) || '/projects/fintech.jpg',
           liveUrl: (d.liveUrl as string) || undefined,
           githubUrl: (d.githubUrl as string) || undefined,
         };
@@ -163,9 +162,9 @@ export async function getCmsPosts(): Promise<BlogPost[]> {
             avatar: '/team/lead.jpg',
           },
           coverImage:
-            typeof d.coverImage === 'object' && d.coverImage !== null && 'url' in d.coverImage
+            (typeof d.coverImage === 'object' && d.coverImage !== null && 'url' in d.coverImage
               ? (d.coverImage as { url: string }).url
-              : '/blog/architecture.jpg',
+              : (d.imageUrl as string)) || '/blog/architecture.jpg',
         };
       });
     }

@@ -1,12 +1,15 @@
 import type { CollectionConfig } from 'payload';
+import path from 'path';
 
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
-    group: 'Admin & System',
+    useAsTitle: 'filename',
+    group: 'Studio Content',
+    description: 'Upload and manage project screenshots, blog cover images, and studio assets.',
   },
   upload: {
-    staticDir: 'public/uploads',
+    staticDir: path.resolve(process.cwd(), 'public/uploads'),
     imageSizes: [
       {
         name: 'thumbnail',
@@ -16,8 +19,8 @@ export const Media: CollectionConfig = {
       },
       {
         name: 'card',
-        width: 768,
-        height: 512,
+        width: 1200,
+        height: 800,
         position: 'centre',
       },
     ],
@@ -28,7 +31,10 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      required: true,
+      required: false,
+      admin: {
+        description: 'Optional image description for accessibility and SEO',
+      },
     },
   ],
 };

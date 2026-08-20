@@ -69,6 +69,18 @@ export const Posts: CollectionConfig = {
       name: 'coverImage',
       type: 'upload',
       relationTo: 'media',
+      label: 'Article Cover Image (Upload from Computer)',
+      admin: {
+        description: 'Upload gambar sampul artikel (.png, .jpg, .webp) langsung dari komputer/laptop Anda.',
+      },
+    },
+    {
+      name: 'imageUrl',
+      type: 'text',
+      label: 'Or Static Image URL (Optional)',
+      admin: {
+        description: 'Opsional: Path atau URL gambar jika tidak mengupload file.',
+      },
     },
     {
       name: 'tags',
