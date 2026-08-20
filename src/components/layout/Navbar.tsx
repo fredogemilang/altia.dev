@@ -383,14 +383,16 @@ export function Navbar() {
                       <Link
                         href="/pricing"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-start gap-3 p-2.5 rounded-xl bg-cream/70 border border-warm-border/60"
+                        className="flex items-start gap-3 p-3 rounded-xl bg-cream hover:bg-ivory border border-warm-border shadow-xs transition-colors"
                       >
-                        <Tag className="w-4 h-4 text-charcoal mt-0.5" />
+                        <div className="w-6 h-6 rounded-md bg-charcoal/10 text-charcoal flex items-center justify-center shrink-0 mt-0.5">
+                          <Tag className="w-3.5 h-3.5" />
+                        </div>
                         <div>
                           <div className="font-display font-bold text-sm text-charcoal">
                             {t("pricingMenu.rateCardTitle")}
                           </div>
-                          <div className="text-xs text-charcoal-muted">
+                          <div className="text-xs text-charcoal-muted mt-0.5">
                             {t("pricingMenu.rateCardDesc")}
                           </div>
                         </div>
@@ -399,17 +401,19 @@ export function Navbar() {
                       <Link
                         href="/estimator"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-start gap-3 p-2.5 rounded-xl bg-vermilion/10 border border-vermilion/30"
+                        className="flex items-start gap-3 p-3 rounded-xl bg-cream hover:bg-ivory border border-vermilion/40 shadow-xs transition-colors"
                       >
-                        <Sparkles className="w-4 h-4 text-vermilion mt-0.5" />
+                        <div className="w-6 h-6 rounded-md bg-vermilion text-ivory flex items-center justify-center shrink-0 mt-0.5">
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </div>
                         <div>
                           <div className="font-display font-bold text-sm text-charcoal flex items-center gap-2">
                             <span>{t("pricingMenu.estimatorTitle")}</span>
-                            <span className="text-[9px] uppercase font-bold px-1.5 py-0.2 rounded bg-vermilion text-ivory">
+                            <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-vermilion text-ivory">
                               New
                             </span>
                           </div>
-                          <div className="text-xs text-charcoal-muted">
+                          <div className="text-xs text-charcoal-muted mt-0.5">
                             {t("pricingMenu.estimatorDesc")}
                           </div>
                         </div>
