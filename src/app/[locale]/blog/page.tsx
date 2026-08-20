@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { BLOG_POSTS } from "@/data/blog";
+import { getCmsPosts } from "@/lib/payload/data";
 import { Sparkles, Calendar, Clock, ArrowUpRight } from "lucide-react";
 
 interface BlogPageProps {
@@ -18,6 +18,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations("Blog");
+  const posts = await getCmsPosts();
   const lang = locale === "id" ? "id" : "en";
 
   return (
@@ -48,7 +49,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <section>
         <Container size="large">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {BLOG_POSTS.map((post) => (
+            {posts.map((post) => (
               <Card
                 key={post.slug}
                 className="flex flex-col justify-between h-full bg-warm-card border-warm-border group hover:border-vermilion"

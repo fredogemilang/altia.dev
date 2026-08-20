@@ -14,8 +14,7 @@ import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { CounterAnimation } from "@/components/effects/CounterAnimation";
 import { HorizontalScroll } from "@/components/effects/HorizontalScroll";
 import { ParallaxImage } from "@/components/effects/ParallaxImage";
-import { PROJECTS } from "@/data/projects";
-import { TESTIMONIALS } from "@/data/testimonials";
+import { getCmsProjects, getCmsTestimonials, seedInitialPayloadDataIfEmpty } from "@/lib/payload/data";
 import {
   Globe,
   Smartphone,
@@ -45,6 +44,9 @@ export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
+  // Auto seed initial CMS records if DB is empty
+  seedInitialPayloadDataIfEmpty().catch(() => {});
+
   const tHero = await getTranslations("Hero");
   const tServices = await getTranslations("Services");
   const tPortfolio = await getTranslations("Portfolio");
@@ -52,7 +54,9 @@ export default async function HomePage({ params }: HomePageProps) {
   const tTestimonials = await getTranslations("Testimonials");
   const tCommon = await getTranslations("Common");
 
-  const featuredProjects = PROJECTS.filter((p) => p.featured);
+  const allProjects = await getCmsProjects();
+  const featuredProjects = allProjects.filter((p) => p.featured);
+  const testimonials = await getCmsTestimonials();
   const lang = locale === "id" ? "id" : "en";
 
   return (
@@ -376,7 +380,7 @@ export default async function HomePage({ params }: HomePageProps) {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {TESTIMONIALS.map((item, index) => (
+            {testimonials.map((item, index) => (
               <ScrollReveal
                 key={item.id}
                 variant="fade-up"

@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ParallaxImage } from "@/components/effects/ParallaxImage";
+import { getCmsProjects, getCmsProjectBySlug } from "@/lib/payload/data";
 import { PROJECTS } from "@/data/projects";
 import { routing } from "@/i18n/routing";
 import {
@@ -29,18 +30,19 @@ export function generateStaticParams() {
 }
 
 interface ProjectDetailPageProps {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 }
 
 export default async function ProjectDetailPage({
-  params: { locale, slug },
+  params,
 }: ProjectDetailPageProps) {
+  const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = await getCmsProjectBySlug(slug);
   if (!project) {
     notFound();
   }
@@ -48,9 +50,9 @@ export default async function ProjectDetailPage({
   const t = await getTranslations("Portfolio");
   const lang = locale === "id" ? "id" : "en";
 
-  // Find next project
-  const currentIndex = PROJECTS.findIndex((p) => p.slug === slug);
-  const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
+  const allProjects = await getCmsProjects();
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+  const nextProject = allProjects[(currentIndex + 1) % allProjects.length] || allProjects[0];
 
   return (
     <div className="flex flex-col gap-16 sm:gap-24 pb-24">

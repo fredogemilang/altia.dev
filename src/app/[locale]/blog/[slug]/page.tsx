@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
+import { getCmsPostBySlug } from "@/lib/payload/data";
 import { BLOG_POSTS } from "@/data/blog";
 import { routing } from "@/i18n/routing";
 import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
@@ -18,18 +19,19 @@ export function generateStaticParams() {
 }
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     locale: string;
     slug: string;
-  };
+  }>;
 }
 
 export default async function BlogPostPage({
-  params: { locale, slug },
+  params,
 }: BlogPostPageProps) {
+  const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = await getCmsPostBySlug(slug);
   if (!post) {
     notFound();
   }
