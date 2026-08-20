@@ -311,8 +311,46 @@ export function Navbar() {
       {/* Full-screen Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-50 bg-ivory/98 backdrop-blur-xl hidden flex-col justify-between p-6 pt-24 pb-8 overflow-y-auto"
+        className="fixed inset-0 z-50 bg-ivory/98 backdrop-blur-xl hidden flex-col justify-between p-6 pt-5 pb-8 overflow-y-auto"
       >
+        {/* Mobile Menu Top Bar with Close Button in Top Right */}
+        <div className="flex items-center justify-between pb-4 border-b border-warm-border/60">
+          <Link
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2.5"
+          >
+            <div className="w-8 h-8 rounded-lg bg-vermilion flex items-center justify-center text-ivory font-display font-black text-base shadow-sm">
+              A
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display font-bold text-lg tracking-tight text-charcoal leading-none">
+                ALTIA<span className="text-vermilion">.</span>DEV
+              </span>
+              <span className="text-[9px] uppercase font-bold tracking-widest text-charcoal-muted mt-0.5">
+                Studio
+              </span>
+            </div>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1.5 rounded-full bg-cream text-charcoal border border-warm-border text-xs font-bold font-display uppercase tracking-wider"
+            >
+              {locale.toUpperCase()}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-full bg-cream hover:bg-charcoal text-charcoal hover:text-ivory border border-warm-border transition-colors shadow-sm"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+
         <div className="flex flex-col gap-3 mt-4">
           {NAV_LINKS.map((link) => {
             const isPricing = link.href === "/pricing";
