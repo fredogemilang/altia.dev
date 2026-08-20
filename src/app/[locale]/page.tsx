@@ -60,7 +60,7 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* ─────────────────────────────────────────────────────────── */}
       {/* 1. HERO SECTION (Pure Vermilion Lamp on Warm Ivory Stage)   */}
       {/* ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-8 pb-16 sm:pt-12 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center pt-16 pb-16 sm:pt-20 sm:pb-20 bg-ivory bg-noise border-b border-warm-border/60 overflow-hidden">
         <HeroLamp>
           <Container size="large">
             <div className="flex flex-col items-center text-center max-w-4xl mx-auto relative z-10 pt-4 sm:pt-6">
