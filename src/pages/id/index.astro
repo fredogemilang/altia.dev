@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Container } from '../../components/ui/Container';
+import { Card } from '../../components/ui/Card';
+import { Badge } from '../../components/ui/Badge';
+import { SectionHeading } from '../../components/ui/SectionHeading';
+import { SplitGlobeHero } from '../../components/sections/SplitGlobeHero';
+import { ServicesCardGrid, type ServiceCardItem } from '../../components/sections/services/ServicesCardGrid';
+import { ScrollReveal } from '../../components/effects/ScrollReveal';
+import { CounterAnimation } from '../../components/effects/CounterAnimation';
+import { StackedCardsSection } from '../../components/sections/portfolio/StackedCardsSection';
+import { getProjects, getTestimonials } from '../../lib/b10cks';
+import { t, type Locale } from '../../i18n/utils';
+import { Zap } from 'lucide-react';
+
+const locale: Locale = 'id';
+const allProjects = await getProjects();
+const featuredProjects = allProjects.filter((p) => p.featured);
+const testimonials = await getTestimonials();
+
+const marqueeItems = [
+  t(locale, 'Hero.service1'),
+  '•',
+  t(locale, 'Hero.service2'),
+  '•',
+  t(locale, 'Hero.service3'),
+  '•',
+  'ALTIA DEV STUDIO',
+  '•',
+  'CREATIVE ENGINEERING',
+  '•',
+];
+
+const serviceItems: ServiceCardItem[] = [
+  {
+    id: 'web',
+    icon: 'web',
+    number: t(locale, 'Services.items.web.number'),
+    title: t(locale, 'Services.items.web.title'),
+    tagline: t(locale, 'Services.items.web.tagline'),
+    stack: 'WordPress, Laravel, Next.js, Go',
+    href: '/id/services#web',
+  },
+  {
+    id: 'app',
+    icon: 'app',
+    number: t(locale, 'Services.items.app.number'),
+    title: t(locale, 'Services.items.app.title'),
+    tagline: t(locale, 'Services.items.app.tagline'),
+    stack: 'Flutter, React Native, Rust',
+    href: '/id/services#app',
+  },
+  {
+    id: 'ai',
+    icon: 'ai',
+    number: t(locale, 'Services.items.ai.number'),
+    title: t(locale, 'Services.items.ai.title'),
+    tagline: t(locale, 'Services.items.ai.tagline'),
+    stack: 'LangChain, Qdrant, Python',
+    href: '/id/services#ai',
+  },
+];
+---
+
+<Layout locale={locale}>
+  <div class="flex flex-col gap-36 sm:gap-48 lg:gap-56 pb-36">
+    <!-- 1. SPLIT GLOBE HERO (Interactive 3D WebGL Globe Split) -->
+    <SplitGlobeHero
+      client:load
+      badge={t(locale, 'Hero.badge')}
+      titleLine1={t(locale, 'Hero.titleLine1')}
+      titleLine2={t(locale, 'Hero.titleLine2')}
+      subtitle={t(locale, 'Hero.subtitle')}
+      primaryCta={t(locale, 'Hero.primaryCta')}
+      secondaryCta={t(locale, 'Hero.secondaryCta')}
+      marqueeItems={marqueeItems}
+    />
+
+    <!-- 2. SERVICES PREVIEW SECTION (2-Way Reversible Stagger Grid) -->
+    <section class="relative">
+      <Container size="large">
+        <SectionHeading
+          tag={t(locale, 'Services.tag')}
+          title={t(locale, 'Services.title')}
+          subtitle={t(locale, 'Services.subtitle')}
+        />
+
+        <ServicesCardGrid
+          client:visible
+          items={serviceItems}
+          exploreText={t(locale, 'Common.explore')}
+        />
+      </Container>
+    </section>
+
+    <!-- 3. SELECTED WORKS SHOWCASE (GSAP Parallax Stacking Cards) -->
+    <StackedCardsSection
+      client:visible
+      projects={featuredProjects}
+      lang={locale}
+      tag={t(locale, 'Portfolio.tag')}
+      title={t(locale, 'Portfolio.title')}
+      exploreText={t(locale, 'Portfolio.viewProject')}
+      viewAllText={t(locale, 'Common.viewAll', 'Semua Proyek')}
+    />
+
+    <!-- 4. STATS COUNTER SECTION -->
+    <section class="relative py-4 sm:py-8">
+      <Container size="large">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 bg-charcoal text-ivory rounded-4xl p-10 sm:p-16 lg:p-20 shadow-warm-lg relative overflow-hidden">
+          <div class="flex flex-col">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
+              <CounterAnimation client:visible value={45} suffix="+" />
+            </span>
+            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
+              {t(locale, 'Stats.stat1.label')}
+            </span>
+            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
+              {t(locale, 'Stats.stat1.description')}
+            </span>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
+              <CounterAnimation client:visible value={99.8} decimals={1} suffix="%" />
+            </span>
+            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
+              {t(locale, 'Stats.stat2.label')}
+            </span>
+            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
+              {t(locale, 'Stats.stat2.description')}
+            </span>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
+              <CounterAnimation client:visible value={4.2} decimals={1} suffix="x" />
+            </span>
+            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
+              {t(locale, 'Stats.stat3.label')}
+            </span>
+            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
+              {t(locale, 'Stats.stat3.description')}
+            </span>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
+              <CounterAnimation client:visible value={12} suffix="+" />
+            </span>
+            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
+              {t(locale, 'Stats.stat4.label')}
+            </span>
+            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
+              {t(locale, 'Stats.stat4.description')}
+            </span>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 5. CLIENT STORIES & TESTIMONIALS -->
+    <section class="relative">
+      <Container size="large">
+        <SectionHeading
+          tag={t(locale, 'Testimonials.tag')}
+          title={t(locale, 'Testimonials.title')}
+          subtitle={t(locale, 'Testimonials.subtitle')}
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          {testimonials.map((item, index) => (
+            <ScrollReveal
+              client:visible
+              key={item.id}
+              variant="fade-up"
+              delay={index * 0.15}
+              className="h-full"
+            >
+              <Card className="p-8 sm:p-10 h-full flex flex-col justify-between bg-warm-card border-warm-border rounded-3xl">
+                <div>
+                  {item.metric && (
+                    <Badge
+                      variant="vermilion"
+                      size="sm"
+                      className="mb-8 font-bold uppercase tracking-wider text-[11px] px-3 py-1 inline-flex items-center gap-1.5"
+                    >
+                      <Zap className="w-3.5 h-3.5" />
+                      <span>{item.metric[locale]}</span>
+                    </Badge>
+                  )}
+                  <p class="text-base sm:text-lg text-charcoal leading-relaxed mb-10 italic">
+                    &ldquo;{item.quote[locale]}&rdquo;
+                  </p>
+                </div>
+
+                <div class="flex items-center gap-3.5 pt-6 border-t border-warm-border">
+                  <div class="w-11 h-11 rounded-full bg-cream overflow-hidden relative flex-shrink-0">
+                    <img
+                      src={item.avatar}
+                      alt={item.author}
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-display font-bold text-sm sm:text-base text-charcoal leading-tight">
+                      {item.author}
+                    </span>
+                    <span class="text-xs sm:text-sm text-charcoal-muted leading-tight mt-0.5">
+                      {item.role[locale]}, {item.company}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  </div>
+</Layout>

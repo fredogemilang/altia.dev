@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Container } from '../components/ui/Container';
+import { Badge } from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { ScrollReveal } from '../components/effects/ScrollReveal';
+import { TEAM_MEMBERS } from '../data/team';
+import { t, type Locale } from '../i18n/utils';
+import {
+  Sparkles,
+  HeartHandshake,
+  Target,
+  Eye,
+  Github,
+  Linkedin,
+  Twitter,
+} from 'lucide-react';
+
+const locale: Locale = 'en';
+---
+
+<Layout title={t(locale, 'About.title')} locale={locale}>
+  <div class="flex flex-col gap-24 sm:gap-32 pb-24">
+    <!-- 1. Header -->
+    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
+      <Container size="large">
+        <div class="max-w-3xl">
+          <Badge
+            variant="vermilion"
+            size="md"
+            className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-vermilion" />
+            <span>{t(locale, 'About.tag')}</span>
+          </Badge>
+          <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-6">
+            {t(locale, 'About.title')}
+          </h1>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 2. Philosophy / Story -->
+    <section>
+      <Container size="large">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-5">
+            <span class="text-xs uppercase font-display font-bold tracking-widest text-vermilion mb-2 block">
+              {t(locale, 'About.storyTitle')}
+            </span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-charcoal leading-tight">
+              Software built with intent, beauty, and scale.
+            </h2>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col gap-6 text-base sm:text-lg text-charcoal-muted leading-relaxed">
+            <p>{t(locale, 'About.storyP1')}</p>
+            <p>{t(locale, 'About.storyP2')}</p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 3. Core Values / Pillars -->
+    <section class="py-12 bg-charcoal text-ivory">
+      <Container size="large">
+        <SectionHeading
+          tag={t(locale, 'About.values.tag')}
+          title="The three pillars that guide every line of code"
+          dark
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ScrollReveal client:visible variant="fade-up" delay={0.1}>
+            <div class="flex flex-col gap-4 p-8 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
+              <div class="w-12 h-12 rounded-2xl bg-vermilion text-ivory flex items-center justify-center font-display font-bold">
+                <Eye className="w-6 h-6" />
+              </div>
+              <h3 class="font-display text-2xl font-bold text-ivory">
+                {t(locale, 'About.values.v1Title')}
+              </h3>
+              <p class="text-sm text-ivory/70 leading-relaxed">
+                {t(locale, 'About.values.v1Desc')}
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal client:visible variant="fade-up" delay={0.25}>
+            <div class="flex flex-col gap-4 p-8 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
+              <div class="w-12 h-12 rounded-2xl bg-vermilion text-ivory flex items-center justify-center font-display font-bold">
+                <Target className="w-6 h-6" />
+              </div>
+              <h3 class="font-display text-2xl font-bold text-ivory">
+                {t(locale, 'About.values.v2Title')}
+              </h3>
+              <p class="text-sm text-ivory/70 leading-relaxed">
+                {t(locale, 'About.values.v2Desc')}
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal client:visible variant="fade-up" delay={0.4}>
+            <div class="flex flex-col gap-4 p-8 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
+              <div class="w-12 h-12 rounded-2xl bg-vermilion text-ivory flex items-center justify-center font-display font-bold">
+                <HeartHandshake className="w-6 h-6" />
+              </div>
+              <h3 class="font-display text-2xl font-bold text-ivory">
+                {t(locale, 'About.values.v3Title')}
+              </h3>
+              <p class="text-sm text-ivory/70 leading-relaxed">
+                {t(locale, 'About.values.v3Desc')}
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 4. Team Members -->
+    <section>
+      <Container size="large">
+        <SectionHeading
+          tag="Team"
+          title={t(locale, 'About.teamTitle')}
+          subtitle="Engineers, architects, and designers dedicated to elevating digital products."
+        />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {TEAM_MEMBERS.map((member, index) => (
+            <ScrollReveal
+              client:visible
+              key={member.name}
+              variant="fade-up"
+              delay={index * 0.1}
+              className="h-full"
+            >
+              <Card className="h-full flex flex-col justify-between p-6 bg-warm-card border-warm-border group hover:border-vermilion">
+                <div>
+                  <div class="aspect-square w-full rounded-2xl bg-cream overflow-hidden mb-6 relative">
+                    <img
+                      src={member.avatar}
+                      alt={member.name}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-charcoal mb-1">
+                    {member.name}
+                  </h3>
+                  <span class="text-xs font-display font-bold uppercase tracking-wider text-vermilion block mb-3">
+                    {member.role[locale]}
+                  </span>
+                  <p class="text-xs text-charcoal-muted leading-relaxed mb-6">
+                    {member.bio[locale]}
+                  </p>
+                </div>
+
+                <div class="flex items-center gap-2 pt-4 border-t border-warm-border text-charcoal-muted">
+                  {member.socials.github && (
+                    <a
+                      href={member.socials.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
+                      aria-label="GitHub"
+                    >
+                      <Github className="w-4 h-4" />
+                    </a>
+                  )}
+                  {member.socials.twitter && (
+                    <a
+                      href={member.socials.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
+                      aria-label="Twitter"
+                    >
+                      <Twitter className="w-4 h-4" />
+                    </a>
+                  )}
+                  {member.socials.linkedin && (
+                    <a
+                      href={member.socials.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  </div>
+</Layout>

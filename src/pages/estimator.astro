@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Container } from '../components/ui/Container';
+import { Badge } from '../components/ui/Badge';
+import { EstimatorWizard } from '../components/estimator/EstimatorWizard';
+import { t, type Locale } from '../i18n/utils';
+import { Sparkles, ShieldCheck, Clock, Zap } from 'lucide-react';
+
+const locale: Locale = 'en';
+---
+
+<Layout title={t(locale, 'Estimator.title')} locale={locale}>
+  <div class="flex flex-col gap-12 sm:gap-16 pb-24">
+    <!-- Header Section -->
+    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
+      <Container size="large">
+        <div class="max-w-3xl mx-auto text-center">
+          <Badge
+            variant="vermilion"
+            size="md"
+            className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-vermilion" />
+            <span>{t(locale, 'Estimator.tag')}</span>
+          </Badge>
+
+          <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-charcoal leading-[1.1] mb-5">
+            {t(locale, 'Estimator.title')}
+          </h1>
+
+          <p class="text-base sm:text-lg text-charcoal-muted leading-relaxed max-w-2xl mx-auto mb-8">
+            {t(locale, 'Estimator.subtitle')}
+          </p>
+
+          <!-- Trust Indicators -->
+          <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 pt-4 border-t border-warm-border/60 text-xs font-display font-medium text-charcoal-muted">
+            <div class="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-vermilion" />
+              <span>Deterministic Pricing Engine</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-vermilion" />
+              <span>Takes ~2 minutes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-vermilion" />
+              <span>Zero sales pressure</span>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Main Wizard Container -->
+    <section>
+      <Container size="medium">
+        <EstimatorWizard client:load />
+      </Container>
+    </section>
+  </div>
+</Layout>

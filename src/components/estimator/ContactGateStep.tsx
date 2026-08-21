@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/useI18n";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import {

@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "./Badge";
-import { TextReveal } from "@/components/effects/TextReveal";
+import { ScrollHighlightText } from "@/components/effects/ScrollHighlightText";
 
 export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
   tag?: string;
@@ -49,13 +49,11 @@ export const SectionHeading = forwardRef<HTMLDivElement, SectionHeadingProps>(
 
         <h2
           className={cn(
-            "font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.12]",
+            "font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12]",
             dark ? "text-ivory" : "text-charcoal"
           )}
         >
-          <TextReveal type="words" duration={0.85} stagger={0.025}>
-            {title}
-          </TextReveal>
+          <ScrollHighlightText text={title} dark={dark} />
         </h2>
 
         {subtitle && (

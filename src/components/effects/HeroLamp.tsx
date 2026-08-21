@@ -43,12 +43,12 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
         </motion.div>
       )}
 
-      {/* ── Solid Visible Horizon Laser Slit Bar (Glows & Grows 15rem -> 30rem) ── */}
+      {/* ── Solid Glowing Horizontal Laser Slit Bar ── */}
       <div className="relative flex flex-col items-center w-full">
-        {/* The Crisp Solid Glowing Laser Line (Clearly Visible) */}
+        {/* The Crisp Solid Glowing Laser Line (Gently Scaled Up) */}
         <motion.div
-          initial={{ width: "15rem", opacity: 0.6 }}
-          whileInView={{ width: "30rem", opacity: 1 }}
+          initial={{ width: "18rem", opacity: 0.6 }}
+          whileInView={{ width: "38rem", opacity: 1 }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -57,65 +57,46 @@ export function HeroLamp({ badge, children, className }: HeroLampProps) {
           className="relative z-30 h-[2.5px] sm:h-[3px] rounded-full bg-vermilion shadow-[0_0_12px_#E34234,0_0_24px_rgba(227,66,52,0.6)]"
         />
 
-        {/* ── Downward Symmetrical Light Cones Originating From Laser Line ── */}
+        {/* ── Downward Symmetrical Light Cones (Seamless & Balanced Width) ── */}
         <div className="absolute top-[2px] left-0 right-0 h-[480px] sm:h-[560px] flex w-full items-start justify-center isolate pointer-events-none z-0 overflow-hidden">
-          {/* Left Conic Beam (15rem -> 30rem growth) */}
+          {/* Main Expanding Spotlight Beam (Expanded to 48rem) */}
           <motion.div
-            initial={{ opacity: 0.5, width: "15rem" }}
-            whileInView={{ opacity: 0.9, width: "30rem" }}
+            initial={{ opacity: 0.4, width: "20rem" }}
+            whileInView={{ opacity: 0.9, width: "48rem" }}
             transition={{
               delay: 0.3,
               duration: 0.8,
               ease: "easeInOut",
             }}
-            style={{
-              backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
-            }}
-            className="absolute inset-auto right-[calc(50%-1px)] top-0 h-64 sm:h-80 overflow-visible w-[30rem] bg-gradient-conic from-vermilion via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
-          >
-            {/* Bottom fade mask to ivory */}
-            <div className="absolute w-[100%] left-0 bg-ivory h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-            {/* Left fade mask to ivory */}
-            <div className="absolute w-36 h-[100%] left-0 bg-ivory bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
-          </motion.div>
-
-          {/* Right Conic Beam (15rem -> 30rem growth) */}
-          <motion.div
-            initial={{ opacity: 0.5, width: "15rem" }}
-            whileInView={{ opacity: 0.9, width: "30rem" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
-            style={{
-              backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
-            }}
-            className="absolute inset-auto left-[calc(50%-1px)] top-0 h-64 sm:h-80 w-[30rem] bg-gradient-conic from-transparent via-transparent to-vermilion text-white [--conic-position:from_290deg_at_center_top] mix-blend-multiply blur-[1px] [mask-image:linear-gradient(to_bottom,white_10%,white_75%,transparent_100%)]"
-          >
-            {/* Right fade mask to ivory */}
-            <div className="absolute w-36 h-[100%] right-0 bg-ivory bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
-            {/* Bottom fade mask to ivory */}
-            <div className="absolute w-[100%] right-0 bg-ivory h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          </motion.div>
-
-          {/* Central Seamless Fusion Cone (Eliminates the vertical hairline completely) */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 h-52 sm:h-64 w-28 sm:w-36 bg-[radial-gradient(ellipse_at_top,_rgba(227,66,52,0.32)_0%,_rgba(227,66,52,0.12)_45%,_transparent_75%)] mix-blend-multiply blur-[1px] pointer-events-none" />
-
-          {/* Diffuser Core Glow Sphere (8rem -> 18rem growth) */}
-          <motion.div
-            initial={{ width: "8rem" }}
-            whileInView={{ width: "18rem" }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
-            className="absolute top-0 z-20 h-24 sm:h-32 w-72 rounded-full bg-vermilion/25 blur-2xl pointer-events-none"
+            className="absolute top-0 h-64 sm:h-88 bg-[radial-gradient(ellipse_50%_100%_at_50%_0%,_rgba(227,66,52,0.4)_0%,_rgba(227,66,52,0.18)_45%,_rgba(227,66,52,0.04)_75%,_transparent_100%)] mix-blend-multiply blur-[2px] [mask-image:linear-gradient(to_bottom,white_15%,white_75%,transparent_100%)]"
           />
 
-          {/* Atmosphere Ambient Radial Wash */}
-          <div className="absolute top-0 h-40 w-[32rem] sm:w-[46rem] rounded-full bg-vermilion/15 blur-3xl pointer-events-none" />
+          {/* High Intensity Inner Filament Glow */}
+          <motion.div
+            initial={{ width: "14rem", opacity: 0.3 }}
+            whileInView={{ width: "32rem", opacity: 0.85 }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="absolute top-0 h-44 sm:h-56 bg-[radial-gradient(ellipse_50%_100%_at_50%_0%,_rgba(227,66,52,0.52)_0%,_rgba(227,66,52,0.18)_50%,_transparent_85%)] mix-blend-multiply blur-[3px]"
+          />
+
+          {/* Core Glow Center Ball */}
+          <motion.div
+            initial={{ width: "10rem" }}
+            whileInView={{ width: "20rem" }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="absolute top-0 z-20 h-22 sm:h-30 rounded-full bg-vermilion/28 blur-2xl pointer-events-none"
+          />
+
+          {/* Atmosphere Ambient Soft Wash */}
+          <div className="absolute top-0 h-48 w-[42rem] sm:w-[56rem] rounded-full bg-vermilion/15 blur-3xl pointer-events-none" />
         </div>
 
         {/* ── Content Container (Main Headline, Subtitle, CTAs inside spotlight) ── */}

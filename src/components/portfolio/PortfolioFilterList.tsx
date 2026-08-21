@@ -1,9 +1,7 @@
-"use client";
-
 import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { Project } from "@/data/projects";
+import { useTranslations } from "@/i18n/useI18n";
+import { type Locale, getLocalizedPath } from "@/i18n/utils";
+import type { Project } from "@/data/projects";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -13,19 +11,19 @@ import { cn } from "@/lib/utils";
 
 interface PortfolioFilterListProps {
   projects: Project[];
-  locale: string;
+  locale?: string;
 }
 
 export function PortfolioFilterList({
   projects,
-  locale,
+  locale = "en",
 }: PortfolioFilterListProps) {
   const t = useTranslations("Portfolio");
   const [activeCategory, setActiveCategory] = useState<
     "all" | "web" | "app" | "ai"
   >("all");
 
-  const lang = locale === "id" ? "id" : "en";
+  const lang: Locale = locale === "id" ? "id" : "en";
 
   const filteredProjects =
     activeCategory === "all"
@@ -86,7 +84,7 @@ export function PortfolioFilterList({
                   {project.category.toUpperCase()}
                 </Badge>
                 <span className="text-xs font-display text-charcoal-muted">
-                  {project.client} • {project.year}
+                  {project.client} · {project.year}
                 </span>
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-bold text-charcoal mb-3 group-hover:text-vermilion transition-colors">
@@ -109,7 +107,7 @@ export function PortfolioFilterList({
                 ))}
               </div>
               <Button
-                href={`/portfolio/${project.slug}`}
+                href={getLocalizedPath(`/portfolio/${project.slug}`, lang)}
                 variant="ghost"
                 size="sm"
                 className="text-vermilion font-bold p-0 hover:bg-transparent"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/useI18n";
 import { WizardQuestion } from "@/domain/estimator/types";
 import { OptionCard } from "./OptionCard";
 

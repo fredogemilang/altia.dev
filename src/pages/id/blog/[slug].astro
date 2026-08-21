@@ -1,0 +1,102 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Container } from '../../../components/ui/Container';
+import { Badge } from '../../../components/ui/Badge';
+import { getBlogPosts, getBlogPostBySlug } from '../../../lib/b10cks';
+import { t, type Locale, getLocalizedPath } from '../../../i18n/utils';
+import { ArrowLeft, Clock } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const locale: Locale = 'id';
+const post = await getBlogPostBySlug(slug as string);
+
+if (!post) {
+  return Astro.redirect('/id/blog');
+}
+---
+
+<Layout
+  title={post.title[locale]}
+  description={post.excerpt[locale]}
+  ogImage={post.coverImage}
+  locale={locale}
+>
+  <article class="flex flex-col gap-12 pb-24">
+    <!-- 1. Article Header -->
+    <section class="pt-8 bg-noise border-b border-warm-border/60 pb-12">
+      <Container size="small">
+        <a
+          href={getLocalizedPath('/blog', locale)}
+          class="inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-wider text-charcoal-muted hover:text-vermilion mb-8 transition-colors"
+          data-cursor
+        >
+          <ArrowLeft class="w-3.5 h-3.5" />
+          <span>{t(locale, 'Blog.back')}</span>
+        </a>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <Badge variant="vermilion" size="sm" className="uppercase font-bold tracking-wider">
+              {post.category}
+            </Badge>
+            <div class="flex items-center gap-1.5 text-xs text-charcoal-muted">
+              <Clock class="w-3.5 h-3.5 text-vermilion" />
+              <span>{post.readTime} {t(locale, 'Blog.readTime')}</span>
+            </div>
+          </div>
+
+          <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-charcoal leading-[1.18]">
+            {post.title[locale]}
+          </h1>
+
+          <div class="flex items-center gap-4 pt-4 border-t border-warm-border/60 mt-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden">
+              <img
+                src={post.author.avatar}
+                alt={post.author.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="flex flex-col">
+              <span class="font-display font-bold text-sm text-charcoal">
+                {post.author.name}
+              </span>
+              <span class="text-xs text-charcoal-muted">
+                {post.author.role} • {post.publishedAt}
+              </span>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 2. Cover Image -->
+    <section>
+      <Container size="small">
+        <div class="aspect-[16/9] rounded-3xl overflow-hidden shadow-warm">
+          <img
+            src={post.coverImage}
+            alt={post.title[locale]}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </Container>
+    </section>
+
+    <!-- 3. Article Body -->
+    <section>
+      <Container size="small">
+        <div class="prose prose-lg prose-neutral max-w-none text-charcoal leading-relaxed whitespace-pre-line text-base sm:text-lg">
+          {post.content[locale]}
+        </div>
+      </Container>
+    </section>
+  </article>
+</Layout>

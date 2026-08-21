@@ -1,0 +1,101 @@
+---
+import { SITE_CONFIG } from '../lib/constants';
+import { Navbar } from '../components/layout/Navbar';
+import { Footer } from '../components/layout/Footer';
+import { MagneticCursor } from '../components/effects/MagneticCursor';
+import { PageTransitionProgress } from '../components/effects/PageTransitionProgress';
+import { type Locale, getLocaleFromUrl } from '../i18n/utils';
+import '../styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  locale?: Locale;
+}
+
+const {
+  title = SITE_CONFIG.title,
+  description = SITE_CONFIG.description,
+  ogImage = SITE_CONFIG.ogImage,
+} = Astro.props;
+
+const url = Astro.url;
+const locale = Astro.props.locale || getLocaleFromUrl(url);
+const pathname = url.pathname;
+const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Web Development, Mobile Apps, Desktop Apps, AI Automation, Astro, GSAP, Creative Agency, ALTIA DEV" />
+    <meta name="author" content="ALTIA DEV" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url.href} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={SITE_CONFIG.name} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@altiadev" />
+  </head>
+  <body class="bg-ivory text-charcoal font-sans min-h-screen flex flex-col selection:bg-vermilion selection:text-ivory">
+    <PageTransitionProgress client:load />
+    <MagneticCursor client:load />
+    <Navbar client:load locale={locale} pathname={pathname} />
+
+    <main class="flex-1 pt-20 flex flex-col">
+      <slot />
+    </main>
+
+    <Footer locale={locale} />
+
+    <!-- High-Performance Lenis Smooth Scroll Script synced with GSAP -->
+    <script>
+      import Lenis from 'lenis';
+      import { gsap, ScrollTrigger } from '../lib/gsapConfig';
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1.0,
+          touchMultiplier: 1.5,
+        });
+
+        // Sync Lenis scroll updates with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // Sync requestAnimationFrame ticker with GSAP ticker loop
+        const updateTicker = (time: number) => {
+          lenis.raf(time * 1000);
+        };
+
+        gsap.ticker.add(updateTicker);
+        gsap.ticker.lagSmoothing(0);
+      }
+    </script>
+  </body>
+</html>

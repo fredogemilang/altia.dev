@@ -1,12 +1,9 @@
-"use client";
-
 import { useEffect, useState, useRef } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { gsap } from "@/lib/gsapConfig";
+import { t, type Locale, getLocalizedPath } from "@/i18n/utils";
 import {
   Menu,
   X,
@@ -20,12 +17,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
-  const t = useTranslations("Navigation");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+interface NavbarProps {
+  locale?: Locale;
+  pathname?: string;
+}
 
+export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pricingDropdownOpen, setPricingDropdownOpen] = useState(false);
@@ -85,8 +82,10 @@ export function Navbar() {
   }, [mobileMenuOpen]);
 
   const toggleLanguage = () => {
-    const nextLocale = locale === "en" ? "id" : "en";
-    router.replace(pathname, { locale: nextLocale });
+    const nextLocale: Locale = locale === "en" ? "id" : "en";
+    const currentCleanPath = pathname.replace(/^\/id(\/|$)/, "/");
+    const targetUrl = getLocalizedPath(currentCleanPath, nextLocale);
+    window.location.href = targetUrl;
   };
 
   const handleMouseEnterPricing = () => {
@@ -102,6 +101,8 @@ export function Navbar() {
     }, 150);
   };
 
+  const cleanPath = pathname.replace(/^\/id(\/|$)/, "/");
+
   return (
     <>
       <header
@@ -116,8 +117,8 @@ export function Navbar() {
         <Container size="large">
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
-            <Link
-              href="/"
+            <a
+              href={getLocalizedPath("/", locale)}
               className="flex items-center gap-2.5 group"
               data-cursor
               data-cursor-text="ALTIA"
@@ -133,17 +134,17 @@ export function Navbar() {
                   Studio
                 </span>
               </div>
-            </Link>
+            </a>
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1 bg-cream/70 p-1.5 rounded-full border border-warm-border/80 backdrop-blur-md">
               {NAV_LINKS.map((link) => {
                 const isPricing = link.href === "/pricing";
                 const isActive = isPricing
-                  ? pathname.startsWith("/pricing") || pathname.startsWith("/estimator")
+                  ? cleanPath.startsWith("/pricing") || cleanPath.startsWith("/estimator")
                   : link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
+                  ? cleanPath === "/"
+                  : cleanPath.startsWith(link.href);
 
                 if (isPricing) {
                   return (
@@ -153,8 +154,8 @@ export function Navbar() {
                       onMouseEnter={handleMouseEnterPricing}
                       onMouseLeave={handleMouseLeavePricing}
                     >
-                      <Link
-                        href="/pricing"
+                      <a
+                        href={getLocalizedPath("/pricing", locale)}
                         className={cn(
                           "flex items-center gap-1 px-4 py-1.5 text-xs font-display font-semibold rounded-full transition-all duration-200",
                           isActive
@@ -163,23 +164,23 @@ export function Navbar() {
                         )}
                         data-cursor
                       >
-                        <span>{t(link.labelKey)}</span>
+                        <span>{t(locale, `Navigation.${link.labelKey}`)}</span>
                         <ChevronDown
                           className={cn(
                             "w-3.5 h-3.5 transition-transform duration-200",
                             pricingDropdownOpen ? "rotate-180" : ""
                           )}
                         />
-                      </Link>
+                      </a>
 
-                      {/* Semi Mega-Menu Dropdown (Solid Opaque Background & High Z-Index) */}
+                      {/* Semi Mega-Menu Dropdown */}
                       {pricingDropdownOpen && (
                         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 z-50 w-[490px]">
                           <div className="p-4 rounded-2xl bg-[#FAF4E9] border-2 border-warm-border shadow-[0_20px_50px_rgba(47,42,38,0.22)] overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                             <div className="grid grid-cols-1 gap-2.5">
                               {/* Option 1: Rate Card & Pricing */}
-                              <Link
-                                href="/pricing"
+                              <a
+                                href={getLocalizedPath("/pricing", locale)}
                                 onClick={() => setPricingDropdownOpen(false)}
                                 className="group/item flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FFFDF9] hover:bg-cream border border-warm-border transition-all"
                               >
@@ -189,50 +190,52 @@ export function Navbar() {
                                 <div className="flex-1">
                                   <div className="flex items-center justify-between gap-2 mb-1">
                                     <h4 className="font-display font-bold text-sm text-charcoal group-hover/item:text-vermilion transition-colors">
-                                      {t("pricingMenu.rateCardTitle")}
+                                      {t(locale, "Navigation.pricingMenu.rateCardTitle")}
                                     </h4>
                                     <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-warm-border/60 text-charcoal font-display">
-                                      {t("pricingMenu.rateCardBadge")}
+                                      {t(locale, "Navigation.pricingMenu.rateCardBadge")}
                                     </span>
                                   </div>
                                   <p className="text-xs text-charcoal-muted leading-relaxed">
-                                    {t("pricingMenu.rateCardDesc")}
+                                    {t(locale, "Navigation.pricingMenu.rateCardDesc")}
                                   </p>
                                 </div>
-                              </Link>
+                              </a>
 
-                              {/* Option 2: Project Estimator */}
-                              <Link
-                                href="/estimator"
+                              {/* Option 2: AI Cost Estimator */}
+                              <a
+                                href={getLocalizedPath("/estimator", locale)}
                                 onClick={() => setPricingDropdownOpen(false)}
-                                className="group/item flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FFFDF9] hover:bg-cream border-2 border-vermilion/40 hover:border-vermilion transition-all shadow-sm"
+                                className="group/item flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FFFDF9] hover:bg-cream border border-warm-border transition-all"
                               >
-                                <div className="w-10 h-10 rounded-xl bg-vermilion text-ivory flex items-center justify-center flex-shrink-0 shadow-sm">
-                                  <Sparkles className="w-5 h-5" />
+                                <div className="w-10 h-10 rounded-xl bg-vermilion/10 group-hover/item:bg-vermilion group-hover/item:text-ivory flex items-center justify-center flex-shrink-0 transition-colors">
+                                  <Sparkles className="w-5 h-5 text-vermilion group-hover/item:text-ivory" />
                                 </div>
                                 <div className="flex-1">
                                   <div className="flex items-center justify-between gap-2 mb-1">
-                                    <h4 className="font-display font-bold text-sm text-charcoal group-hover/item:text-vermilion transition-colors flex items-center gap-1.5">
-                                      <span>{t("pricingMenu.estimatorTitle")}</span>
-                                      <ArrowRight className="w-3.5 h-3.5 text-vermilion opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                                    <h4 className="font-display font-bold text-sm text-charcoal group-hover/item:text-vermilion transition-colors">
+                                      {t(locale, "Navigation.pricingMenu.estimatorTitle")}
                                     </h4>
-                                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-vermilion text-ivory font-display">
-                                      {t("pricingMenu.estimatorBadge")}
+                                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-vermilion/15 text-vermilion font-display">
+                                      {t(locale, "Navigation.pricingMenu.estimatorBadge")}
                                     </span>
                                   </div>
                                   <p className="text-xs text-charcoal-muted leading-relaxed">
-                                    {t("pricingMenu.estimatorDesc")}
+                                    {t(locale, "Navigation.pricingMenu.estimatorDesc")}
                                   </p>
                                 </div>
-                              </Link>
+                              </a>
                             </div>
 
-                            {/* Dropdown Footer Note */}
-                            <div className="mt-3 pt-3 border-t border-warm-border/80 flex items-center justify-between text-[11px] text-charcoal-muted px-1 font-display">
-                              <div className="flex items-center gap-1.5">
-                                <ShieldCheck className="w-3.5 h-3.5 text-vermilion" />
-                                <span>{t("pricingMenu.footerNote")}</span>
-                              </div>
+                            {/* Dropdown Footer Guarantee */}
+                            <div className="mt-3 pt-3 border-t border-warm-border flex items-center justify-between px-1 text-[11px] text-charcoal-muted font-display">
+                              <span className="flex items-center gap-1.5">
+                                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                                {t(locale, "Navigation.pricingMenu.footerGuarantee")}
+                              </span>
+                              <span className="text-vermilion font-semibold">
+                                {t(locale, "Navigation.pricingMenu.footerSpeed")}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -242,9 +245,9 @@ export function Navbar() {
                 }
 
                 return (
-                  <Link
+                  <a
                     key={link.href}
-                    href={link.href}
+                    href={getLocalizedPath(link.href, locale)}
                     className={cn(
                       "px-4 py-1.5 text-xs font-display font-semibold rounded-full transition-all duration-200",
                       isActive
@@ -253,209 +256,165 @@ export function Navbar() {
                     )}
                     data-cursor
                   >
-                    {t(link.labelKey)}
-                  </Link>
+                    {t(locale, `Navigation.${link.labelKey}`)}
+                  </a>
                 );
               })}
             </nav>
 
-            {/* Right Action: Language Switcher + CTA */}
-            <div className="hidden lg:flex items-center gap-3">
+            {/* Actions: Lang Switch & CTA Button */}
+            <div className="flex items-center gap-3">
               {/* Language Switcher */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream text-charcoal-muted hover:text-charcoal hover:bg-ivory border border-warm-border text-xs font-display font-bold uppercase tracking-wider transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-display font-bold uppercase rounded-full bg-cream border border-warm-border text-charcoal hover:border-charcoal transition-all duration-200"
+                aria-label="Toggle language"
                 data-cursor
-                title="Switch language"
               >
-                <Globe className="w-3.5 h-3.5 text-vermilion" />
-                <span>{locale.toUpperCase()}</span>
+                <Globe className="w-3.5 h-3.5 text-charcoal-muted" />
+                <span>{locale}</span>
               </button>
 
-              <Button
-                href="/contact"
-                variant="primary"
-                size="sm"
-                cursorText="TALK"
-              >
-                <span>{t("getStarted")}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Button>
-            </div>
+              {/* Primary CTA */}
+              <div className="hidden sm:block">
+                <Button
+                  href={getLocalizedPath("/contact", locale)}
+                  variant="primary"
+                  size="sm"
+                  cursorText="HIRE"
+                >
+                  <span>{t(locale, "Navigation.cta")}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Button>
+              </div>
 
-            {/* Mobile Actions: Language toggle + Hamburger */}
-            <div className="flex lg:hidden items-center gap-2">
-              <button
-                onClick={toggleLanguage}
-                className="p-2 rounded-full bg-cream text-charcoal border border-warm-border text-xs font-bold font-display uppercase"
-              >
-                {locale.toUpperCase()}
-              </button>
-
+              {/* Mobile Menu Toggle Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full bg-cream text-charcoal border border-warm-border hover:bg-ivory transition-colors"
-                aria-label="Toggle menu"
+                className="lg:hidden w-10 h-10 rounded-full bg-cream border border-warm-border flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-ivory transition-colors duration-200"
+                aria-label="Toggle mobile menu"
               >
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </Container>
       </header>
 
-      {/* Full-screen Mobile Menu Overlay */}
+      {/* Fullscreen Animated Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-50 bg-ivory/98 backdrop-blur-xl hidden flex-col justify-between p-6 pt-5 pb-8 overflow-y-auto"
+        style={{ display: "none", opacity: 0 }}
+        className="fixed inset-0 z-40 bg-ivory/98 backdrop-blur-xl flex flex-col justify-between pt-28 pb-10 px-6 sm:px-10 lg:hidden overflow-y-auto"
       >
-        {/* Mobile Menu Top Bar with Close Button in Top Right */}
-        <div className="flex items-center justify-between pb-4 border-b border-warm-border/60">
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5"
-          >
-            <div className="w-8 h-8 rounded-lg bg-vermilion flex items-center justify-center text-ivory font-display font-black text-base shadow-sm">
-              A
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-lg tracking-tight text-charcoal leading-none">
-                ALTIA<span className="text-vermilion">.</span>DEV
-              </span>
-              <span className="text-[9px] uppercase font-bold tracking-widest text-charcoal-muted mt-0.5">
-                Studio
-              </span>
-            </div>
-          </Link>
+        <div className="flex flex-col gap-6 max-w-md mx-auto w-full">
+          <nav className="flex flex-col gap-2">
+            {NAV_LINKS.map((link) => {
+              const isPricing = link.href === "/pricing";
+              const isActive = isPricing
+                ? cleanPath.startsWith("/pricing") || cleanPath.startsWith("/estimator")
+                : link.href === "/"
+                ? cleanPath === "/"
+                : cleanPath.startsWith(link.href);
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1.5 rounded-full bg-cream text-charcoal border border-warm-border text-xs font-bold font-display uppercase tracking-wider"
-            >
-              {locale.toUpperCase()}
-            </button>
+              if (isPricing) {
+                return (
+                  <div key={link.href} className="mobile-nav-item flex flex-col">
+                    <div className="flex items-center justify-between py-2 border-b border-warm-border">
+                      <a
+                        href={getLocalizedPath("/pricing", locale)}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={cn(
+                          "font-display text-2xl font-bold transition-colors",
+                          isActive ? "text-vermilion" : "text-charcoal hover:text-vermilion"
+                        )}
+                      >
+                        {t(locale, `Navigation.${link.labelKey}`)}
+                      </a>
+                      <button
+                        onClick={() => setMobilePricingExpanded(!mobilePricingExpanded)}
+                        className="p-2 text-charcoal hover:text-vermilion"
+                        aria-label="Expand pricing menu"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "w-5 h-5 transition-transform duration-200",
+                            mobilePricingExpanded ? "rotate-180" : ""
+                          )}
+                        />
+                      </button>
+                    </div>
 
-            <button
+                    {mobilePricingExpanded && (
+                      <div className="pl-4 py-3 flex flex-col gap-3 bg-cream/50 rounded-xl my-2 border border-warm-border/60">
+                        <a
+                          href={getLocalizedPath("/pricing", locale)}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between text-sm font-display font-semibold text-charcoal hover:text-vermilion py-1"
+                        >
+                          <span className="flex items-center gap-2">
+                            <Tag className="w-4 h-4 text-charcoal-muted" />
+                            {t(locale, "Navigation.pricingMenu.rateCardTitle")}
+                          </span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-warm-border font-bold">
+                            {t(locale, "Navigation.pricingMenu.rateCardBadge")}
+                          </span>
+                        </a>
+
+                        <a
+                          href={getLocalizedPath("/estimator", locale)}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between text-sm font-display font-semibold text-vermilion py-1"
+                        >
+                          <span className="flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-vermilion" />
+                            {t(locale, "Navigation.pricingMenu.estimatorTitle")}
+                          </span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-vermilion/20 text-vermilion font-bold">
+                            {t(locale, "Navigation.pricingMenu.estimatorBadge")}
+                          </span>
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <a
+                  key={link.href}
+                  href={getLocalizedPath(link.href, locale)}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "mobile-nav-item font-display text-2xl font-bold py-2 border-b border-warm-border transition-colors flex items-center justify-between",
+                    isActive ? "text-vermilion" : "text-charcoal hover:text-vermilion"
+                  )}
+                >
+                  <span>{t(locale, `Navigation.${link.labelKey}`)}</span>
+                  <ArrowRight className="w-4 h-4 opacity-40" />
+                </a>
+              );
+            })}
+          </nav>
+
+          <div className="mobile-nav-item pt-4 flex flex-col gap-4">
+            <Button
+              href={getLocalizedPath("/contact", locale)}
+              variant="primary"
+              size="lg"
+              className="w-full justify-center"
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 rounded-full bg-cream hover:bg-charcoal text-charcoal hover:text-ivory border border-warm-border transition-colors shadow-sm"
-              aria-label="Close menu"
             >
-              <X className="w-6 h-6" />
-            </button>
+              <span>{t(locale, "Navigation.cta")}</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 mt-4">
-          {NAV_LINKS.map((link) => {
-            const isPricing = link.href === "/pricing";
-            const isActive = isPricing
-              ? pathname.startsWith("/pricing") || pathname.startsWith("/estimator")
-              : link.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(link.href);
-
-            if (isPricing) {
-              return (
-                <div key={link.href} className="mobile-nav-item border-b border-warm-border/60 py-2">
-                  <div
-                    onClick={() => setMobilePricingExpanded(!mobilePricingExpanded)}
-                    className="flex items-center justify-between cursor-pointer font-display text-2xl font-bold py-1"
-                  >
-                    <span className={isActive ? "text-vermilion" : "text-charcoal"}>
-                      {t(link.labelKey)}
-                    </span>
-                    <ChevronDown
-                      className={cn(
-                        "w-5 h-5 text-charcoal-muted transition-transform",
-                        mobilePricingExpanded ? "rotate-180" : ""
-                      )}
-                    />
-                  </div>
-
-                  {mobilePricingExpanded && (
-                    <div className="flex flex-col gap-2.5 pl-3 pt-3 pb-2">
-                      <Link
-                        href="/pricing"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-start gap-3 p-3 rounded-xl bg-cream hover:bg-ivory border border-warm-border shadow-xs transition-colors"
-                      >
-                        <div className="w-6 h-6 rounded-md bg-charcoal/10 text-charcoal flex items-center justify-center shrink-0 mt-0.5">
-                          <Tag className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <div className="font-display font-bold text-sm text-charcoal">
-                            {t("pricingMenu.rateCardTitle")}
-                          </div>
-                          <div className="text-xs text-charcoal-muted mt-0.5">
-                            {t("pricingMenu.rateCardDesc")}
-                          </div>
-                        </div>
-                      </Link>
-
-                      <Link
-                        href="/estimator"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-start gap-3 p-3 rounded-xl bg-cream hover:bg-ivory border border-vermilion/40 shadow-xs transition-colors"
-                      >
-                        <div className="w-6 h-6 rounded-md bg-vermilion text-ivory flex items-center justify-center shrink-0 mt-0.5">
-                          <Sparkles className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <div className="font-display font-bold text-sm text-charcoal flex items-center gap-2">
-                            <span>{t("pricingMenu.estimatorTitle")}</span>
-                            <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-vermilion text-ivory">
-                              New
-                            </span>
-                          </div>
-                          <div className="text-xs text-charcoal-muted mt-0.5">
-                            {t("pricingMenu.estimatorDesc")}
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              );
-            }
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "mobile-nav-item font-display text-2xl font-bold py-2 border-b border-warm-border/60 transition-colors flex items-center justify-between",
-                  isActive ? "text-vermilion" : "text-charcoal"
-                )}
-              >
-                <span>{t(link.labelKey)}</span>
-                <ArrowUpRight className="w-5 h-5 text-charcoal-muted" />
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="flex flex-col gap-4 pt-6 border-t border-warm-border mt-6">
-          <Button
-            href="/contact"
-            variant="primary"
-            size="lg"
-            className="w-full"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>{t("getStarted")}</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Button>
-
-          <p className="text-xs text-charcoal-muted text-center font-display">
-            {SITE_CONFIG.contact.email}
-          </p>
+        {/* Mobile Menu Footer Info */}
+        <div className="mobile-nav-item text-center text-xs text-charcoal-muted font-display pt-8 border-t border-warm-border">
+          <p>{SITE_CONFIG.title}</p>
+          <p className="mt-1">{SITE_CONFIG.contact.address}</p>
         </div>
       </div>
     </>

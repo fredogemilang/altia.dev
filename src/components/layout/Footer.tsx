@@ -1,19 +1,18 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SITE_CONFIG, NAV_LINKS } from "@/lib/constants";
+import { t, type Locale, getLocalizedPath } from "@/i18n/utils";
 import { ArrowUp, ArrowUpRight, Github, Twitter, Linkedin, Instagram } from "lucide-react";
 
-export function Footer() {
-  const t = useTranslations("Footer");
-  const tNav = useTranslations("Navigation");
-  const tCta = useTranslations("Cta");
+interface FooterProps {
+  locale?: Locale;
+}
 
+export function Footer({ locale = "en" }: FooterProps) {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -30,18 +29,23 @@ export function Footer() {
               ALTIA DEV Studio
             </span>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ivory mb-4 leading-tight">
-              {tCta("title")}
+              {t(locale, "Cta.title")}
             </h2>
             <p className="text-ivory/70 text-base sm:text-lg mb-8 max-w-xl">
-              {tCta("subtitle")}
+              {t(locale, "Cta.subtitle")}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button href="/contact" variant="primary" size="lg" cursorText="BOOK">
-                <span>{tCta("button")}</span>
+              <Button href={getLocalizedPath("/contact", locale)} variant="primary" size="lg" cursorText="BOOK">
+                <span>{t(locale, "Cta.button")}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Button>
-              <Button href="/portfolio" variant="secondary" size="lg" className="bg-charcoal-500 text-ivory border-charcoal-500/50 hover:bg-charcoal-500/70">
-                <span>{tNav("portfolio")}</span>
+              <Button
+                href={getLocalizedPath("/portfolio", locale)}
+                variant="secondary"
+                size="lg"
+                className="bg-charcoal-500 text-ivory border-charcoal-500/50 hover:bg-charcoal-500/70"
+              >
+                <span>{t(locale, "Navigation.portfolio")}</span>
               </Button>
             </div>
           </div>
@@ -51,16 +55,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16 pb-16 border-b border-charcoal-500/30">
           {/* Brand Col */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-2.5">
+            <a href={getLocalizedPath("/", locale)} className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-vermilion flex items-center justify-center text-ivory font-display font-black text-base">
                 A
               </div>
               <span className="font-display font-bold text-xl tracking-tight text-ivory">
                 ALTIA<span className="text-vermilion">.</span>DEV
               </span>
-            </Link>
+            </a>
             <p className="text-ivory/60 text-sm max-w-sm leading-relaxed">
-              {t("tagline")}
+              {t(locale, "Footer.tagline")}
             </p>
             <div className="flex items-center gap-3 mt-2">
               <a
@@ -105,54 +109,54 @@ export function Footer() {
           {/* Quick Links */}
           <div className="flex flex-col gap-3">
             <h4 className="font-display font-bold text-sm uppercase tracking-wider text-ivory/90 mb-1">
-              {t("quickLinks")}
+              {t(locale, "Footer.quickLinks")}
             </h4>
             {NAV_LINKS.map((link) => (
-              <Link
+              <a
                 key={link.href}
-                href={link.href}
+                href={getLocalizedPath(link.href, locale)}
                 className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
               >
-                {tNav(link.labelKey)}
-              </Link>
+                {t(locale, `Navigation.${link.labelKey}`)}
+              </a>
             ))}
           </div>
 
           {/* Services Links */}
           <div className="flex flex-col gap-3">
             <h4 className="font-display font-bold text-sm uppercase tracking-wider text-ivory/90 mb-1">
-              {t("servicesTitle")}
+              {t(locale, "Footer.servicesTitle")}
             </h4>
-            <Link
-              href="/services#web"
+            <a
+              href={getLocalizedPath("/services#web", locale)}
               className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
             >
               Web Development
-            </Link>
-            <Link
-              href="/services#app"
+            </a>
+            <a
+              href={getLocalizedPath("/services#app", locale)}
               className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
             >
               Mobile & Desktop Apps
-            </Link>
-            <Link
-              href="/services#ai"
+            </a>
+            <a
+              href={getLocalizedPath("/services#ai", locale)}
               className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
             >
               AI Automation & Systems
-            </Link>
-            <Link
-              href="/pricing"
+            </a>
+            <a
+              href={getLocalizedPath("/pricing", locale)}
               className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
             >
               Pricing & Packages
-            </Link>
+            </a>
           </div>
 
           {/* Contact Col */}
           <div className="flex flex-col gap-3">
             <h4 className="font-display font-bold text-sm uppercase tracking-wider text-ivory/90 mb-1">
-              {t("social")}
+              {t(locale, "Footer.social")}
             </h4>
             <p className="text-sm text-ivory/60">
               {SITE_CONFIG.contact.email}
@@ -173,8 +177,8 @@ export function Footer() {
 
         {/* Bottom copyright & attribution */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/50">
-          <p>{t("copyright", { year: new Date().getFullYear().toString() })}</p>
-          <p>{t("designedWith")}</p>
+          <p>© {new Date().getFullYear()} ALTIA DEV. All rights reserved.</p>
+          <p>{t(locale, "Footer.designedWith", "Crafted with precision & code.")}</p>
         </div>
       </Container>
     </footer>

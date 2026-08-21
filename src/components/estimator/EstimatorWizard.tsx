@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from "@/i18n/useI18n";
 import { WIZARD_QUESTIONS } from "@/domain/estimator/questions";
 import { isQuestionVisible } from "@/domain/estimator/conditionEngine";
 import { ProjectRequirements, ProjectEstimate } from "@/domain/estimator/types";
 import { EstimatorProgressBar } from "./EstimatorProgressBar";
 import { QuestionStep } from "./QuestionStep";
-import { ContactGateStep, ContactData } from "./ContactGateStep";
+import { ContactGateStep, type ContactData } from "./ContactGateStep";
 import { EstimateResult } from "./EstimateResult";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";

@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   name: "ALTIA DEV",
-  title: "ALTIA DEV — Creative Design & AI Engineering Studio",
+  title: "ALTIA DEV · Creative Design & AI Engineering Studio",
   description:
     "High-craft digital engineering studio specializing in modern web applications, cross-platform apps, and intelligent AI automation pipelines.",
   url: "https://altiadev.com",

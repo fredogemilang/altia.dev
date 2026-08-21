@@ -22,48 +22,48 @@
     }
   },
   "Hero": {
-    "badge": "Studio Produk Digital & AI Engineering",
-    "titleLine1": "Membangun Pengalaman",
-    "titleLine2": "Digital yang Cerdas",
-    "subtitle": "Kami mendesain dan membangun platform web, aplikasi lintas platform, dan sistem AI — masing-masing disesuaikan dengan kebutuhan bisnis Anda, bukan template jadi.",
+    "badge": "Produk Digital • Aplikasi • Otomasi AI",
+    "titleLine1": "Visi Anda.",
+    "titleLine2": "Kami Wujudkan.",
+    "subtitle": "Kami merancang dan membangun solusi digital yang mengubah ide ambisius menjadi hasil nyata bagi bisnis Anda.",
     "service1": "Web Development",
     "service2": "Mobile & Desktop Apps",
     "service3": "AI Automation",
     "primaryCta": "Mulai Proyek",
-    "secondaryCta": "Lihat Portofolio",
+    "secondaryCta": "Jelajahi Karya",
     "scrollDown": "Scroll untuk melihat lebih lanjut"
   },
   "Services": {
     "tag": "Yang Kami Bangun",
     "title": "Tiga disiplin, satu tujuan: software yang benar-benar berjalan",
-    "subtitle": "Kami memilih teknologi berdasarkan kebutuhan proyek — bukan yang sedang tren. Berikut yang kami kerjakan.",
+    "subtitle": "Kami memilih teknologi berdasarkan kebutuhan proyek, bukan yang sedang tren. Berikut yang kami kerjakan.",
     "viewAll": "Lihat Semua Layanan",
     "items": {
       "web": {
         "number": "01",
         "title": "Arsitektur Web & Cloud",
-        "tagline": "PHP, WordPress, Go, dan TypeScript — dipilih sesuai kebutuhan proyek.",
+        "tagline": "PHP, WordPress, Go, dan TypeScript, dipilih sesuai kebutuhan proyek.",
         "description": "Kami membangun platform web dengan teknologi yang paling tepat: website perusahaan di WordPress dengan tema kustom, aplikasi web di Laravel atau Next.js, dan API berperforma tinggi di Go. Setiap proyek mendapat desain database yang matang, strategi caching, dan pipeline deployment yang terstruktur.",
         "features": [
-          "WordPress Korporat — Tema Kustom, Headless CMS, WooCommerce",
-          "Backend PHP — Laravel 11, Symfony, Filament Admin Panel",
-          "API Berperforma Tinggi — Go, Node.js, REST & gRPC",
-          "Aplikasi Web Interaktif — Next.js 14, React, Server Components",
-          "Database & Infrastruktur — PostgreSQL, MySQL, Redis, Docker",
-          "Optimasi Performa — Core Web Vitals, CDN, Security Hardening"
+          "WordPress Korporat: Tema Kustom, Headless CMS, WooCommerce",
+          "Backend PHP: Laravel 11, Symfony, Filament Admin Panel",
+          "API Berperforma Tinggi: Go, Node.js, REST & gRPC",
+          "Aplikasi Web Interaktif: Next.js 14, React, Server Components",
+          "Database & Infrastruktur: PostgreSQL, MySQL, Redis, Docker",
+          "Optimasi Performa: Core Web Vitals, CDN, Security Hardening"
         ],
         "stack": ["WordPress", "PHP (Laravel)", "Go", "Next.js", "TypeScript", "PostgreSQL", "MySQL", "Docker"]
       },
       "app": {
         "number": "02",
         "title": "Mobile & Desktop Apps",
-        "tagline": "Satu codebase, terasa native — di iOS, Android, dan desktop.",
+        "tagline": "Satu codebase, terasa native di iOS, Android, dan desktop.",
         "description": "Kami menggunakan Flutter dan React Native untuk membuat aplikasi yang terasa native di setiap platform tanpa harus menulis kode terpisah. Dukungan offline, notifikasi, dan sinkronisasi real-time sudah termasuk standar.",
         "features": [
-          "Mobile Lintas Platform — iOS & Android dari satu codebase",
-          "Aplikasi Desktop — macOS & Windows via Flutter atau Electron",
-          "Arsitektur Offline-First — Penyimpanan lokal dengan sinkronisasi cloud",
-          "Sistem Komponen — UI yang konsisten di semua platform"
+          "Mobile Lintas Platform: iOS & Android dari satu codebase",
+          "Aplikasi Desktop: macOS & Windows via Flutter atau Electron",
+          "Arsitektur Offline-First: Penyimpanan lokal dengan sinkronisasi cloud",
+          "Sistem Komponen: UI yang konsisten di semua platform"
         ],
         "stack": ["Flutter", "React Native", "Electron", "Swift", "Kotlin", "SQLite"]
       },
@@ -73,10 +73,10 @@
         "tagline": "AI yang benar-benar menghemat waktu, bukan sekadar demo keren.",
         "description": "Kami membangun sistem AI untuk pekerjaan nyata: pemrosesan dokumen, otomatisasi customer support, ekstraksi data, dan pencarian internal berbasis knowledge base. Setiap solusi terhubung langsung ke tools dan workflow yang sudah Anda gunakan.",
         "features": [
-          "Workflow Agen Multi-Langkah — Otomatisasi tugas dengan pengawasan manusia",
-          "Sistem Knowledge Base RAG — Cari di dokumen Anda sendiri dengan akurasi LLM",
-          "Chatbot & Voice AI — Asisten yang benar-benar membantu pelanggan",
-          "Integrasi API — Hubungkan output AI ke CRM, ERP, dan tools internal"
+          "Workflow Agen Multi-Langkah: Otomatisasi tugas dengan pengawasan manusia",
+          "Sistem Knowledge Base RAG: Cari di dokumen Anda sendiri dengan akurasi LLM",
+          "Chatbot & Voice AI: Asisten yang benar-benar membantu pelanggan",
+          "Integrasi API: Hubungkan output AI ke CRM, ERP, dan tools internal"
         ],
         "stack": ["Python", "LangChain", "OpenAI / Claude", "LlamaIndex", "FastAPI", "Vector DBs"]
       }
@@ -133,7 +133,7 @@
       "number": 45,
       "suffix": "+",
       "label": "Proyek Terkirim",
-      "description": "Web, mobile, dan AI — sudah live dan berjalan"
+      "description": "Web, mobile, dan AI sudah live dan berjalan"
     },
     "stat2": {
       "value": "96%",
@@ -165,11 +165,11 @@
   "Pricing": {
     "tag": "Harga",
     "title": "Harga per layanan, langsung ke intinya",
-    "subtitle": "Semua harga adalah titik awal. Biaya final tergantung cakupan, kompleksitas, dan timeline — yang kita tentukan bersama lewat konsultasi gratis.",
+    "subtitle": "Semua harga adalah titik awal. Biaya final tergantung cakupan, kompleksitas, dan timeline, yang kita tentukan bersama lewat konsultasi gratis.",
     "note": "Harga yang tertera adalah estimasi 'mulai dari' dalam USD. Setiap proyek dimulai dengan konsultasi gratis untuk menentukan scope dan deliverables yang jelas.",
     "web": {
       "title": "Web Development",
-      "subtitle": "WordPress, Laravel, Next.js, Go — disesuaikan dengan kebutuhan proyek.",
+      "subtitle": "WordPress, Laravel, Next.js, Go disesuaikan dengan kebutuhan proyek.",
       "items": [
         {
           "name": "Landing Page",
@@ -205,7 +205,7 @@
     },
     "app": {
       "title": "Apps",
-      "subtitle": "Flutter, React Native, Electron — satu codebase, performa native.",
+      "subtitle": "Flutter, React Native, Electron: satu codebase, performa native.",
       "items": [
         {
           "name": "Mobile App",
@@ -226,7 +226,7 @@
     },
     "ai": {
       "title": "AI",
-      "subtitle": "AI yang benar-benar bekerja — bukan sekadar demo yang keren.",
+      "subtitle": "AI yang benar-benar bekerja, bukan sekadar demo yang keren.",
       "apiNote": "Proyek AI menggunakan API pihak ketiga (OpenAI, Claude, dll.) dengan biaya operasional sekitar $20–$150/bulan tergantung volume penggunaan. Biaya ini terpisah dari biaya development dan ditagihkan langsung ke akun Anda.",
       "items": [
         {
@@ -247,7 +247,7 @@
         {
           "name": "Custom AI Agent",
           "price": "dari $2,000",
-          "desc": "Sistem workflow otonom multi-langkah — misalnya kualifikasi lead, riset otomatis, atau agregasi data dengan pengawasan manusia."
+          "desc": "Sistem workflow otonom multi-langkah, misalnya kualifikasi lead, riset otomatis, atau agregasi data dengan pengawasan manusia."
         },
         {
           "name": "AI Integration",
@@ -279,13 +279,13 @@
     },
     "cta": {
       "title": "Belum yakin butuh layanan yang mana?",
-      "subtitle": "Book konsultasi gratis 30 menit. Kita diskusi proyek Anda, rekomendasi pendekatan yang tepat, dan kasih estimasi jujur — tanpa kewajiban.",
+      "subtitle": "Book konsultasi gratis 30 menit. Kita diskusi proyek Anda, rekomendasi pendekatan yang tepat, dan kasih estimasi jujur tanpa kewajiban apa pun.",
       "button": "Book Konsultasi Gratis"
     },
     "faq": {
       "title": "Pertanyaan Umum",
       "q1": "Berapa lama pengerjaan proyek biasanya?",
-      "a1": "Landing page atau chatbot bisa selesai 1–2 minggu. Company profile dan app sederhana butuh 2–4 minggu. Proyek lebih besar — web app kustom, sistem AI, atau produk multi-platform — biasanya 6–12 minggu tergantung scope.",
+      "a1": "Landing page atau chatbot bisa selesai 1–2 minggu. Company profile dan app sederhana butuh 2–4 minggu. Proyek lebih besar (web app kustom, sistem AI, atau produk multi-platform) biasanya butuh 6–12 minggu tergantung scope.",
       "q2": "Bisa lanjutkan atau modifikasi codebase yang sudah ada?",
       "a2": "Bisa. Kami sering audit, refactoring, dan extend proyek yang sudah berjalan. Kami juga bisa tambahkan fitur AI ke sistem yang sudah live di production.",
       "q3": "Siapa yang memiliki kode?",
@@ -293,7 +293,7 @@
       "q4": "Bagaimana sistem pembayarannya?",
       "a4": "Struktur standar: 50% di awal untuk mulai, 25% saat review tengah proyek, dan 25% sebelum deployment ke production. Untuk retainer, kami fleksibel soal struktur.",
       "q5": "Apakah biaya API AI sudah termasuk dalam harga proyek?",
-      "a5": "Belum. Biaya development mencakup pembuatan dan deployment sistem. Biaya API (OpenAI, Claude, dll.) ditagihkan langsung ke akun Anda — biasanya $15–$125/bulan tergantung pemakaian. Kami bantu setup dan optimasi biayanya.",
+      "a5": "Belum. Biaya development mencakup pembuatan dan deployment sistem. Biaya API (OpenAI, Claude, dll.) ditagihkan langsung ke akun Anda, biasanya $15–$125/bulan tergantung pemakaian. Kami bantu setup dan optimasi biayanya.",
       "q6": "Bagaimana kalau proyek saya tidak masuk kategori manapun?",
       "a6": "Kebanyakan proyek adalah kombinasi beberapa layanan. Ceritakan saja kebutuhan Anda saat konsultasi, dan kami buatkan proposal kustom dengan breakdown yang jelas."
     }
@@ -303,15 +303,15 @@
     "title": "Studio kecil yang mengerjakan software standar production",
     "storyTitle": "Cara Kami Berpikir",
     "storyP1": "ALTIA DEV dimulai dari ide sederhana: software yang bagus dibuat oleh engineer yang peduli dengan kode sekaligus dengan orang yang menggunakannya.",
-    "storyP2": "Kami tim kecil — bukan agensi dengan berlapis-lapis account manager. Anda bekerja langsung dengan orang yang menulis kode dan mendesain tampilan. Artinya keputusan lebih cepat, miskomunikasi lebih sedikit, dan hasil yang sesuai dengan apa yang Anda minta.",
+    "storyP2": "Kami tim kecil, bukan agensi dengan berlapis-lapis account manager. Anda bekerja langsung dengan orang yang menulis kode dan mendesain tampilan. Artinya keputusan lebih cepat, miskomunikasi lebih sedikit, dan hasil yang sesuai dengan apa yang Anda minta.",
     "values": {
       "tag": "Yang Kami Pegang",
       "v1Title": "Detail Itu Penting",
-      "v1Desc": "Animasi yang mulus, loading cepat, error handling yang rapi — hal-hal kecil yang membedakan software bagus dari software yang biasa saja.",
+      "v1Desc": "Animasi yang mulus, loading cepat, error handling yang rapi: hal-hal kecil yang membedakan software bagus dari software yang biasa saja.",
       "v2Title": "Teknologi yang Tepat untuk Masalah yang Tepat",
-      "v2Desc": "Kami memilih teknologi berdasarkan kebutuhan proyek — bukan karena baru atau sedang populer. WordPress untuk company profile, Go untuk API traffic tinggi, Flutter untuk aplikasi lintas platform.",
+      "v2Desc": "Kami memilih teknologi berdasarkan kebutuhan proyek, bukan karena baru atau sedang populer. WordPress untuk company profile, Go untuk API traffic tinggi, Flutter untuk aplikasi lintas platform.",
       "v3Title": "Komunikasi Jujur",
-      "v3Desc": "Update mingguan dengan demo yang bisa dilihat langsung. Kalau ada kendala lebih berat dari perkiraan, kami sampaikan di awal — bukan seminggu sebelum deadline."
+      "v3Desc": "Update mingguan dengan demo yang bisa dilihat langsung. Kalau ada kendala lebih berat dari perkiraan, kami sampaikan di awal, bukan seminggu sebelum deadline."
     },
     "teamTitle": "Tim Kami",
     "milestonesTitle": "Perjalanan Studio"
@@ -361,7 +361,7 @@
       "emailTitle": "Email",
       "email": "hello@altiadev.com",
       "officeTitle": "Lokasi",
-      "office": "Jakarta, Indonesia — Melayani klien di seluruh dunia",
+      "office": "Jakarta, Indonesia · Melayani klien di seluruh dunia",
       "hoursTitle": "Jam Kerja",
       "hours": "Senin – Jumat, 09:00 – 18:00 WIB"
     }
@@ -680,7 +680,7 @@
       "emailPlaceholder": "budi@perusahaan.com",
       "phoneLabel": "Nomor WhatsApp / HP",
       "phonePlaceholder": "+62 812-3456-7890",
-      "phoneHint": "Wajib diisi — salinan rincian estimasi dan dokumen milestone proyek akan dikirimkan ke nomor WhatsApp ini.",
+      "phoneHint": "Wajib diisi: salinan rincian estimasi dan dokumen milestone proyek akan dikirimkan ke nomor WhatsApp ini.",
       "companyLabel": "Nama Perusahaan / Brand",
       "companyPlaceholder": "PT Maju Bersama",
       "optional": "Opsional",

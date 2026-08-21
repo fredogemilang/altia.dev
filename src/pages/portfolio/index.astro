@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Container } from '../../components/ui/Container';
+import { Badge } from '../../components/ui/Badge';
+import { PortfolioFilterList } from '../../components/portfolio/PortfolioFilterList';
+import { getProjects } from '../../lib/b10cks';
+import { t, type Locale } from '../../i18n/utils';
+import { Sparkles } from 'lucide-react';
+
+const locale: Locale = 'en';
+const projects = await getProjects();
+---
+
+<Layout title={t(locale, 'Portfolio.title')} locale={locale}>
+  <div class="flex flex-col gap-16 pb-24">
+    <!-- Page Header -->
+    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
+      <Container size="large">
+        <div class="max-w-3xl">
+          <Badge
+            variant="vermilion"
+            size="md"
+            className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-vermilion" />
+            <span>{t(locale, 'Portfolio.tag')}</span>
+          </Badge>
+          <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-6">
+            {t(locale, 'Portfolio.title')}
+          </h1>
+          <p class="text-lg sm:text-xl text-charcoal-muted leading-relaxed">
+            {t(locale, 'Portfolio.subtitle')}
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Portfolio Grid with Interactive Filters -->
+    <section>
+      <Container size="large">
+        <PortfolioFilterList client:load projects={projects} locale={locale} />
+      </Container>
+    </section>
+  </div>
+</Layout>

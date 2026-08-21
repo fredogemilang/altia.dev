@@ -11,11 +11,11 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       <div
         ref={ref}
         className={cn(
-          "w-full mx-auto px-4 sm:px-6 lg:px-8",
+          "w-full mx-auto px-6 sm:px-10 lg:px-16 xl:px-20",
           {
             "max-w-7xl": size === "default",
             "max-w-4xl": size === "small",
-            "max-w-[1440px]": size === "large",
+            "max-w-[1380px]": size === "large",
             "max-w-full": size === "full",
           },
           className

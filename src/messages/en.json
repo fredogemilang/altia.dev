@@ -22,48 +22,48 @@
     }
   },
   "Hero": {
-    "badge": "Digital Product Studio & AI Engineering",
-    "titleLine1": "Crafting Intelligent",
-    "titleLine2": "Digital Experiences",
-    "subtitle": "We design and build web platforms, cross-platform apps, and AI automation systems — each tailored to your business goals, not off-the-shelf templates.",
+    "badge": "Digital Products • Applications • AI Automation",
+    "titleLine1": "Your Vision.",
+    "titleLine2": "Our Code.",
+    "subtitle": "We design and engineer digital solutions that turn ambitious ideas into meaningful business outcomes.",
     "service1": "Web Development",
     "service2": "Mobile & Desktop Apps",
     "service3": "AI Automation",
     "primaryCta": "Start a Project",
-    "secondaryCta": "Explore Works",
+    "secondaryCta": "Explore Our Work",
     "scrollDown": "Scroll to explore"
   },
   "Services": {
     "tag": "What We Build",
     "title": "Software engineering across three disciplines",
-    "subtitle": "We work with the stack that fits the problem — not the one that's trending. Here's what we ship.",
+    "subtitle": "We work with the stack that fits the problem, not the one that's trending. Here's what we ship.",
     "viewAll": "See All Services",
     "items": {
       "web": {
         "number": "01",
         "title": "Web & Cloud Architecture",
-        "tagline": "PHP, WordPress, Go, and TypeScript — chosen by project needs, not hype.",
+        "tagline": "PHP, WordPress, Go, and TypeScript, chosen by project needs, not hype.",
         "description": "We build web platforms using the technology that fits: corporate sites on WordPress with custom themes, web applications on Laravel or Next.js, and high-throughput APIs in Go. Every project gets proper database design, caching strategy, and deployment pipeline.",
         "features": [
-          "Corporate WordPress — Custom Themes, Headless CMS, WooCommerce",
-          "PHP Backends — Laravel 11, Symfony, Filament Admin Panels",
-          "High-Performance APIs — Go, Node.js, REST & gRPC",
-          "Interactive Web Apps — Next.js 14, React, Server Components",
-          "Database & Infrastructure — PostgreSQL, MySQL, Redis, Docker",
-          "Performance Tuning — Core Web Vitals, CDN, Security Hardening"
+          "Corporate WordPress: Custom Themes, Headless CMS, WooCommerce",
+          "PHP Backends: Laravel 11, Symfony, Filament Admin Panels",
+          "High-Performance APIs: Go, Node.js, REST & gRPC",
+          "Interactive Web Apps: Next.js 14, React, Server Components",
+          "Database & Infrastructure: PostgreSQL, MySQL, Redis, Docker",
+          "Performance Tuning: Core Web Vitals, CDN, Security Hardening"
         ],
         "stack": ["WordPress", "PHP (Laravel)", "Go", "Next.js", "TypeScript", "PostgreSQL", "MySQL", "Docker"]
       },
       "app": {
         "number": "02",
         "title": "Mobile & Desktop Apps",
-        "tagline": "One codebase, native feel — across iOS, Android, and desktop.",
+        "tagline": "One codebase, native feel across iOS, Android, and desktop.",
         "description": "We use Flutter and React Native to build apps that feel native on every platform without maintaining separate codebases. Offline support, push notifications, and real-time sync come standard.",
         "features": [
-          "Cross-Platform Mobile — iOS & Android from one codebase",
-          "Desktop Applications — macOS & Windows via Flutter or Electron",
-          "Offline-First Architecture — Local storage with cloud sync",
-          "Reusable Component Systems — Consistent UI across platforms"
+          "Cross-Platform Mobile: iOS & Android from one codebase",
+          "Desktop Applications: macOS & Windows via Flutter or Electron",
+          "Offline-First Architecture: Local storage with cloud sync",
+          "Reusable Component Systems: Consistent UI across platforms"
         ],
         "stack": ["Flutter", "React Native", "Electron", "Swift", "Kotlin", "SQLite"]
       },
@@ -73,10 +73,10 @@
         "tagline": "Practical AI that saves hours, not just demos well.",
         "description": "We build AI systems that handle real work: document processing, customer support automation, data extraction, and internal knowledge search. Every solution connects to your existing tools and workflows.",
         "features": [
-          "Multi-Step Agent Workflows — Task automation with human oversight",
-          "RAG Knowledge Systems — Search your own docs with LLM accuracy",
-          "Chatbots & Voice AI — Customer-facing assistants that actually help",
-          "API Integrations — Connect AI outputs to CRM, ERP, and internal tools"
+          "Multi-Step Agent Workflows: Task automation with human oversight",
+          "RAG Knowledge Systems: Search your own docs with LLM accuracy",
+          "Chatbots & Voice AI: Customer-facing assistants that actually help",
+          "API Integrations: Connect AI outputs to CRM, ERP, and internal tools"
         ],
         "stack": ["Python", "LangChain", "OpenAI / Claude", "LlamaIndex", "FastAPI", "Vector DBs"]
       }
@@ -133,7 +133,7 @@
       "number": 45,
       "suffix": "+",
       "label": "Projects Delivered",
-      "description": "Web, mobile, and AI — shipped and running"
+      "description": "Web, mobile, and AI shipped and running"
     },
     "stat2": {
       "value": "96%",
@@ -165,11 +165,11 @@
   "Pricing": {
     "tag": "Pricing",
     "title": "Straightforward pricing per service",
-    "subtitle": "All prices are starting points. Final cost depends on scope, complexity, and timeline — which we define together during a free scoping call.",
+    "subtitle": "All prices are starting points. Final cost depends on scope, complexity, and timeline, which we define together during a free scoping call.",
     "note": "Prices listed are 'starting from' estimates in USD. Every project begins with a free consultation to define exact scope and deliverables.",
     "web": {
       "title": "Web Development",
-      "subtitle": "WordPress, Laravel, Next.js, Go — matched to your project needs.",
+      "subtitle": "WordPress, Laravel, Next.js, Go matched to your project needs.",
       "items": [
         {
           "name": "Landing Page",
@@ -205,7 +205,7 @@
     },
     "app": {
       "title": "Apps",
-      "subtitle": "Flutter, React Native, Electron — unified codebase, native performance.",
+      "subtitle": "Flutter, React Native, Electron: unified codebase, native performance.",
       "items": [
         {
           "name": "Mobile App",
@@ -226,7 +226,7 @@
     },
     "ai": {
       "title": "AI",
-      "subtitle": "Practical AI that handles real work — not just impressive demos.",
+      "subtitle": "Practical AI that handles real work, not just impressive demos.",
       "apiNote": "AI projects use third-party APIs (OpenAI, Claude, etc.) with ongoing costs of roughly $20–$150/month depending on usage volume. This cost is separate from development fees and is billed directly to your account.",
       "items": [
         {
@@ -247,7 +247,7 @@
         {
           "name": "Custom AI Agent",
           "price": "from $2,000",
-          "desc": "Multi-step autonomous workflow system — e.g. lead qualification, automated research, or data aggregation with human-in-the-loop."
+          "desc": "Multi-step autonomous workflow system for lead qualification, automated research, or data aggregation with human-in-the-loop."
         },
         {
           "name": "AI Integration",
@@ -279,13 +279,13 @@
     },
     "cta": {
       "title": "Not sure which service you need?",
-      "subtitle": "Book a free 30-minute call. We'll discuss your project, recommend the right approach, and give you an honest estimate — no commitment required.",
+      "subtitle": "Book a free 30-minute call. We'll discuss your project, recommend the right approach, and give you an honest estimate with no commitment required.",
       "button": "Book a Free Call"
     },
     "faq": {
       "title": "Common Questions",
       "q1": "How long does a typical project take?",
-      "a1": "A landing page or chatbot can be done in 1–2 weeks. Company profiles and basic apps take 2–4 weeks. Larger builds — custom web apps, AI systems, or multi-platform products — typically run 6–12 weeks depending on scope.",
+      "a1": "A landing page or chatbot can be done in 1–2 weeks. Company profiles and basic apps take 2–4 weeks. Larger builds (custom web apps, AI systems, or multi-platform products) typically run 6–12 weeks depending on scope.",
       "q2": "Can you work with our existing codebase?",
       "a2": "Yes. We regularly audit, refactor, and extend existing projects. We can also integrate AI features into systems that are already in production.",
       "q3": "Who owns the code?",
@@ -293,7 +293,7 @@
       "q4": "How does payment work?",
       "a4": "Standard structure: 50% upfront to begin, 25% at mid-project review, and 25% before production deployment. We're flexible for ongoing retainer engagements.",
       "q5": "Are AI API costs included in the project price?",
-      "a5": "No. Development cost covers building and deploying the system. Ongoing API costs (OpenAI, Claude, etc.) are billed directly to your own account — typically $15–$125/month depending on usage. We help you set this up and optimize costs.",
+      "a5": "No. Development cost covers building and deploying the system. Ongoing API costs (OpenAI, Claude, etc.) are billed directly to your own account, typically $15–$125/month depending on usage. We help you set this up and optimize costs.",
       "q6": "What if my project doesn't fit any of these categories?",
       "a6": "Most projects are a combination of services. Just tell us what you need during the scoping call and we'll put together a custom proposal with a clear breakdown."
     }
@@ -303,15 +303,15 @@
     "title": "A small studio that ships production-grade software",
     "storyTitle": "How We Think",
     "storyP1": "ALTIA DEV started with a straightforward idea: good software comes from engineers who care about both the code and the people using it.",
-    "storyP2": "We're a compact team — not an agency with layers of account managers. You work directly with the people writing the code and designing the interfaces. That means faster decisions, fewer miscommunications, and software that actually matches what you asked for.",
+    "storyP2": "We're a compact team, not an agency with layers of account managers. You work directly with the people writing the code and designing the interfaces. That means faster decisions, fewer miscommunications, and software that actually matches what you asked for.",
     "values": {
       "tag": "What We Value",
       "v1Title": "Details Matter",
-      "v1Desc": "Smooth animations, fast load times, clean error handling — the small things that separate good software from forgettable software.",
+      "v1Desc": "Smooth animations, fast load times, clean error handling: the small things that separate good software from forgettable software.",
       "v2Title": "Right Tool, Right Job",
-      "v2Desc": "We pick technologies based on your project's real needs — not because they're new or popular. WordPress for a corporate site, Go for a high-traffic API, Flutter for a cross-platform app.",
+      "v2Desc": "We pick technologies based on your project's real needs, not because they're new or popular. WordPress for a corporate site, Go for a high-traffic API, Flutter for a cross-platform app.",
       "v3Title": "Honest Communication",
-      "v3Desc": "Weekly updates with working demos. If something is harder than expected, we tell you early — not the week before launch."
+      "v3Desc": "Weekly updates with working demos. If something is harder than expected, we tell you early, not the week before launch."
     },
     "teamTitle": "The Team",
     "milestonesTitle": "Studio Timeline"
@@ -361,7 +361,7 @@
       "emailTitle": "Email",
       "email": "hello@altiadev.com",
       "officeTitle": "Location",
-      "office": "Jakarta, Indonesia — Working with clients worldwide",
+      "office": "Jakarta, Indonesia · Working with clients worldwide",
       "hoursTitle": "Working Hours",
       "hours": "Monday – Friday, 09:00 – 18:00 GMT+7"
     }
@@ -680,7 +680,7 @@
       "emailPlaceholder": "alex@company.com",
       "phoneLabel": "WhatsApp / Phone Number",
       "phonePlaceholder": "+1 (555) 0192 or +62 812 3456 789",
-      "phoneHint": "Required — we dispatch your official estimate breakdown and milestone scope to this WhatsApp number.",
+      "phoneHint": "Required: we dispatch your official estimate breakdown and milestone scope to this WhatsApp number.",
       "companyLabel": "Company or Brand",
       "companyPlaceholder": "Acme Global Inc.",
       "optional": "Optional",

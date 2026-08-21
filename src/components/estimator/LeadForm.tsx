@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from "@/i18n/useI18n";
 import { ProjectRequirements, ProjectEstimate } from "@/domain/estimator/types";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Link } from "@/i18n/navigation";
 import {
   Send,
   CheckCircle2,

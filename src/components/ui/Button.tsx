@@ -1,7 +1,4 @@
-"use client";
-
-import { ButtonHTMLAttributes, forwardRef } from "react";
-import { Link } from "@/i18n/navigation";
+import { ButtonHTMLAttributes, forwardRef, AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
@@ -9,6 +6,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "dark" | "outline";
   size?: "sm" | "md" | "lg";
   href?: string;
+  target?: string;
+  rel?: string;
   isLoading?: boolean;
   isSuccess?: boolean;
   cursorText?: string;
@@ -21,6 +20,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       href,
+      target,
+      rel,
       isLoading = false,
       isSuccess = false,
       cursorText,
@@ -61,8 +62,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (href) {
       return (
-        <Link
+        <a
           href={href}
+          target={target}
+          rel={rel}
           className={combinedClasses}
           data-cursor
           data-cursor-text={cursorText}
@@ -70,7 +73,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <span className="relative z-10 flex items-center gap-2">
             {children}
           </span>
-        </Link>
+        </a>
       );
     }
 

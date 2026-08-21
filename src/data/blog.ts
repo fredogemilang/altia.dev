@@ -169,7 +169,7 @@ Dengan menerapkan pola ini, aplikasi Next.js Anda akan berjalan mulus di 60–12
       en: `
 # Beyond Simple RAG: Architecting Multi-Agent Workflows with Self-Correction
 
-Naive Retrieval-Augmented Generation (RAG)—fetching top-k vector chunks and passing them into a prompt—breaks down when dealing with complex, multi-hop reasoning, tabular data, and contradictory domain sources.
+Naive Retrieval-Augmented Generation (RAG), which simply fetches top-k vector chunks and passes them into a prompt, breaks down when dealing with complex, multi-hop reasoning, tabular data, and contradictory domain sources.
 
 ## The Core Bottleneck of Vector Search
 Vector embeddings capture semantic closeness, but semantic closeness does not equal factual relevance. When an analyst queries "Compare Q3 operating margins between 2023 and 2024", naive cosine similarity retrieves paragraphs mentioning "margins" without understanding temporal or mathematical relationships.

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 import { cn } from "@/lib/utils";
 
@@ -61,12 +60,12 @@ export function ParallaxImage({
         ref={imgRef}
         className="absolute inset-0 w-full h-[125%] -top-[12.5%] will-change-transform"
       >
-        <Image
+        <img
           src={src}
           alt={alt}
-          fill
-          sizes="(max-width: 768px) 100vw, 800px"
-          className="object-cover"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover"
         />
       </div>
     </div>

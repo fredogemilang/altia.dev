@@ -1,0 +1,200 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Container } from '../../components/ui/Container';
+import { Badge } from '../../components/ui/Badge';
+import { Button } from '../../components/ui/Button';
+import { getProjects, getProjectBySlug } from '../../lib/b10cks';
+import { CaseStudyHero } from '../../components/sections/portfolio/CaseStudyHero';
+import { CaseStudyGallery } from '../../components/sections/portfolio/CaseStudyGallery';
+import { CaseStudyArchitecture } from '../../components/sections/portfolio/CaseStudyArchitecture';
+import { CaseStudyFeatures } from '../../components/sections/portfolio/CaseStudyFeatures';
+import { CaseStudyTestimonial } from '../../components/sections/portfolio/CaseStudyTestimonial';
+import { t, type Locale, getLocalizedPath } from '../../i18n/utils';
+import {
+  ArrowRight,
+  ShieldAlert,
+  Lightbulb,
+} from 'lucide-react';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const locale: Locale = 'en';
+const project = await getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect('/portfolio');
+}
+
+const allProjects = await getProjects();
+const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+const nextProject =
+  allProjects[(currentIndex + 1) % allProjects.length] || allProjects[0];
+---
+
+<Layout
+  title={`${project.title[locale]} - Case Study`}
+  description={project.tagline[locale]}
+  ogImage={project.image}
+  locale={locale}
+>
+  <div class="flex flex-col gap-12 sm:gap-20 pb-28">
+    <!-- 1. Rich Case Study Hero + Big Impact Stat Callouts -->
+    <CaseStudyHero
+      project={project}
+      lang={locale}
+      backText={t(locale, 'Portfolio.backToList')}
+    />
+
+    <!-- 2. Interactive Multi-Device Interface Showcase Gallery -->
+    <CaseStudyGallery
+      client:visible
+      gallery={project.gallery}
+      title={project.title[locale]}
+      lang={locale}
+    />
+
+    <!-- 3. The Challenge vs. The Engineering Solution -->
+    <section class="relative py-8 sm:py-16">
+      <Container size="large">
+        <div class="flex flex-col gap-4 max-w-3xl mb-10 sm:mb-14">
+          <Badge variant="vermilion" size="sm" className="w-fit uppercase tracking-widest text-[10px] font-bold">
+            PROBLEM & BREAKTHROUGH
+          </Badge>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-charcoal">
+            The Core Challenge & Our Engineering Approach
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- The Challenge -->
+          <div class="p-8 sm:p-12 rounded-4xl bg-cream/60 border-2 border-warm-border flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-charcoal text-ivory flex items-center justify-center mb-6 shadow-md">
+                <ShieldAlert className="w-6 h-6 text-amber-400" />
+              </div>
+              <span class="text-xs font-mono font-bold uppercase tracking-widest text-charcoal-muted mb-2 block">
+                01 · Initial Bottleneck
+              </span>
+              <h3 class="font-display text-2xl sm:text-3xl font-black text-charcoal mb-4">
+                {t(locale, 'Portfolio.challenge')}
+              </h3>
+              <p class="text-base sm:text-lg text-charcoal-muted leading-relaxed font-normal">
+                {project.challenge[locale]}
+              </p>
+            </div>
+          </div>
+
+          <!-- The Solution -->
+          <div class="p-8 sm:p-12 rounded-4xl bg-[#FFFDF9] border-2 border-vermilion/40 shadow-warm-lg flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-vermilion text-ivory flex items-center justify-center mb-6 shadow-md">
+                <Lightbulb className="w-6 h-6 text-ivory" />
+              </div>
+              <span class="text-xs font-mono font-bold uppercase tracking-widest text-vermilion mb-2 block">
+                02 · The Solution Engineered
+              </span>
+              <h3 class="font-display text-2xl sm:text-3xl font-black text-charcoal mb-4">
+                {t(locale, 'Portfolio.solution')}
+              </h3>
+              <p class="text-base sm:text-lg text-charcoal-muted leading-relaxed font-normal">
+                {project.solution[locale]}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 4. Visual System Architecture & Technical Pipeline -->
+    <CaseStudyArchitecture
+      architecture={project.architecture}
+      stack={project.stack}
+      lang={locale}
+    />
+
+    <!-- 5. Key Engineered Features & Innovations -->
+    <CaseStudyFeatures
+      features={project.keyFeatures}
+      lang={locale}
+    />
+
+    <!-- 6. Verified Client Testimonial Endorsement -->
+    <CaseStudyTestimonial
+      testimonial={project.testimonial}
+      lang={locale}
+    />
+
+    <!-- 7. Bottom Consultation Banner -->
+    <section class="relative pt-8">
+      <Container size="large">
+        <div class="p-8 sm:p-14 lg:p-16 rounded-4xl bg-charcoal text-ivory border border-white/10 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="max-w-2xl text-center lg:text-left">
+            <span class="text-xs font-mono uppercase tracking-widest text-vermilion font-bold mb-3 block">
+              READY TO BUILD?
+            </span>
+            <h3 class="font-display text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-ivory mb-4">
+              Have a similar technical challenge or ambitious product vision?
+            </h3>
+            <p class="text-base sm:text-lg text-ivory/70 font-normal">
+              Let's calibrate the architecture, timeline, and exact scope with our senior engineering team.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto shrink-0">
+            <Button
+              href={getLocalizedPath('/contact', locale)}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto shadow-vermilion-glow"
+              cursorText="TALK"
+            >
+              <span>Schedule a Tech Call</span>
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+            <Button
+              href={getLocalizedPath('/estimator', locale)}
+              variant="secondary"
+              size="lg"
+              className="w-full sm:w-auto bg-white/10 text-ivory hover:bg-white hover:text-charcoal border-white/20"
+              cursorText="CALCULATE"
+            >
+              <span>Calculate Scope</span>
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 8. Next Project Flow Navigator -->
+    <section class="pt-8 border-t border-warm-border">
+      <Container size="large">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-4xl bg-warm-card border border-warm-border hover:border-vermilion/40 transition-colors">
+          <div class="flex flex-col">
+            <span class="text-xs uppercase font-mono font-bold tracking-wider text-charcoal-muted mb-1">
+              {t(locale, 'Portfolio.nextProject')}
+            </span>
+            <h3 class="font-display text-2xl sm:text-3xl font-black text-charcoal">
+              {nextProject.title[locale]}
+            </h3>
+          </div>
+
+          <Button
+            href={getLocalizedPath(`/portfolio/${nextProject.slug}`, locale)}
+            variant="primary"
+            size="md"
+            cursorText="NEXT"
+          >
+            <span>{t(locale, 'Portfolio.viewProject')}</span>
+            <ArrowRight className="w-4 h-4" />
+          </Button>
+        </div>
+      </Container>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,101 @@
+"use client";
+
+import React from "react";
+import { Container } from "@/components/ui/Container";
+import { Badge } from "@/components/ui/Badge";
+import { ProjectArchitecture } from "@/data/projects";
+import { Layers, Cpu, Database, Activity, CheckCircle2, ArrowRight } from "lucide-react";
+
+interface CaseStudyArchitectureProps {
+  architecture?: ProjectArchitecture;
+  stack: string[];
+  lang: "id" | "en";
+}
+
+export function CaseStudyArchitecture({
+  architecture,
+  stack,
+  lang,
+}: CaseStudyArchitectureProps) {
+  if (!architecture) return null;
+
+  return (
+    <section className="relative py-12 sm:py-20 bg-charcoal text-ivory rounded-4xl mx-4 sm:mx-8 lg:mx-12 overflow-hidden shadow-2xl">
+      {/* Background blueprint grid */}
+      <div
+        className="absolute inset-0 z-0 h-full w-full 
+        bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] 
+        bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_40%,#000_40%,transparent_100%)] pointer-events-none"
+      />
+
+      <div className="relative z-10 px-6 sm:px-12 lg:px-16">
+        {/* Section Header */}
+        <div className="flex flex-col gap-4 max-w-3xl mb-12 sm:mb-16">
+          <Badge variant="charcoal" size="sm" className="w-fit uppercase tracking-widest text-[10px] font-bold border-white/20 text-ivory bg-white/10">
+            {lang === "id" ? "ARSITEKTUR & REKAYASA SISTEM" : "SYSTEM ARCHITECTURE & PIPELINE"}
+          </Badge>
+
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-ivory leading-tight">
+            {architecture.headline[lang]}
+          </h2>
+
+          <p className="text-base sm:text-lg text-ivory/70 leading-relaxed font-normal">
+            {architecture.description[lang]}
+          </p>
+        </div>
+
+        {/* Interactive Architecture Flow Nodes */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {architecture.nodes.map((node, index) => (
+            <div
+              key={index}
+              className="p-6 sm:p-7 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-vermilion/60 transition-all duration-300 flex flex-col justify-between group hover:bg-white/[0.08]"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="w-8 h-8 rounded-xl bg-vermilion/20 text-vermilion flex items-center justify-center text-xs font-mono font-bold">
+                    0{index + 1}
+                  </span>
+                  <span className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/10 text-ivory/80 border border-white/10">
+                    {node.badge}
+                  </span>
+                </div>
+
+                <h4 className="font-display text-lg font-bold text-ivory mb-2 group-hover:text-vermilion transition-colors">
+                  {node.title[lang]}
+                </h4>
+
+                <p className="text-xs sm:text-sm text-ivory/65 leading-relaxed font-normal">
+                  {node.detail}
+                </p>
+              </div>
+
+              {index < architecture.nodes.length - 1 && (
+                <div className="hidden lg:flex items-center justify-end mt-4 text-white/20 group-hover:text-vermilion transition-colors">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Tech Stack Chips Bar */}
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+          <span className="text-xs font-mono uppercase tracking-widest text-ivory/50">
+            {lang === "id" ? "Teknologi Terverifikasi" : "Engineered Tech Stack"}
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {stack.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs font-mono px-3 py-1.5 rounded-lg bg-white/10 text-ivory font-medium border border-white/10"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

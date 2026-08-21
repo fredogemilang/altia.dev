@@ -1,0 +1,253 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Container } from '../components/ui/Container';
+import { Badge } from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
+import { Button } from '../components/ui/Button';
+import { SectionHeading } from '../components/ui/SectionHeading';
+import { ScrollReveal } from '../components/effects/ScrollReveal';
+import { FaqAccordion } from '../components/pricing/FaqAccordion';
+import { t, type Locale, getLocalizedPath } from '../i18n/utils';
+import {
+  Sparkles,
+  ArrowRight,
+  Globe,
+  Smartphone,
+  Cpu,
+  Wrench,
+  Info,
+} from 'lucide-react';
+
+const locale: Locale = 'en';
+
+const faqItems = [
+  { question: t(locale, 'Pricing.faq.q1'), answer: t(locale, 'Pricing.faq.a1') },
+  { question: t(locale, 'Pricing.faq.q2'), answer: t(locale, 'Pricing.faq.a2') },
+  { question: t(locale, 'Pricing.faq.q3'), answer: t(locale, 'Pricing.faq.a3') },
+  { question: t(locale, 'Pricing.faq.q4'), answer: t(locale, 'Pricing.faq.a4') },
+  { question: t(locale, 'Pricing.faq.q5'), answer: t(locale, 'Pricing.faq.a5') },
+  { question: t(locale, 'Pricing.faq.q6'), answer: t(locale, 'Pricing.faq.a6') },
+];
+
+const webServices = [
+  { name: t(locale, 'Pricing.web.items.0.name'), price: t(locale, 'Pricing.web.items.0.price'), desc: t(locale, 'Pricing.web.items.0.desc') },
+  { name: t(locale, 'Pricing.web.items.1.name'), price: t(locale, 'Pricing.web.items.1.price'), desc: t(locale, 'Pricing.web.items.1.desc') },
+  { name: t(locale, 'Pricing.web.items.2.name'), price: t(locale, 'Pricing.web.items.2.price'), desc: t(locale, 'Pricing.web.items.2.desc') },
+  { name: t(locale, 'Pricing.web.items.3.name'), price: t(locale, 'Pricing.web.items.3.price'), desc: t(locale, 'Pricing.web.items.3.desc') },
+  { name: t(locale, 'Pricing.web.items.4.name'), price: t(locale, 'Pricing.web.items.4.price'), desc: t(locale, 'Pricing.web.items.4.desc') },
+  { name: t(locale, 'Pricing.web.items.5.name'), price: t(locale, 'Pricing.web.items.5.price'), desc: t(locale, 'Pricing.web.items.5.desc') },
+];
+
+const appServices = [
+  { name: t(locale, 'Pricing.app.items.0.name'), price: t(locale, 'Pricing.app.items.0.price'), desc: t(locale, 'Pricing.app.items.0.desc') },
+  { name: t(locale, 'Pricing.app.items.1.name'), price: t(locale, 'Pricing.app.items.1.price'), desc: t(locale, 'Pricing.app.items.1.desc') },
+  { name: t(locale, 'Pricing.app.items.2.name'), price: t(locale, 'Pricing.app.items.2.price'), desc: t(locale, 'Pricing.app.items.2.desc') },
+];
+
+const aiServices = [
+  { name: t(locale, 'Pricing.ai.items.0.name'), price: t(locale, 'Pricing.ai.items.0.price'), desc: t(locale, 'Pricing.ai.items.0.desc') },
+  { name: t(locale, 'Pricing.ai.items.1.name'), price: t(locale, 'Pricing.ai.items.1.price'), desc: t(locale, 'Pricing.ai.items.1.desc') },
+  { name: t(locale, 'Pricing.ai.items.2.name'), price: t(locale, 'Pricing.ai.items.2.price'), desc: t(locale, 'Pricing.ai.items.2.desc') },
+  { name: t(locale, 'Pricing.ai.items.3.name'), price: t(locale, 'Pricing.ai.items.3.price'), desc: t(locale, 'Pricing.ai.items.3.desc') },
+  { name: t(locale, 'Pricing.ai.items.4.name'), price: t(locale, 'Pricing.ai.items.4.price'), desc: t(locale, 'Pricing.ai.items.4.desc') },
+];
+
+const ongoingServices = [
+  { name: t(locale, 'Pricing.ongoing.items.0.name'), price: t(locale, 'Pricing.ongoing.items.0.price'), desc: t(locale, 'Pricing.ongoing.items.0.desc') },
+  { name: t(locale, 'Pricing.ongoing.items.1.name'), price: t(locale, 'Pricing.ongoing.items.1.price'), desc: t(locale, 'Pricing.ongoing.items.1.desc') },
+  { name: t(locale, 'Pricing.ongoing.items.2.name'), price: t(locale, 'Pricing.ongoing.items.2.price'), desc: t(locale, 'Pricing.ongoing.items.2.desc') },
+];
+---
+
+<Layout title={t(locale, 'Pricing.title')} locale={locale}>
+  <div class="flex flex-col gap-20 sm:gap-28 pb-24">
+    <!-- 1. Header -->
+    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
+      <Container size="large">
+        <div class="max-w-3xl">
+          <Badge
+            variant="vermilion"
+            size="md"
+            className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-vermilion" />
+            <span>{t(locale, 'Pricing.tag')}</span>
+          </Badge>
+          <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-6">
+            {t(locale, 'Pricing.title')}
+          </h1>
+          <p class="text-lg sm:text-xl text-charcoal-muted leading-relaxed mb-4">
+            {t(locale, 'Pricing.subtitle')}
+          </p>
+          <p class="text-sm text-charcoal-muted/80 leading-relaxed flex items-start gap-2">
+            <Info className="w-4 h-4 text-vermilion flex-shrink-0 mt-0.5" />
+            <span>{t(locale, 'Pricing.note')}</span>
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <!-- 2. Web Development Pricing -->
+    <section>
+      <Container size="large">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center text-vermilion">
+            <Globe className="w-5 h-5" />
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-charcoal">
+            {t(locale, 'Pricing.web.title')}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {webServices.map((service, index) => (
+            <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.08} className="h-full">
+              <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
+                <div>
+                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
+                    {service.name}
+                  </h3>
+                  <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
+                    {service.price}
+                  </div>
+                  <p class="text-sm text-charcoal-muted leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
+                </div>
+                <Button href={getLocalizedPath('/contact', locale)} variant="secondary" size="sm" className="w-full justify-center">
+                  <span>{t(locale, 'Pricing.inquireButton')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- 3. Mobile & Desktop App Pricing -->
+    <section>
+      <Container size="large">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center text-vermilion">
+            <Smartphone className="w-5 h-5" />
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-charcoal">
+            {t(locale, 'Pricing.app.title')}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {appServices.map((service, index) => (
+            <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.1} className="h-full">
+              <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
+                <div>
+                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
+                    {service.name}
+                  </h3>
+                  <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
+                    {service.price}
+                  </div>
+                  <p class="text-sm text-charcoal-muted leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
+                </div>
+                <Button href={getLocalizedPath('/contact', locale)} variant="secondary" size="sm" className="w-full justify-center">
+                  <span>{t(locale, 'Pricing.inquireButton')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- 4. AI & Automation Pricing -->
+    <section>
+      <Container size="large">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center text-vermilion">
+            <Cpu className="w-5 h-5" />
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-charcoal">
+            {t(locale, 'Pricing.ai.title')}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {aiServices.map((service, index) => (
+            <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.08} className="h-full">
+              <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
+                <div>
+                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
+                    {service.name}
+                  </h3>
+                  <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
+                    {service.price}
+                  </div>
+                  <p class="text-sm text-charcoal-muted leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
+                </div>
+                <Button href={getLocalizedPath('/contact', locale)} variant="secondary" size="sm" className="w-full justify-center">
+                  <span>{t(locale, 'Pricing.inquireButton')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- 5. Retainers & Maintenance -->
+    <section>
+      <Container size="large">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center text-vermilion">
+            <Wrench className="w-5 h-5" />
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-charcoal">
+            {t(locale, 'Pricing.ongoing.title')}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {ongoingServices.map((service, index) => (
+            <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.1} className="h-full">
+              <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
+                <div>
+                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
+                    {service.name}
+                  </h3>
+                  <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
+                    {service.price}
+                  </div>
+                  <p class="text-sm text-charcoal-muted leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
+                </div>
+                <Button href={getLocalizedPath('/contact', locale)} variant="secondary" size="sm" className="w-full justify-center">
+                  <span>{t(locale, 'Pricing.inquireButton')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- 6. FAQ Section -->
+    <section class="py-8">
+      <Container size="large">
+        <SectionHeading
+          tag={t(locale, 'Pricing.faq.tag')}
+          title={t(locale, 'Pricing.faq.title')}
+        />
+        <FaqAccordion client:visible items={faqItems} />
+      </Container>
+    </section>
+  </div>
+</Layout>

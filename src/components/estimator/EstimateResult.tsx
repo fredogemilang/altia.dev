@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/useI18n";
 import { ProjectRequirements, ProjectEstimate } from "@/domain/estimator/types";
 import { ContactData } from "./ContactGateStep";
 import { Card } from "@/components/ui/Card";
