@@ -41,6 +41,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Single unified Flutter/React Native codebase supporting both iOS and Android");
     } else if (hasIos || hasAndroid) {
@@ -52,6 +53,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Cross-desktop binary builds for both macOS and Windows");
     }
@@ -63,6 +65,7 @@ export class AppPricingStrategy implements PricingStrategy {
     minPrice += designMod.min;
     maxPrice += designMod.max;
     minWeeks += designMod.weeks;
+    maxWeeks += designMod.weeks;
     complexityScore += designMod.score;
 
     if (requirements.design.status === "ready") {
@@ -78,6 +81,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Social & email authentication with biometric FaceID / TouchID support");
     }
@@ -86,6 +90,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += 200;
       maxPrice += 400;
       minWeeks += 0.5;
+      maxWeeks += 0.5;
       complexityScore += 10;
       highlights.push("Cross-platform push notification infrastructure (FCM / APNs)");
     }
@@ -95,6 +100,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Offline-first architecture with SQLite/Isar local storage and background cloud sync");
     }
@@ -104,6 +110,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("In-App Purchases (IAP) / Stripe payment gateway integration");
     }
@@ -113,6 +120,7 @@ export class AppPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Real-time cloud database synchronization and live data feeds");
     }
@@ -143,6 +151,7 @@ export class AppPricingStrategy implements PricingStrategy {
         minPrice += intMod.min;
         maxPrice += intMod.max;
         minWeeks += intMod.weeks;
+        maxWeeks += intMod.weeks;
         complexityScore += intMod.score;
         highlights.push(`Integration with ${requirements.integrations.length} third-party backend API(s)`);
       }
@@ -200,8 +209,8 @@ export class AppPricingStrategy implements PricingStrategy {
         max: maxPrice,
       },
       timeline: {
-        minWeeks: Math.round(minWeeks),
-        maxWeeks: Math.round(maxWeeks),
+        minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),
+        maxWeeks: Math.round(Math.max(minWeeks, maxWeeks)),
       },
       recommendation,
       highlights,

@@ -290,9 +290,16 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   const priceRange = lead.estimate?.pricing
     ? `$${lead.estimate.pricing.min?.toLocaleString()} – $${lead.estimate.pricing.max?.toLocaleString()}`
     : 'N/A';
-  const minWeeks = lead.estimate?.timeline?.minWeeks ?? lead.estimate?.timeline?.weeks ?? 'N/A';
-  const maxWeeks = lead.estimate?.timeline?.maxWeeks ?? minWeeks;
-  const timelineStr = minWeeks === maxWeeks ? `${minWeeks} weeks` : `${minWeeks} – ${maxWeeks} weeks`;
+  const rawMinWeeks = lead.estimate?.timeline?.minWeeks ?? lead.estimate?.timeline?.weeks;
+  const rawMaxWeeks = lead.estimate?.timeline?.maxWeeks ?? rawMinWeeks;
+  let timelineStr = 'N/A';
+  if (typeof rawMinWeeks === 'number' && typeof rawMaxWeeks === 'number') {
+    const minW = Math.min(rawMinWeeks, rawMaxWeeks);
+    const maxW = Math.max(rawMinWeeks, rawMaxWeeks);
+    timelineStr = minW === maxW ? `${minW} weeks` : `${minW} – ${maxW} weeks`;
+  } else if (rawMinWeeks) {
+    timelineStr = `${rawMinWeeks} weeks`;
+  }
   const serviceType = lead.requirements?.service || 'N/A';
   const projectType = (lead.estimate?.projectType || lead.requirements?.projectType || serviceType).replace(/_/g, ' ');
   const complexity = lead.estimate?.complexity?.level || 'medium';
@@ -533,9 +540,16 @@ export async function sendLeadToTelegram(
   const priceRange = lead.estimate?.pricing
     ? `$${lead.estimate.pricing.min?.toLocaleString()} – $${lead.estimate.pricing.max?.toLocaleString()}`
     : 'N/A';
-  const timeline = lead.estimate?.timeline?.weeks
-    ? `${lead.estimate.timeline.weeks} weeks`
-    : 'N/A';
+  const tMin = lead.estimate?.timeline?.minWeeks ?? lead.estimate?.timeline?.weeks;
+  const tMax = lead.estimate?.timeline?.maxWeeks ?? tMin;
+  let timeline = 'N/A';
+  if (typeof tMin === 'number' && typeof tMax === 'number') {
+    const minW = Math.min(tMin, tMax);
+    const maxW = Math.max(tMin, tMax);
+    timeline = minW === maxW ? `${minW} weeks` : `${minW} – ${maxW} weeks`;
+  } else if (tMin) {
+    timeline = `${tMin} weeks`;
+  }
   const serviceType = lead.requirements?.service || 'N/A';
   const scope = lead.requirements?.scope || 'N/A';
 

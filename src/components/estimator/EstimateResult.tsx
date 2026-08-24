@@ -49,8 +49,10 @@ export function EstimateResult({
   const projectTypeName = (estimate?.projectType || requirements?.projectType || requirements?.service || "digital_product").replace(/_/g, " ");
   const minPrice = estimate?.pricing?.min ?? (estimate as any)?.minPrice ?? 3500;
   const maxPrice = estimate?.pricing?.max ?? (estimate as any)?.maxPrice ?? 7500;
-  const minWeeks = estimate?.timeline?.minWeeks ?? 4;
-  const maxWeeks = estimate?.timeline?.maxWeeks ?? 8;
+  const rawMinWeeks = estimate?.timeline?.minWeeks ?? 4;
+  const rawMaxWeeks = estimate?.timeline?.maxWeeks ?? 8;
+  const minWeeks = Math.min(rawMinWeeks, rawMaxWeeks);
+  const maxWeeks = Math.max(rawMinWeeks, rawMaxWeeks);
   const complexityLevel = estimate?.complexity?.level ?? (requirements as any)?.complexity ?? "medium";
   const solution = estimate?.recommendation?.solution ?? "Custom Digital Engineering Solution";
   const rationale = estimate?.recommendation?.rationale ?? "Tailored architecture built to scale with high performance and zero-jank frontend.";
@@ -193,7 +195,7 @@ export function EstimateResult({
             </div>
 
             <div className="font-display font-black text-3xl sm:text-4xl text-charcoal my-2">
-              {minWeeks} – {maxWeeks} {t("weeks")}
+              {minWeeks === maxWeeks ? `${minWeeks} ${t("weeks")}` : `${minWeeks} – ${maxWeeks} ${t("weeks")}`}
             </div>
           </div>
 

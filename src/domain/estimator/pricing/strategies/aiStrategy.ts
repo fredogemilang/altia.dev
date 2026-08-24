@@ -37,6 +37,7 @@ export class AIPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Stateful multi-agent decision chain with automated error recovery");
     }
@@ -46,6 +47,7 @@ export class AIPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Hybrid dense/sparse vector embedding index with reranking pipeline");
     }
@@ -55,6 +57,7 @@ export class AIPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Human-in-the-loop approval dashboard and confidence threshold triggers");
     }
@@ -85,6 +88,7 @@ export class AIPricingStrategy implements PricingStrategy {
         minPrice += intMod.min;
         maxPrice += intMod.max;
         minWeeks += intMod.weeks;
+        maxWeeks += intMod.weeks;
         complexityScore += intMod.score;
         highlights.push(`Connected to ${requirements.integrations.length} enterprise system(s) & data sources`);
       }
@@ -142,8 +146,8 @@ export class AIPricingStrategy implements PricingStrategy {
         max: maxPrice,
       },
       timeline: {
-        minWeeks: Math.round(minWeeks),
-        maxWeeks: Math.round(maxWeeks),
+        minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),
+        maxWeeks: Math.round(Math.max(minWeeks, maxWeeks)),
       },
       recommendation,
       highlights,

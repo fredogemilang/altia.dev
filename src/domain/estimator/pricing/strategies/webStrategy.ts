@@ -39,6 +39,7 @@ export class WebPricingStrategy implements PricingStrategy {
     minPrice += designMod.min;
     maxPrice += designMod.max;
     minWeeks += designMod.weeks;
+    maxWeeks += designMod.weeks;
     complexityScore += designMod.score;
 
     if (requirements.design.status === "ready") {
@@ -67,6 +68,7 @@ export class WebPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Secure user authentication & role-based access control (RBAC)");
     }
@@ -76,6 +78,7 @@ export class WebPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Automated payment gateway integration & webhook handling");
     }
@@ -85,6 +88,7 @@ export class WebPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Custom headless CMS or WordPress content management setup");
     }
@@ -94,6 +98,7 @@ export class WebPricingStrategy implements PricingStrategy {
       minPrice += mod.min;
       maxPrice += mod.max;
       minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Real-time WebSockets / SSE reactive updates");
     }
@@ -124,6 +129,7 @@ export class WebPricingStrategy implements PricingStrategy {
         minPrice += intMod.min;
         maxPrice += intMod.max;
         minWeeks += intMod.weeks;
+        maxWeeks += intMod.weeks;
         complexityScore += intMod.score;
         highlights.push(`Integration with ${requirements.integrations.length} external third-party service(s)`);
       }
@@ -184,8 +190,8 @@ export class WebPricingStrategy implements PricingStrategy {
         max: maxPrice,
       },
       timeline: {
-        minWeeks: Math.round(minWeeks),
-        maxWeeks: Math.round(maxWeeks),
+        minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),
+        maxWeeks: Math.round(Math.max(minWeeks, maxWeeks)),
       },
       recommendation,
       highlights,
