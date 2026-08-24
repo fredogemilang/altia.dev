@@ -3,8 +3,8 @@ export const SITE_CONFIG = {
   title: "ALTIA DEV · Creative Design & AI Engineering Studio",
   description:
     "High-craft digital engineering studio specializing in modern web applications, cross-platform apps, and intelligent AI automation pipelines.",
-  url: "https://altia.dev",
-  ogImage: "https://altia.dev/og.jpg",
+  url: "https://www.altia.dev",
+  ogImage: "https://www.altia.dev/og.jpg",
   links: {
     twitter: "https://twitter.com/altiadev",
     github: "https://github.com/altiadev",
