@@ -243,8 +243,8 @@ export async function handleLeadCapture(
 
   const leadId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
 
-  // Send lead notification to Telegram
-  await sendLeadToTelegram({
+  // Build Telegram promise (caller should waitUntil this)
+  const telegramPromise = sendLeadToTelegram({
     leadId,
     name,
     email,
@@ -266,13 +266,14 @@ export async function handleLeadCapture(
       estimate,
       qualification,
     },
+    telegramPromise,
   };
 }
 
 // -------------------------------------------------------------
 // 4. Telegram Lead Notification
 // -------------------------------------------------------------
-async function sendLeadToTelegram(
+export async function sendLeadToTelegram(
   lead: {
     leadId: string;
     name: string;
@@ -305,42 +306,45 @@ async function sendLeadToTelegram(
   const serviceType = lead.requirements?.service || 'N/A';
   const scope = lead.requirements?.scope || 'N/A';
 
-  const message = [
-    `${tierEmoji} *New Lead — ${lead.tier.toUpperCase()}* (Score: ${lead.score}/100)`,
+  const h = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const lines = [
+    `${tierEmoji} <b>New Lead — ${lead.tier.toUpperCase()}</b> (Score: ${lead.score}/100)`,
     '',
-    `👤 *${escapeMarkdown(lead.name)}*`,
-    `📧 ${escapeMarkdown(lead.email)}`,
-    `📱 ${escapeMarkdown(lead.phone)}`,
-    lead.company ? `🏢 ${escapeMarkdown(lead.company)}` : '',
+    `👤 <b>${h(lead.name)}</b>`,
+    `📧 ${h(lead.email)}`,
+    `📱 ${h(lead.phone)}`,
+    lead.company ? `🏢 ${h(lead.company)}` : '',
     '',
-    `🔧 Service: ${escapeMarkdown(serviceType)}`,
-    `📋 Scope: ${escapeMarkdown(scope)}`,
-    `💰 Estimate: ${escapeMarkdown(priceRange)}`,
-    `⏱ Timeline: ${escapeMarkdown(timeline)}`,
+    `🔧 Service: ${h(serviceType)}`,
+    `📋 Scope: ${h(scope)}`,
+    `💰 Estimate: ${h(priceRange)}`,
+    `⏱ Timeline: ${h(timeline)}`,
     `🌐 Locale: ${lead.locale.toUpperCase()}`,
     '',
-    `🆔 \`${lead.leadId}\``,
+    `🆔 <code>${lead.leadId}</code>`,
   ].filter(Boolean).join('\n');
 
   try {
-    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    const resp = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: chatId,
-        text: message,
-        parse_mode: 'MarkdownV2',
+        text: lines,
+        parse_mode: 'HTML',
         disable_web_page_preview: true,
       }),
     });
+    const result = await resp.json() as any;
+    if (!result.ok) {
+      console.error('[Telegram] API error:', JSON.stringify(result));
+    }
   } catch (err) {
     console.error('[Telegram] Failed to send lead notification:', err);
   }
 }
 
-function escapeMarkdown(text: string): string {
-  return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1');
-}
 
 function escapeHtml(str: string): string {
   return str

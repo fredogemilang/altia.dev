@@ -18,6 +18,11 @@ export async function onRequestPost(context: EventContext<EnvBindings, string, a
 
     const result = await handleLeadCapture(payload, clientIp, userAgent, context.env);
 
+    // Fire Telegram notification in background (don't block response)
+    if (result.telegramPromise) {
+      context.waitUntil(result.telegramPromise);
+    }
+
     return new Response(JSON.stringify(result.body), {
       status: result.status,
       headers: corsHeaders(context.request),
