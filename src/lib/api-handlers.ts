@@ -243,19 +243,14 @@ export async function handleLeadCapture(
 
   const leadId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
 
-  // Build Telegram promise (caller should waitUntil this)
-  const telegramPromise = sendLeadToTelegram({
-    leadId,
-    name,
-    email,
-    phone,
-    company,
-    tier,
-    score: Math.min(100, score),
-    estimate,
-    requirements,
-    locale,
-  }, env);
+  const leadData = {
+    leadId, name, email, phone, company, tier,
+    score: Math.min(100, score), estimate, requirements, locale,
+  };
+
+  // Build notification promises (caller should waitUntil these)
+  const telegramPromise = sendLeadToTelegram(leadData, env);
+  const emailPromise = sendLeadEmail(leadData, env);
 
   return {
     status: 200,
@@ -267,7 +262,90 @@ export async function handleLeadCapture(
       qualification,
     },
     telegramPromise,
+    emailPromise,
   };
+}
+
+// -------------------------------------------------------------
+// 3b. Brevo Email for Lead Notification
+// -------------------------------------------------------------
+async function sendLeadEmail(
+  lead: {
+    leadId: string; name: string; email: string; phone: string;
+    company: string; tier: string; score: number;
+    estimate: any; requirements: any; locale: string;
+  },
+  env: EnvBindings = {}
+) {
+  const apiKey = env.BREVO_API_KEY || (typeof process !== 'undefined' ? process.env.BREVO_API_KEY : undefined);
+  const senderEmail = env.BREVO_SENDER_EMAIL || 'website@altia.dev';
+  const senderName = env.BREVO_SENDER_NAME || 'ALTIA DEV';
+  const receiverEmail = env.CONTACT_RECEIVER_EMAIL || 'hello@altia.dev';
+
+  if (!apiKey) {
+    console.log('[Brevo] API key not configured. Lead email skipped:', lead.leadId);
+    return;
+  }
+
+  const tierLabel = lead.tier === 'hot' ? '🔥 HOT' : lead.tier === 'warm' ? '🟡 WARM' : '🟢 QUALIFIED';
+  const priceRange = lead.estimate?.pricing
+    ? `$${lead.estimate.pricing.min?.toLocaleString()} – $${lead.estimate.pricing.max?.toLocaleString()}`
+    : 'N/A';
+  const timeline = lead.estimate?.timeline?.weeks ? `${lead.estimate.timeline.weeks} weeks` : 'N/A';
+  const serviceType = lead.requirements?.service || 'N/A';
+  const scope = lead.requirements?.scope || 'N/A';
+  const e = escapeHtml;
+
+  const htmlContent = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #E8DFD3; border-radius: 16px; background-color: #FFF6E8; color: #2F2A26;">
+      <h2 style="color: #E34234; margin-top: 0; font-size: 20px;">New Estimator Lead — ${tierLabel} (Score: ${lead.score}/100)</h2>
+
+      <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+        <tr><td style="padding: 8px 0; font-weight: bold; width: 120px;">Name</td><td>${e(lead.name)}</td></tr>
+        <tr><td style="padding: 8px 0; font-weight: bold;">Email</td><td><a href="mailto:${e(lead.email)}" style="color: #E34234;">${e(lead.email)}</a></td></tr>
+        <tr><td style="padding: 8px 0; font-weight: bold;">Phone</td><td><a href="https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}" style="color: #E34234;">${e(lead.phone)}</a></td></tr>
+        ${lead.company ? `<tr><td style="padding: 8px 0; font-weight: bold;">Company</td><td>${e(lead.company)}</td></tr>` : ''}
+      </table>
+
+      <div style="margin-top: 16px; padding: 16px; background: #FAF4E9; border-radius: 8px; border-left: 4px solid #E34234;">
+        <p style="margin: 0 0 8px; font-weight: bold;">Project Requirements</p>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr><td style="padding: 4px 0;">Service</td><td style="font-weight: bold;">${e(serviceType)}</td></tr>
+          <tr><td style="padding: 4px 0;">Scope</td><td style="font-weight: bold;">${e(scope)}</td></tr>
+          <tr><td style="padding: 4px 0;">Investment Range</td><td style="font-weight: bold; color: #E34234;">${e(priceRange)}</td></tr>
+          <tr><td style="padding: 4px 0;">Timeline</td><td style="font-weight: bold;">${e(timeline)}</td></tr>
+        </table>
+      </div>
+
+      <p style="font-size: 12px; color: #8A8078; margin-top: 24px; border-top: 1px solid #E8DFD3; padding-top: 12px;">
+        Lead ID: ${lead.leadId} · Locale: ${lead.locale.toUpperCase()} · ${new Date().toLocaleString()}
+      </p>
+    </div>
+  `;
+
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': apiKey,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: senderName, email: senderEmail },
+        to: [{ email: receiverEmail, name: 'ALTIA DEV Leads' }],
+        replyTo: { email: lead.email, name: lead.name },
+        subject: `[${lead.tier.toUpperCase()} Lead] ${lead.name} — ${serviceType} (${priceRange})`,
+        htmlContent,
+      }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      console.error('[Brevo] Lead email failed:', JSON.stringify(err));
+    }
+  } catch (err) {
+    console.error('[Brevo] Lead email error:', err);
+  }
 }
 
 // -------------------------------------------------------------
