@@ -188,15 +188,17 @@ Tambahkan variabel berikut di **Cloudflare Pages** → **Settings** → **Enviro
 
 ### Production Environment Variables
 
-| Variable | Value | Keterangan |
-|----------|-------|------------|
-| `NODE_VERSION` | `20` | Node.js runtime build |
-| `BREVO_API_KEY` | `xkeysib-xxxxx` | API key dari [Brevo](#3-setup-brevo-email-transaksional) |
-| `BREVO_SENDER_EMAIL` | `hello@altia.dev` | Email pengirim (harus terverifikasi di Brevo) |
-| `BREVO_SENDER_NAME` | `ALTIA DEV Website` | Nama pengirim yang tampil di email |
-| `CONTACT_RECEIVER_EMAIL` | `hello@altia.dev` | Email tujuan penerima inquiry |
-| `TELEGRAM_BOT_TOKEN` | `123456789:ABCdef...` | Bot token dari [BotFather](#langkah-1-buat-bot-di-telegram) |
-| `TELEGRAM_CHAT_ID` | `123456789` | Chat ID dari [Langkah 2](#langkah-2-dapatkan-chat-id) |
+| Variable | Value | Type | Keterangan |
+|----------|-------|------|------------|
+| `NODE_VERSION` | `20` | Plain text | Node.js runtime build |
+| `BREVO_API_KEY` | `xkeysib-xxxxx` | **🔒 Encrypt** | API key dari [Brevo](#3-setup-brevo-email-transaksional) |
+| `BREVO_SENDER_EMAIL` | `hello@altia.dev` | Plain text | Email pengirim (harus terverifikasi di Brevo) |
+| `BREVO_SENDER_NAME` | `ALTIA DEV Website` | Plain text | Nama pengirim yang tampil di email |
+| `CONTACT_RECEIVER_EMAIL` | `hello@altia.dev` | Plain text | Email tujuan penerima inquiry |
+| `TELEGRAM_BOT_TOKEN` | `123456789:ABCdef...` | **🔒 Encrypt** | Bot token dari [BotFather](#langkah-1-buat-bot-di-telegram) |
+| `TELEGRAM_CHAT_ID` | `123456789` | Plain text | Chat ID dari [Langkah 2](#langkah-2-dapatkan-chat-id) |
+
+> **⚠️ PENTING:** Untuk variabel bertipe **🔒 Encrypt**, pilih tombol **"Encrypt"** saat menambahkan di Cloudflare Pages. Value yang sudah di-encrypt tidak bisa dilihat lagi setelah disimpan, jadi pastikan Anda menyimpan backup di tempat aman (password manager).
 
 ### Local Development (.env.local)
 ```ini
