@@ -22,8 +22,8 @@ interface LeadFormProps {
 }
 
 export function LeadForm({ requirements, estimate, onReset }: LeadFormProps) {
-  const t = useTranslations("Estimator.leadForm");
   const locale = useLocale();
+  const t = useTranslations("Estimator.leadForm", locale);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -64,7 +64,7 @@ export function LeadForm({ requirements, estimate, onReset }: LeadFormProps) {
         setError(data.error || "Failed to submit estimate. Please try again.");
       }
     } catch (err) {
-      setError("Network error submitting estimate. Please reach out to hello@altiadev.com directly.");
+      setError("Network error submitting estimate. Please reach out to hello@altia.dev directly.");
     } finally {
       setIsSubmitting(false);
     }

@@ -28,7 +28,7 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
             </h2>
           </div>
           <span className="text-xs font-mono text-charcoal-muted uppercase tracking-wider">
-            {gallery.length} High-Resolution Screens
+            {gallery.length} {lang === "id" ? "Layar Resolusi Tinggi" : "High-Resolution Screens"}
           </span>
         </div>
 
@@ -54,7 +54,7 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
             <img
               src={gallery[activeImageIndex] || gallery[0]}
               alt={`${title} screenshot ${activeImageIndex + 1}`}
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </div>
         </div>
@@ -76,11 +76,11 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
                   src={img}
                   alt={`Thumbnail ${idx + 1}`}
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
                   <span className="text-[10px] font-mono font-bold text-ivory uppercase tracking-wider">
-                    Screen 0{idx + 1}
+                    {lang === "id" ? "Layar" : "Screen"} 0{idx + 1}
                   </span>
                 </div>
               </button>

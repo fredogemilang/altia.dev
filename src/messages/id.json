@@ -2,121 +2,170 @@
   "Navigation": {
     "home": "Beranda",
     "services": "Layanan",
-    "portfolio": "Portofolio",
+    "portfolio": "Portfolio",
     "pricing": "Harga",
     "about": "Tentang Kami",
     "blog": "Blog",
-    "estimator": "Estimator",
+    "estimator": "Kalkulator Proyek",
     "contact": "Kontak",
-    "getStarted": "Hubungi Kami",
+    "getStarted": "Mulai Proyek",
     "menu": "Menu",
     "close": "Tutup",
+    "cta": "Mulai Proyek",
     "pricingMenu": {
-      "rateCardTitle": "Daftar Tarif & Layanan",
-      "rateCardDesc": "Transparansi harga awal untuk Web, Aplikasi, AI & Pemeliharaan.",
-      "rateCardBadge": "Harga Awal",
-      "estimatorTitle": "Kalkulator Estimasi Proyek",
-      "estimatorDesc": "Hitung rentang investasi, jadwal pengerjaan & dapatkan salinan via WhatsApp.",
-      "estimatorBadge": "Alat Interaktif",
-      "footerNote": "Kalkulasi deterministik · Bebas tekanan sales"
+      "rateCardTitle": "Daftar Harga & Paket",
+      "rateCardDesc": "Website, aplikasi, dan sistem AI mulai $350.",
+      "rateCardBadge": "Tarif Awal",
+      "estimatorTitle": "Kalkulator Proyek",
+      "estimatorDesc": "Dapatkan gambaran awal estimasi proyek dalam ~2 menit.",
+      "estimatorBadge": "Interaktif",
+      "footerNote": "Kalkulasi deterministik · Bebas tekanan sales",
+      "footerGuarantee": "IP & Repository Milik Anda",
+      "footerSpeed": "Tanpa Vendor Lock-in"
     }
   },
   "Hero": {
-    "badge": "Produk Digital • Aplikasi • Otomasi AI",
-    "titleLine1": "Visi Anda.",
-    "titleLine2": "Kami Wujudkan.",
-    "subtitle": "Kami merancang dan membangun solusi digital yang mengubah ide ambisius menjadi hasil nyata bagi bisnis Anda.",
+    "badge": "ALTIA DEV · CREATIVE ENGINEERING STUDIO",
+    "location": "Jakarta, Indonesia · Melayani Klien di Seluruh Dunia",
+    "titleLine1": "Your Vision.",
+    "titleLine2": "Our Code.",
+    "subtitle": "Kami merancang dan membangun produk digital yang mengubah ide menjadi software yang cepat, matang, dan siap digunakan di dunia nyata.",
     "service1": "Web Development",
     "service2": "Mobile & Desktop Apps",
     "service3": "AI Automation",
     "primaryCta": "Mulai Proyek",
-    "secondaryCta": "Jelajahi Karya",
+    "secondaryCta": "Lihat Portfolio",
+    "proof1": "Worldwide Delivery",
+    "proof2": "Production-Ready Speed",
+    "proof3": "Zero Lock-In Codebase",
     "scrollDown": "Scroll untuk melihat lebih lanjut"
   },
   "Services": {
-    "tag": "Yang Kami Bangun",
-    "title": "Tiga disiplin, satu tujuan: software yang benar-benar berjalan",
-    "subtitle": "Kami memilih teknologi berdasarkan kebutuhan proyek, bukan yang sedang tren. Berikut yang kami kerjakan.",
+    "tag": "YANG KAMI BANGUN",
+    "title": "Tiga disiplin. Satu standar.",
+    "subtitle": "Kami menggabungkan design, engineering, dan AI untuk membangun produk digital yang tidak hanya terlihat baik, tetapi juga bekerja dengan baik.",
+    "homeTitle": "Design, engineering, dan AI. Satu studio.",
+    "homeSubtitle": "Kami memilih teknologi berdasarkan masalah yang ingin diselesaikan, bukan karena sedang populer. Hasilnya adalah produk digital yang dirancang dengan baik, bekerja dengan baik, dan siap berkembang.",
     "viewAll": "Lihat Semua Layanan",
     "items": {
       "web": {
         "number": "01",
-        "title": "Arsitektur Web & Cloud",
-        "tagline": "PHP, WordPress, Go, dan TypeScript, dipilih sesuai kebutuhan proyek.",
-        "description": "Kami membangun platform web dengan teknologi yang paling tepat: website perusahaan di WordPress dengan tema kustom, aplikasi web di Laravel atau Next.js, dan API berperforma tinggi di Go. Setiap proyek mendapat desain database yang matang, strategi caching, dan pipeline deployment yang terstruktur.",
+        "title": "Web & Cloud Platforms",
+        "tagline": "WordPress · Laravel · Next.js · Astro · Go",
+        "homeDescription": "Website, web app, SaaS, dan API dengan fondasi teknis yang kuat, mulai dari arsitektur dan data hingga deployment dan observability.",
+        "pageDescription": "Kami membangun website perusahaan, e-commerce, web application, SaaS, dan API dengan perhatian pada performa dan kemudahan pengembangan sejak awal.",
+        "description": "Kami membangun website perusahaan, e-commerce, web application, SaaS, dan API dengan perhatian pada performa dan kemudahan pengembangan sejak awal.",
+        "cta": "Konsultasikan Proyek Web",
         "features": [
-          "WordPress Korporat: Tema Kustom, Headless CMS, WooCommerce",
-          "Backend PHP: Laravel 11, Symfony, Filament Admin Panel",
-          "API Berperforma Tinggi: Go, Node.js, REST & gRPC",
-          "Aplikasi Web Interaktif: Next.js 14, React, Server Components",
-          "Database & Infrastruktur: PostgreSQL, MySQL, Redis, Docker",
-          "Optimasi Performa: Core Web Vitals, CDN, Security Hardening"
+          "Corporate websites & headless CMS",
+          "Laravel, Symfony, Next.js, Astro & React",
+          "High-throughput API & backend services",
+          "PostgreSQL, MySQL, Redis & Docker",
+          "Caching, CDN & performance optimization"
         ],
-        "stack": ["WordPress", "PHP (Laravel)", "Go", "Next.js", "TypeScript", "PostgreSQL", "MySQL", "Docker"]
+        "stack": ["WordPress", "Laravel", "Next.js", "Astro", "Go", "PostgreSQL", "Docker"]
       },
       "app": {
         "number": "02",
         "title": "Mobile & Desktop Apps",
-        "tagline": "Satu codebase, terasa native di iOS, Android, dan desktop.",
-        "description": "Kami menggunakan Flutter dan React Native untuk membuat aplikasi yang terasa native di setiap platform tanpa harus menulis kode terpisah. Dukungan offline, notifikasi, dan sinkronisasi real-time sudah termasuk standar.",
+        "tagline": "Flutter · React Native · Rust · Electron",
+        "homeDescription": "Aplikasi lintas platform yang terasa natural di setiap perangkat, dengan perhatian pada performa, dukungan offline, sinkronisasi, dan integrasi native.",
+        "pageDescription": "Aplikasi lintas platform dengan interaksi yang matang, performa yang andal, dukungan offline, sinkronisasi, dan integrasi native.",
+        "description": "Aplikasi lintas platform dengan interaksi yang matang, performa yang andal, dukungan offline, sinkronisasi, dan integrasi native.",
+        "cta": "Konsultasikan Proyek App",
         "features": [
-          "Mobile Lintas Platform: iOS & Android dari satu codebase",
-          "Aplikasi Desktop: macOS & Windows via Flutter atau Electron",
-          "Arsitektur Offline-First: Penyimpanan lokal dengan sinkronisasi cloud",
-          "Sistem Komponen: UI yang konsisten di semua platform"
+          "Flutter & React Native",
+          "macOS & Windows utilities",
+          "Offline-first architecture",
+          "SQLite & synchronization",
+          "Native APIs & device integrations"
         ],
-        "stack": ["Flutter", "React Native", "Electron", "Swift", "Kotlin", "SQLite"]
+        "stack": ["Flutter", "React Native", "Rust", "Electron", "Swift", "Kotlin", "SQLite"]
       },
       "ai": {
         "number": "03",
         "title": "AI Automation & Systems",
-        "tagline": "AI yang benar-benar menghemat waktu, bukan sekadar demo keren.",
-        "description": "Kami membangun sistem AI untuk pekerjaan nyata: pemrosesan dokumen, otomatisasi customer support, ekstraksi data, dan pencarian internal berbasis knowledge base. Setiap solusi terhubung langsung ke tools dan workflow yang sudah Anda gunakan.",
+        "tagline": "Python · LangChain · FastAPI · Qdrant · LLM APIs",
+        "homeDescription": "Sistem AI untuk pekerjaan nyata, mulai dari knowledge base dan pemrosesan dokumen hingga agent, riset, dan automation operasional.",
+        "pageDescription": "Kami membangun sistem AI untuk workflow bisnis nyata, bukan sekadar demo. Mulai dari retrieval dan document intelligence hingga agent dan automation.",
+        "description": "Kami membangun sistem AI untuk workflow bisnis nyata, bukan sekadar demo. Mulai dari retrieval dan document intelligence hingga agent dan automation.",
+        "cta": "Konsultasikan Proyek AI",
         "features": [
-          "Workflow Agen Multi-Langkah: Otomatisasi tugas dengan pengawasan manusia",
-          "Sistem Knowledge Base RAG: Cari di dokumen Anda sendiri dengan akurasi LLM",
-          "Chatbot & Voice AI: Asisten yang benar-benar membantu pelanggan",
-          "Integrasi API: Hubungkan output AI ke CRM, ERP, dan tools internal"
+          "Multi-agent systems",
+          "Enterprise RAG & hybrid search",
+          "Document & PDF processing",
+          "AI agents & tool calling",
+          "Guardrails, evaluation & monitoring"
         ],
-        "stack": ["Python", "LangChain", "OpenAI / Claude", "LlamaIndex", "FastAPI", "Vector DBs"]
+        "stack": ["Python", "LangChain", "FastAPI", "Qdrant", "LLM APIs", "LlamaIndex"]
       }
     },
     "process": {
-      "tag": "Cara Kerja Kami",
-      "title": "Dari brief ke production dalam tahapan yang jelas",
+      "tag": "Alur Kerja",
+      "title": "Dari brief hingga production, dengan proses yang jelas.",
       "steps": [
         {
           "number": "01",
           "title": "Discovery & Scoping",
-          "desc": "Kami mendefinisikan masalah, memetakan kebutuhan teknis, dan menyepakati deliverables sebelum mulai menulis kode."
+          "desc": "Kami memahami tujuan bisnis, pengguna, batasan, kebutuhan teknis, dan deliverables sebelum pekerjaan dimulai."
         },
         {
           "number": "02",
-          "title": "Desain & Prototipe",
-          "desc": "Prototipe interaktif yang bisa Anda klik dan coba. Kami menyepakati tampilan, alur, dan nuansa sebelum tahap development dimulai."
+          "title": "Design & Prototype",
+          "desc": "Kami menyusun pengalaman dan memvalidasi keputusan penting sebelum development berjalan terlalu jauh."
         },
         {
           "number": "03",
-          "title": "Build & Testing",
-          "desc": "Demo staging mingguan agar Anda bisa melihat progres secara langsung. Kode dites, direview, dan didokumentasikan sepanjang proses."
+          "title": "Build & Test",
+          "desc": "Development berlangsung bertahap dengan staging, demo berkala, testing, code review, dan dokumentasi."
         },
         {
           "number": "04",
-          "title": "Launch & Serah Terima",
-          "desc": "Kami deploy ke production, jalankan load test, pasang monitoring, lalu serahkan dokumentasi lengkap beserta seluruh akses."
+          "title": "Launch & Handover",
+          "desc": "Kami menangani deployment, monitoring, dan handover hingga produk siap digunakan oleh pengguna sebenarnya."
         }
       ]
+    },
+    "standards": {
+      "tag": "Standar Engineering",
+      "title": "Standar engineering yang melindungi investasi Anda.",
+      "subtitle": "Kami menghapus risiko proyek melalui kepemilikan kode transparan, arsitektur terukur, dan pendampingan pasca-rilis yang solid.",
+      "card1": {
+        "tag": "Ownership",
+        "title": "Kode dan Repository Tetap Milik Anda",
+        "desc": "Kode, repository, dan intellectual property proyek tetap menjadi milik Anda. Tidak ada vendor lock-in yang tidak perlu.",
+        "badge": "Kepemilikan Penuh"
+      },
+      "card2": {
+        "tag": "Performance",
+        "title": "Performa Sejak Arsitektur",
+        "desc": "Performa diperhatikan sejak level arsitektur, bukan baru dioptimalkan menjelang launch.",
+        "badge": "Fast by Design"
+      },
+      "card3": {
+        "tag": "Security & Delivery",
+        "title": "CI/CD & Praktik Keamanan Terstruktur",
+        "desc": "CI/CD, testing, deployment, dan praktik security yang terstruktur membantu menjaga perubahan tetap terkendali dan production tetap stabil.",
+        "badge": "Stabilitas Terjamin"
+      },
+      "card4": {
+        "tag": "Hypercare",
+        "title": "Pendampingan Pasca-Launch",
+        "desc": "Setelah launch, kami tetap mendampingi untuk menangani masalah awal dan memastikan sistem berjalan stabil di production.",
+        "badge": "Dukungan Penuh"
+      }
     }
   },
   "Portfolio": {
-    "tag": "Karya Pilihan",
-    "title": "Proyek terbaru, hasil nyata",
-    "subtitle": "Pilihan web app, produk mobile, dan sistem AI yang sudah kami selesaikan untuk klien dari berbagai industri.",
-    "allFilter": "Semua Proyek",
+    "tag": "PORTFOLIO PILIHAN",
+    "title": "Proyek yang kami bangun dari ide hingga production.",
+    "subtitle": "Jelajahi produk digital di bidang web, aplikasi, dan AI, masing-masing dibangun untuk menjawab masalah tertentu dengan pendekatan teknis yang terarah.",
+    "allFilter": "Semua",
     "webFilter": "Web",
-    "appFilter": "Mobile & Desktop",
-    "aiFilter": "AI Automation",
+    "appFilter": "App",
+    "aiFilter": "AI",
     "viewProject": "Lihat Studi Kasus",
+    "viewAll": "Lihat Semua Portfolio",
     "livePreview": "Kunjungi Website",
     "github": "Kode Sumber",
     "overview": "Ringkasan Proyek",
@@ -128,12 +177,13 @@
     "backToList": "Kembali ke semua proyek"
   },
   "Stats": {
+    "title": "Dibangun untuk bekerja. Bukan sekadar terlihat bagus.",
     "stat1": {
       "value": "45+",
       "number": 45,
       "suffix": "+",
-      "label": "Proyek Terkirim",
-      "description": "Web, mobile, dan AI sudah live dan berjalan"
+      "label": "Proyek Berhasil",
+      "description": "Web, mobile, dan AI yang sudah live dan aktif digunakan"
     },
     "stat2": {
       "value": "96%",
@@ -146,60 +196,60 @@
       "value": "3.5x",
       "number": 3.5,
       "suffix": "x",
-      "label": "Rata-rata Waktu Dihemat",
+      "label": "Waktu yang Dihemat",
       "description": "Pada workflow yang diotomatisasi dengan sistem AI kami"
     },
     "stat4": {
-      "value": "8",
+      "value": "8+",
       "number": 8,
       "suffix": "+",
-      "label": "Negara Terlayani",
-      "description": "Startup, agensi, dan perusahaan menengah"
+      "label": "Antar Negara",
+      "description": "Startup, agensi, dan perusahaan menengah di seluruh dunia"
     }
   },
   "Testimonials": {
-    "tag": "Kata Klien",
-    "title": "Feedback dari tim yang pernah bekerja dengan kami",
-    "subtitle": "Langsung dari founder dan lead engineer yang mempercayakan proyek production kepada kami."
+    "tag": "Testimoni",
+    "title": "Apa kata mereka",
+    "subtitle": "Perspektif dari founder, product lead, dan engineer yang pernah bekerja bersama kami."
   },
   "Pricing": {
-    "tag": "Harga",
-    "title": "Harga per layanan, langsung ke intinya",
-    "subtitle": "Semua harga adalah titik awal. Biaya final tergantung cakupan, kompleksitas, dan timeline, yang kita tentukan bersama lewat konsultasi gratis.",
-    "note": "Harga yang tertera adalah estimasi 'mulai dari' dalam USD. Setiap proyek dimulai dengan konsultasi gratis untuk menentukan scope dan deliverables yang jelas.",
+    "tag": "HARGA",
+    "title": "Harga transparan. Scope yang jelas.",
+    "subtitle": "Harga di bawah ini adalah titik awal. Biaya akhir bergantung pada scope, kompleksitas, integrasi, dan timeline. Kami akan membantu menyusun scope yang masuk akal sebelum development dimulai.",
+    "note": "Harga awal ditampilkan dalam USD. Konsultasi awal tidak dipungut biaya.",
     "web": {
       "title": "Web Development",
       "subtitle": "WordPress, Laravel, Next.js, Go disesuaikan dengan kebutuhan proyek.",
       "items": [
         {
           "name": "Landing Page",
-          "price": "dari $350",
-          "desc": "Satu halaman marketing site dengan desain responsif konversi tinggi, animasi halus, dan setup SEO dasar."
+          "price": "Mulai $350",
+          "desc": "Halaman marketing dengan desain responsif, motion, dan fondasi SEO teknis."
         },
         {
           "name": "Company Profile",
-          "price": "dari $750",
-          "desc": "Website perusahaan 5–10 halaman dengan CMS, formulir kontak, dan integrasi Google Analytics."
+          "price": "Mulai $750",
+          "desc": "Website perusahaan 5–10 halaman dengan CMS, formulir kontak, dan analytics."
         },
         {
           "name": "Corporate Website",
-          "price": "dari $1,500",
-          "desc": "Website bisnis lengkap dengan tema WordPress kustom atau Next.js, multi-bahasa, dan dashboard admin."
+          "price": "Mulai $1.500",
+          "desc": "Website bisnis yang lebih lengkap dengan CMS atau Next.js, multi-bahasa, dan kebutuhan admin."
         },
         {
           "name": "Custom Web Application",
-          "price": "dari $2,500",
-          "desc": "Aplikasi web full-stack dengan logika bisnis kustom, arsitektur database, autentikasi user, dan integrasi API pihak ketiga."
+          "price": "Mulai $2.500",
+          "desc": "Aplikasi full-stack dengan business logic, database, autentikasi, dan integrasi API."
         },
         {
           "name": "SaaS / MVP",
-          "price": "dari $3,500",
-          "desc": "Minimum viable product lengkap atau platform SaaS multi-tenant dengan sistem langganan, kontrol admin, dan CI/CD production."
+          "price": "Mulai $3.500",
+          "desc": "Fondasi MVP atau SaaS dengan user management, billing, admin, dan deployment."
         },
         {
           "name": "E-Commerce",
-          "price": "dari $1,500",
-          "desc": "Toko online dengan katalog produk, payment gateway, integrasi pengiriman, dan manajemen pesanan."
+          "price": "Mulai $1.500",
+          "desc": "Toko online dengan katalog, pembayaran, pengiriman, dan manajemen pesanan."
         }
       ]
     },
@@ -209,181 +259,198 @@
       "items": [
         {
           "name": "Mobile App",
-          "price": "dari $2,500",
-          "desc": "Aplikasi mobile lintas platform (iOS & Android) dengan push notification, penyimpanan offline, dan sinkronisasi real-time."
+          "price": "Mulai $2.500",
+          "desc": "Aplikasi iOS & Android dengan push notification, offline support, dan sinkronisasi."
         },
         {
           "name": "Desktop App",
-          "price": "dari $2,000",
-          "desc": "Aplikasi desktop yang terasa native untuk macOS dan Windows, dibangun dengan Flutter atau Electron."
+          "price": "Mulai $2.000",
+          "desc": "Aplikasi macOS atau Windows dengan pengalaman desktop yang terfokus."
         },
         {
           "name": "Mobile + Web App",
-          "price": "dari $4,500",
-          "desc": "Ekosistem multi-platform terpadu dengan backend bersama untuk aplikasi mobile dan dashboard web."
+          "price": "Mulai $4.500",
+          "desc": "Aplikasi mobile dan dashboard web dengan backend serta data layer yang terintegrasi."
         }
       ]
     },
     "ai": {
       "title": "AI",
-      "subtitle": "AI yang benar-benar bekerja, bukan sekadar demo yang keren.",
-      "apiNote": "Proyek AI menggunakan API pihak ketiga (OpenAI, Claude, dll.) dengan biaya operasional sekitar $20–$150/bulan tergantung volume penggunaan. Biaya ini terpisah dari biaya development dan ditagihkan langsung ke akun Anda.",
+      "subtitle": "Sistem AI untuk workflow bisnis nyata, bukan sekadar demo.",
+      "apiNote": "Biaya penggunaan layanan pihak ketiga seperti LLM API, cloud infrastructure, atau platform eksternal biasanya terpisah dari biaya development.",
       "items": [
         {
           "name": "AI Chatbot",
-          "price": "dari $500",
-          "desc": "Chatbot customer support atau FAQ internal berbasis LLM, dilatih dengan knowledge base Anda dan terhubung ke website."
+          "price": "Mulai $500",
+          "desc": "Chatbot berbasis LLM untuk customer support atau knowledge base internal."
         },
         {
           "name": "Document Processing",
-          "price": "dari $1,000",
-          "desc": "Ekstraksi dan penataan data otomatis dari invoice, kontrak, atau PDF menggunakan pipeline OCR dan LLM cerdas."
+          "price": "Mulai $1.000",
+          "desc": "Pipeline OCR dan AI untuk mengekstrak serta menata data dari dokumen."
         },
         {
           "name": "RAG Knowledge Base",
-          "price": "dari $1,500",
-          "desc": "Sistem pencarian semantik internal yang memungkinkan tim mencari di dokumen perusahaan dan SOP dengan akurasi tinggi."
+          "price": "Mulai $1.500",
+          "desc": "Knowledge base internal dengan semantic dan hybrid search."
         },
         {
           "name": "Custom AI Agent",
-          "price": "dari $2,000",
-          "desc": "Sistem workflow otonom multi-langkah, misalnya kualifikasi lead, riset otomatis, atau agregasi data dengan pengawasan manusia."
+          "price": "Mulai $2.000",
+          "desc": "Workflow AI multi-langkah untuk riset, lead qualification, agregasi data, dan operasional."
         },
         {
           "name": "AI Integration",
-          "price": "dari $750",
-          "desc": "Menghubungkan kapabilitas LLM dan AI langsung ke CRM, ERP, database, atau software internal Anda via API."
+          "price": "Mulai $750",
+          "desc": "Integrasikan kemampuan AI ke CRM, ERP, database, atau software internal."
         }
       ]
     },
     "ongoing": {
-      "title": "Infrastructure",
+      "title": "Infrastructure & Support",
       "subtitle": "Setup server, maintenance, dan optimasi berkelanjutan pasca rilis.",
       "items": [
         {
           "name": "Server & Deployment",
-          "price": "dari $200",
-          "desc": "Provisioning cloud/VPS, sertifikat SSL, pipeline CI/CD deployment otomatis, setup domain, dan penguatan keamanan."
+          "price": "Mulai $200",
+          "desc": "Provisioning server, SSL, deployment, konfigurasi domain, dan hardening dasar."
         },
         {
           "name": "Maintenance",
-          "price": "dari $100/bulan",
-          "desc": "Perbaikan bug proaktif, update keamanan, monitoring uptime, optimasi performa, dan backup berkala."
+          "price": "Mulai $100/bulan",
+          "desc": "Bug fixing, update, monitoring, performance tuning, dan backup."
         },
         {
           "name": "AI Monitoring",
-          "price": "dari $150/bulan",
-          "desc": "Pengecekan akurasi model berkala, evaluasi prompt drift, tuning latensi, dan optimasi biaya token."
+          "price": "Mulai $150/bulan",
+          "desc": "Evaluasi model, prompt drift, reliability, latency, dan optimasi biaya token."
         }
       ]
     },
     "cta": {
       "title": "Belum yakin butuh layanan yang mana?",
-      "subtitle": "Book konsultasi gratis 30 menit. Kita diskusi proyek Anda, rekomendasi pendekatan yang tepat, dan kasih estimasi jujur tanpa kewajiban apa pun.",
-      "button": "Book Konsultasi Gratis"
+      "subtitle": "Ceritakan apa yang ingin Anda bangun. Kami akan membantu menyusun scope, pendekatan teknis, dan memberikan estimasi jujur tanpa komitmen.",
+      "button": "Diskusikan Proyek Anda"
     },
+    "inquireButton": "Mulai Proyek",
     "faq": {
-      "title": "Pertanyaan Umum",
+      "tag": "Tanya Jawab",
+      "title": "Pertanyaan yang sering kami terima",
       "q1": "Berapa lama pengerjaan proyek biasanya?",
-      "a1": "Landing page atau chatbot bisa selesai 1–2 minggu. Company profile dan app sederhana butuh 2–4 minggu. Proyek lebih besar (web app kustom, sistem AI, atau produk multi-platform) biasanya butuh 6–12 minggu tergantung scope.",
+      "a1": "Timeline bergantung pada scope. Website sederhana dapat selesai dalam 1–2 minggu, sedangkan web app, sistem AI, dan produk multi-platform biasanya membutuhkan 6–12 minggu.",
       "q2": "Bisa lanjutkan atau modifikasi codebase yang sudah ada?",
-      "a2": "Bisa. Kami sering audit, refactoring, dan extend proyek yang sudah berjalan. Kami juga bisa tambahkan fitur AI ke sistem yang sudah live di production.",
+      "a2": "Bisa. Kami dapat melanjutkan, memperbaiki, atau merapikan codebase yang sudah ada setelah technical assessment.",
       "q3": "Siapa yang memiliki kode?",
-      "a3": "Anda. Seluruh source code, desain, database schema, dan konfigurasi AI diserahkan ke Anda setelah proyek selesai dan pembayaran lunas.",
+      "a3": "Anda tetap memiliki kode dan intellectual property proyek sesuai kesepakatan. Kami tidak membuat ketergantungan vendor yang tidak perlu.",
       "q4": "Bagaimana sistem pembayarannya?",
-      "a4": "Struktur standar: 50% di awal untuk mulai, 25% saat review tengah proyek, dan 25% sebelum deployment ke production. Untuk retainer, kami fleksibel soal struktur.",
-      "q5": "Apakah biaya API AI sudah termasuk dalam harga proyek?",
-      "a5": "Belum. Biaya development mencakup pembuatan dan deployment sistem. Biaya API (OpenAI, Claude, dll.) ditagihkan langsung ke akun Anda, biasanya $15–$125/bulan tergantung pemakaian. Kami bantu setup dan optimasi biayanya.",
+      "a4": "Pembayaran dibagi berdasarkan milestone yang disepakati agar scope, progres, dan pembayaran tetap jelas.",
+      "q5": "Apakah biaya AI pihak ketiga atau cloud sudah termasuk?",
+      "a5": "Biaya penggunaan layanan pihak ketiga seperti LLM API, cloud infrastructure, atau platform eksternal biasanya terpisah dari biaya development.",
       "q6": "Bagaimana kalau proyek saya tidak masuk kategori manapun?",
-      "a6": "Kebanyakan proyek adalah kombinasi beberapa layanan. Ceritakan saja kebutuhan Anda saat konsultasi, dan kami buatkan proposal kustom dengan breakdown yang jelas."
+      "a6": "Sebagian besar proyek adalah kombinasi beberapa layanan. Ceritakan kebutuhan Anda dan kami akan menyusun pendekatan yang sesuai dengan breakdown jelas."
     }
   },
   "About": {
-    "tag": "Tentang ALTIA DEV",
-    "title": "Studio kecil yang mengerjakan software standar production",
-    "storyTitle": "Cara Kami Berpikir",
-    "storyP1": "ALTIA DEV dimulai dari ide sederhana: software yang bagus dibuat oleh engineer yang peduli dengan kode sekaligus dengan orang yang menggunakannya.",
-    "storyP2": "Kami tim kecil, bukan agensi dengan berlapis-lapis account manager. Anda bekerja langsung dengan orang yang menulis kode dan mendesain tampilan. Artinya keputusan lebih cepat, miskomunikasi lebih sedikit, dan hasil yang sesuai dengan apa yang Anda minta.",
+    "tag": "TENTANG ALTIA DEV",
+    "title": "Studio kecil. Engineering yang serius.",
+    "storyTitle": "Dibangun dengan tujuan yang jelas, dikerjakan dengan perhatian pada detail, dan siap berkembang.",
+    "storyP1": "ALTIA DEV adalah creative engineering studio yang menggabungkan design, software engineering, dan intelligent systems untuk membangun produk digital yang matang dari dua sisi: bagaimana produk terasa saat digunakan dan bagaimana ia bekerja di balik layar.",
+    "storyP2": "Software yang baik bukan sekadar kode yang berjalan. Ia harus menyelesaikan masalah yang tepat, terasa jelas saat digunakan, dan memiliki fondasi yang mampu berkembang bersama bisnis. Kami sengaja bekerja sebagai tim yang ringkas. Dengan begitu, keputusan tetap cepat, komunikasi tetap langsung, dan orang yang membangun produk Anda benar-benar terlibat dalam pekerjaannya.",
     "values": {
-      "tag": "Yang Kami Pegang",
-      "v1Title": "Detail Itu Penting",
-      "v1Desc": "Animasi yang mulus, loading cepat, error handling yang rapi: hal-hal kecil yang membedakan software bagus dari software yang biasa saja.",
-      "v2Title": "Teknologi yang Tepat untuk Masalah yang Tepat",
-      "v2Desc": "Kami memilih teknologi berdasarkan kebutuhan proyek, bukan karena baru atau sedang populer. WordPress untuk company profile, Go untuk API traffic tinggi, Flutter untuk aplikasi lintas platform.",
-      "v3Title": "Komunikasi Jujur",
-      "v3Desc": "Update mingguan dengan demo yang bisa dilihat langsung. Kalau ada kendala lebih berat dari perkiraan, kami sampaikan di awal, bukan seminggu sebelum deadline."
+      "tag": "Tiga hal yang kami pegang.",
+      "v1Title": "Details Matter",
+      "v1Desc": "Performa, accessibility, error handling, animasi, dan micro-interaction adalah bagian dari kualitas produk, bukan pekerjaan tambahan.",
+      "v2Title": "Technology Follows the Problem",
+      "v2Desc": "Kami memilih stack berdasarkan kebutuhan produk, bukan karena teknologinya sedang tren.",
+      "v3Title": "Communication Should Be Clear",
+      "v3Desc": "Kami memberikan update yang konkret, membicarakan risiko sejak awal, dan menjaga setiap keputusan tetap jelas sepanjang proyek."
     },
     "teamTitle": "Tim Kami",
+    "teamSubtitle": "Engineer, architect, dan designer yang bekerja lintas disiplin untuk membangun produk digital dengan standar tinggi.",
     "milestonesTitle": "Perjalanan Studio"
   },
   "Blog": {
-    "tag": "Blog",
-    "title": "Catatan soal membangun software",
-    "subtitle": "Tulisan teknis, retrospektif proyek, dan panduan praktis dari tim ALTIA DEV.",
+    "tag": "WAWASAN & ENGINEERING",
+    "title": "Cara kami berpikir tentang design, code, dan AI.",
+    "subtitle": "Catatan teknis, eksperimen, dan sudut pandang dari proses kami membangun produk digital.",
     "readArticle": "Baca Artikel",
+    "readMore": "Baca Artikel",
     "readTime": "menit baca",
-    "back": "Kembali ke Blog",
-    "publishedOn": "Dipublikasikan pada"
+    "back": "Kembali ke semua artikel",
+    "tableOfContents": "Daftar Isi",
+    "shareArticle": "Bagikan Artikel",
+    "copied": "Tautan Disalin!",
+    "copyLink": "Salin Tautan",
+    "previousPost": "Artikel Sebelumnya",
+    "nextPost": "Artikel Selanjutnya",
+    "relatedTitle": "Lanjutkan Eksplorasi",
+    "relatedSubtitle": "Wawasan lain seputar engineering, AI, design, dan sistem digital.",
+    "publishedOn": "Diterbitkan pada",
+    "writtenBy": "Ditulis oleh",
+    "viewAll": "Lihat semua artikel"
   },
   "Contact": {
-    "tag": "Hubungi Kami",
-    "title": "Punya proyek? Yuk diskusi scope dan timeline.",
-    "subtitle": "Ceritakan apa yang ingin Anda bangun, perkiraan timeline, dan range budget. Kami akan balas dalam satu hari kerja dengan feedback jujur soal bagaimana kami bisa bantu.",
+    "tag": "HUBUNGI KAMI",
+    "title": "Punya proyek yang ingin dibangun? Mari bahas.",
+    "subtitle": "Ceritakan apa yang ingin Anda bangun, tujuan proyek, perkiraan timeline, dan budget. Kami akan meninjaunya lalu menghubungi Anda dengan langkah berikutnya yang jelas.",
     "form": {
       "nameLabel": "Nama Anda",
       "namePlaceholder": "Budi Santoso",
       "emailLabel": "Alamat Email",
       "emailPlaceholder": "budi@perusahaan.com",
-      "serviceLabel": "Apa yang Anda butuhkan?",
+      "serviceLabel": "Apa yang ingin Anda bangun?",
       "services": {
-        "web": "Web Development",
-        "app": "Mobile & Desktop App",
-        "ai": "AI Automation & Integrasi",
+        "web": "Web & Cloud",
+        "app": "Mobile & Desktop",
+        "ai": "AI Automation",
         "all": "Beberapa Layanan / Belum Yakin"
       },
-      "budgetLabel": "Range Budget (USD)",
+      "budgetLabel": "Perkiraan Budget (USD)",
       "budgets": {
-        "tier1": "Di bawah $3,000",
-        "tier2": "$3,000 – $7,000",
-        "tier3": "$7,000 – $15,000",
-        "tier4": "$15,000+"
+        "tier1": "Di bawah $3.000",
+        "tier2": "$3.000 – $7.000",
+        "tier3": "$7.000 – $15.000",
+        "tier4": "$15.000+"
       },
-      "messageLabel": "Deskripsi Proyek",
+      "messageLabel": "Ceritakan proyek Anda",
       "messagePlaceholder": "Ceritakan apa yang ingin Anda bangun, masalah yang sedang dihadapi, dan target waktunya...",
-      "submit": "Kirim Pesan",
+      "submit": "Kirim Permintaan Proyek",
       "sending": "Mengirim...",
-      "successTitle": "Pesan Terkirim",
-      "successMessage": "Terima kasih sudah menghubungi kami. Kami akan review brief Anda dan membalas dalam satu hari kerja.",
+      "successTitle": "Permintaan Terkirim",
+      "successMessage": "Terima kasih sudah menghubungi kami. Kami akan meninjau brief Anda dan membalas dalam satu hari kerja dengan langkah berikutnya yang jelas.",
       "errorTitle": "Ada Kendala",
-      "errorMessage": "Pesan gagal terkirim. Silakan email langsung ke hello@altiadev.com."
+      "errorMessage": "Pesan gagal terkirim. Silakan email langsung ke hello@altia.dev."
     },
     "info": {
       "emailTitle": "Email",
-      "email": "hello@altiadev.com",
+      "email": "hello@altia.dev",
       "officeTitle": "Lokasi",
       "office": "Jakarta, Indonesia · Melayani klien di seluruh dunia",
       "hoursTitle": "Jam Kerja",
-      "hours": "Senin – Jumat, 09:00 – 18:00 WIB"
+      "hours": "Senin – Jumat · 09.00 – 18.00 WIB"
     }
   },
   "Cta": {
-    "title": "Punya proyek di pikiran?",
-    "subtitle": "Yuk diskusi scope, timeline, dan apakah kami cocok untuk proyek Anda.",
-    "button": "Book Konsultasi Gratis"
+    "title": "Produk berikutnya bisa dimulai dari satu percakapan.",
+    "subtitle": "Bawa ide, masalah, atau bahkan sketsa kasar Anda. Kami akan membantu mengubahnya menjadi langkah yang jelas untuk diwujudkan.",
+    "button": "Mulai Proyek",
+    "secondaryButton": "Lihat Portfolio"
   },
   "Footer": {
-    "tagline": "Studio produk digital yang fokus di platform web, aplikasi lintas platform, dan sistem otomatisasi AI.",
+    "tagline": "Creative engineering studio yang membangun platform web, aplikasi, dan sistem AI untuk bisnis yang ingin terus berkembang.",
     "quickLinks": "Tautan Cepat",
     "servicesTitle": "Layanan",
     "social": "Media Sosial",
+    "ctaTitle": "Ada sesuatu yang layak diwujudkan?",
+    "ctaButton": "Mulai Proyek",
     "copyright": "© {year} ALTIA DEV. Hak cipta dilindungi.",
-    "designedWith": "Dibangun dengan Next.js, GSAP, dan terlalu banyak kopi."
+    "designedWith": "Dibangun dengan Astro, React, GSAP, dan terlalu banyak kopi."
   },
   "Estimator": {
-    "tag": "Kalkulator Proyek",
-    "badge": "Estimasi Lingkup & Investasi Proyek Interaktif",
-    "title": "Hitung estimasi lingkup & investasi proyek Anda dalam 2 menit",
-    "subtitle": "Pilih apa yang ingin Anda bangun, tentukan kebutuhan teknis utama, dan dapatkan rentang investasi serta jadwal pengerjaan yang deterministik dan transparan.",
+    "tag": "KALKULATOR PROYEK",
+    "badge": "Kalkulator Lingkup & Investasi Proyek Interaktif",
+    "title": "Dapatkan gambaran awal estimasi proyek dalam sekitar 2 menit.",
+    "subtitle": "Pilih apa yang ingin Anda bangun, tentukan kebutuhan utamanya, dan kami akan menghitung kisaran investasi serta timeline secara indikatif.",
     "steps": {
       "stepOf": "Langkah {current} dari {total}",
       "back": "Kembali",
@@ -395,19 +462,19 @@
     "questions": {
       "service": {
         "title": "Apa yang ingin Anda bangun?",
-        "desc": "Pilih disiplin utama untuk inisiatif digital Anda.",
+        "desc": "Pilih area utama proyek Anda.",
         "options": {
           "web": {
-            "label": "Web Development",
-            "desc": "Website perusahaan kustom, platform SaaS, API throughput tinggi, atau aplikasi web."
+            "label": "Web & Cloud Platforms",
+            "desc": "Website perusahaan, web app, SaaS, API, atau platform digital."
           },
           "app": {
             "label": "Mobile & Desktop Apps",
-            "desc": "Aplikasi mobile lintas platform (iOS & Android) atau software desktop (macOS & Windows)."
+            "desc": "Aplikasi iOS, Android, macOS, Windows, atau lintas platform."
           },
           "ai": {
             "label": "AI Automation",
-            "desc": "Sistem multi-agent cerdas, RAG knowledge base, pemrosesan dokumen, atau pipeline LLM kustom."
+            "desc": "RAG, document processing, AI agent, knowledge base, atau workflow otomatis."
           }
         }
       },
@@ -417,27 +484,27 @@
         "options": {
           "landing_page": {
             "label": "Landing Page",
-            "desc": "Marketing site 1 halaman dengan konversi tinggi, layout responsif, dan mikro-interaksi halus."
+            "desc": "Halaman marketing dengan desain responsif, motion, dan fondasi SEO teknis."
           },
           "company_profile": {
             "label": "Company Profile",
-            "desc": "Website perusahaan 5–10 halaman dengan integrasi CMS, form kontak, dan analitik."
+            "desc": "Website perusahaan 5–10 halaman dengan CMS, formulir kontak, dan analytics."
           },
           "corporate_website": {
             "label": "Corporate Website",
-            "desc": "Portal bisnis korporat dengan arsitektur WordPress kustom atau Next.js, multi-bahasa, dan panel admin."
+            "desc": "Website bisnis yang lebih lengkap dengan CMS atau Next.js, multi-bahasa, dan kebutuhan admin."
           },
           "custom_web_app": {
             "label": "Custom Web Application",
-            "desc": "Aplikasi web full-stack dengan arsitektur database, autentikasi user, dan integrasi API pihak ketiga."
+            "desc": "Aplikasi full-stack dengan business logic, database, autentikasi, dan integrasi API."
           },
           "saas_mvp": {
             "label": "SaaS / MVP",
-            "desc": "Platform SaaS multi-tenant dengan sistem billing langganan, kontrol admin, dan CI/CD production."
+            "desc": "Fondasi MVP atau SaaS dengan user management, billing, admin, dan deployment."
           },
           "ecommerce": {
             "label": "E-Commerce",
-            "desc": "Toko online dengan katalog produk, payment gateway, integrasi kurir pengiriman, dan manajemen pesanan."
+            "desc": "Toko online dengan katalog, pembayaran, pengiriman, dan manajemen pesanan."
           }
         }
       },
@@ -481,15 +548,15 @@
         "options": {
           "mobile_app": {
             "label": "Aplikasi Mobile (iOS & Android)",
-            "desc": "Aplikasi lintas platform terpadu untuk rilis di App Store dan Play Store."
+            "desc": "Aplikasi iOS & Android dengan push notification, offline support, dan sinkronisasi."
           },
           "desktop_app": {
             "label": "Aplikasi Desktop (macOS & Windows)",
-            "desc": "Software desktop dengan performa sekelas aplikasi native."
+            "desc": "Aplikasi macOS atau Windows dengan pengalaman desktop yang terfokus."
           },
           "mobile_web_bundle": {
             "label": "Aplikasi Mobile + Dashboard Web",
-            "desc": "Ekosistem lengkap mencakup app mobile dan admin dashboard berbasis web."
+            "desc": "Aplikasi mobile dan dashboard web dengan backend serta data layer yang terintegrasi."
           }
         }
       },
@@ -540,23 +607,23 @@
         "options": {
           "ai_chatbot": {
             "label": "Chatbot AI & Asisten Support",
-            "desc": "Asisten berbasis LLM yang dilatih dengan knowledge base bisnis Anda."
+            "desc": "Chatbot berbasis LLM untuk customer support atau knowledge base internal."
           },
           "document_processing": {
             "label": "Pemrosesan Dokumen Otomatis",
-            "desc": "Ekstraksi OCR cerdas untuk invoice, kontrak, dan formulir."
+            "desc": "Pipeline OCR dan AI untuk mengekstrak serta menata data dari dokumen."
           },
           "rag_knowledge_base": {
             "label": "RAG Enterprise Knowledge Base",
-            "desc": "Mesin pencarian semantik di atas dokumen internal dan SOP perusahaan."
+            "desc": "Knowledge base internal dengan semantic dan hybrid search."
           },
           "custom_ai_agent": {
             "label": "Agen AI Otonom Kustom",
-            "desc": "Alur kerja agen multi-langkah dengan kemampuan tool-calling dan self-correction."
+            "desc": "Workflow AI multi-langkah untuk riset, lead qualification, agregasi data, dan operasional."
           },
           "ai_integration": {
             "label": "Integrasi API AI ke Sistem Existing",
-            "desc": "Sematkan kapabilitas LLM langsung ke software atau CRM internal Anda."
+            "desc": "Integrasikan kemampuan AI ke CRM, ERP, database, atau software internal."
           }
         }
       },

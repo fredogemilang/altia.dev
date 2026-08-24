@@ -60,10 +60,14 @@ const ongoingServices = [
 ---
 
 <Layout title={t(locale, 'Pricing.title')} locale={locale}>
-  <div class="flex flex-col gap-20 sm:gap-28 pb-24">
-    <!-- 1. Header -->
-    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
-      <Container size="large">
+  <div class="flex flex-col gap-20 sm:gap-28 pb-36 sm:pb-44 lg:pb-52">
+    <!-- 1. Header (Faded Grid Overlay & Warm Shaded Gradient) -->
+    <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div class="hero-grid-faded" />
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         <div class="max-w-3xl">
           <Badge
             variant="vermilion"
@@ -104,9 +108,11 @@ const ongoingServices = [
             <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.08} className="h-full">
               <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
                 <div>
-                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
-                    {service.name}
-                  </h3>
+                  <a href={getLocalizedPath('/contact', locale)} class="block group/title">
+                    <h3 class="font-display text-xl font-bold text-charcoal mb-2 group-hover/title:text-vermilion transition-colors">
+                      {service.name}
+                    </h3>
+                  </a>
                   <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
                     {service.price}
                   </div>
@@ -142,9 +148,11 @@ const ongoingServices = [
             <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.1} className="h-full">
               <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
                 <div>
-                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
-                    {service.name}
-                  </h3>
+                  <a href={getLocalizedPath('/contact', locale)} class="block group/title">
+                    <h3 class="font-display text-xl font-bold text-charcoal mb-2 group-hover/title:text-vermilion transition-colors">
+                      {service.name}
+                    </h3>
+                  </a>
                   <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
                     {service.price}
                   </div>
@@ -180,9 +188,11 @@ const ongoingServices = [
             <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.08} className="h-full">
               <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
                 <div>
-                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
-                    {service.name}
-                  </h3>
+                  <a href={getLocalizedPath('/contact', locale)} class="block group/title">
+                    <h3 class="font-display text-xl font-bold text-charcoal mb-2 group-hover/title:text-vermilion transition-colors">
+                      {service.name}
+                    </h3>
+                  </a>
                   <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
                     {service.price}
                   </div>
@@ -218,9 +228,11 @@ const ongoingServices = [
             <ScrollReveal client:visible key={index} variant="fade-up" delay={index * 0.1} className="h-full">
               <Card className="p-8 h-full flex flex-col justify-between bg-warm-card border-warm-border hover:border-vermilion/40 transition-colors">
                 <div>
-                  <h3 class="font-display text-xl font-bold text-charcoal mb-2">
-                    {service.name}
-                  </h3>
+                  <a href={getLocalizedPath('/contact', locale)} class="block group/title">
+                    <h3 class="font-display text-xl font-bold text-charcoal mb-2 group-hover/title:text-vermilion transition-colors">
+                      {service.name}
+                    </h3>
+                  </a>
                   <div class="font-display text-2xl sm:text-3xl font-black text-vermilion mb-4">
                     {service.price}
                   </div>
@@ -243,6 +255,7 @@ const ongoingServices = [
     <section class="py-8">
       <Container size="large">
         <SectionHeading
+          client:visible
           tag={t(locale, 'Pricing.faq.tag')}
           title={t(locale, 'Pricing.faq.title')}
         />

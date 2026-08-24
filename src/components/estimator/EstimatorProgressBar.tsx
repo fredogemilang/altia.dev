@@ -1,17 +1,20 @@
 "use client";
 
 import { useTranslations } from "@/i18n/useI18n";
+import type { Locale } from "@/i18n/utils";
 
 interface EstimatorProgressBarProps {
   currentStep: number;
   totalSteps: number;
+  locale?: Locale;
 }
 
 export function EstimatorProgressBar({
   currentStep,
   totalSteps,
+  locale = "en",
 }: EstimatorProgressBarProps) {
-  const t = useTranslations("Estimator.steps");
+  const t = useTranslations("Estimator.steps", locale);
   const percentage = Math.min(100, Math.round(((currentStep + 1) / totalSteps) * 100));
 
   return (

@@ -4,11 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
-import { gsap } from "@/lib/gsapConfig";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getLocalizedPath } from "@/i18n/utils";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
 interface StackedCardsShowcaseProps {
   projects: Project[];
@@ -89,9 +85,16 @@ export function StackedCardsShowcase({
                     </span>
                   </div>
 
-                  <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-charcoal tracking-tight group-hover:text-vermilion transition-colors mb-3">
-                    {project.title[lang]}
-                  </h3>
+                  <a
+                    href={getLocalizedPath(`/portfolio/${project.slug}`, lang)}
+                    className="block group/title"
+                    data-cursor
+                    data-cursor-text="VIEW"
+                  >
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-charcoal tracking-tight group-hover:text-vermilion transition-colors mb-3">
+                      {project.title[lang]}
+                    </h3>
+                  </a>
 
                   <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed mb-6 font-normal">
                     {project.tagline[lang]}
@@ -136,7 +139,12 @@ export function StackedCardsShowcase({
               </div>
 
               {/* Right Column (Visual Mockup Image) */}
-              <div className="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-warm-card border border-warm-border/50">
+              <a
+                href={getLocalizedPath(`/portfolio/${project.slug}`, lang)}
+                className="lg:col-span-6 block relative aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-warm-card border border-warm-border/50 cursor-pointer"
+                data-cursor
+                data-cursor-text="VIEW"
+              >
                 <img
                   src={project.image}
                   alt={project.title[lang]}
@@ -144,7 +152,7 @@ export function StackedCardsShowcase({
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+              </a>
             </div>
           </div>
         );

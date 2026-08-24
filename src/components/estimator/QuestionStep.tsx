@@ -1,17 +1,19 @@
 "use client";
 
 import { useTranslations } from "@/i18n/useI18n";
+import type { Locale } from "@/i18n/utils";
 import { WizardQuestion } from "@/domain/estimator/types";
 import { OptionCard } from "./OptionCard";
 
 interface QuestionStepProps {
   question: WizardQuestion;
   value: unknown;
+  locale?: Locale;
   onChange: (value: unknown) => void;
 }
 
-export function QuestionStep({ question, value, onChange }: QuestionStepProps) {
-  const t = useTranslations();
+export function QuestionStep({ question, value, locale = "en", onChange }: QuestionStepProps) {
+  const t = useTranslations(undefined, locale);
 
   const handleSingleSelect = (val: string) => {
     onChange(val);
@@ -53,6 +55,7 @@ export function QuestionStep({ question, value, onChange }: QuestionStepProps) {
               badge={option.badge}
               isSelected={value === option.value}
               isMulti={false}
+              locale={locale}
               onSelect={handleSingleSelect}
             />
           ))}
@@ -74,6 +77,7 @@ export function QuestionStep({ question, value, onChange }: QuestionStepProps) {
                 badge={option.badge}
                 isSelected={isSelected}
                 isMulti={true}
+                locale={locale}
                 onSelect={handleMultiSelect}
               />
             );

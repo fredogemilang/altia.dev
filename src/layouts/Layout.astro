@@ -3,7 +3,7 @@ import { SITE_CONFIG } from '../lib/constants';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { MagneticCursor } from '../components/effects/MagneticCursor';
-import { PageTransitionProgress } from '../components/effects/PageTransitionProgress';
+import { FloatingBackToTop } from '../components/ui/FloatingBackToTop';
 import { type Locale, getLocaleFromUrl } from '../i18n/utils';
 import '../styles/globals.css';
 
@@ -31,17 +31,43 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#FFF6E8" />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content="Web Development, Mobile Apps, Desktop Apps, AI Automation, Astro, GSAP, Creative Agency, ALTIA DEV" />
     <meta name="author" content="ALTIA DEV" />
+
+    <!-- Canonical & Language Alternates -->
+    <link rel="canonical" href={url.href} />
+    {(() => {
+      const basePath = pathname.replace(/^\/id/, '') || '/';
+      return (
+        <>
+          <link rel="alternate" hreflang="en" href={`${SITE_CONFIG.url}${basePath}`} />
+          <link rel="alternate" hreflang="id" href={`${SITE_CONFIG.url}/id${basePath === '/' ? '' : basePath}`} />
+          <link rel="alternate" hreflang="x-default" href={`${SITE_CONFIG.url}${basePath}`} />
+        </>
+      );
+    })()}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -59,15 +85,15 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
     <meta name="twitter:creator" content="@altiadev" />
   </head>
   <body class="bg-ivory text-charcoal font-sans min-h-screen flex flex-col selection:bg-vermilion selection:text-ivory">
-    <PageTransitionProgress client:load />
-    <MagneticCursor client:load />
+    <MagneticCursor client:idle />
     <Navbar client:load locale={locale} pathname={pathname} />
 
-    <main class="flex-1 pt-20 flex flex-col">
+    <main class="flex-1 pt-20 pb-16 sm:pb-20 lg:pb-24 flex flex-col">
       <slot />
     </main>
 
     <Footer locale={locale} />
+    <FloatingBackToTop client:idle />
 
     <!-- High-Performance Lenis Smooth Scroll Script synced with GSAP -->
     <script>
@@ -84,6 +110,9 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
           wheelMultiplier: 1.0,
           touchMultiplier: 1.5,
         });
+
+        // Expose lenis instance globally for smooth programmatic scrolling
+        (window as any).__lenis = lenis;
 
         // Sync Lenis scroll updates with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);

@@ -30,23 +30,23 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2024-10-14",
     readTime: "6",
     title: {
-      en: "Orchestrating Zero-Jank GSAP ScrollTrigger Animations in Next.js 14",
-      id: "Membangun Animasi GSAP ScrollTrigger Bebas Stutter di Next.js 14",
+      en: "Building Smooth GSAP Animations in Next.js 14",
+      id: "Membangun Animasi GSAP yang Mulus di Next.js 14",
     },
     excerpt: {
-      en: "A deep dive into synchronizing Lenis smooth scroll with GSAP ticker, handling App Router hydration, and avoiding layout thrashing in production.",
-      id: "Panduan mendalam sinkronisasi Lenis smooth scroll dengan GSAP ticker, penanganan hidrasi App Router, dan pencegahan layout thrashing.",
+      en: "How to keep scroll-driven animation responsive by coordinating Lenis, the GSAP ticker, React lifecycle, and rendering-friendly properties.",
+      id: "Cara menjaga animasi berbasis scroll tetap responsif dengan menyelaraskan Lenis, GSAP ticker, React lifecycle, dan properti yang ramah rendering.",
     },
     content: {
       en: `
-# Orchestrating Zero-Jank GSAP ScrollTrigger Animations in Next.js 14
+# Building Smooth GSAP Animations in Next.js 14
 
-Building award-winning digital experiences demands more than just slapping CSS animations on scroll events. It requires a disciplined, timeline-based mental model where the scrollbar acts as a precision playback head.
+Premium motion isn't about adding more effects. The real challenge is keeping scrolling, animation timelines, React lifecycle, and browser rendering in sync.
 
-## 1. The React Lifecycle Problem
-In modern React frameworks with dynamic routing and client-side page transitions, naive GSAP setups inevitably lead to memory leaks, lingering event listeners, and duplicate ScrollTrigger calculations.
+## 1. Managing React Lifecycle Correctly
+In the Next.js App Router, lifecycle management matters. ScrollTrigger instances and event listeners should be scoped and cleaned up correctly to avoid duplicated animations and memory leaks.
 
-The solution is using the official \`@gsap/react\` integration with \`useGSAP\`. By properly scoping your timeline to a container ref, GSAP automatically reverts DOM mutations and removes event listeners when components unmount.
+Use the official \`@gsap/react\` package with \`useGSAP\` to scope timelines to container refs:
 
 \`\`\`typescript
 import { useGSAP } from "@gsap/react";
@@ -70,8 +70,8 @@ export function Hero() {
 }
 \`\`\`
 
-## 2. Syncing Lenis with the GSAP Ticker
-Lenis has become the industry standard for smooth scrolling. To eliminate micro-stutter when ScrollTrigger calculates trigger positions during rapid scrolling, you must drive Lenis's requestAnimationFrame cycle directly from GSAP's internal ticker:
+## 2. Synchronizing Lenis with GSAP
+Let Lenis update through the GSAP ticker so both systems observe the same animation clock. This keeps smooth scrolling and ScrollTrigger synchronized:
 
 \`\`\`typescript
 lenis.on('scroll', ScrollTrigger.update);
@@ -83,23 +83,23 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 \`\`\`
 
-## 3. Animate Only "Cheap" Properties
-Never animate properties that trigger browser layout reflow (such as \`top\`, \`left\`, \`height\`, or \`margin\`). Always compose your choreographies using:
+## 3. Choosing Rendering-Friendly Properties
+Prefer transform and opacity for most motion. Avoid animating layout-heavy properties such as \`top\`, \`left\`, and \`height\` when they aren't necessary:
 - \`transform\` (\`x\`, \`y\`, \`scale\`, \`rotation\`)
 - \`opacity\`
 - \`clipPath\`
 
-By adhering to these rules, your Next.js application will maintain a silky 60–120 fps across devices.
+With clean lifecycle management, a synchronized ticker, and rendering-friendly properties, you can build scroll experiences that feel fluid without making performance an afterthought.
       `,
       id: `
-# Membangun Animasi GSAP ScrollTrigger Bebas Stutter di Next.js 14
+# Membangun Animasi GSAP yang Mulus di Next.js 14
 
-Membangun pengalaman web berkelas dunia menuntut lebih dari sekadar animasi CSS biasa. Dibutuhkan model mental berbasis timeline yang presisi, di mana scrollbar bertindak sebagai pengontrol pemutaran animasi.
+Animasi yang terasa premium bukan soal menambahkan semakin banyak efek. Tantangan sebenarnya adalah menjaga scrolling, timeline animasi, React lifecycle, dan rendering browser tetap selaras.
 
-## 1. Masalah Siklus Hidup React
-Dalam framework modern seperti Next.js dengan transisi halaman sisi klien, implementasi GSAP yang tidak tepat sering menyebabkan kebocoran memori dan duplikasi penghitungan ScrollTrigger.
+## 1. Mengelola React Lifecycle dengan Benar
+Di Next.js App Router, pengelolaan lifecycle sangat penting. Instance ScrollTrigger dan event listener harus memiliki scope serta cleanup yang jelas agar animasi tidak terduplikasi dan memory leak dapat dihindari.
 
-Solusinya adalah menggunakan integrasi resmi \`@gsap/react\` dengan \`useGSAP\`. Dengan membatasi scope timeline ke ref kontainer, GSAP secara otomatis membersihkan mutasi DOM saat komponen di-unmount.
+Gunakan integrasi resmi \`@gsap/react\` dengan \`useGSAP\` untuk membatasi scope timeline ke container ref:
 
 \`\`\`typescript
 import { useGSAP } from "@gsap/react";
@@ -123,8 +123,8 @@ export function Hero() {
 }
 \`\`\`
 
-## 2. Sinkronisasi Lenis dengan GSAP Ticker
-Lenis adalah standar industri untuk scrolling halus. Agar tidak terjadi stutter saat ScrollTrigger menghitung posisi scroll, hubungkan pembaruan Lenis langsung ke GSAP ticker:
+## 2. Menyelaraskan Lenis dengan GSAP
+Jalankan pembaruan Lenis melalui GSAP ticker agar keduanya menggunakan clock animasi yang sama. Dengan begitu, smooth scrolling dan ScrollTrigger tetap sinkron:
 
 \`\`\`typescript
 lenis.on('scroll', ScrollTrigger.update);
@@ -136,13 +136,13 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 \`\`\`
 
-## 3. Hanya Animasikan Properti Komputasi Ringan
-Hindari menganimasikan properti yang memicu reflow tata letak seperti \`top\`, \`left\`, atau \`height\`. Selalu gunakan:
+## 3. Memilih Properti yang Ramah Rendering
+Untuk sebagian besar animasi, prioritaskan transform dan opacity. Hindari animasi pada properti seperti \`top\`, \`left\`, dan \`height\` jika tidak benar-benar diperlukan:
 - \`transform\` (\`x\`, \`y\`, \`scale\`, \`rotation\`)
 - \`opacity\`
 - \`clipPath\`
 
-Dengan menerapkan pola ini, aplikasi Next.js Anda akan berjalan mulus di 60–120 fps.
+Dengan lifecycle yang bersih, ticker yang tersinkron, dan properti yang tepat, Anda dapat membangun pengalaman scroll yang terasa mulus tanpa menjadikan performa sebagai pekerjaan belakangan.
       `,
     },
     author: {
@@ -158,47 +158,51 @@ Dengan menerapkan pola ini, aplikasi Next.js Anda akan berjalan mulus di 60–12
     publishedAt: "2024-09-28",
     readTime: "8",
     title: {
-      en: "Beyond Simple RAG: Architecting Multi-Agent Workflows with Self-Correction",
-      id: "Melampaui RAG Sederhana: Merancang Alur Kerja Multi-Agent dengan Koreksi Mandiri",
+      en: "Beyond Simple RAG: Designing Self-Correcting Multi-Agent Workflows",
+      id: "Melampaui RAG Sederhana: Merancang Workflow Multi-Agent yang Dapat Mengoreksi Diri",
     },
     excerpt: {
-      en: "How to move past naive vector similarity search to build deterministic agent graphs that critique, filter, and synthesize complex enterprise data.",
-      id: "Cara beralih dari vector similarity dasar menuju grafik agen deterministik yang mampu mengkritisi, menyaring, dan menyintesis data enterprise.",
+      en: "Why vector search alone isn't always enough, and how separating retrieval, evaluation, and generation can produce more reliable AI systems.",
+      id: "Mengapa vector search saja tidak selalu cukup, dan bagaimana memisahkan retrieval, evaluasi, dan generasi dapat menghasilkan sistem AI yang lebih dapat diandalkan.",
     },
     content: {
       en: `
-# Beyond Simple RAG: Architecting Multi-Agent Workflows with Self-Correction
+# Beyond Simple RAG: Designing Self-Correcting Multi-Agent Workflows
 
-Naive Retrieval-Augmented Generation (RAG), which simply fetches top-k vector chunks and passes them into a prompt, breaks down when dealing with complex, multi-hop reasoning, tabular data, and contradictory domain sources.
+Simple RAG works well for direct questions. But once a task requires comparing figures, connecting information across documents, or resolving conflicting sources, top-k retrieval starts to show its limits.
 
-## The Core Bottleneck of Vector Search
-Vector embeddings capture semantic closeness, but semantic closeness does not equal factual relevance. When an analyst queries "Compare Q3 operating margins between 2023 and 2024", naive cosine similarity retrieves paragraphs mentioning "margins" without understanding temporal or mathematical relationships.
+## 1. Where Vector Search Falls Short
+Embeddings measure semantic similarity, not factual correctness. A document can sound relevant while still being the wrong evidence for a specific question.
 
-## The Multi-Agent Solution: The Triad Pattern
-At ALTIA DEV, we architect autonomous workflows using a Triad pattern:
+## 2. The Multi-Agent Pattern
+Separate the workflow into distinct responsibilities:
+1. **Retrieval Agent**: Gathers evidence from vector databases, SQL tables, or live APIs.
+2. **Evaluation Agent**: Scores evidence relevance and filters out low-confidence data before synthesis.
+3. **Generation Agent**: Produces answers strictly from evidence that passes verification.
 
-1. **Router & Query Reformulator**: Deconstructs user intent into sub-queries, determining whether to hit dense vector storage, structured SQL databases, or live external APIs.
-2. **Retrieval & Evidence Scorer**: Evaluates retrieved chunks for relevance, discarding low-confidence context before it reaches the synthesis stage.
-3. **Synthesis & Hallucination Auditor**: Verifies that every claim generated in the final response maps directly to cited source tokens. If a hallucination is detected, the graph loops back with corrective instructions.
+## 3. Verify Before You Generate
+Separating evaluation from generation gives the system room to reject weak context, retrieve more evidence, and reduce unsupported answers.
 
-By separating retrieval evaluation from generation, production pipelines achieve accuracy rates exceeding 99% on rigorous compliance benchmarks.
+The goal of multi-agent architecture isn't complexity for its own sake. It is structure: a reasoning process that can be tested, observed, and improved.
       `,
       id: `
-# Melampaui RAG Sederhana: Merancang Alur Kerja Multi-Agent dengan Koreksi Mandiri
+# Melampaui RAG Sederhana: Merancang Workflow Multi-Agent yang Dapat Mengoreksi Diri
 
-Sistem Retrieval-Augmented Generation (RAG) dasar yang hanya mengambil top-k chunk vektor sering kali gagal saat dihadapkan pada penalaran multi-tahap, data tabel rumit, dan sumber informasi yang saling bertentangan.
+RAG sederhana bekerja dengan baik untuk pertanyaan langsung. Namun ketika sebuah tugas membutuhkan perbandingan angka, hubungan lintas dokumen, atau penyelesaian konflik antar-sumber, retrieval top-k mulai menunjukkan batasnya.
 
-## Keterbatasan Pencarian Vektor Dasar
-Embedding vektor merepresentasikan kemiripan semantik, namun kemiripan semantik belum tentu relevan secara faktual. Ketika pertanyaan memerlukan perbandingan angka atau rentang waktu, similarity search sederhana kerap salah mengambil konteks.
+## 1. Saat Vector Search Mulai Terbatas
+Embedding mengukur kemiripan semantik, bukan kebenaran faktual. Sebuah dokumen bisa terlihat relevan tetapi tetap bukan sumber yang tepat untuk menjawab pertanyaan tertentu.
 
-## Solusi Kami: Pola Multi-Agent Triad
-Di ALTIA DEV, kami menerapkan arsitektur agen berbasis pola Triad:
+## 2. Pola Multi-Agent
+Pisahkan workflow menjadi beberapa tanggung jawab:
+1. **Agent Retrieval**: Mencari bukti dari database vektor, SQL, atau API live.
+2. **Agent Evaluasi**: Menilai relevansi dan menyaring bukti sebelum dikirim ke tahap sintesis.
+3. **Agent Generasi**: Menyusun jawaban berdasarkan bukti yang lolos verifikasi.
 
-1. **Router & Reformulator Query**: Memecah intensi pengguna menjadi beberapa sub-query dan memilih apakah harus mengakses database vektor, database SQL, atau API eksternal.
-2. **Evaluator & Scorer Bukti**: Menilai relevansi data yang diambil sebelum dikirim ke tahap sintesis untuk membuang konteks yang meragukan.
-3. **Auditor Halusinasi**: Memverifikasi bahwa setiap poin kesimpulan memiliki referensi kutipan data yang valid. Jika ditemukan ketidaksesuaian, agen akan mengulang pencarian secara otomatis.
+## 3. Verifikasi Sebelum Generasi
+Dengan memisahkan evaluasi dari generasi, sistem memiliki kesempatan untuk menolak konteks yang lemah, mencari bukti tambahan, dan mengurangi jawaban yang tidak memiliki dukungan sumber.
 
-Dengan memisahkan proses evaluasi dari generasi teks, sistem AI kami mencapai akurasi lebih dari 99% dalam pengujian kepatuhan dokumen.
+Tujuan arsitektur multi-agent bukan membuat sistem semakin rumit. Tujuannya adalah memberi struktur pada proses reasoning agar dapat diuji, dipantau, dan diperbaiki.
       `,
     },
     author: {
@@ -214,39 +218,49 @@ Dengan memisahkan proses evaluasi dari generasi teks, sistem AI kami mencapai ak
     publishedAt: "2024-08-19",
     readTime: "5",
     title: {
-      en: "The Psychology of Warm Minimalism: Why Tech Brands Are Leaving Cold Dark Mode",
-      id: "Psikologi Warm Minimalism: Mengapa Brand Teknologi Beralih dari Dark Mode Dingin",
+      en: "Warm Minimalism: Why Technology Brands Are Starting to Feel More Human",
+      id: "Warm Minimalism: Mengapa Brand Teknologi Mulai Terasa Lebih Manusiawi",
     },
     excerpt: {
-      en: "Exploring the shift toward organic ivory tones, vermilion accenting, and tactile typography that build authentic emotional connection.",
-      id: "Mengeksplorasi pergeseran ke nuansa ivory organik, aksen vermilion, dan tipografi taktil yang membangun koneksi emosional autentik.",
+      en: "How ivory, vermilion, warmer typography, and restrained motion are changing the visual language of modern technology brands.",
+      id: "Bagaimana ivory, vermilion, tipografi yang lebih hangat, dan motion yang tenang mengubah bahasa visual brand teknologi modern.",
     },
     content: {
       en: `
-# The Psychology of Warm Minimalism: Why Tech Brands Are Leaving Cold Dark Mode
+# Warm Minimalism: Why Technology Brands Are Starting to Feel More Human
 
-For years, the tech landscape was saturated with dark neon interfaces: jet black #000000 backgrounds, cyan glow effects, and hyper-synthetic purple gradients. While visually dramatic, these palettes often felt sterile, detached, and visually fatiguing during prolonged engagement.
+For years, technology branding leaned heavily on dark interfaces, neon accents, cyan gradients, and synthetic visual language. Dramatic, yes, but not always approachable.
 
-## The Rise of Warm Craft
-Leading digital agencies and high-end software houses are gravitating toward **Warm Minimalism**:
-- **Ivory Base (#FFF6E8)**: Replaces stark clinical white with natural warmth that reduces ocular strain while evoking artisanal print media.
-- **Vermilion Accent (#E34234)**: An intentional, energetic orange-red that conveys vitality, decisiveness, and human energy without the aggression of pure red.
-- **Warm Charcoal Typography (#2F2A26)**: Softens reading contrast, ensuring high accessibility while harmonizing with the ivory canvas.
+## 1. The Shift Toward Warm Minimalism
+Warm minimalism replaces harsh contrast with quieter spaces, warmer colors, and details that feel more tactile and human.
 
-When married to fluid motion and purposeful typography, warm minimalism positions tech companies not as cold algorithmic factories, but as thoughtful, human-centric studios of craft.
+## 2. Warmer Color Systems
+- **Ivory Base (#FFF6E8)**: Creates a paper-like sense of warmth that reduces eye fatigue.
+- **Vermilion Accent (#E34234)**: Adds energy without becoming aggressive or overwhelming.
+- **Soft Charcoal Typography (#2F2A26)**: Keeps the system grounded with comfortable reading contrast.
+
+## 3. Motion That Doesn't Shout
+Motion doesn't need to dominate the screen. Subtle movement can establish rhythm, clarify hierarchy, and make interaction feel more natural.
+
+Warm minimalism isn't just a color trend. It is a way of making technology feel closer, more confident, and more comfortable to use.
       `,
       id: `
-# Psikologi Warm Minimalism: Mengapa Brand Teknologi Beralih dari Dark Mode Dingin
+# Warm Minimalism: Mengapa Brand Teknologi Mulai Terasa Lebih Manusiawi
 
-Selama bertahun-tahun, lanskap industri teknologi dipenuhi antarmuka bernuansa neon gelap: background hitam pekat, efek cyan menyala, dan gradasi ungu sintetis. Meski dramatis, tampilan ini kerap terasa dingin, monoton, dan melelahkan bagi mata saat digunakan dalam waktu lama.
+Selama bertahun-tahun, brand teknologi banyak menggunakan dark interface, aksen neon, gradient cyan, dan bahasa visual yang terasa sangat digital. Dramatis, memang, tetapi tidak selalu terasa dekat.
 
-## Era Baru: Warm Minimalism
-Studio desain dan perusahaan software modern kini mengadopsi pendekatan **Warm Minimalism**:
-- **Warna Dasar Ivory (#FFF6E8)**: Menggantikan putih klinis dengan kehangatan alami yang nyaman di mata, membangkitkan nuansa kertas cetak berkualitas tinggi.
-- **Aksen Vermilion (#E34234)**: Warna merah-oranye berenergi yang mencerminkan ketegasan, vitalitas, dan sentuhan manusia tanpa terkesan agresif.
-- **Tipografi Charcoal Hangat (#2F2A26)**: Memperhalus kontras teks untuk kenyamanan membaca optimal.
+## 1. Pergeseran ke Warm Minimalism
+Warm minimalism mengganti kontras yang keras dengan ruang yang lebih tenang, warna yang lebih hangat, dan detail visual yang terasa lebih manusiawi.
 
-Dipadukan dengan animasi yang halus dan tata letak berirama, warm minimalism menampilkan brand Anda sebagai studio teknologi yang berkelas, elegan, dan berpusat pada manusia.
+## 2. Sistem Warna yang Lebih Hangat
+- **Warna Dasar Ivory (#FFF6E8)**: Memberi kesan hangat seperti kertas berkualitas yang nyaman di mata.
+- **Aksen Vermilion (#E34234)**: Menghadirkan energi tanpa terasa agresif.
+- **Tipografi Charcoal Lembut (#2F2A26)**: Menjaga keseluruhan sistem tetap seimbang dengan kontras yang nyaman dibaca.
+
+## 3. Motion yang Tidak Berlebihan
+Motion tidak harus mendominasi layar. Gerakan yang halus dapat memberi ritme, memperjelas hierarki, dan membuat interaksi terasa lebih natural.
+
+Warm minimalism bukan sekadar tren warna. Ini adalah cara membuat teknologi terasa lebih dekat, lebih percaya diri, dan lebih nyaman digunakan.
       `,
     },
     author: {

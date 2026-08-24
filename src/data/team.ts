@@ -4,6 +4,7 @@ export interface TeamMember {
     en: string;
     id: string;
   };
+  focus: string;
   bio: {
     en: string;
     id: string;
@@ -18,68 +19,71 @@ export interface TeamMember {
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: "Alexandre Altia",
+    name: "Alfredo Gemilang",
     role: {
-      en: "Founder & Lead Architect",
-      id: "Pendiri & Kepala Arsitek",
+      en: "Lead Software Engineer",
+      id: "Lead Software Engineer",
     },
+    focus: "Architecture · Backend · Systems",
     bio: {
-      en: "Specializing in high-performance web systems, GSAP animation orchestration, and modern cloud deployment.",
-      id: "Spesialis dalam sistem web berkinerja tinggi, orkestrasi animasi GSAP, dan infrastruktur cloud modern.",
+      en: "Leads technical direction, designing scalable software architectures, backend systems, and APIs that turn complex requirements into maintainable technology.",
+      id: "Memimpin arah teknis ALTIA DEV, merancang arsitektur software scalable, sistem backend, dan API yang mengubah kebutuhan bisnis menjadi teknologi terstruktur.",
     },
-    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop",
+    avatar: "/uploads/team/Alfredo-Gemilang.webp",
     socials: {
-      github: "https://github.com",
-      twitter: "https://twitter.com",
+      github: "https://github.com/fredogemilang",
       linkedin: "https://linkedin.com",
     },
   },
   {
-    name: "Soraya Danendra",
+    name: "Chety Chintia",
     role: {
-      en: "Head of AI & Intelligent Systems",
-      id: "Kepala Sistem AI & Otomatisasi",
+      en: "Product Designer",
+      id: "Product Designer",
     },
+    focus: "UX · UI · Design Systems",
     bio: {
-      en: "Pioneering autonomous multi-agent networks, vector semantic indexing, and enterprise RAG deployments.",
-      id: "Memimpin pengembangan jaringan agen otonom, pengindeksan vektor, dan sistem RAG enterprise.",
+      en: "Designs digital products around how users interact, connecting product thinking with visual design across UX, UI, user flows, and cohesive design systems.",
+      id: "Merancang produk digital berdasarkan interaksi pengguna, menghubungkan product thinking dengan visual design di area UX, UI, user flows, dan design system yang konsisten.",
     },
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop",
+    avatar: "/uploads/team/Chety-Chintia.webp",
+    socials: {
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com",
+    },
+  },
+  {
+    name: "Ars Pelo",
+    role: {
+      en: "Infrastructure Engineer",
+      id: "Infrastructure Engineer",
+    },
+    focus: "Cloud · DevOps · Security",
+    bio: {
+      en: "Builds and manages cloud environments, CI/CD deployment pipelines, server architecture, security, monitoring, and operational reliability for production systems.",
+      id: "Membangun dan mengelola cloud environment, CI/CD deployment pipeline, arsitektur server, security, monitoring, serta keandalan operasional untuk sistem produksi.",
+    },
+    avatar: "/uploads/team/Ars-Pelo.webp",
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
   },
   {
-    name: "Kenji Takahashi",
+    name: "Satrioaji Nugroho",
     role: {
-      en: "Staff Mobile & Desktop Engineer",
-      id: "Insinyur Utama Mobile & Desktop",
+      en: "Software Engineer",
+      id: "Software Engineer",
     },
+    focus: "Full-Stack · Web · Integration",
     bio: {
-      en: "Crafting multi-platform experiences with Flutter, Rust, and native graphics pipelines.",
-      id: "Mengembangkan aplikasi multi-platform dengan Flutter, Rust, dan optimasi grafis native.",
+      en: "Builds responsive end-to-end web applications across frontend interfaces, backend services, database integrations, and third-party APIs ready for production.",
+      id: "Membangun aplikasi web end-to-end pada sisi frontend, backend services, integrasi database, dan third-party API yang siap digunakan di lingkungan produksi.",
     },
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop",
+    avatar: "/uploads/team/Satrioaji-Nugroho.webp",
     socials: {
       github: "https://github.com",
-      twitter: "https://twitter.com",
-    },
-  },
-  {
-    name: "Maya Indira",
-    role: {
-      en: "Creative Director & Design Systems",
-      id: "Direktur Kreatif & Design System",
-    },
-    bio: {
-      en: "Shaping warm minimalist aesthetics, micro-interaction ergonomics, and accessible brand tokens.",
-      id: "Merancang estetika warm minimalist, ergonomi mikro-interaksi, dan token desain yang aksesibel.",
-    },
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop",
-    socials: {
       linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
     },
   },
 ];

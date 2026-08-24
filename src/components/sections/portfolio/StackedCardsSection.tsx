@@ -6,12 +6,9 @@ import type { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { gsap } from "@/lib/gsapConfig";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 import { getLocalizedPath } from "@/i18n/utils";
 import { ScrollHighlightText } from "@/components/effects/ScrollHighlightText";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface StackedCardsSectionProps {
   projects: Project[];
@@ -57,12 +54,22 @@ export function StackedCardsSection({
       });
     }, containerRef);
 
+    // Refresh ScrollTrigger so stacking bounds recalculate
+    ScrollTrigger.refresh();
+
     return () => ctx.revert();
   }, [projects]);
 
   return (
-    <section ref={containerRef} className="relative py-12 sm:py-20 lg:py-24">
-      <Container size="large">
+    <section ref={containerRef} className="relative py-16 sm:py-24 lg:py-28">
+      {/* Seamless Blueprint Dot-Grid Texture & Ambient Radial Glow (isolated overflow-hidden) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 texture-blueprint-grid opacity-75" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-vermilion/5 rounded-full blur-3xl -mr-48" />
+        <div className="absolute bottom-10 left-0 w-[400px] h-[400px] bg-terracotta/5 rounded-full blur-3xl -ml-40" />
+      </div>
+
+      <Container size="large" className="relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20">
           <div className="max-w-2xl">
@@ -120,9 +127,16 @@ export function StackedCardsSection({
                       </div>
 
                       {/* Title & Tagline */}
-                      <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-charcoal tracking-tight group-hover:text-vermilion transition-colors mb-3">
-                        {project.title[lang]}
-                      </h3>
+                      <a
+                        href={getLocalizedPath(`/portfolio/${project.slug}`, lang)}
+                        className="block group/title"
+                        data-cursor
+                        data-cursor-text="VIEW"
+                      >
+                        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-charcoal tracking-tight group-hover:text-vermilion transition-colors mb-3">
+                          {project.title[lang]}
+                        </h3>
+                      </a>
 
                       <p className="text-sm sm:text-base text-charcoal-muted leading-relaxed mb-6 font-normal">
                         {project.tagline[lang]}
@@ -167,7 +181,12 @@ export function StackedCardsSection({
                   </div>
 
                   {/* Right Column (Visual Mockup Image) */}
-                  <div className="lg:col-span-6 relative aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-warm-card border border-warm-border/50">
+                  <a
+                    href={getLocalizedPath(`/portfolio/${project.slug}`, lang)}
+                    className="lg:col-span-6 block relative aspect-[16/10] rounded-2xl overflow-hidden shadow-md bg-warm-card border border-warm-border/50 cursor-pointer"
+                    data-cursor
+                    data-cursor-text="VIEW"
+                  >
                     <img
                       src={project.image}
                       alt={project.title[lang]}
@@ -176,7 +195,7 @@ export function StackedCardsSection({
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+                  </a>
                 </div>
               </div>
             );

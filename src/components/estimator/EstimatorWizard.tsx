@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useTranslations, useLocale } from "@/i18n/useI18n";
+import { useTranslations } from "@/i18n/useI18n";
+import type { Locale } from "@/i18n/utils";
 import { WIZARD_QUESTIONS } from "@/domain/estimator/questions";
 import { isQuestionVisible } from "@/domain/estimator/conditionEngine";
 import { ProjectRequirements, ProjectEstimate } from "@/domain/estimator/types";
+import { normalizeWizardAnswers } from "@/domain/estimator/normalizer";
+import { calculateProjectEstimate } from "@/domain/estimator/pricing/engine";
 import { EstimatorProgressBar } from "./EstimatorProgressBar";
 import { QuestionStep } from "./QuestionStep";
 import { ContactGateStep, type ContactData } from "./ContactGateStep";
@@ -13,9 +16,12 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ArrowLeft, ArrowRight, Lock, Loader2 } from "lucide-react";
 
-export function EstimatorWizard() {
-  const t = useTranslations("Estimator.steps");
-  const locale = useLocale();
+interface EstimatorWizardProps {
+  locale?: Locale;
+}
+
+export function EstimatorWizard({ locale = "en" }: EstimatorWizardProps) {
+  const t = useTranslations("Estimator.steps", locale);
 
   const [answers, setAnswers] = useState<Record<string, unknown>>({
     service: "web",
@@ -85,6 +91,10 @@ export function EstimatorWizard() {
     setIsSubmittingLead(true);
     setLeadError(null);
 
+    // Compute robust domain estimate
+    const localRequirements = normalizeWizardAnswers(answers);
+    const localEstimate = calculateProjectEstimate(localRequirements);
+
     try {
       const res = await fetch("/api/estimator/lead", {
         method: "POST",
@@ -96,19 +106,34 @@ export function EstimatorWizard() {
         }),
       });
 
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.estimate) {
         setEstimateResult({
-          requirements: data.requirements,
-          estimate: data.estimate,
-          leadId: data.leadId,
+          requirements: data.requirements || localRequirements,
+          estimate: data.estimate || localEstimate,
+          leadId: data.leadId || `lead_${Date.now()}`,
           contact,
         });
       } else {
-        setLeadError(data.error || "Failed to process estimate. Please try again.");
+        setEstimateResult({
+          requirements: localRequirements,
+          estimate: localEstimate,
+          leadId: `lead_${Date.now()}`,
+          contact,
+        });
       }
     } catch (err) {
-      setLeadError("Network error submitting estimate. Please reach out to hello@altiadev.com directly.");
+      console.warn("[Estimator] Lead API submission fallback to client calculator:", err);
+      setEstimateResult({
+        requirements: localRequirements,
+        estimate: localEstimate,
+        leadId: `lead_${Date.now()}`,
+        contact,
+      });
     } finally {
       setIsSubmittingLead(false);
     }
@@ -127,6 +152,7 @@ export function EstimatorWizard() {
         estimate={estimateResult.estimate}
         leadId={estimateResult.leadId}
         contact={estimateResult.contact}
+        locale={locale}
         onRecalculate={handleRecalculate}
       />
     );
@@ -138,6 +164,7 @@ export function EstimatorWizard() {
       <EstimatorProgressBar
         currentStep={currentStepForProgress}
         totalSteps={totalStepsWithContact}
+        locale={locale}
       />
 
       {/* Contact Gate Step */}
@@ -147,6 +174,7 @@ export function EstimatorWizard() {
           onSubmit={handleContactSubmit}
           isSubmitting={isSubmittingLead}
           error={leadError}
+          locale={locale}
         />
       ) : (
         /* Regular Question Step */
@@ -155,6 +183,7 @@ export function EstimatorWizard() {
             <QuestionStep
               question={currentQuestion}
               value={currentAnswer}
+              locale={locale}
               onChange={handleAnswerChange}
             />
 

@@ -21,30 +21,49 @@ export function getLocaleFromUrl(url: URL | string): Locale {
 }
 
 /**
- * Translate a nested key, e.g. "Hero.titleLine1"
+ * Translate a nested key, e.g. "Hero.titleLine1", with optional interpolation params or fallback
  */
-export function t(locale: Locale, key: string, fallback?: string): string {
+export function t(
+  locale: Locale,
+  key: string,
+  paramsOrFallback?: Record<string, any> | string,
+  fallback?: string
+): string {
   const parts = key.split('.');
   let current: any = messages[locale] || messages.en;
+  let resolved: string | undefined;
 
   for (const part of parts) {
     if (current && typeof current === 'object' && part in current) {
       current = current[part];
     } else {
-      // Fallback to English if missing in target locale
       let engFallback: any = messages.en;
       for (const p of parts) {
         if (engFallback && typeof engFallback === 'object' && p in engFallback) {
           engFallback = engFallback[p];
         } else {
-          return fallback || key;
+          resolved = typeof paramsOrFallback === 'string' ? paramsOrFallback : fallback || key;
+          break;
         }
       }
-      return typeof engFallback === 'string' ? engFallback : (fallback || key);
+      if (!resolved && typeof engFallback === 'string') {
+        resolved = engFallback;
+      }
+      break;
     }
   }
 
-  return typeof current === 'string' ? current : (fallback || key);
+  if (!resolved) {
+    resolved = typeof current === 'string' ? current : (typeof paramsOrFallback === 'string' ? paramsOrFallback : fallback || key);
+  }
+
+  if (paramsOrFallback && typeof paramsOrFallback === 'object') {
+    Object.entries(paramsOrFallback).forEach(([paramKey, paramVal]) => {
+      resolved = resolved!.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), String(paramVal));
+    });
+  }
+
+  return resolved;
 }
 
 /**

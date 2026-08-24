@@ -5,6 +5,8 @@ import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { ScrollReveal } from '../../components/effects/ScrollReveal';
+import { ProcessStepsGrid, type ProcessStep } from '../../components/sections/services/ProcessStepsGrid';
+import { EngineeringStandardsBento, type BentoCardData } from '../../components/sections/services/EngineeringStandardsBento';
 import { t, type Locale, getLocalizedPath } from '../../i18n/utils';
 import {
   Globe,
@@ -16,13 +18,68 @@ import {
 } from 'lucide-react';
 
 const locale: Locale = 'id';
+
+const processSteps: ProcessStep[] = [
+  {
+    number: '01',
+    title: t(locale, 'Services.process.steps.0.title'),
+    desc: t(locale, 'Services.process.steps.0.desc'),
+  },
+  {
+    number: '02',
+    title: t(locale, 'Services.process.steps.1.title'),
+    desc: t(locale, 'Services.process.steps.1.desc'),
+  },
+  {
+    number: '03',
+    title: t(locale, 'Services.process.steps.2.title'),
+    desc: t(locale, 'Services.process.steps.2.desc'),
+  },
+  {
+    number: '04',
+    title: t(locale, 'Services.process.steps.3.title'),
+    desc: t(locale, 'Services.process.steps.3.desc'),
+  },
+];
+
+const standardsCard1: BentoCardData = {
+  tag: t(locale, 'Services.standards.card1.tag'),
+  title: t(locale, 'Services.standards.card1.title'),
+  desc: t(locale, 'Services.standards.card1.desc'),
+  badge: t(locale, 'Services.standards.card1.badge'),
+};
+
+const standardsCard2: BentoCardData = {
+  tag: t(locale, 'Services.standards.card2.tag'),
+  title: t(locale, 'Services.standards.card2.title'),
+  desc: t(locale, 'Services.standards.card2.desc'),
+  badge: t(locale, 'Services.standards.card2.badge'),
+};
+
+const standardsCard3: BentoCardData = {
+  tag: t(locale, 'Services.standards.card3.tag'),
+  title: t(locale, 'Services.standards.card3.title'),
+  desc: t(locale, 'Services.standards.card3.desc'),
+  badge: t(locale, 'Services.standards.card3.badge'),
+};
+
+const standardsCard4: BentoCardData = {
+  tag: t(locale, 'Services.standards.card4.tag'),
+  title: t(locale, 'Services.standards.card4.title'),
+  desc: t(locale, 'Services.standards.card4.desc'),
+  badge: t(locale, 'Services.standards.card4.badge'),
+};
 ---
 
 <Layout title={t(locale, 'Services.title')} locale={locale}>
-  <div class="flex flex-col gap-24 sm:gap-32 pb-24">
-    <!-- 1. HERO HEADER -->
-    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
-      <Container size="large">
+  <div class="flex flex-col gap-24 sm:gap-32 pb-36 sm:pb-44 lg:pb-52">
+    <!-- 1. HERO HEADER (Faded Grid Overlay & Warm Shaded Gradient) -->
+    <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div class="hero-grid-faded" />
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         <div class="max-w-3xl">
           <Badge variant="vermilion" size="md" className="mb-4 uppercase tracking-widest text-[11px] font-bold">
             <Sparkles className="w-3.5 h-3.5 text-vermilion" />
@@ -59,10 +116,6 @@ const locale: Locale = 'id';
                   {t(locale, 'Services.items.web.title')}
                 </h2>
 
-                <p class="text-base sm:text-lg text-charcoal font-medium">
-                  {t(locale, 'Services.items.web.tagline')}
-                </p>
-
                 <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
                   {t(locale, 'Services.items.web.description')}
                 </p>
@@ -70,27 +123,23 @@ const locale: Locale = 'id';
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Corporate WordPress & Headless CMS (Custom Themes)</span>
+                    <span>Corporate websites & headless CMS</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Enterprise PHP (Laravel 11 & Symfony)</span>
+                    <span>Laravel, Symfony, Next.js, Astro & React</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>High-Throughput Go & Node.js Microservices</span>
+                    <span>High-throughput API & backend services</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Next.js, Astro & React Web Flagships</span>
+                    <span>PostgreSQL, MySQL, Redis & Docker</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Distributed PostgreSQL, MySQL, Redis & Docker</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
-                    <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>100/100 Core Web Vitals & Edge Caching</span>
+                    <span>Caching, CDN & performance optimization</span>
                   </div>
                 </div>
 
@@ -98,7 +147,7 @@ const locale: Locale = 'id';
                   <span class="text-xs font-display font-bold uppercase text-charcoal-muted mr-2">
                     Stack:
                   </span>
-                  {['WordPress', 'PHP (Laravel 11)', 'Go', 'Next.js 14', 'Symfony', 'TypeScript', 'PostgreSQL', 'MySQL', 'Docker'].map((tech) => (
+                  {['WordPress', 'Laravel', 'Next.js', 'Astro', 'Go', 'PostgreSQL', 'Docker'].map((tech) => (
                     <Badge key={tech} variant="cream" size="sm">
                       {tech}
                     </Badge>
@@ -107,7 +156,7 @@ const locale: Locale = 'id';
 
                 <div class="pt-4">
                   <Button href={getLocalizedPath('/contact', locale)} variant="primary" size="md">
-                    <span>Konsultasikan Arsitektur Web</span>
+                    <span>{t(locale, 'Services.items.web.cta')}</span>
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
@@ -163,10 +212,6 @@ const locale: Locale = 'id';
                   {t(locale, 'Services.items.app.title')}
                 </h2>
 
-                <p class="text-base sm:text-lg text-charcoal font-medium">
-                  {t(locale, 'Services.items.app.tagline')}
-                </p>
-
                 <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
                   {t(locale, 'Services.items.app.description')}
                 </p>
@@ -174,19 +219,23 @@ const locale: Locale = 'id';
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Cross-Platform Flutter & React Native</span>
+                    <span>Flutter & React Native</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Native macOS / Windows Utilities</span>
+                    <span>macOS & Windows utilities</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Offline-First SQLite & Sync Engines</span>
+                    <span>Offline-first architecture</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Apple HealthKit & Sensor Interop</span>
+                    <span>SQLite & synchronization</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
+                    <span>Native APIs & device integrations</span>
                   </div>
                 </div>
 
@@ -194,7 +243,7 @@ const locale: Locale = 'id';
                   <span class="text-xs font-display font-bold uppercase text-charcoal-muted mr-2">
                     Stack:
                   </span>
-                  {['Flutter', 'Dart', 'React Native', 'Rust FFI', 'Electron', 'SQLite'].map((tech) => (
+                  {['Flutter', 'React Native', 'Rust', 'Electron', 'SQLite'].map((tech) => (
                     <Badge key={tech} variant="cream" size="sm">
                       {tech}
                     </Badge>
@@ -203,7 +252,7 @@ const locale: Locale = 'id';
 
                 <div class="pt-4">
                   <Button href={getLocalizedPath('/contact', locale)} variant="primary" size="md">
-                    <span>Konsultasikan Proyek App</span>
+                    <span>{t(locale, 'Services.items.app.cta')}</span>
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
@@ -257,10 +306,6 @@ const locale: Locale = 'id';
                   {t(locale, 'Services.items.ai.title')}
                 </h2>
 
-                <p class="text-base sm:text-lg text-charcoal font-medium">
-                  {t(locale, 'Services.items.ai.tagline')}
-                </p>
-
                 <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
                   {t(locale, 'Services.items.ai.description')}
                 </p>
@@ -268,19 +313,23 @@ const locale: Locale = 'id';
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Multi-Agent Autonomous Systems</span>
+                    <span>Multi-agent systems</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Enterprise RAG & Hybrid Dense/Sparse Search</span>
+                    <span>Enterprise RAG & hybrid search</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Automated Document & PDF Synthesizers</span>
+                    <span>Document & PDF processing</span>
                   </div>
                   <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
                     <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
-                    <span>Hallucination Guardrails & Tool Calling</span>
+                    <span>AI agents & tool calling</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-charcoal font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-vermilion flex-shrink-0" />
+                    <span>Guardrails, evaluation & monitoring</span>
                   </div>
                 </div>
 
@@ -288,7 +337,7 @@ const locale: Locale = 'id';
                   <span class="text-xs font-display font-bold uppercase text-charcoal-muted mr-2">
                     Stack:
                   </span>
-                  {['Python', 'LangChain', 'FastAPI', 'Qdrant', 'GPT-4o', 'Claude 3.5'].map((tech) => (
+                  {['Python', 'LangChain', 'FastAPI', 'Qdrant', 'LLM APIs'].map((tech) => (
                     <Badge key={tech} variant="cream" size="sm">
                       {tech}
                     </Badge>
@@ -297,7 +346,7 @@ const locale: Locale = 'id';
 
                 <div class="pt-4">
                   <Button href={getLocalizedPath('/contact', locale)} variant="primary" size="md">
-                    <span>Konsultasikan AI Automation</span>
+                    <span>{t(locale, 'Services.items.ai.cta')}</span>
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
@@ -334,71 +383,40 @@ print("AI Agent Graph online with 99.4% precision")`}</code>
     </section>
 
     <!-- 3. AGILE METHODOLOGY & PROCESS -->
-    <section class="py-12 bg-charcoal text-ivory">
+    <section class="py-16 sm:py-20 bg-charcoal text-ivory rounded-4xl my-4 mx-4 sm:mx-8 lg:mx-12 overflow-hidden shadow-warm-lg">
       <Container size="large">
         <SectionHeading
+          client:visible
           tag={t(locale, 'Services.process.tag')}
           title={t(locale, 'Services.process.title')}
           dark
         />
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <ScrollReveal client:visible variant="fade-up" delay={0.1}>
-            <div class="flex flex-col gap-4 p-6 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
-              <span class="font-display font-black text-4xl text-vermilion">
-                01
-              </span>
-              <h3 class="font-display text-xl font-bold text-ivory">
-                {t(locale, 'Services.process.steps.0.title')}
-              </h3>
-              <p class="text-sm text-ivory/70 leading-relaxed">
-                {t(locale, 'Services.process.steps.0.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
+        <ProcessStepsGrid client:visible steps={processSteps} />
+      </Container>
+    </section>
 
-          <ScrollReveal client:visible variant="fade-up" delay={0.25}>
-            <div class="flex flex-col gap-4 p-6 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
-              <span class="font-display font-black text-4xl text-vermilion">
-                02
-              </span>
-              <h3 class="font-display text-xl font-bold text-ivory">
-                {t(locale, 'Services.process.steps.1.title')}
-              </h3>
-              <p class="text-sm text-ivory/70 leading-relaxed">
-                {t(locale, 'Services.process.steps.1.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
+    <!-- 4. ENGINEERING STANDARDS & GUARANTEES (Warm Ivory Bento Grid) -->
+    <section class="relative py-16 sm:py-24 overflow-hidden">
+      {/* Seamless Blueprint Dot-Grid Texture */}
+      <div className="absolute inset-0 texture-blueprint-grid opacity-60 pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-vermilion/5 rounded-full blur-3xl pointer-events-none -mr-48" />
 
-          <ScrollReveal client:visible variant="fade-up" delay={0.4}>
-            <div class="flex flex-col gap-4 p-6 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
-              <span class="font-display font-black text-4xl text-vermilion">
-                03
-              </span>
-              <h3 class="font-display text-xl font-bold text-ivory">
-                {t(locale, 'Services.process.steps.2.title')}
-              </h3>
-              <p class="text-sm text-ivory/70 leading-relaxed">
-                {t(locale, 'Services.process.steps.2.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
+      <Container size="large" className="relative z-10">
+        <SectionHeading
+          client:visible
+          tag={t(locale, 'Services.standards.tag')}
+          title={t(locale, 'Services.standards.title')}
+          subtitle={t(locale, 'Services.standards.subtitle')}
+        />
 
-          <ScrollReveal client:visible variant="fade-up" delay={0.55}>
-            <div class="flex flex-col gap-4 p-6 rounded-3xl bg-charcoal-800 border border-charcoal-500/30 h-full">
-              <span class="font-display font-black text-4xl text-vermilion">
-                04
-              </span>
-              <h3 class="font-display text-xl font-bold text-ivory">
-                {t(locale, 'Services.process.steps.3.title')}
-              </h3>
-              <p class="text-sm text-ivory/70 leading-relaxed">
-                {t(locale, 'Services.process.steps.3.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
+        <EngineeringStandardsBento
+          client:visible
+          card1={standardsCard1}
+          card2={standardsCard2}
+          card3={standardsCard3}
+          card4={standardsCard4}
+        />
       </Container>
     </section>
   </div>

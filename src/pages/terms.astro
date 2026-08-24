@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Container } from '../components/ui/Container';
+
+const locale = 'en';
+const lastUpdated = 'August 25, 2026';
+---
+
+<Layout title="Terms of Service" description="ALTIA DEV Terms of Service — rules and guidelines for using our website and services." locale={locale}>
+  <section class="py-16 sm:py-24">
+    <Container size="small">
+      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
+        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Terms of Service</h1>
+        <p class="text-warm-text text-sm">Last updated: {lastUpdated}</p>
+
+        <h2>1. Agreement to Terms</h2>
+        <p>
+          By accessing and using the ALTIA DEV website (<strong>altia.dev</strong>), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.
+        </p>
+
+        <h2>2. Services</h2>
+        <p>
+          ALTIA DEV provides custom software development services including web development, mobile and desktop applications, and AI automation solutions. Project scope, deliverables, timeline, and pricing are defined in individual project agreements.
+        </p>
+
+        <h2>3. Intellectual Property</h2>
+        <ul>
+          <li>All content on this website (text, graphics, logos, code) is the property of ALTIA DEV and is protected by intellectual property laws.</li>
+          <li>Upon full payment, clients receive ownership of custom deliverables as specified in their project agreement.</li>
+          <li>ALTIA DEV retains the right to showcase completed projects in our portfolio unless otherwise agreed.</li>
+        </ul>
+
+        <h2>4. Project Estimator</h2>
+        <p>
+          The Project Estimator tool provides indicative pricing and timelines based on your inputs. These estimates are not binding quotes. Final pricing is determined through a detailed discovery process and formalized in a project agreement.
+        </p>
+
+        <h2>5. User Responsibilities</h2>
+        <p>When using our website and services, you agree to:</p>
+        <ul>
+          <li>Provide accurate and truthful information.</li>
+          <li>Not use the website for any unlawful purpose.</li>
+          <li>Not attempt to interfere with the website's functionality.</li>
+          <li>Not scrape, crawl, or use automated means to access the website without permission.</li>
+        </ul>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>
+          ALTIA DEV shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or services. Our total liability shall not exceed the fees paid by you for the specific service in question.
+        </p>
+
+        <h2>7. Payment Terms</h2>
+        <p>
+          Payment terms, milestones, and schedules are defined in individual project agreements. Standard terms include an upfront deposit with milestone-based payments.
+        </p>
+
+        <h2>8. Termination</h2>
+        <p>
+          Either party may terminate a project engagement as specified in the project agreement. We reserve the right to suspend or terminate website access for violations of these terms.
+        </p>
+
+        <h2>9. Governing Law</h2>
+        <p>
+          These Terms of Service are governed by the laws of the Republic of Indonesia. Any disputes shall be resolved through the courts of Jakarta, Indonesia.
+        </p>
+
+        <h2>10. Changes to Terms</h2>
+        <p>
+          We reserve the right to modify these terms at any time. Changes will be posted on this page with an updated date. Continued use of the website constitutes acceptance of modified terms.
+        </p>
+
+        <h2>11. Contact Us</h2>
+        <p>
+          For questions about these Terms of Service, contact us at:<br />
+          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
+          <strong>Location:</strong> Jakarta, Indonesia
+        </p>
+      </div>
+    </Container>
+  </section>
+</Layout>

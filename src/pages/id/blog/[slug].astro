@@ -2,9 +2,14 @@
 import Layout from '../../../layouts/Layout.astro';
 import { Container } from '../../../components/ui/Container';
 import { Badge } from '../../../components/ui/Badge';
+import { TableOfContents } from '../../../components/blog/TableOfContents';
+import { ShareArticle } from '../../../components/blog/ShareArticle';
+import { NextPrevArticles } from '../../../components/blog/NextPrevArticles';
+import { RelatedArticles } from '../../../components/blog/RelatedArticles';
 import { getBlogPosts, getBlogPostBySlug } from '../../../lib/b10cks';
+import { parseMarkdown } from '../../../lib/markdown';
 import { t, type Locale, getLocalizedPath } from '../../../i18n/utils';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Sparkles } from 'lucide-react';
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
@@ -20,83 +25,172 @@ const post = await getBlogPostBySlug(slug as string);
 if (!post) {
   return Astro.redirect('/id/blog');
 }
+
+const allPosts = await getBlogPosts();
+const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+// Chronological order: allPosts is sorted descending by publishedAt (0 = newest)
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : undefined; // Older post
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined; // Newer post
+
+const { html, toc } = parseMarkdown(post.content[locale]);
+const currentUrl = Astro.url.href;
 ---
 
 <Layout
-  title={post.title[locale]}
+  title={`${post.title[locale]} | ALTIA DEV`}
   description={post.excerpt[locale]}
   ogImage={post.coverImage}
   locale={locale}
 >
-  <article class="flex flex-col gap-12 pb-24">
-    <!-- 1. Article Header -->
-    <section class="pt-8 bg-noise border-b border-warm-border/60 pb-12">
-      <Container size="small">
-        <a
-          href={getLocalizedPath('/blog', locale)}
-          class="inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-wider text-charcoal-muted hover:text-vermilion mb-8 transition-colors"
-          data-cursor
-        >
-          <ArrowLeft class="w-3.5 h-3.5" />
-          <span>{t(locale, 'Blog.back')}</span>
-        </a>
+  <article class="flex flex-col gap-12 sm:gap-16 pb-36 sm:pb-44 lg:pb-52">
+    <!-- 1. Article Header (Matches Nav Container Width with Faded Grid & Warm Shaded Gradient) -->
+    <section class="relative pt-12 sm:pt-16 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div class="hero-grid-faded" />
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <Badge variant="vermilion" size="sm" className="uppercase font-bold tracking-wider">
-              {post.category}
-            </Badge>
-            <div class="flex items-center gap-1.5 text-xs text-charcoal-muted">
-              <Clock class="w-3.5 h-3.5 text-vermilion" />
-              <span>{post.readTime} {t(locale, 'Blog.readTime')}</span>
+      <Container size="large" className="relative z-10">
+        <div class="max-w-5xl">
+          {/* Back to Blog */}
+          <a
+            href={getLocalizedPath('/blog', locale)}
+            class="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-charcoal-muted hover:text-vermilion mb-8 transition-colors group"
+            data-cursor
+          >
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+            <span>{t(locale, 'Blog.back')}</span>
+          </a>
+
+          <div class="flex flex-col gap-6">
+            <div class="flex flex-wrap items-center gap-3">
+              <Badge variant="vermilion" size="sm" className="uppercase font-bold tracking-wider text-[11px]">
+                {post.category}
+              </Badge>
+              <div class="flex items-center gap-1.5 text-xs font-mono text-charcoal-muted bg-cream px-3 py-1 rounded-full border border-warm-border">
+                <Clock className="w-3.5 h-3.5 text-vermilion" />
+                <span>{post.readTime} {t(locale, 'Blog.readTime')}</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs font-mono text-charcoal-muted bg-cream px-3 py-1 rounded-full border border-warm-border">
+                <Calendar className="w-3.5 h-3.5 text-vermilion" />
+                <span>{post.publishedAt}</span>
+              </div>
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-charcoal leading-[1.12]">
+              {post.title[locale]}
+            </h1>
+
+            <p class="text-lg sm:text-xl text-charcoal-muted leading-relaxed font-normal max-w-4xl">
+              {post.excerpt[locale]}
+            </p>
+
+            {/* Author Profile */}
+            <div class="flex items-center gap-4 pt-6 border-t border-warm-border/80 mt-2">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-warm-border shadow-xs flex-shrink-0">
+                <img
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="flex flex-col">
+                <span class="font-display font-bold text-base text-charcoal">
+                  {post.author.name}
+                </span>
+                <span class="text-xs text-charcoal-muted font-medium">
+                  {post.author.role} · ALTIA DEV Studio
+                </span>
+              </div>
             </div>
           </div>
+        </div>
+      </Container>
+    </section>
 
-          <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-charcoal leading-[1.18]">
-            {post.title[locale]}
-          </h1>
-
-          <div class="flex items-center gap-4 pt-4 border-t border-warm-border/60 mt-4">
-            <div class="w-10 h-10 rounded-full overflow-hidden">
+    <!-- 2. Main Article Content with Featured Cover Image in Left Column & Sticky TOC in Right Column -->
+    <section>
+      <Container size="large">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Main Article Left Column (Cover Image + Content) */}
+          <div class="lg:col-span-8 flex flex-col">
+            {/* Featured Cover Image placed inside left column */}
+            <div class="aspect-[16/9] rounded-3xl sm:rounded-4xl overflow-hidden shadow-[0_20px_50px_rgba(47,42,38,0.08)] border border-warm-border mb-8 sm:mb-12">
               <img
-                src={post.author.avatar}
-                alt={post.author.name}
+                src={post.coverImage}
+                alt={post.title[locale]}
                 class="w-full h-full object-cover"
               />
             </div>
-            <div class="flex flex-col">
-              <span class="font-display font-bold text-sm text-charcoal">
-                {post.author.name}
-              </span>
-              <span class="text-xs text-charcoal-muted">
-                {post.author.role} • {post.publishedAt}
-              </span>
+
+            {/* Table of Contents for Mobile */}
+            {toc.length > 0 && (
+              <div class="lg:hidden mb-8">
+                <TableOfContents client:idle toc={toc} title={t(locale, 'Blog.tableOfContents')} />
+              </div>
+            )}
+
+            {/* Rendered HTML content */}
+            <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
+              <Fragment set:html={html} />
             </div>
+
+            {/* Bottom In-Article Share Bar */}
+            <div class="mt-14 pt-8 border-t border-warm-border/80 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div class="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-vermilion" />
+                <span class="font-display font-bold text-sm text-charcoal">
+                  Menyukai artikel ini? Bagikan ke jejaring Anda:
+                </span>
+              </div>
+              <ShareArticle
+                client:idle
+                url={currentUrl}
+                title={post.title[locale]}
+                shareLabel={t(locale, 'Blog.shareArticle')}
+                copiedLabel={t(locale, 'Blog.copied')}
+                copyLinkLabel={t(locale, 'Blog.copyLink')}
+              />
+            </div>
+
+            {/* Next & Previous Articles Navigation */}
+            <NextPrevArticles
+              client:visible
+              prevPost={prevPost}
+              nextPost={nextPost}
+              locale={locale}
+              prevLabel={t(locale, 'Blog.previousPost')}
+              nextLabel={t(locale, 'Blog.nextPost')}
+            />
           </div>
+
+          {/* Sticky Sidebar on Desktop starting from the very top (TOC + Quick Share) */}
+          <aside class="hidden lg:flex lg:col-span-4 flex-col gap-6 sticky top-28">
+            {toc.length > 0 && (
+              <TableOfContents client:idle toc={toc} title={t(locale, 'Blog.tableOfContents')} />
+            )}
+            <ShareArticle
+              client:visible
+              url={currentUrl}
+              title={post.title[locale]}
+              shareLabel={t(locale, 'Blog.shareArticle')}
+              copiedLabel={t(locale, 'Blog.copied')}
+              copyLinkLabel={t(locale, 'Blog.copyLink')}
+            />
+          </aside>
         </div>
       </Container>
     </section>
 
-    <!-- 2. Cover Image -->
-    <section>
-      <Container size="small">
-        <div class="aspect-[16/9] rounded-3xl overflow-hidden shadow-warm">
-          <img
-            src={post.coverImage}
-            alt={post.title[locale]}
-            class="w-full h-full object-cover"
-          />
-        </div>
-      </Container>
-    </section>
-
-    <!-- 3. Article Body -->
-    <section>
-      <Container size="small">
-        <div class="prose prose-lg prose-neutral max-w-none text-charcoal leading-relaxed whitespace-pre-line text-base sm:text-lg">
-          {post.content[locale]}
-        </div>
-      </Container>
-    </section>
+    <!-- 3. Related Articles Section -->
+    <RelatedArticles
+      client:visible
+      posts={allPosts}
+      currentSlug={post.slug}
+      currentCategory={post.category}
+      locale={locale}
+      sectionTitle={t(locale, 'Blog.relatedTitle')}
+      sectionSubtitle={t(locale, 'Blog.relatedSubtitle')}
+      viewAllLabel={t(locale, 'Blog.viewAll')}
+    />
   </article>
 </Layout>

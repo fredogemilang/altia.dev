@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "@/i18n/useI18n";
+import type { Locale } from "@/i18n/utils";
 import { Globe, Smartphone, Cpu, Check, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
@@ -13,6 +14,7 @@ interface OptionCardProps {
   badge?: string;
   isSelected: boolean;
   isMulti?: boolean;
+  locale?: Locale;
   onSelect: (value: string) => void;
 }
 
@@ -24,9 +26,10 @@ export function OptionCard({
   badge,
   isSelected,
   isMulti = false,
+  locale = "en",
   onSelect,
 }: OptionCardProps) {
-  const t = useTranslations();
+  const t = useTranslations(undefined, locale);
 
   const renderIcon = () => {
     switch (icon) {

@@ -6,8 +6,8 @@ import { Badge } from '../../components/ui/Badge';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { SplitGlobeHero } from '../../components/sections/SplitGlobeHero';
 import { ServicesCardGrid, type ServiceCardItem } from '../../components/sections/services/ServicesCardGrid';
+import { StatsGrid, type StatItem } from '../../components/sections/StatsGrid';
 import { ScrollReveal } from '../../components/effects/ScrollReveal';
-import { CounterAnimation } from '../../components/effects/CounterAnimation';
 import { StackedCardsSection } from '../../components/sections/portfolio/StackedCardsSection';
 import { getProjects, getTestimonials } from '../../lib/b10cks';
 import { t, type Locale } from '../../i18n/utils';
@@ -17,6 +17,35 @@ const locale: Locale = 'id';
 const allProjects = await getProjects();
 const featuredProjects = allProjects.filter((p) => p.featured);
 const testimonials = await getTestimonials();
+
+const statsData: StatItem[] = [
+  {
+    value: 45,
+    suffix: '+',
+    label: t(locale, 'Stats.stat1.label'),
+    description: t(locale, 'Stats.stat1.description'),
+  },
+  {
+    value: 99.8,
+    decimals: 1,
+    suffix: '%',
+    label: t(locale, 'Stats.stat2.label'),
+    description: t(locale, 'Stats.stat2.description'),
+  },
+  {
+    value: 4.2,
+    decimals: 1,
+    suffix: 'x',
+    label: t(locale, 'Stats.stat3.label'),
+    description: t(locale, 'Stats.stat3.description'),
+  },
+  {
+    value: 12,
+    suffix: '+',
+    label: t(locale, 'Stats.stat4.label'),
+    description: t(locale, 'Stats.stat4.description'),
+  },
+];
 
 const marqueeItems = [
   t(locale, 'Hero.service1'),
@@ -37,8 +66,8 @@ const serviceItems: ServiceCardItem[] = [
     icon: 'web',
     number: t(locale, 'Services.items.web.number'),
     title: t(locale, 'Services.items.web.title'),
-    tagline: t(locale, 'Services.items.web.tagline'),
-    stack: 'WordPress, Laravel, Next.js, Go',
+    tagline: t(locale, 'Services.items.web.homeDescription'),
+    stack: 'WordPress · Laravel · Next.js · Astro · Go',
     href: '/id/services#web',
   },
   {
@@ -46,8 +75,8 @@ const serviceItems: ServiceCardItem[] = [
     icon: 'app',
     number: t(locale, 'Services.items.app.number'),
     title: t(locale, 'Services.items.app.title'),
-    tagline: t(locale, 'Services.items.app.tagline'),
-    stack: 'Flutter, React Native, Rust',
+    tagline: t(locale, 'Services.items.app.homeDescription'),
+    stack: 'Flutter · React Native · Rust · Electron',
     href: '/id/services#app',
   },
   {
@@ -55,8 +84,8 @@ const serviceItems: ServiceCardItem[] = [
     icon: 'ai',
     number: t(locale, 'Services.items.ai.number'),
     title: t(locale, 'Services.items.ai.title'),
-    tagline: t(locale, 'Services.items.ai.tagline'),
-    stack: 'LangChain, Qdrant, Python',
+    tagline: t(locale, 'Services.items.ai.homeDescription'),
+    stack: 'Python · LangChain · FastAPI · Qdrant · LLM APIs',
     href: '/id/services#ai',
   },
 ];
@@ -80,9 +109,10 @@ const serviceItems: ServiceCardItem[] = [
     <section class="relative">
       <Container size="large">
         <SectionHeading
+          client:visible
           tag={t(locale, 'Services.tag')}
-          title={t(locale, 'Services.title')}
-          subtitle={t(locale, 'Services.subtitle')}
+          title={t(locale, 'Services.homeTitle')}
+          subtitle={t(locale, 'Services.homeSubtitle')}
         />
 
         <ServicesCardGrid
@@ -104,65 +134,22 @@ const serviceItems: ServiceCardItem[] = [
       viewAllText={t(locale, 'Common.viewAll', 'Semua Proyek')}
     />
 
-    <!-- 4. STATS COUNTER SECTION -->
+    <!-- 4. STATS COUNTER SECTION (Cascading Wave Scrub) -->
     <section class="relative py-4 sm:py-8">
       <Container size="large">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 bg-charcoal text-ivory rounded-4xl p-10 sm:p-16 lg:p-20 shadow-warm-lg relative overflow-hidden">
-          <div class="flex flex-col">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
-              <CounterAnimation client:visible value={45} suffix="+" />
-            </span>
-            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
-              {t(locale, 'Stats.stat1.label')}
-            </span>
-            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
-              {t(locale, 'Stats.stat1.description')}
-            </span>
-          </div>
-
-          <div class="flex flex-col">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
-              <CounterAnimation client:visible value={99.8} decimals={1} suffix="%" />
-            </span>
-            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
-              {t(locale, 'Stats.stat2.label')}
-            </span>
-            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
-              {t(locale, 'Stats.stat2.description')}
-            </span>
-          </div>
-
-          <div class="flex flex-col">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
-              <CounterAnimation client:visible value={4.2} decimals={1} suffix="x" />
-            </span>
-            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
-              {t(locale, 'Stats.stat3.label')}
-            </span>
-            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
-              {t(locale, 'Stats.stat3.description')}
-            </span>
-          </div>
-
-          <div class="flex flex-col">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-vermilion mb-2">
-              <CounterAnimation client:visible value={12} suffix="+" />
-            </span>
-            <span class="font-display font-bold text-sm sm:text-base text-ivory mb-1.5">
-              {t(locale, 'Stats.stat4.label')}
-            </span>
-            <span class="text-xs sm:text-sm text-ivory/60 leading-relaxed">
-              {t(locale, 'Stats.stat4.description')}
-            </span>
-          </div>
-        </div>
+        <StatsGrid client:visible stats={statsData} />
       </Container>
     </section>
 
     <!-- 5. CLIENT STORIES & TESTIMONIALS -->
-    <section class="relative">
-      <Container size="large">
+    <section class="relative py-12 sm:py-16 overflow-hidden">
+      {/* Seamless Editorial Diagonal Texture & Ambient Terracotta Glow */}
+      <div class="absolute inset-0 texture-editorial-lines opacity-80 pointer-events-none" />
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-terracotta/4 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         <SectionHeading
+          client:visible
           tag={t(locale, 'Testimonials.tag')}
           title={t(locale, 'Testimonials.title')}
           subtitle={t(locale, 'Testimonials.subtitle')}

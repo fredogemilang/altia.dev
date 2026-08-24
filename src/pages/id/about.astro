@@ -21,10 +21,14 @@ const locale: Locale = 'id';
 ---
 
 <Layout title={t(locale, 'About.title')} locale={locale}>
-  <div class="flex flex-col gap-24 sm:gap-32 pb-24">
-    <!-- 1. Header -->
-    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
-      <Container size="large">
+  <div class="flex flex-col gap-24 sm:gap-32 pb-36 sm:pb-44 lg:pb-52">
+    <!-- 1. Header (Faded Grid Overlay & Warm Shaded Gradient) -->
+    <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div class="hero-grid-faded" />
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         <div class="max-w-3xl">
           <Badge
             variant="vermilion"
@@ -66,8 +70,9 @@ const locale: Locale = 'id';
     <section class="py-12 bg-charcoal text-ivory">
       <Container size="large">
         <SectionHeading
+          client:visible
           tag={t(locale, 'About.values.tag')}
-          title="Tiga pilar utama dalam setiap baris kode kami"
+          title="Tiga pilar yang memandu setiap baris kode kami"
           dark
         />
 
@@ -121,9 +126,10 @@ const locale: Locale = 'id';
     <section>
       <Container size="large">
         <SectionHeading
-          tag="Team"
+          client:visible
+          tag="Tim Kami"
           title={t(locale, 'About.teamTitle')}
-          subtitle="Para rekayasawan, arsitek sistem, dan desainer kami."
+          subtitle={t(locale, 'About.teamSubtitle')}
         />
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -147,9 +153,14 @@ const locale: Locale = 'id';
                   <h3 class="font-display font-bold text-xl text-charcoal mb-1">
                     {member.name}
                   </h3>
-                  <span class="text-xs font-display font-bold uppercase tracking-wider text-vermilion block mb-3">
+                  <span class="text-xs font-display font-bold uppercase tracking-wider text-vermilion block mb-1">
                     {member.role[locale]}
                   </span>
+                  {member.focus && (
+                    <span class="text-[11px] font-mono text-charcoal-muted/80 block mb-3">
+                      {member.focus}
+                    </span>
+                  )}
                   <p class="text-xs text-charcoal-muted leading-relaxed mb-6">
                     {member.bio[locale]}
                   </p>

@@ -13,8 +13,12 @@ interface CaseStudyHeroProps {
 
 export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
   return (
-    <section className="relative pt-6 sm:pt-10 pb-12 sm:pb-16 border-b border-warm-border/60 bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#F4ECE1]/40">
-      <Container size="large">
+    <section className="relative pt-8 sm:pt-12 pb-14 sm:pb-20 border-b border-warm-border/60 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2]">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div className="hero-grid-faded" />
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         {/* Back Link */}
         <a
           href={getLocalizedPath("/portfolio", lang)}
@@ -30,10 +34,10 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
           <div className="flex flex-wrap items-center gap-3">
             <Badge variant="vermilion" size="sm" className="uppercase font-bold tracking-wider text-[11px]">
               {project.category === "ai"
-                ? "AI & Autonomous Systems"
+                ? (lang === "id" ? "AI & Sistem Otonom" : "AI & Autonomous Systems")
                 : project.category === "app"
-                ? "Mobile & Desktop App"
-                : "Web & Headless Platform"}
+                ? (lang === "id" ? "Aplikasi Mobile & Desktop" : "Mobile & Desktop App")
+                : (lang === "id" ? "Platform Web & Headless" : "Web & Headless Platform")}
             </Badge>
             <span className="text-xs font-mono font-medium text-charcoal-muted bg-cream px-3 py-1 rounded-full border border-warm-border/80">
               {project.client} · {project.year}
@@ -60,7 +64,7 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
                 className="gap-2"
                 cursorText="LIVE"
               >
-                <span>Visit Live Application</span>
+                <span>{lang === "id" ? "Kunjungi Website Live" : "Visit Live Application"}</span>
                 <ExternalLink className="w-4 h-4" />
               </Button>
             </div>
@@ -71,7 +75,7 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 sm:p-8 rounded-3xl bg-warm-card border border-warm-border shadow-warm">
           <div>
             <span className="text-[11px] font-mono uppercase tracking-widest text-charcoal-muted block mb-1">
-              Client
+              {lang === "id" ? "Klien" : "Client"}
             </span>
             <span className="font-display font-bold text-base sm:text-lg text-charcoal">
               {project.client}
@@ -79,7 +83,7 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
           </div>
           <div>
             <span className="text-[11px] font-mono uppercase tracking-widest text-charcoal-muted block mb-1">
-              Year
+              {lang === "id" ? "Tahun" : "Year"}
             </span>
             <span className="font-display font-bold text-base sm:text-lg text-charcoal">
               {project.year}
@@ -87,7 +91,7 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
           </div>
           <div>
             <span className="text-[11px] font-mono uppercase tracking-widest text-charcoal-muted block mb-1">
-              Category
+              {lang === "id" ? "Kategori" : "Category"}
             </span>
             <span className="font-display font-bold text-base sm:text-lg text-charcoal uppercase">
               {project.category}
@@ -95,7 +99,7 @@ export function CaseStudyHero({ project, lang, backText }: CaseStudyHeroProps) {
           </div>
           <div>
             <span className="text-[11px] font-mono uppercase tracking-widest text-charcoal-muted block mb-1">
-              Primary Stack
+              {lang === "id" ? "Stack Utama" : "Primary Stack"}
             </span>
             <span className="font-display font-bold text-base sm:text-lg text-charcoal truncate block">
               {project.stack[0]} + {project.stack[1] || "More"}

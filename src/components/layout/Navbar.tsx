@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { gsap } from "@/lib/gsapConfig";
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 import { t, type Locale, getLocalizedPath } from "@/i18n/utils";
 import {
   Menu,
@@ -14,6 +14,7 @@ import {
   Sparkles,
   ShieldCheck,
   ArrowRight,
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,28 +23,92 @@ interface NavbarProps {
   pathname?: string;
 }
 
+interface LanguageOption {
+  code: Locale;
+  label: string;
+  subLabel: string;
+  flag: string;
+}
+
+const LANGUAGES: LanguageOption[] = [
+  { code: "en", label: "English", subLabel: "EN (Global)", flag: "🇺🇸" },
+  { code: "id", label: "Bahasa Indonesia", subLabel: "ID (Indonesia)", flag: "🇮🇩" },
+];
+
 export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pricingDropdownOpen, setPricingDropdownOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [mobilePricingExpanded, setMobilePricingExpanded] = useState(true);
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const langDropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll position for navbar glassmorphism
+  // Track scroll position for navbar glassmorphism (synced with Lenis & native scroll)
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+    const checkScroll = () => {
+      const scrollY =
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      setIsScrolled(scrollY > 15);
+    };
+
+    checkScroll();
+    window.addEventListener("scroll", checkScroll, { passive: true });
+    document.addEventListener("scroll", checkScroll, { passive: true });
+
+    // GSAP ScrollTrigger listener for 100% sync with Lenis smooth-scroll ticker
+    let trigger: any = null;
+    if (typeof window !== "undefined") {
+      trigger = ScrollTrigger.create({
+        start: "top -15",
+        onToggle: (self) => {
+          setIsScrolled(self.isActive);
+        },
+        onUpdate: (self) => {
+          setIsScrolled(self.scroll() > 15);
+        },
+      });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+      document.removeEventListener("scroll", checkScroll);
+      if (trigger) trigger.kill();
+    };
+  }, []);
+
+  // Click outside listener for language dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target as Node)
+      ) {
+        setLangDropdownOpen(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLangDropdownOpen(false);
+        setPricingDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   // Animate mobile menu open/close
@@ -79,14 +144,18 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
         },
       });
     }
-  }, [mobileMenuOpen]);
 
-  const toggleLanguage = () => {
-    const nextLocale: Locale = locale === "en" ? "id" : "en";
-    const currentCleanPath = pathname.replace(/^\/id(\/|$)/, "/");
-    const targetUrl = getLocalizedPath(currentCleanPath, nextLocale);
-    window.location.href = targetUrl;
-  };
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [mobileMenuOpen]);
 
   const handleMouseEnterPricing = () => {
     if (dropdownTimeoutRef.current) {
@@ -101,6 +170,19 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
     }, 150);
   };
 
+  const handleMouseEnterLang = () => {
+    if (langDropdownTimeoutRef.current) {
+      clearTimeout(langDropdownTimeoutRef.current);
+    }
+    setLangDropdownOpen(true);
+  };
+
+  const handleMouseLeaveLang = () => {
+    langDropdownTimeoutRef.current = setTimeout(() => {
+      setLangDropdownOpen(false);
+    }, 150);
+  };
+
   const cleanPath = pathname.replace(/^\/id(\/|$)/, "/");
 
   return (
@@ -108,10 +190,10 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
       <header
         ref={navRef}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 sm:py-5",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "glass-warm py-3 sm:py-3.5 shadow-warm"
-            : "bg-transparent"
+            ? "bg-[#FFF6E8]/92 backdrop-blur-lg border-b border-warm-border/80 shadow-[0_4px_24px_rgba(47,42,38,0.08)] py-2.5 sm:py-3"
+            : "bg-transparent py-4 sm:py-5"
         )}
       >
         <Container size="large">
@@ -119,25 +201,24 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
             {/* Brand Logo */}
             <a
               href={getLocalizedPath("/", locale)}
-              className="flex items-center gap-2.5 group"
+              className="flex items-center group"
               data-cursor
               data-cursor-text="ALTIA"
             >
-              <div className="w-8 h-8 rounded-lg bg-vermilion flex items-center justify-center text-ivory font-display font-black text-base shadow-sm group-hover:scale-105 group-hover:bg-charcoal transition-all duration-300">
-                A
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-lg sm:text-xl tracking-tight text-charcoal leading-none">
-                  ALTIA<span className="text-vermilion">.</span>DEV
-                </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-charcoal-muted mt-0.5">
-                  Studio
-                </span>
-              </div>
+              <img
+                src="/uploads/altia-dev-logo.webp"
+                alt="ALTIA DEV"
+                className={cn(
+                  "w-auto object-contain transition-all duration-300 group-hover:scale-105 origin-left",
+                  isScrolled
+                    ? "h-7 sm:h-8 max-w-[150px] sm:max-w-[170px]"
+                    : "h-11 sm:h-12 md:h-[50px] max-w-[210px] sm:max-w-[250px]"
+                )}
+              />
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1 bg-cream/70 p-1.5 rounded-full border border-warm-border/80 backdrop-blur-md">
+            <nav className="hidden lg:flex items-center gap-1 bg-cream/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-warm-border/80 shadow-warm">
               {NAV_LINKS.map((link) => {
                 const isPricing = link.href === "/pricing";
                 const isActive = isPricing
@@ -262,18 +343,97 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
               })}
             </nav>
 
-            {/* Actions: Lang Switch & CTA Button */}
-            <div className="flex items-center gap-3">
-              {/* Language Switcher */}
-              <button
-                onClick={toggleLanguage}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-display font-bold uppercase rounded-full bg-cream border border-warm-border text-charcoal hover:border-charcoal transition-all duration-200"
-                aria-label="Toggle language"
-                data-cursor
+            {/* Actions: Lang Dropdown & CTA Button */}
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              {/* Language Switcher Dropdown */}
+              <div
+                className="relative"
+                ref={langDropdownRef}
+                onMouseEnter={handleMouseEnterLang}
+                onMouseLeave={handleMouseLeaveLang}
               >
-                <Globe className="w-3.5 h-3.5 text-charcoal-muted" />
-                <span>{locale}</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 text-xs font-display font-bold uppercase rounded-full border transition-all duration-200 select-none",
+                    langDropdownOpen
+                      ? "bg-ivory border-charcoal text-charcoal shadow-xs"
+                      : "bg-cream border-warm-border text-charcoal hover:border-charcoal hover:bg-ivory/90"
+                  )}
+                  aria-label="Language selector"
+                  aria-expanded={langDropdownOpen}
+                  data-cursor
+                >
+                  <Globe className="w-3.5 h-3.5 text-charcoal-muted" />
+                  <span>{locale.toUpperCase()}</span>
+                  <ChevronDown
+                    className={cn(
+                      "w-3 h-3 text-charcoal-muted transition-transform duration-200",
+                      langDropdownOpen ? "rotate-180 text-charcoal" : ""
+                    )}
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {langDropdownOpen && (
+                  <div className="absolute top-full right-0 pt-2 z-50 w-56 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="p-2 rounded-2xl bg-[#FAF4E9] border-2 border-warm-border shadow-[0_16px_40px_rgba(47,42,38,0.20)] overflow-hidden">
+                      <div className="px-2.5 py-1 mb-1 border-b border-warm-border/70 flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-charcoal-muted">
+                          {t(locale, "Common.language", "Language")}
+                        </span>
+                        <span className="text-[10px] font-mono text-charcoal-muted/70">
+                          {locale === "en" ? "Global" : "ID"}
+                        </span>
+                      </div>
+
+                      <div className="space-y-1">
+                        {LANGUAGES.map((lang) => {
+                          const isSelected = locale === lang.code;
+                          const targetUrl = getLocalizedPath(cleanPath, lang.code);
+
+                          return (
+                            <a
+                              key={lang.code}
+                              href={targetUrl}
+                              onClick={() => setLangDropdownOpen(false)}
+                              className={cn(
+                                "group/lang flex items-center justify-between px-3 py-2 rounded-xl text-xs font-display transition-all",
+                                isSelected
+                                  ? "bg-[#FFFDF9] text-charcoal font-bold shadow-xs border border-warm-border"
+                                  : "text-charcoal-muted hover:text-charcoal hover:bg-ivory/80 font-medium"
+                              )}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <span className="text-base leading-none select-none">{lang.flag}</span>
+                                <div className="flex flex-col">
+                                  <span className={cn("leading-none", isSelected ? "text-charcoal" : "group-hover/lang:text-vermilion transition-colors")}>
+                                    {lang.label}
+                                  </span>
+                                  <span className="text-[10px] text-charcoal-muted/80 font-mono mt-0.5">
+                                    {lang.subLabel}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {isSelected ? (
+                                <div className="w-5 h-5 rounded-full bg-vermilion/10 flex items-center justify-center text-vermilion flex-shrink-0">
+                                  <Check className="w-3 h-3 stroke-[2.5]" />
+                                </div>
+                              ) : (
+                                <span className="text-[10px] font-mono text-charcoal-muted/50 uppercase group-hover/lang:text-charcoal transition-colors">
+                                  {lang.code}
+                                </span>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Primary CTA */}
               <div className="hidden sm:block">
@@ -308,6 +468,31 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
         className="fixed inset-0 z-40 bg-ivory/98 backdrop-blur-xl flex flex-col justify-between pt-28 pb-10 px-6 sm:px-10 lg:hidden overflow-y-auto"
       >
         <div className="flex flex-col gap-6 max-w-md mx-auto w-full">
+          {/* Mobile Language Switcher Segmented Control */}
+          <div className="mobile-nav-item flex items-center justify-between p-1.5 rounded-2xl bg-cream border border-warm-border">
+            {LANGUAGES.map((lang) => {
+              const isSelected = locale === lang.code;
+              const targetUrl = getLocalizedPath(cleanPath, lang.code);
+
+              return (
+                <a
+                  key={lang.code}
+                  href={targetUrl}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-display font-bold transition-all text-center",
+                    isSelected
+                      ? "bg-charcoal text-ivory shadow-xs"
+                      : "text-charcoal-muted hover:text-charcoal hover:bg-ivory/60"
+                  )}
+                >
+                  <span className="text-sm leading-none">{lang.flag}</span>
+                  <span>{lang.label}</span>
+                </a>
+              );
+            })}
+          </div>
+
           <nav className="flex flex-col gap-2">
             {NAV_LINKS.map((link) => {
               const isPricing = link.href === "/pricing";
@@ -339,21 +524,21 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
                         <ChevronDown
                           className={cn(
                             "w-5 h-5 transition-transform duration-200",
-                            mobilePricingExpanded ? "rotate-180" : ""
+                            mobilePricingExpanded ? "rotate-180 text-vermilion" : ""
                           )}
                         />
                       </button>
                     </div>
 
                     {mobilePricingExpanded && (
-                      <div className="pl-4 py-3 flex flex-col gap-3 bg-cream/50 rounded-xl my-2 border border-warm-border/60">
+                      <div className="pl-4 py-3 flex flex-col gap-3 border-b border-warm-border bg-cream/40 rounded-xl my-1">
                         <a
                           href={getLocalizedPath("/pricing", locale)}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center justify-between text-sm font-display font-semibold text-charcoal hover:text-vermilion py-1"
                         >
                           <span className="flex items-center gap-2">
-                            <Tag className="w-4 h-4 text-charcoal-muted" />
+                            <Tag className="w-4 h-4 text-charcoal" />
                             {t(locale, "Navigation.pricingMenu.rateCardTitle")}
                           </span>
                           <span className="text-[10px] px-1.5 py-0.5 rounded bg-warm-border font-bold">

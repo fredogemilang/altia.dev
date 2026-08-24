@@ -2,14 +2,10 @@
 
 import React, { useEffect, useRef } from "react";
 import { ArrowRight, Globe, ShieldCheck, Zap } from "lucide-react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { InteractiveGlobe } from "@/components/effects/InteractiveGlobe";
-import { gsap } from "@/lib/gsapConfig";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
 interface SplitGlobeHeroProps {
   badge?: string;
@@ -32,6 +28,10 @@ export function SplitGlobeHero({
   const sectionRef = useRef<HTMLElement>(null);
   const globeWrapperRef = useRef<HTMLDivElement>(null);
   const contentWrapperRef = useRef<HTMLDivElement>(null);
+  const heroH1Ref = useRef<HTMLHeadingElement>(null);
+  const heroSubRef = useRef<HTMLParagraphElement>(null);
+  const heroCtaRef = useRef<HTMLDivElement>(null);
+  const heroTagsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -65,6 +65,20 @@ export function SplitGlobeHero({
           },
         });
       }
+
+      // 3. Staggered entry animations (replaces framer-motion)
+      const entries = [heroH1Ref, heroSubRef, heroCtaRef, heroTagsRef];
+      entries.forEach((ref, i) => {
+        if (ref.current) {
+          gsap.from(ref.current, {
+            opacity: 0,
+            y: 16 - i * 2,
+            duration: 0.6,
+            delay: 0.1 + i * 0.1,
+            ease: "power2.out",
+          });
+        }
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -105,10 +119,8 @@ export function SplitGlobeHero({
             className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left will-change-transform"
           >
             {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            <h1
+              ref={heroH1Ref}
               className="text-balance font-display font-black tracking-tight text-charcoal text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.05] mb-5 sm:mb-6"
             >
               <span>{titleLine1}</span>
@@ -116,23 +128,19 @@ export function SplitGlobeHero({
               <span className="bg-gradient-to-r from-vermilion via-[#FF5733] to-[#E34234] bg-clip-text text-transparent">
                 {titleLine2}
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            <p
+              ref={heroSubRef}
               className="text-balance text-sm sm:text-base md:text-lg text-charcoal-muted max-w-xl leading-relaxed mb-8 sm:mb-10 font-normal"
             >
               {subtitle}
-            </motion.p>
+            </p>
 
             {/* Dual CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            <div
+              ref={heroCtaRef}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto mb-10"
             >
               <Button
@@ -154,13 +162,11 @@ export function SplitGlobeHero({
               >
                 <span>{secondaryCta}</span>
               </Button>
-            </motion.div>
+            </div>
 
             {/* Micro Feature Tags */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+            <div
+              ref={heroTagsRef}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-5 sm:gap-6 pt-4 border-t border-warm-border/70 text-xs text-charcoal/75 font-mono uppercase tracking-wider"
             >
               <div className="flex items-center gap-1.5">
@@ -175,7 +181,7 @@ export function SplitGlobeHero({
                 <ShieldCheck className="w-3.5 h-3.5 text-vermilion" />
                 <span>Zero Lock-In Codebase</span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Column (3D Interactive Globe with Dynamic Zoom-In on Scroll) */}

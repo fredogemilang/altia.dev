@@ -5,11 +5,7 @@ import { ArrowUpRight, CheckCircle2, ArrowRight } from "lucide-react";
 import { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { gsap } from "@/lib/gsapConfig";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getLocalizedPath } from "@/i18n/utils";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
 interface SplitParallaxShowcaseProps {
   projects: Project[];

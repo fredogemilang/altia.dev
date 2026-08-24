@@ -6,6 +6,7 @@ import { ContactData } from "./ContactGateStep";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { SITE_CONFIG } from "@/lib/constants";
 import {
   Sparkles,
   Calendar,
@@ -28,6 +29,7 @@ interface EstimateResultProps {
   estimate: ProjectEstimate;
   leadId?: string;
   contact?: ContactData;
+  locale?: string;
   onRecalculate: () => void;
 }
 
@@ -36,19 +38,39 @@ export function EstimateResult({
   estimate,
   leadId,
   contact,
+  locale = "en",
   onRecalculate,
 }: EstimateResultProps) {
-  const t = useTranslations("Estimator.result");
+  const t = useTranslations("Estimator.result", locale as any);
 
   const cleanLeadId = leadId ? leadId.replace("lead_", "#") : "#EST-2026";
-  const whatsappNumber = "6281234567890"; // ALTIA DEV Official WhatsApp
+  const whatsappNumber = SITE_CONFIG.contact.whatsapp || "6282147709084"; // ALTIA DEV Official WhatsApp
+
+  const projectTypeName = (estimate?.projectType || requirements?.projectType || requirements?.service || "digital_product").replace(/_/g, " ");
+  const minPrice = estimate?.pricing?.min ?? (estimate as any)?.minPrice ?? 3500;
+  const maxPrice = estimate?.pricing?.max ?? (estimate as any)?.maxPrice ?? 7500;
+  const minWeeks = estimate?.timeline?.minWeeks ?? 4;
+  const maxWeeks = estimate?.timeline?.maxWeeks ?? 8;
+  const complexityLevel = estimate?.complexity?.level ?? (requirements as any)?.complexity ?? "medium";
+  const solution = estimate?.recommendation?.solution ?? "Custom Digital Engineering Solution";
+  const rationale = estimate?.recommendation?.rationale ?? "Tailored architecture built to scale with high performance and zero-jank frontend.";
+  const highlights = estimate?.highlights || [
+    "Production-grade modern tech stack",
+    "Comprehensive responsive UI/UX implementation",
+    "SEO, Core Web Vitals, and accessibility optimization",
+  ];
+  const assumptions = estimate?.assumptions || [
+    "Design and specifications approved during sprint 0",
+    "API credentials and assets provided on schedule",
+  ];
+
   const waMessage = encodeURIComponent(
-    `Halo ALTIA DEV, saya telah mengisi Project Estimator (${cleanLeadId}) untuk proyek ${estimate.projectType.replace(/_/g, " ")} dengan estimasi $${estimate.pricing.min.toLocaleString()} – $${estimate.pricing.max.toLocaleString()}. Saya ingin mendiskusikan implementasi teknisnya.`
+    `Halo ALTIA DEV, saya telah mengisi Project Estimator (${cleanLeadId}) untuk proyek ${projectTypeName} dengan estimasi $${minPrice.toLocaleString()} – $${maxPrice.toLocaleString()}. Saya ingin mendiskusikan implementasi teknisnya.`
   );
   const waLink = `https://wa.me/${whatsappNumber}?text=${waMessage}`;
 
   const renderComplexityBadge = () => {
-    switch (estimate.complexity.level) {
+    switch (complexityLevel) {
       case "low":
         return (
           <Badge variant="outline" size="sm" className="bg-emerald-500/10 text-emerald-700 border-emerald-500/30 uppercase font-bold text-xs">
@@ -71,13 +93,15 @@ export function EstimateResult({
   };
 
   const renderServiceIcon = () => {
-    switch (requirements.service) {
+    switch (requirements?.service) {
       case "web":
         return <Globe className="w-5 h-5 text-vermilion" />;
       case "app":
         return <Smartphone className="w-5 h-5 text-vermilion" />;
       case "ai":
         return <Cpu className="w-5 h-5 text-vermilion" />;
+      default:
+        return <Globe className="w-5 h-5 text-vermilion" />;
     }
   };
 
@@ -122,7 +146,7 @@ export function EstimateResult({
             {t("title")}
           </h2>
           <p className="text-xs sm:text-sm text-charcoal-muted mt-1">
-            {t("subtitle", { version: estimate.pricingRulesVersion })}
+            {t("subtitle", { version: estimate?.pricingRulesVersion || "2026.1" })}
           </p>
         </div>
 
@@ -149,7 +173,7 @@ export function EstimateResult({
             </div>
 
             <div className="font-display font-black text-3xl sm:text-4xl text-vermilion my-2">
-              ${estimate.pricing.min.toLocaleString()} – ${estimate.pricing.max.toLocaleString()}
+              ${minPrice.toLocaleString()} – ${maxPrice.toLocaleString()}
             </div>
           </div>
 
@@ -169,7 +193,7 @@ export function EstimateResult({
             </div>
 
             <div className="font-display font-black text-3xl sm:text-4xl text-charcoal my-2">
-              {estimate.timeline.minWeeks} – {estimate.timeline.maxWeeks} {t("weeks")}
+              {minWeeks} – {maxWeeks} {t("weeks")}
             </div>
           </div>
 
@@ -203,10 +227,10 @@ export function EstimateResult({
           {t("recommendationTitle")}
         </h4>
         <h3 className="font-display font-bold text-lg sm:text-xl text-charcoal mb-2">
-          {estimate.recommendation.solution}
+          {solution}
         </h3>
         <p className="text-sm text-charcoal-muted leading-relaxed">
-          {estimate.recommendation.rationale}
+          {rationale}
         </p>
       </Card>
 
@@ -219,7 +243,7 @@ export function EstimateResult({
             <span>{t("highlightsTitle")}</span>
           </h4>
           <ul className="space-y-3">
-            {estimate.highlights.map((item, idx) => (
+            {highlights.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-charcoal leading-relaxed">
                 <div className="w-1.5 h-1.5 rounded-full bg-vermilion flex-shrink-0 mt-2" />
                 <span>{item}</span>
@@ -235,7 +259,7 @@ export function EstimateResult({
             <span>{t("assumptionsTitle")}</span>
           </h4>
           <ul className="space-y-3">
-            {estimate.assumptions.map((item, idx) => (
+            {assumptions.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-charcoal-muted leading-relaxed">
                 <div className="w-1.5 h-1.5 rounded-full bg-charcoal-muted flex-shrink-0 mt-2" />
                 <span>{item}</span>
@@ -273,7 +297,7 @@ export function EstimateResult({
             <span>{t("chatWhatsApp")}</span>
           </a>
 
-          <Button href="/contact" variant="primary" size="md" className="sm:text-base sm:px-7 sm:py-3.5" cursorText="BOOK">
+          <Button href={locale === "id" ? "/id/contact" : "/contact"} variant="primary" size="md" className="sm:text-base sm:px-7 sm:py-3.5" cursorText="BOOK">
             <PhoneCall className="w-4 h-4" />
             <span>{t("bookCall")}</span>
           </Button>

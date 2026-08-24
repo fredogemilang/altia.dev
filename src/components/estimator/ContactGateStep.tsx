@@ -16,6 +16,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import type { Locale } from "@/i18n/utils";
+
 export interface ContactData {
   name: string;
   email: string;
@@ -28,6 +30,7 @@ interface ContactGateStepProps {
   onSubmit: (contact: ContactData) => Promise<void>;
   isSubmitting: boolean;
   error: string | null;
+  locale?: Locale;
 }
 
 export function ContactGateStep({
@@ -35,8 +38,9 @@ export function ContactGateStep({
   onSubmit,
   isSubmitting,
   error,
+  locale = "en",
 }: ContactGateStepProps) {
-  const t = useTranslations("Estimator.contactGate");
+  const t = useTranslations("Estimator.contactGate", locale);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

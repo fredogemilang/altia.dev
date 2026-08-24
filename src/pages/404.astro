@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Container } from '../components/ui/Container';
+import { Button } from '../components/ui/Button';
+import { getLocaleFromUrl } from '../i18n/utils';
+import { t } from '../i18n/translations';
+
+const locale = getLocaleFromUrl(Astro.url);
+---
+
+<Layout title="404 — Page Not Found" locale={locale}>
+  <section class="flex-1 flex items-center justify-center min-h-[60vh] py-20">
+    <Container size="small" class="text-center">
+      <!-- Animated 404 number -->
+      <div class="relative mb-8">
+        <h1 class="font-display text-[120px] sm:text-[180px] lg:text-[220px] font-black text-vermilion/10 leading-none select-none">
+          404
+        </h1>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-charcoal tracking-tight">
+            Page Not Found
+          </span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="text-lg sm:text-xl text-warm-text max-w-md mx-auto mb-10 leading-relaxed">
+        {locale === 'id' 
+          ? 'Halaman yang Anda cari tidak ditemukan. Mungkin sudah dipindahkan atau dihapus.'
+          : "The page you're looking for doesn't exist. It may have been moved or deleted."}
+      </p>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href={locale === 'id' ? '/id/' : '/'} variant="primary" size="lg" cursorText="HOME">
+          {locale === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
+        </Button>
+        <Button href={locale === 'id' ? '/id/contact' : '/contact'} variant="secondary" size="md" cursorText="CHAT">
+          {locale === 'id' ? 'Hubungi Kami' : 'Contact Us'}
+        </Button>
+      </div>
+
+      <!-- Decorative elements -->
+      <div class="mt-16 flex items-center justify-center gap-2 text-sm text-warm-text/60">
+        <span class="inline-block w-8 h-px bg-warm-border"></span>
+        <span>ALTIA DEV</span>
+        <span class="inline-block w-8 h-px bg-warm-border"></span>
+      </div>
+    </Container>
+  </section>
+</Layout>

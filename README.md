@@ -33,15 +33,12 @@
 
 ## 📁 Project Structure
 
-```
-├── backend-cpanel/             # Laravel custom controllers & deployment assets for cPanel
-│   ├── app/Http/Controllers/
-│   │   ├── ContactController.php    # Brevo transactional email controller
-│   │   └── EstimatorController.php  # Estimator engine & lead scoring
-│   ├── routes/api.php               # API endpoints
-│   ├── public/.htaccess             # Apache CORS & rewrite configuration
-│   ├── .env.example                 # Production environment example
-│   └── cpanel_symlink_helper.php    # 1-click storage symlink browser helper
+├── functions/api/               # Cloudflare Pages Edge Functions (TypeScript)
+│   ├── contact.ts               # Brevo transactional email & mock handler
+│   ├── health.ts                # Edge health check endpoint
+│   └── estimator/
+│       ├── estimate.ts          # Deterministic pricing engine endpoint
+│       └── lead.ts              # Lead capture & scoring endpoint
 ├── src/
 │   ├── components/             # Reusable UI, Layout, & Island components
 │   │   ├── contact/            # Contact form island

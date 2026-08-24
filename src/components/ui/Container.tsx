@@ -1,8 +1,8 @@
-import { HTMLAttributes, forwardRef } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
-  size?: "default" | "small" | "large" | "full";
+  size?: "default" | "small" | "medium" | "large" | "full";
 }
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
@@ -15,6 +15,7 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
           {
             "max-w-7xl": size === "default",
             "max-w-4xl": size === "small",
+            "max-w-5xl": size === "medium",
             "max-w-[1380px]": size === "large",
             "max-w-full": size === "full",
           },

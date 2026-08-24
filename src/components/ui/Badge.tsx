@@ -1,8 +1,8 @@
-import { HTMLAttributes, forwardRef } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: "vermilion" | "cream" | "charcoal" | "outline";
+  variant?: "vermilion" | "cream" | "charcoal" | "outline" | "terracotta";
   size?: "sm" | "md";
 }
 
@@ -13,6 +13,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       cream: "bg-cream text-charcoal-500 border-warm-border",
       charcoal: "bg-charcoal text-ivory border-transparent",
       outline: "bg-transparent text-charcoal-400 border-warm-border",
+      terracotta: "bg-terracotta/10 text-terracotta border-terracotta/20",
     };
 
     const sizeStyles = {

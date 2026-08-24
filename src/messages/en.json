@@ -2,121 +2,170 @@
   "Navigation": {
     "home": "Home",
     "services": "Services",
-    "portfolio": "Portfolio",
+    "portfolio": "Work",
     "pricing": "Pricing",
     "about": "About",
     "blog": "Blog",
-    "estimator": "Estimator",
+    "estimator": "Project Estimator",
     "contact": "Contact",
-    "getStarted": "Let's Talk",
+    "getStarted": "Start a Project",
     "menu": "Menu",
     "close": "Close",
+    "cta": "Start a Project",
     "pricingMenu": {
       "rateCardTitle": "Pricing & Rate Card",
-      "rateCardDesc": "Transparent starting rates across Web, Apps, AI & ongoing support.",
+      "rateCardDesc": "Web, apps, and AI systems starting from $350.",
       "rateCardBadge": "Starting Rates",
-      "estimatorTitle": "Interactive Project Estimator",
-      "estimatorDesc": "Calculate calibrated investment range, timeline & get instant scope copy.",
-      "estimatorBadge": "Interactive Tool",
-      "footerNote": "Deterministic calculations · Zero sales pressure"
+      "estimatorTitle": "Project Estimator",
+      "estimatorDesc": "Get a rough project estimate in ~2 minutes.",
+      "estimatorBadge": "Interactive",
+      "footerNote": "Deterministic calculations · Zero sales pressure",
+      "footerGuarantee": "You Own Code & Repository",
+      "footerSpeed": "No Vendor Lock-in"
     }
   },
   "Hero": {
-    "badge": "Digital Products • Applications • AI Automation",
+    "badge": "ALTIA DEV · CREATIVE ENGINEERING STUDIO",
+    "location": "Jakarta, Indonesia · Remote Worldwide",
     "titleLine1": "Your Vision.",
     "titleLine2": "Our Code.",
-    "subtitle": "We design and engineer digital solutions that turn ambitious ideas into meaningful business outcomes.",
+    "subtitle": "We design and engineer digital products that turn ideas into software that is fast, thoughtful, and ready for the real world.",
     "service1": "Web Development",
     "service2": "Mobile & Desktop Apps",
     "service3": "AI Automation",
     "primaryCta": "Start a Project",
     "secondaryCta": "Explore Our Work",
+    "proof1": "Worldwide Delivery",
+    "proof2": "Production-Ready Speed",
+    "proof3": "Zero Lock-In Codebase",
     "scrollDown": "Scroll to explore"
   },
   "Services": {
-    "tag": "What We Build",
-    "title": "Software engineering across three disciplines",
-    "subtitle": "We work with the stack that fits the problem, not the one that's trending. Here's what we ship.",
-    "viewAll": "See All Services",
+    "tag": "WHAT WE BUILD",
+    "title": "Three disciplines. One standard.",
+    "subtitle": "We bring design, engineering, and AI together to build digital products that are not only well designed, but built to perform.",
+    "homeTitle": "Design, engineering, and AI. One studio.",
+    "homeSubtitle": "We choose technology around the problem, not the other way around. The result is digital products that look considered, perform well, and are built to evolve.",
+    "viewAll": "View All Services",
     "items": {
       "web": {
         "number": "01",
-        "title": "Web & Cloud Architecture",
-        "tagline": "PHP, WordPress, Go, and TypeScript, chosen by project needs, not hype.",
-        "description": "We build web platforms using the technology that fits: corporate sites on WordPress with custom themes, web applications on Laravel or Next.js, and high-throughput APIs in Go. Every project gets proper database design, caching strategy, and deployment pipeline.",
+        "title": "Web & Cloud Platforms",
+        "tagline": "WordPress · Laravel · Next.js · Astro · Go",
+        "homeDescription": "Websites, web apps, SaaS products, and APIs built with a strong technical foundation, from architecture and data to deployment and observability.",
+        "pageDescription": "We build corporate websites, e-commerce, web applications, SaaS platforms, and APIs with performance and maintainability in mind from day one.",
+        "description": "We build corporate websites, e-commerce, web applications, SaaS platforms, and APIs with performance and maintainability in mind from day one.",
+        "cta": "Discuss a Web Project",
         "features": [
-          "Corporate WordPress: Custom Themes, Headless CMS, WooCommerce",
-          "PHP Backends: Laravel 11, Symfony, Filament Admin Panels",
-          "High-Performance APIs: Go, Node.js, REST & gRPC",
-          "Interactive Web Apps: Next.js 14, React, Server Components",
-          "Database & Infrastructure: PostgreSQL, MySQL, Redis, Docker",
-          "Performance Tuning: Core Web Vitals, CDN, Security Hardening"
+          "Corporate websites & headless CMS",
+          "Laravel, Symfony, Next.js, Astro & React",
+          "High-throughput API & backend services",
+          "PostgreSQL, MySQL, Redis & Docker",
+          "Caching, CDN & performance optimization"
         ],
-        "stack": ["WordPress", "PHP (Laravel)", "Go", "Next.js", "TypeScript", "PostgreSQL", "MySQL", "Docker"]
+        "stack": ["WordPress", "Laravel", "Next.js", "Astro", "Go", "PostgreSQL", "Docker"]
       },
       "app": {
         "number": "02",
         "title": "Mobile & Desktop Apps",
-        "tagline": "One codebase, native feel across iOS, Android, and desktop.",
-        "description": "We use Flutter and React Native to build apps that feel native on every platform without maintaining separate codebases. Offline support, push notifications, and real-time sync come standard.",
+        "tagline": "Flutter · React Native · Rust · Electron",
+        "homeDescription": "Cross-platform applications designed to feel natural on every device, with attention to performance, offline support, synchronization, and native integrations.",
+        "pageDescription": "Cross-platform applications with thoughtful interaction, reliable performance, offline capabilities, synchronization, and native integrations.",
+        "description": "Cross-platform applications with thoughtful interaction, reliable performance, offline capabilities, synchronization, and native integrations.",
+        "cta": "Discuss an App Project",
         "features": [
-          "Cross-Platform Mobile: iOS & Android from one codebase",
-          "Desktop Applications: macOS & Windows via Flutter or Electron",
-          "Offline-First Architecture: Local storage with cloud sync",
-          "Reusable Component Systems: Consistent UI across platforms"
+          "Flutter & React Native",
+          "macOS & Windows utilities",
+          "Offline-first architecture",
+          "SQLite & synchronization",
+          "Native APIs & device integrations"
         ],
-        "stack": ["Flutter", "React Native", "Electron", "Swift", "Kotlin", "SQLite"]
+        "stack": ["Flutter", "React Native", "Rust", "Electron", "Swift", "Kotlin", "SQLite"]
       },
       "ai": {
         "number": "03",
         "title": "AI Automation & Systems",
-        "tagline": "Practical AI that saves hours, not just demos well.",
-        "description": "We build AI systems that handle real work: document processing, customer support automation, data extraction, and internal knowledge search. Every solution connects to your existing tools and workflows.",
+        "tagline": "Python · LangChain · FastAPI · Qdrant · LLM APIs",
+        "homeDescription": "AI systems built for real workflows, from knowledge bases and document processing to agents, research, and operational automation.",
+        "pageDescription": "We build AI systems around real business workflows, not just demos. From retrieval and document intelligence to agents and automation.",
+        "description": "We build AI systems around real business workflows, not just demos. From retrieval and document intelligence to agents and automation.",
+        "cta": "Discuss an AI Project",
         "features": [
-          "Multi-Step Agent Workflows: Task automation with human oversight",
-          "RAG Knowledge Systems: Search your own docs with LLM accuracy",
-          "Chatbots & Voice AI: Customer-facing assistants that actually help",
-          "API Integrations: Connect AI outputs to CRM, ERP, and internal tools"
+          "Multi-agent systems",
+          "Enterprise RAG & hybrid search",
+          "Document & PDF processing",
+          "AI agents & tool calling",
+          "Guardrails, evaluation & monitoring"
         ],
-        "stack": ["Python", "LangChain", "OpenAI / Claude", "LlamaIndex", "FastAPI", "Vector DBs"]
+        "stack": ["Python", "LangChain", "FastAPI", "Qdrant", "LLM APIs", "LlamaIndex"]
       }
     },
     "process": {
-      "tag": "How We Work",
-      "title": "From brief to production in clear, repeatable steps",
+      "tag": "Process",
+      "title": "From brief to production, with a clear path.",
       "steps": [
         {
           "number": "01",
           "title": "Discovery & Scoping",
-          "desc": "We define the problem, map technical requirements, and agree on deliverables before writing a single line of code."
+          "desc": "We understand the business goal, users, constraints, technical requirements, and deliverables before work begins."
         },
         {
           "number": "02",
-          "title": "Design & Prototyping",
-          "desc": "Interactive prototypes you can click through. We align on look, feel, and flow before development starts."
+          "title": "Design & Prototype",
+          "desc": "We shape the experience and validate important decisions before development gets too far ahead."
         },
         {
           "number": "03",
           "title": "Build & Test",
-          "desc": "Weekly staging demos so you see progress in real time. Code is tested, reviewed, and documented throughout."
+          "desc": "Development happens in stages, with staging environments, demos, testing, code review, and documentation."
         },
         {
           "number": "04",
           "title": "Launch & Handover",
-          "desc": "We deploy to production, run load tests, set up monitoring, and hand over complete documentation and access."
+          "desc": "We handle deployment, monitoring, and handover so the product is ready for real users."
         }
       ]
+    },
+    "standards": {
+      "tag": "Engineering Standards",
+      "title": "Engineering standards that protect your investment.",
+      "subtitle": "We eliminate project risk with transparent code ownership, measurable performance, and rock-solid post-launch support.",
+      "card1": {
+        "tag": "Ownership",
+        "title": "You Own the Code & Repository",
+        "desc": "You own the code, repository, and project intellectual property. No unnecessary vendor lock-in.",
+        "badge": "Full Ownership"
+      },
+      "card2": {
+        "tag": "Performance",
+        "title": "Performance at Architecture Level",
+        "desc": "Performance is considered at the architecture level, not added as an afterthought.",
+        "badge": "Fast by Design"
+      },
+      "card3": {
+        "tag": "Security & Delivery",
+        "title": "Structured CI/CD & Security",
+        "desc": "Structured CI/CD, testing, deployment, and security practices keep changes predictable and production stable.",
+        "badge": "Stable Production"
+      },
+      "card4": {
+        "tag": "Hypercare",
+        "title": "Post-Launch Hypercare",
+        "desc": "After launch, we stay close enough to resolve early issues and help the system settle into production.",
+        "badge": "Dedicated Support"
+      }
     }
   },
   "Portfolio": {
-    "tag": "Selected Works",
-    "title": "Recent projects, real results",
-    "subtitle": "A selection of web apps, mobile products, and AI systems we've shipped for clients across industries.",
-    "allFilter": "All Projects",
+    "tag": "SELECTED WORK",
+    "title": "Projects we build from idea to production.",
+    "subtitle": "Explore digital products across web, applications, and AI, each shaped around a specific problem and built with a deliberate technical approach.",
+    "allFilter": "All",
     "webFilter": "Web",
-    "appFilter": "Mobile & Desktop",
-    "aiFilter": "AI Automation",
+    "appFilter": "Apps",
+    "aiFilter": "AI",
     "viewProject": "View Case Study",
+    "viewAll": "View All Work",
     "livePreview": "Live Site",
     "github": "Source Code",
     "overview": "Project Overview",
@@ -128,78 +177,79 @@
     "backToList": "Back to all projects"
   },
   "Stats": {
+    "title": "Built to work. Not just to look good.",
     "stat1": {
       "value": "45+",
       "number": 45,
       "suffix": "+",
-      "label": "Projects Delivered",
-      "description": "Web, mobile, and AI shipped and running"
+      "label": "Projects Shipped",
+      "description": "Web, mobile, and AI shipped and actively running"
     },
     "stat2": {
       "value": "96%",
       "number": 96,
       "suffix": "%",
-      "label": "Repeat & Referral Rate",
+      "label": "Returning & Referred Clients",
       "description": "Clients who come back or refer others"
     },
     "stat3": {
       "value": "3.5x",
       "number": 3.5,
       "suffix": "x",
-      "label": "Average Time Saved",
+      "label": "Hours Saved",
       "description": "On workflows automated with our AI systems"
     },
     "stat4": {
-      "value": "8",
+      "value": "8+",
       "number": 8,
       "suffix": "+",
       "label": "Countries Served",
-      "description": "Startups, agencies, and mid-size companies"
+      "description": "Startups, agencies, and mid-size companies worldwide"
     }
   },
   "Testimonials": {
-    "tag": "What Clients Say",
-    "title": "Feedback from teams we've worked with",
-    "subtitle": "Real words from founders and engineering leads who hired us for production work."
+    "tag": "Testimony",
+    "title": "What they say",
+    "subtitle": "Perspectives from founders, product leaders, and engineers we've worked with."
   },
   "Pricing": {
-    "tag": "Pricing",
-    "title": "Straightforward pricing per service",
-    "subtitle": "All prices are starting points. Final cost depends on scope, complexity, and timeline, which we define together during a free scoping call.",
-    "note": "Prices listed are 'starting from' estimates in USD. Every project begins with a free consultation to define exact scope and deliverables.",
+    "tag": "PRICING",
+    "title": "Transparent pricing. Clear scope.",
+    "subtitle": "The prices below are starting points. Final pricing depends on scope, complexity, integrations, and timeline. We'll help shape a sensible scope before development begins.",
+    "note": "Starting prices are shown in USD. Initial consultation is free.",
     "web": {
       "title": "Web Development",
       "subtitle": "WordPress, Laravel, Next.js, Go matched to your project needs.",
       "items": [
         {
           "name": "Landing Page",
-          "price": "from $350",
-          "desc": "Single-page marketing site with high-converting responsive design, smooth animations, and basic SEO setup."
+          "price": "From $350",
+          "desc": "A focused marketing page with responsive design, motion, and technical SEO foundations."
         },
         {
           "name": "Company Profile",
-          "price": "from $750",
-          "desc": "5–10 page corporate website with CMS, contact forms, and Google Analytics integration."
+          "price": "From $750",
+          "desc": "A 5–10 page company website with CMS, contact forms, and analytics."
         },
         {
           "name": "Corporate Website",
-          "price": "from $1,500",
-          "desc": "Full-featured business website with custom WordPress theme or Next.js, multi-language support, and admin dashboard."
+          "price": "From $1,500",
+          "desc": "A larger business website with CMS or Next.js, multilingual support, and admin needs."
         },
         {
           "name": "Custom Web Application",
-          "price": "from $2,500",
-          "desc": "Full-stack web application with custom business logic, database architecture, user auth, and third-party API integrations."
+          "price": "From $2,500",
+          "desc": "A full-stack application with business logic, database, authentication, and API integrations."
         },
         {
           "name": "SaaS / MVP",
-          "price": "from $3,500",
-          "desc": "Complete minimum viable product or multi-tenant SaaS platform with subscription billing, admin controls, and production CI/CD."
+          "price": "From $3,500",
+          "desc": "An MVP or SaaS foundation with user management, billing, admin, and deployment."
         },
         {
           "name": "E-Commerce",
-          "price": "from $1,500",
-          "desc": "Online store with product catalog, payment gateway, shipping integration, and order management."
+          "price": "From $1,500",
+          "desc": "An online store with catalog, payments, shipping, and order management."
         }
       ]
     },
@@ -209,304 +259,321 @@
       "items": [
         {
           "name": "Mobile App",
-          "price": "from $2,500",
-          "desc": "Cross-platform mobile application (iOS & Android) with push notifications, offline storage, and real-time sync."
+          "price": "From $2,500",
+          "desc": "iOS & Android application with push notifications, offline support, and synchronization."
         },
         {
           "name": "Desktop App",
-          "price": "from $2,000",
-          "desc": "Native-feel desktop application for macOS and Windows built with Flutter or Electron."
+          "price": "From $2,000",
+          "desc": "A macOS or Windows application with a focused desktop experience."
         },
         {
           "name": "Mobile + Web App",
-          "price": "from $4,500",
-          "desc": "Unified multi-platform ecosystem with shared backend serving mobile apps and an interactive web dashboard."
+          "price": "From $4,500",
+          "desc": "Mobile app and web dashboard connected through one backend and data layer."
         }
       ]
     },
     "ai": {
       "title": "AI",
-      "subtitle": "Practical AI that handles real work, not just impressive demos.",
-      "apiNote": "AI projects use third-party APIs (OpenAI, Claude, etc.) with ongoing costs of roughly $20–$150/month depending on usage volume. This cost is separate from development fees and is billed directly to your account.",
+      "subtitle": "AI systems built for real workflows, not just demos.",
+      "apiNote": "Usage costs from third-party services such as LLM APIs, cloud infrastructure, or external platforms are normally separate from development fees.",
       "items": [
         {
           "name": "AI Chatbot",
-          "price": "from $500",
-          "desc": "Customer support or internal FAQ chatbot powered by LLM, trained on your knowledge base and embedded on your site."
+          "price": "From $500",
+          "desc": "An LLM-powered chatbot for customer support or internal knowledge."
         },
         {
           "name": "Document Processing",
-          "price": "from $1,000",
-          "desc": "Automated extraction and structuring of data from invoices, contracts, or PDFs using OCR and intelligent LLM pipelines."
+          "price": "From $1,000",
+          "desc": "OCR and AI pipeline for extracting and structuring data from documents."
         },
         {
           "name": "RAG Knowledge Base",
-          "price": "from $1,500",
-          "desc": "Semantic enterprise search system allowing teams to query proprietary documentation and SOPs with high precision."
+          "price": "From $1,500",
+          "desc": "Internal knowledge base with semantic and hybrid search."
         },
         {
           "name": "Custom AI Agent",
-          "price": "from $2,000",
-          "desc": "Multi-step autonomous workflow system for lead qualification, automated research, or data aggregation with human-in-the-loop."
+          "price": "From $2,000",
+          "desc": "Multi-step AI workflows for research, lead qualification, data aggregation, and operations."
         },
         {
           "name": "AI Integration",
-          "price": "from $750",
-          "desc": "Connect modern LLM and AI capabilities directly into your existing CRM, ERP, database, or internal software via API."
+          "price": "From $750",
+          "desc": "Connect AI capabilities to CRM, ERP, databases, or internal software."
         }
       ]
     },
     "ongoing": {
-      "title": "Infrastructure",
+      "title": "Infrastructure & Support",
       "subtitle": "Server setup, maintenance, and continuous optimization after launch.",
       "items": [
         {
           "name": "Server & Deployment",
-          "price": "from $200",
-          "desc": "Cloud/VPS provisioning, SSL certificates, CI/CD automated deployment pipelines, domain setup, and security hardening."
+          "price": "From $200",
+          "desc": "Server provisioning, SSL, deployment, domain setup, and basic hardening."
         },
         {
           "name": "Maintenance",
-          "price": "from $100/month",
-          "desc": "Proactive bug fixes, security updates, uptime monitoring, performance optimization, and regular backups."
+          "price": "From $100/month",
+          "desc": "Bug fixes, updates, monitoring, performance tuning, and backups."
         },
         {
           "name": "AI Monitoring",
-          "price": "from $150/month",
-          "desc": "Ongoing model accuracy checks, prompt drift evaluations, latency tuning, and token cost optimization."
+          "price": "From $150/month",
+          "desc": "Model evaluation, prompt drift, reliability, latency, and token-cost optimization."
         }
       ]
     },
     "cta": {
       "title": "Not sure which service you need?",
-      "subtitle": "Book a free 30-minute call. We'll discuss your project, recommend the right approach, and give you an honest estimate with no commitment required.",
-      "button": "Book a Free Call"
+      "subtitle": "Tell us what you're working on. We'll help shape the scope, technical approach, and provide a clear estimate.",
+      "button": "Discuss Your Project"
     },
+    "inquireButton": "Start a Project",
     "faq": {
+      "tag": "FAQ",
       "title": "Common Questions",
-      "q1": "How long does a typical project take?",
-      "a1": "A landing page or chatbot can be done in 1–2 weeks. Company profiles and basic apps take 2–4 weeks. Larger builds (custom web apps, AI systems, or multi-platform products) typically run 6–12 weeks depending on scope.",
+      "q1": "How long does a project take?",
+      "a1": "Timeline depends on scope. Simple websites can take 1–2 weeks, while web apps, AI systems, and multi-platform products typically take 6–12 weeks.",
       "q2": "Can you work with our existing codebase?",
-      "a2": "Yes. We regularly audit, refactor, and extend existing projects. We can also integrate AI features into systems that are already in production.",
+      "a2": "Yes. We can continue, improve, or refactor an existing codebase after a technical assessment.",
       "q3": "Who owns the code?",
-      "a3": "You do. All source code, designs, database schemas, and AI configurations are transferred to you upon project completion and final payment.",
+      "a3": "You do, subject to the project agreement. We don't create unnecessary vendor dependencies.",
       "q4": "How does payment work?",
-      "a4": "Standard structure: 50% upfront to begin, 25% at mid-project review, and 25% before production deployment. We're flexible for ongoing retainer engagements.",
-      "q5": "Are AI API costs included in the project price?",
-      "a5": "No. Development cost covers building and deploying the system. Ongoing API costs (OpenAI, Claude, etc.) are billed directly to your own account, typically $15–$125/month depending on usage. We help you set this up and optimize costs.",
+      "a4": "Projects are split into agreed milestones so scope, progress, and payments stay clear.",
+      "q5": "Are third-party AI or cloud costs included?",
+      "a5": "Usage costs from third-party services such as LLM APIs, cloud infrastructure, or external platforms are normally separate from development fees.",
       "q6": "What if my project doesn't fit any of these categories?",
       "a6": "Most projects are a combination of services. Just tell us what you need during the scoping call and we'll put together a custom proposal with a clear breakdown."
     }
   },
   "About": {
-    "tag": "About ALTIA DEV",
-    "title": "A small studio that ships production-grade software",
-    "storyTitle": "How We Think",
-    "storyP1": "ALTIA DEV started with a straightforward idea: good software comes from engineers who care about both the code and the people using it.",
-    "storyP2": "We're a compact team, not an agency with layers of account managers. You work directly with the people writing the code and designing the interfaces. That means faster decisions, fewer miscommunications, and software that actually matches what you asked for.",
+    "tag": "ABOUT ALTIA DEV",
+    "title": "A small studio that takes engineering seriously.",
+    "storyTitle": "Built with intent, crafted with care, ready to scale.",
+    "storyP1": "ALTIA DEV is a creative engineering studio combining design, software engineering, and intelligent systems to build digital products that are considered from both sides: how they feel and how they work.",
+    "storyP2": "Good software is more than code that runs. It should solve the right problem, feel clear to use, and have the foundation to grow with the business. We're deliberately small. That keeps decisions fast, communication direct, and the people shaping your product close to the work.",
     "values": {
-      "tag": "What We Value",
+      "tag": "Three things we care about.",
       "v1Title": "Details Matter",
-      "v1Desc": "Smooth animations, fast load times, clean error handling: the small things that separate good software from forgettable software.",
-      "v2Title": "Right Tool, Right Job",
-      "v2Desc": "We pick technologies based on your project's real needs, not because they're new or popular. WordPress for a corporate site, Go for a high-traffic API, Flutter for a cross-platform app.",
-      "v3Title": "Honest Communication",
-      "v3Desc": "Weekly updates with working demos. If something is harder than expected, we tell you early, not the week before launch."
+      "v1Desc": "Performance, accessibility, error handling, animation, and micro-interactions are part of product quality, not optional extras.",
+      "v2Title": "Technology Follows the Problem",
+      "v2Desc": "We choose the stack based on what the product needs, not what happens to be trending.",
+      "v3Title": "Communication Should Be Clear",
+      "v3Desc": "We share concrete progress, surface risks early, and keep decisions visible throughout the project."
     },
     "teamTitle": "The Team",
-    "milestonesTitle": "Studio Timeline"
+    "teamSubtitle": "Engineers, architects, and designers working across disciplines to build high-standard digital products.",
+    "milestonesTitle": "Studio Milestones"
   },
   "Blog": {
-    "tag": "Blog",
-    "title": "Notes on building software",
-    "subtitle": "Technical write-ups, project retrospectives, and practical guides from the ALTIA DEV team.",
+    "tag": "INSIGHTS & ENGINEERING",
+    "title": "How we think about design, code, and AI.",
+    "subtitle": "Technical notes, experiments, and ideas from the process of building digital products.",
     "readArticle": "Read Article",
+    "readMore": "Read Article",
     "readTime": "min read",
-    "back": "Back to Blog",
-    "publishedOn": "Published on"
+    "back": "Back to all articles",
+    "tableOfContents": "Table of Contents",
+    "shareArticle": "Share this article",
+    "copied": "Link Copied!",
+    "copyLink": "Copy Link",
+    "previousPost": "Previous Article",
+    "nextPost": "Next Article",
+    "relatedTitle": "Continue Exploring",
+    "relatedSubtitle": "Explore other insights on engineering, AI, design, and digital systems.",
+    "publishedOn": "Published on",
+    "writtenBy": "Written by",
+    "viewAll": "View all articles"
   },
   "Contact": {
-    "tag": "Get in Touch",
-    "title": "Have a project? Let's talk scope and timeline.",
-    "subtitle": "Tell us what you're building, your rough timeline, and budget range. We'll reply within one business day with honest feedback on how we can help.",
+    "tag": "GET IN TOUCH",
+    "title": "Have a project in mind? Let's talk.",
+    "subtitle": "Tell us what you're building, what you're trying to achieve, your timeline, and your approximate budget. We'll review it and get back to you with a clear next step.",
     "form": {
       "nameLabel": "Your Name",
-      "namePlaceholder": "Jane Doe",
+      "namePlaceholder": "John Doe",
       "emailLabel": "Email Address",
-      "emailPlaceholder": "jane@company.com",
-      "serviceLabel": "What do you need?",
+      "emailPlaceholder": "john@company.com",
+      "serviceLabel": "What are you looking to build?",
       "services": {
-        "web": "Web Development",
-        "app": "Mobile & Desktop App",
-        "ai": "AI Automation & Integration",
+        "web": "Web & Cloud",
+        "app": "Mobile & Desktop",
+        "ai": "AI Automation",
         "all": "Multiple Services / Not Sure Yet"
       },
-      "budgetLabel": "Budget Range (USD)",
+      "budgetLabel": "Approximate Budget",
       "budgets": {
         "tier1": "Under $3,000",
         "tier2": "$3,000 – $7,000",
         "tier3": "$7,000 – $15,000",
         "tier4": "$15,000+"
       },
-      "messageLabel": "Project Description",
-      "messagePlaceholder": "Describe what you want to build, current pain points, and your ideal timeline...",
-      "submit": "Send Message",
+      "messageLabel": "Tell us about the project",
+      "messagePlaceholder": "Tell us about what you want to build, key goals, and your target timeline...",
+      "submit": "Send Project Inquiry",
       "sending": "Sending...",
-      "successTitle": "Message Sent",
-      "successMessage": "Thanks for reaching out. We'll review your brief and get back to you within one business day.",
+      "successTitle": "Inquiry Sent",
+      "successMessage": "Thank you for reaching out. We will review your brief and respond within one business day with clear next steps.",
       "errorTitle": "Something Went Wrong",
-      "errorMessage": "We couldn't send your message. Please email us directly at hello@altiadev.com."
+      "errorMessage": "Failed to send message. Please email us directly at hello@altia.dev."
     },
     "info": {
       "emailTitle": "Email",
-      "email": "hello@altiadev.com",
+      "email": "hello@altia.dev",
       "officeTitle": "Location",
-      "office": "Jakarta, Indonesia · Working with clients worldwide",
-      "hoursTitle": "Working Hours",
-      "hours": "Monday – Friday, 09:00 – 18:00 GMT+7"
+      "office": "Jakarta, Indonesia · Serving clients worldwide",
+      "hoursTitle": "Business Hours",
+      "hours": "Monday–Friday · 09:00–18:00 WIB"
     }
   },
   "Cta": {
-    "title": "Have a project in mind?",
-    "subtitle": "Let's discuss scope, timeline, and whether we're the right fit.",
-    "button": "Book a Free Call"
+    "title": "Your next product starts with a conversation.",
+    "subtitle": "Bring us the idea, the problem, or even a rough sketch. We'll help turn it into a clear path forward.",
+    "button": "Start a Project",
+    "secondaryButton": "Explore Our Work"
   },
   "Footer": {
-    "tagline": "Digital product studio specializing in web platforms, cross-platform apps, and AI automation systems.",
+    "tagline": "Creative engineering studio building web platforms, applications, and intelligent systems for businesses that want to move forward.",
     "quickLinks": "Quick Links",
     "servicesTitle": "Services",
-    "social": "Connect",
+    "social": "Social",
+    "ctaTitle": "Have something worth building?",
+    "ctaButton": "Start a Project",
     "copyright": "© {year} ALTIA DEV. All rights reserved.",
-    "designedWith": "Built with Next.js, GSAP, and too much coffee."
+    "designedWith": "Built with Astro, React, GSAP, and too much coffee."
   },
   "Estimator": {
-    "tag": "Project Estimator",
-    "badge": "Interactive Project Scope & Investment Estimator",
-    "title": "Estimate your project scope & investment in 2 minutes",
-    "subtitle": "Select what you want to build, specify your core technical requirements, and receive an instant deterministic investment range and timeline.",
+    "tag": "PROJECT ESTIMATOR",
+    "badge": "Interactive Project Estimator",
+    "title": "Get a rough project estimate in about 2 minutes.",
+    "subtitle": "Choose what you're building, tell us what matters most, and we'll calculate an indicative investment range and timeline.",
     "steps": {
       "stepOf": "Step {current} of {total}",
       "back": "Back",
       "next": "Continue",
       "almostDone": "View Estimate",
       "calculate": "Calculate Estimate",
-      "calculating": "Analyzing Scope & Pricing..."
+      "calculating": "Analyzing Scope & Costs..."
     },
     "questions": {
       "service": {
-        "title": "What do you want to build?",
-        "desc": "Select the primary discipline for your upcoming digital initiative.",
+        "title": "What are you looking to build?",
+        "desc": "Choose the primary area for your digital project.",
         "options": {
           "web": {
-            "label": "Web Development",
-            "desc": "Bespoke corporate websites, SaaS platforms, high-throughput APIs, or custom web apps."
+            "label": "Web & Cloud Platforms",
+            "desc": "Corporate website, web app, SaaS, API, or digital platform."
           },
           "app": {
             "label": "Mobile & Desktop Apps",
-            "desc": "Cross-platform mobile apps (iOS & Android) or native desktop utilities (macOS & Windows)."
+            "desc": "iOS, Android, macOS, Windows, or cross-platform application."
           },
           "ai": {
             "label": "AI Automation",
-            "desc": "Intelligent multi-agent systems, RAG knowledge bases, document parsing, or custom LLM pipelines."
+            "desc": "RAG, document processing, AI agents, knowledge bases, or automated workflows."
           }
         }
       },
       "web_project_type": {
         "title": "What type of web project is this?",
-        "desc": "Choose the closest archetype to your technical requirements.",
+        "desc": "Select the archetype that best matches your technical scope.",
         "options": {
           "landing_page": {
             "label": "Landing Page",
-            "desc": "Single-page high-converting marketing site with responsive layout & smooth micro-interactions."
+            "desc": "Single-page marketing site with responsive design, motion, and technical SEO foundations."
           },
           "company_profile": {
             "label": "Company Profile",
-            "desc": "5–10 page corporate website with CMS integration, contact forms, and analytics."
+            "desc": "5–10 page company website with CMS, contact forms, and analytics."
           },
           "corporate_website": {
             "label": "Corporate Website",
-            "desc": "Enterprise portal with custom WordPress or Next.js architecture, multilingual support, and admin panel."
+            "desc": "Larger business website with CMS or Next.js, multilingual support, and admin needs."
           },
           "custom_web_app": {
             "label": "Custom Web Application",
-            "desc": "Full-stack web application with database architecture, user auth, and third-party APIs."
+            "desc": "Full-stack application with business logic, database, authentication, and API integrations."
           },
           "saas_mvp": {
             "label": "SaaS / MVP",
-            "desc": "Multi-tenant SaaS platform with subscription billing, admin controls, and production CI/CD."
+            "desc": "MVP or SaaS foundation with user management, billing, admin, and deployment."
           },
           "ecommerce": {
             "label": "E-Commerce",
-            "desc": "Online store with product catalog, payment gateway, shipping integration, and order management."
+            "desc": "Online store with catalog, payments, shipping, and order management."
           }
         }
       },
       "web_features": {
-        "title": "Which features do you need?",
-        "desc": "Select all that apply to your web application.",
+        "title": "What features do you need?",
+        "desc": "Select all key capabilities for your web solution.",
         "options": {
           "cms": {
             "label": "Content Management (CMS)",
-            "desc": "Easily edit text, images, and articles without touching code."
+            "desc": "Manage text, media, and articles effortlessly without touching code."
           },
           "auth": {
             "label": "User Accounts & Authentication",
-            "desc": "Secure login, registration, password reset, and user profile management."
+            "desc": "Secure login, user registration, password recovery, and profiles."
           },
           "payments": {
             "label": "Online Payments & Subscriptions",
-            "desc": "Stripe, Midtrans, or Xendit payment gateway integration."
+            "desc": "Payment gateway integration (Stripe, Midtrans, Xendit)."
           },
           "multilingual": {
-            "label": "Multilingual Localization",
-            "desc": "Seamless internationalization with language switching (e.g. EN / ID)."
+            "label": "Multilingual Support (i18n)",
+            "desc": "Multi-language switching support (e.g. EN / ID)."
           },
           "realtime": {
-            "label": "Real-time Updates",
-            "desc": "Live data feeds, instant notifications, or WebSockets chat."
+            "label": "Real-Time Updates",
+            "desc": "Live feeds, instant notifications, or chat via WebSockets."
           },
           "animation": {
-            "label": "Advanced Kinetic Animations",
-            "desc": "Bespoke 3D GSAP scroll choreographies and micro-interactions."
+            "label": "Advanced Kinetic Motion",
+            "desc": "3D scroll choreography, micro-interactions, and GSAP animations."
           },
           "not_sure": {
             "label": "Not Sure / Need Recommendation",
-            "desc": "We will evaluate and recommend the most effective feature set during initial scoping."
+            "desc": "Let's explore and define the best feature set during discovery."
           }
         }
       },
       "app_project_type": {
-        "title": "What type of app do you need?",
-        "desc": "Select the primary scope for your application.",
+        "title": "What type of application do you need?",
+        "desc": "Select your primary target platform scope.",
         "options": {
           "mobile_app": {
             "label": "Mobile App (iOS & Android)",
-            "desc": "Unified cross-platform application for mobile app stores."
+            "desc": "Cross-platform mobile application with push notifications, offline support, and sync."
           },
           "desktop_app": {
             "label": "Desktop App (macOS & Windows)",
-            "desc": "Native-grade desktop software utility."
+            "desc": "A macOS or Windows application with a focused desktop experience."
           },
           "mobile_web_bundle": {
             "label": "Mobile App + Web Dashboard",
-            "desc": "Complete ecosystem with mobile apps and web admin panel."
+            "desc": "Mobile app and web dashboard connected through one backend and data layer."
           }
         }
       },
       "app_platforms": {
-        "title": "Which target platforms do you require?",
-        "desc": "Select all operating systems you plan to release on.",
+        "title": "Which target platforms are required?",
+        "desc": "Select all operating systems where your application will be shipped.",
         "options": {
           "ios": { "label": "Apple iOS (iPhone & iPad)" },
           "android": { "label": "Google Android" },
           "macos": { "label": "Apple macOS" },
           "windows": { "label": "Microsoft Windows" },
-          "recommended_mobile": { "label": "Recommended: iOS & Android (Cross-Platform)" }
+          "recommended_mobile": { "label": "General Recommendation: iOS & Android (Cross-Platform)" }
         }
       },
       "app_features": {
-        "title": "Key app capabilities needed",
-        "desc": "Select hardware and platform capabilities required.",
+        "title": "Key application capabilities required",
+        "desc": "Select hardware and platform integrations needed.",
         "options": {
           "auth": {
             "label": "Biometric & Social Auth",
@@ -514,23 +581,23 @@
           },
           "push_notifications": {
             "label": "Push Notifications",
-            "desc": "Automated engagement and transaction notifications."
+            "desc": "Automated engagement and transactional notifications."
           },
           "offline": {
             "label": "Offline-First Mode",
-            "desc": "Local database storage with background cloud synchronization."
+            "desc": "Local caching with background synchronization when reconnected."
           },
           "payments": {
             "label": "In-App Purchases / Checkout",
-            "desc": "App Store In-App Purchases, Stripe, or local gateways."
+            "desc": "In-app purchases (IAP), Stripe, or local gateways."
           },
           "realtime": {
-            "label": "Real-time Chat & Sync",
-            "desc": "Live messaging, tracking, or reactive state sync."
+            "label": "Real-Time Chat & Sync",
+            "desc": "Instant messaging, live location tracking, or real-time data sync."
           },
           "not_sure": {
-            "label": "Not Sure / Recommend Capabilities",
-            "desc": "Let's define necessary native modules and APIs together during discovery."
+            "label": "Not Sure / Need Guidance",
+            "desc": "We will help determine optimal native modules during discovery."
           }
         }
       },
@@ -540,33 +607,33 @@
         "options": {
           "ai_chatbot": {
             "label": "AI Chatbot & Support Assistant",
-            "desc": "LLM-powered assistant trained on your knowledge base."
+            "desc": "LLM-powered assistant trained on your business knowledge base."
           },
           "document_processing": {
             "label": "Automated Document Processing",
-            "desc": "Intelligent OCR extraction for invoices, contracts, and forms."
+            "desc": "Intelligent OCR extraction for invoices, contracts, and PDFs."
           },
           "rag_knowledge_base": {
             "label": "RAG Enterprise Knowledge Base",
-            "desc": "Semantic search engine over proprietary company documentation."
+            "desc": "Internal knowledge base with semantic and hybrid search."
           },
           "custom_ai_agent": {
             "label": "Custom Autonomous AI Agent",
-            "desc": "Multi-step agentic workflow with tool-calling and self-correction."
+            "desc": "Multi-step AI workflows for research, lead qualification, data aggregation, and operations."
           },
           "ai_integration": {
-            "label": "AI API & System Integration",
-            "desc": "Embed LLM capabilities directly into existing software or CRM."
+            "label": "AI API Integration into Existing Systems",
+            "desc": "Connect AI capabilities to CRM, ERP, databases, or internal software."
           }
         }
       },
       "ai_workflow_depth": {
-        "title": "How complex is the workflow?",
-        "desc": "Define the operational decision depth of the AI system.",
+        "title": "How complex is the AI workflow?",
+        "desc": "Define the decision-making depth of the automation.",
         "options": {
           "single_step": {
             "label": "Single-Step Task Automation",
-            "desc": "Direct prompt-to-response generation or simple text classification."
+            "desc": "Direct prompt completion or simple classification."
           },
           "multi_step": {
             "label": "Multi-Step Decision Chain",
@@ -574,21 +641,21 @@
           },
           "human_in_the_loop": {
             "label": "Human-in-the-Loop Approval",
-            "desc": "AI proposes output; human operator reviews before execution."
+            "desc": "AI drafts actions; human operators review before execution."
           },
           "multi_data_source": {
             "label": "Multi-Source Knowledge Retrieval",
-            "desc": "Combines vector databases, SQL data, PDFs, and live APIs."
+            "desc": "Combined vector DBs, SQL tables, PDFs, and live APIs."
           },
           "not_sure": {
             "label": "Not Sure / Need AI Consultation",
-            "desc": "We will assess your operational workflows and recommend the optimal AI architecture."
+            "desc": "We will evaluate your workflows and recommend the optimal architecture."
           }
         }
       },
       "integrations_level": {
-        "title": "External systems & API integrations",
-        "desc": "Does the system need to connect to other software or databases?",
+        "title": "External System & API Integrations",
+        "desc": "Does the system need to connect with third-party software or databases?",
         "options": {
           "none": {
             "label": "Standalone System",
@@ -596,126 +663,126 @@
           },
           "one_two": {
             "label": "1–2 Standard Integrations",
-            "desc": "Standard APIs like Stripe, SendGrid, Google Analytics."
+            "desc": "Common APIs like Stripe/Midtrans, SendGrid, Google Analytics."
           },
           "multiple": {
             "label": "Multiple Third-Party Services",
-            "desc": "CRM (HubSpot/Salesforce), ERP, custom webhooks, databases."
+            "desc": "CRM (HubSpot/Salesforce), ERP, custom webhooks, external DBs."
           },
           "complex_custom": {
-            "label": "Complex Enterprise Legacy Systems",
-            "desc": "Deep bi-directional sync, custom message queues, enterprise SSO."
+            "label": "Complex Legacy Enterprise Systems",
+            "desc": "Deep two-way sync, custom message queues, enterprise SSO."
           },
           "not_sure": {
             "label": "Not Sure / Need Technical Recommendation",
-            "desc": "We will audit existing tools and recommend the most cost-effective integration architecture."
+            "desc": "We will audit existing infrastructure and recommend cost-effective approaches."
           }
         }
       },
       "design_status": {
         "title": "UI/UX Design Readiness",
-        "desc": "What is the current status of your designs?",
+        "desc": "What is the current design status for your product?",
         "options": {
           "ready": {
-            "label": "Design is Ready in Figma",
-            "desc": "We have complete high-fidelity UI screens ready to code."
+            "label": "Design Ready in Figma",
+            "desc": "We already have complete UI screens and design components ready for development."
           },
           "needs_refinement": {
             "label": "Existing Design Needs Polish",
-            "desc": "We have rough wireframes or existing UI that needs elevation."
+            "desc": "We have rough wireframes or an older UI that needs upgrading."
           },
           "needs_design": {
-            "label": "ALTIA DEV Should Handle Design",
-            "desc": "Start from scratch with wireframes, full UI/UX, and prototypes."
+            "label": "Full Design by ALTIA DEV",
+            "desc": "Start from scratch: UX research, wireframes, complete UI, and interactive prototypes."
           }
         }
       },
       "timeline_preference": {
-        "title": "Target Delivery Timeline",
-        "desc": "When do you plan to deploy or launch this project?",
+        "title": "Target Launch Timeline",
+        "desc": "When are you planning to deploy or launch this project?",
         "options": {
           "no_deadline": {
-            "label": "Flexible / No Fixed Deadline",
-            "desc": "Focus on perfection; timeline is flexible."
+            "label": "Flexible / No Strict Deadline",
+            "desc": "Focus on perfection; flexible scheduling."
           },
           "1_3_months": {
             "label": "1 to 3 Months",
-            "desc": "Standard thorough development cycle."
+            "desc": "Structured and balanced development cycle."
           },
           "under_1_month": {
             "label": "Under 1 Month",
             "desc": "Focused sprint for rapid MVP launch."
           },
           "asap": {
-            "label": "ASAP (Rush Sprint)",
-            "desc": "Dedicated engineering bandwidth for immediate priority kick-off."
+            "label": "As Soon As Possible (Rush Sprint)",
+            "desc": "Priority engineering team allocation to start immediately."
           }
         }
       },
       "budget_range": {
-        "title": "Planned Budget Range (USD)",
-        "desc": "Helps us calibrate architecture and technology recommendations.",
+        "title": "Estimated Budget Range (USD)",
+        "desc": "Helps us tailor the architectural and technology recommendations.",
         "options": {
           "under_1000": { "label": "Under $1,000" },
           "1000_2500": { "label": "$1,000 – $2,500" },
           "2500_5000": { "label": "$2,500 – $5,000" },
           "5000_10000": { "label": "$5,000 – $10,000" },
           "10000_plus": { "label": "$10,000+" },
-          "not_sure": { "label": "Not sure yet / Seeking advice" }
+          "not_sure": { "label": "Not sure / Looking for advice" }
         }
       },
       "additional_notes": {
-        "title": "Any additional context or technical requirements?",
-        "desc": "Tell us about specific business goals, target audience, or existing tech stack (optional).",
-        "placeholder": "e.g. We want to migrate our existing PHP backend to Next.js 14 and need multi-tenant organization support..."
+        "title": "Any additional notes or specific requirements?",
+        "desc": "Share specific business targets, target audience, or existing tech stack (optional).",
+        "placeholder": "Example: We want to migrate our backend to Next.js 14 and need multi-tenant support..."
       }
     },
     "contactGate": {
-      "badge": "Final Step · Calculation Ready",
-      "title": "Where should we send your official estimate?",
-      "subtitle": "Your project scope and investment calculation are ready. Provide your details below to unlock the full breakdown on-screen and receive an official copy directly via WhatsApp and Email.",
+      "badge": "Final Step · Estimate Ready",
+      "title": "Where should we send your official project scope?",
+      "subtitle": "Your custom scope calculation and investment range are ready. Enter your details below to unlock full breakdown and receive a formal copy via WhatsApp & Email.",
       "nameLabel": "Your Full Name",
-      "namePlaceholder": "Alexander Wright",
-      "emailLabel": "Work Email Address",
-      "emailPlaceholder": "alex@company.com",
+      "namePlaceholder": "John Doe",
+      "emailLabel": "Work / Business Email",
+      "emailPlaceholder": "john@company.com",
       "phoneLabel": "WhatsApp / Phone Number",
-      "phonePlaceholder": "+1 (555) 0192 or +62 812 3456 789",
-      "phoneHint": "Required: we dispatch your official estimate breakdown and milestone scope to this WhatsApp number.",
-      "companyLabel": "Company or Brand",
-      "companyPlaceholder": "Acme Global Inc.",
+      "phonePlaceholder": "+1 555-0123-456",
+      "phoneHint": "Required: your milestone roadmap and calibrated estimate summary will be delivered to this number.",
+      "companyLabel": "Company / Brand Name",
+      "companyPlaceholder": "Acme Corp",
       "optional": "Optional",
       "back": "Back to Questions",
-      "submit": "Unlock Estimate & Send Copy",
-      "submitting": "Analyzing Scope & Sending Copy...",
+      "submit": "Unlock Breakdown & Send Copy",
+      "submitting": "Analyzing Scope & Sending...",
       "errors": {
         "nameRequired": "Please enter your full name.",
-        "emailRequired": "Please provide a valid work email address.",
-        "phoneRequired": "WhatsApp / Phone number is required for estimate delivery."
+        "emailRequired": "Please enter a valid work email address.",
+        "phoneRequired": "WhatsApp / phone number is required to receive estimate."
       }
     },
     "result": {
       "tag": "Project Estimate Result",
-      "title": "Your Custom Project Investment Estimate",
+      "title": "Your Calibrated Project Investment Estimate",
       "subtitle": "Calculated by ALTIA DEV Deterministic Pricing Engine (v{version})",
-      "deliverySuccessBadge": "Estimate Breakdown Dispatched",
-      "deliverySuccessDesc": "Thank you {name}. Your estimate breakdown has been unlocked below, and an official confirmation copy has been sent to your WhatsApp ({phone}) and Email ({email}).",
+      "deliverySuccessBadge": "Estimate Copy Sent Successfully",
+      "deliverySuccessDesc": "Thank you {name}. Your estimate breakdown is unlocked below, and a formal copy has been sent to WhatsApp ({phone}) and Email ({email}).",
       "investmentTitle": "Estimated Investment Range",
-      "timelineTitle": "Estimated Delivery Timeline",
+      "timelineTitle": "Estimated Timeline",
       "weeks": "weeks",
-      "complexityTitle": "Architecture Complexity",
+      "complexityTitle": "Architectural Complexity",
       "complexityLow": "Low Complexity",
       "complexityMedium": "Medium Complexity",
       "complexityHigh": "High Complexity",
       "recommendationTitle": "Recommended Technical Approach",
-      "highlightsTitle": "Key Architecture Highlights",
-      "assumptionsTitle": "Commercial & Technical Assumptions",
-      "nextStepsTitle": "Recommended Next Steps",
-      "disclaimer": "This estimate is based on the answers provided and serves as a calibrated planning reference. Final scope, milestones, and commercial agreements are finalized after an initial technical discovery session.",
-      "ctaTitle": "Ready to discuss this project?",
-      "ctaSubtitle": "Our lead architect has received your project brief and is ready to discuss milestone timelines, team bandwidth, and proposal details.",
-      "chatWhatsApp": "Chat via WhatsApp",
-      "bookCall": "Book Discovery Call",
-      "recalculate": "Edit Scope & Recalculate"
+      "highlightsTitle": "Key Architectural Highlights",
+      "assumptionsTitle": "Technical & Commercial Assumptions",
+      "nextStepsTitle": "What Happens Next",
+      "disclaimer": "This estimate is calculated based on your selections and serves as a calibrated planning baseline. Final deliverables, milestone schedules, and formal commercial terms are agreed during initial discovery.",
+      "ctaTitle": "Ready to discuss your implementation roadmap?",
+      "ctaSubtitle": "Our lead architect has received your brief and is ready to discuss milestone schedules, team availability, and architecture proposals.",
+      "chatWhatsApp": "Discuss via WhatsApp",
+      "bookCall": "Schedule Discovery Call",
+      "recalculate": "Adjust Scope & Recalculate"
     }
   },
   "Common": {

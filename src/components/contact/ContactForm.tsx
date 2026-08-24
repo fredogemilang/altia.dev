@@ -13,7 +13,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ locale }: ContactFormProps) {
-  const t = useTranslations("Contact.form");
+  const t = useTranslations("Contact.form", (locale === "id" ? "id" : "en") as Locale);
 
   const [formData, setFormData] = useState({
     name: "",

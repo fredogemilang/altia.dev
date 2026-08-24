@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { RefObject } from "react";
+import type { RefObject } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
 export type AnimationCallback = (

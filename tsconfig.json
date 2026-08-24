@@ -4,6 +4,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
+    "verbatimModuleSyntax": false,
+    "types": ["node"],
     "paths": {
       "@/*": ["src/*"]
     }

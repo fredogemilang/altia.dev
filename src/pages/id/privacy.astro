@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Container } from '../../components/ui/Container';
+
+const locale = 'id';
+const lastUpdated = '25 Agustus 2026';
+---
+
+<Layout title="Kebijakan Privasi" description="Kebijakan Privasi ALTIA DEV — bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda." locale={locale}>
+  <section class="py-16 sm:py-24">
+    <Container size="small">
+      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
+        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Kebijakan Privasi</h1>
+        <p class="text-warm-text text-sm">Terakhir diperbarui: {lastUpdated}</p>
+
+        <h2>1. Pendahuluan</h2>
+        <p>
+          ALTIA DEV ("kami") berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda saat mengunjungi situs web <strong>altia.dev</strong> dan menggunakan layanan kami.
+        </p>
+
+        <h2>2. Informasi yang Kami Kumpulkan</h2>
+        <h3>Informasi yang Anda Berikan</h3>
+        <ul>
+          <li><strong>Formulir Kontak:</strong> Nama, alamat email, layanan yang diminati, kisaran anggaran, dan deskripsi proyek.</li>
+          <li><strong>Estimator Proyek:</strong> Nama, email, nomor telepon/WhatsApp, nama perusahaan, dan kebutuhan proyek.</li>
+        </ul>
+        <h3>Informasi yang Dikumpulkan Secara Otomatis</h3>
+        <ul>
+          <li><strong>Data Penggunaan:</strong> Halaman yang dikunjungi, waktu yang dihabiskan, jenis browser, jenis perangkat, dan URL perujuk.</li>
+          <li><strong>Alamat IP:</strong> Dikumpulkan untuk tujuan keamanan dan analitik.</li>
+        </ul>
+
+        <h2>3. Cara Kami Menggunakan Informasi Anda</h2>
+        <ul>
+          <li>Untuk menanggapi pertanyaan Anda dan memberikan layanan yang diminta.</li>
+          <li>Untuk mengirimkan estimasi proyek dan komunikasi tindak lanjut.</li>
+          <li>Untuk meningkatkan situs web dan layanan kami.</li>
+          <li>Untuk mematuhi kewajiban hukum.</li>
+        </ul>
+
+        <h2>4. Layanan Pihak Ketiga</h2>
+        <p>Kami menggunakan layanan pihak ketiga berikut:</p>
+        <ul>
+          <li><strong>Brevo (Sendinblue):</strong> Pengiriman email transaksional untuk pengiriman formulir kontak.</li>
+          <li><strong>Cloudflare:</strong> Hosting situs web, CDN, dan analitik web.</li>
+          <li><strong>Telegram:</strong> Pengiriman notifikasi lead ke tim kami.</li>
+          <li><strong>Google Fonts:</strong> Tipografi web (font dimuat dengan pengaturan yang menjaga privasi).</li>
+        </ul>
+
+        <h2>5. Penyimpanan Data</h2>
+        <p>
+          Kami menyimpan informasi pribadi Anda hanya selama diperlukan untuk memenuhi tujuan pengumpulannya, biasanya selama hubungan bisnis berlangsung dan sebagaimana diwajibkan oleh hukum.
+        </p>
+
+        <h2>6. Hak Anda</h2>
+        <p>Anda berhak untuk:</p>
+        <ul>
+          <li>Mengakses data pribadi yang kami simpan tentang Anda.</li>
+          <li>Meminta koreksi data yang tidak akurat.</li>
+          <li>Meminta penghapusan data Anda.</li>
+          <li>Menarik persetujuan untuk pemrosesan data.</li>
+        </ul>
+        <p>Untuk menggunakan hak ini, hubungi kami di <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a>.</p>
+
+        <h2>7. Keamanan Data</h2>
+        <p>
+          Kami menerapkan langkah-langkah teknis dan organisasi yang tepat untuk melindungi informasi pribadi Anda. Semua transmisi data dienkripsi menggunakan SSL/TLS.
+        </p>
+
+        <h2>8. Cookie</h2>
+        <p>
+          Situs web kami tidak menggunakan cookie pelacakan. Kami mungkin menggunakan cookie esensial untuk fungsionalitas situs saja.
+        </p>
+
+        <h2>9. Perubahan Kebijakan</h2>
+        <p>
+          Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan akan diposting di halaman ini dengan tanggal revisi yang diperbarui.
+        </p>
+
+        <h2>10. Hubungi Kami</h2>
+        <p>
+          Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, hubungi kami di:<br />
+          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
+          <strong>Lokasi:</strong> Jakarta, Indonesia
+        </p>
+      </div>
+    </Container>
+  </section>
+</Layout>

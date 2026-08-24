@@ -10,10 +10,14 @@ const locale: Locale = 'id';
 ---
 
 <Layout title={t(locale, 'Estimator.title')} locale={locale}>
-  <div class="flex flex-col gap-12 sm:gap-16 pb-24">
-    <!-- Header Section -->
-    <section class="pt-12 pb-8 bg-noise border-b border-warm-border/60">
-      <Container size="large">
+  <div class="flex flex-col gap-12 sm:gap-16 pb-36 sm:pb-44 lg:pb-52">
+    <!-- Header Section (Faded Grid Overlay & Warm Shaded Gradient) -->
+    <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+      {/* Seamless Faded Background Grid with Ambient Radial Glow */}
+      <div class="hero-grid-faded" />
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container size="large" className="relative z-10">
         <div class="max-w-3xl mx-auto text-center">
           <Badge
             variant="vermilion"
@@ -54,7 +58,7 @@ const locale: Locale = 'id';
     <!-- Main Wizard Container -->
     <section>
       <Container size="medium">
-        <EstimatorWizard client:load />
+        <EstimatorWizard client:load locale={locale} />
       </Container>
     </section>
   </div>
