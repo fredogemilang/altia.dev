@@ -1,0 +1,75 @@
+---
+import { SITE_CONFIG } from '../../lib/constants';
+import type { Locale } from '../../i18n/utils';
+import type { ArticleMetadata, PageType } from '../../types/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  ogImage: string;
+  ogImageAlt?: string;
+  locale: Locale;
+  pageType?: PageType;
+  article?: ArticleMetadata;
+}
+
+const {
+  title,
+  description,
+  url,
+  ogImage,
+  ogImageAlt = title,
+  locale,
+  pageType = 'website',
+  article,
+} = Astro.props;
+
+const isArticle = pageType === 'article' || Boolean(article);
+const ogType = isArticle ? 'article' : 'website';
+
+// Normalize OpenGraph locale code
+const ogLocale = locale === 'id' ? 'id_ID' : 'en_US';
+const ogAlternateLocale = locale === 'id' ? 'en_US' : 'id_ID';
+
+// Absolute image URL
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${SITE_CONFIG.url}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+---
+
+<!-- Open Graph Core -->
+<meta property="og:site_name" content={SITE_CONFIG.name} />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={ogAlternateLocale} />
+
+<!-- Open Graph Image -->
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:secure_url" content={absoluteOgImage} />
+<meta property="og:image:alt" content={ogImageAlt} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Article Specific Open Graph -->
+{isArticle && article && (
+  <>
+    {article.publishedTime && (
+      <meta property="article:published_time" content={new Date(article.publishedTime).toISOString()} />
+    )}
+    {article.modifiedTime && (
+      <meta property="article:modified_time" content={new Date(article.modifiedTime).toISOString()} />
+    )}
+    {article.section && <meta property="article:section" content={article.section} />}
+    {article.tags?.map((tag) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+    {article.authors?.map((author) => (
+      <meta property="article:author" content={author.name} />
+    ))}
+  </>
+)}

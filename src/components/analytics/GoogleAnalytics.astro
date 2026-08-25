@@ -1,0 +1,46 @@
+---
+import { SITE_CONFIG } from '../../lib/constants';
+
+interface Props {
+  gaId?: string;
+  gtmId?: string;
+}
+
+const gaId =
+  Astro.props.gaId ||
+  import.meta.env.PUBLIC_GA_ID ||
+  (SITE_CONFIG.analytics?.gaId !== 'G-XXXXXXXXXX' ? SITE_CONFIG.analytics?.gaId : undefined);
+
+const gtmId =
+  Astro.props.gtmId ||
+  import.meta.env.PUBLIC_GTM_ID ||
+  (SITE_CONFIG.analytics?.gtmId ? SITE_CONFIG.analytics?.gtmId : undefined);
+
+const hasGa = Boolean(gaId && gaId.startsWith('G-'));
+const hasGtm = Boolean(gtmId && gtmId.startsWith('GTM-'));
+---
+
+{hasGtm && (
+  <!-- Google Tag Manager -->
+  <script is:inline define:vars={{ gtmId }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',gtmId);
+  </script>
+)}
+
+{hasGa && !hasGtm && (
+  <!-- Google Analytics 4 (gtag.js) - Performance Deferred -->
+  <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+  <script is:inline define:vars={{ gaId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', gaId, {
+      page_path: window.location.pathname,
+      send_page_view: true,
+    });
+  </script>
+)}

@@ -6,7 +6,15 @@ const locale = 'en';
 const lastUpdated = 'August 25, 2026';
 ---
 
-<Layout title="Terms of Service" description="ALTIA DEV Terms of Service — rules and guidelines for using our website and services." locale={locale}>
+<Layout
+  title="Terms of Service"
+  description="ALTIA DEV Terms of Service — rules and guidelines for using our website and services."
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Terms of Service', url: '/terms' },
+  ]}
+>
   <section class="py-16 sm:py-24">
     <Container size="small">
       <div class="prose prose-lg prose-neutral max-w-none text-charcoal">

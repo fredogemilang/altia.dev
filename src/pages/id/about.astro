@@ -20,7 +20,16 @@ import {
 const locale: Locale = 'id';
 ---
 
-<Layout title={t(locale, 'About.title')} locale={locale}>
+<Layout
+  title={t(locale, 'About.title')}
+  description={t(locale, 'About.storyP1')}
+  pageType="profile"
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Beranda', url: '/id' },
+    { name: t(locale, 'About.title'), url: '/id/about' },
+  ]}
+>
   <div class="flex flex-col gap-24 sm:gap-32 pb-36 sm:pb-44 lg:pb-52">
     <!-- 1. Header (Faded Grid Overlay & Warm Shaded Gradient) -->
     <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">

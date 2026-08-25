@@ -69,9 +69,40 @@ const standardsCard4: BentoCardData = {
   desc: t(locale, 'Services.standards.card4.desc'),
   badge: t(locale, 'Services.standards.card4.badge'),
 };
+
+const servicesMetadata = [
+  {
+    id: 'web',
+    name: t(locale, 'Services.items.web.title'),
+    description: t(locale, 'Services.items.web.p1'),
+    serviceType: 'Web Engineering & Architecture',
+  },
+  {
+    id: 'app',
+    name: t(locale, 'Services.items.app.title'),
+    description: t(locale, 'Services.items.app.p1'),
+    serviceType: 'Mobile & Desktop App Development',
+  },
+  {
+    id: 'ai',
+    name: t(locale, 'Services.items.ai.title'),
+    description: t(locale, 'Services.items.ai.p1'),
+    serviceType: 'AI Engineering & Automation Pipelines',
+  },
+];
 ---
 
-<Layout title={t(locale, 'Services.title')} locale={locale}>
+<Layout
+  title={t(locale, 'Services.title')}
+  description={t(locale, 'Services.subtitle')}
+  locale={locale}
+  pageType="service"
+  services={servicesMetadata}
+  breadcrumbs={[
+    { name: 'Beranda', url: '/id' },
+    { name: t(locale, 'Services.title'), url: '/id/services' },
+  ]}
+>
   <div class="flex flex-col gap-24 sm:gap-32 pb-36 sm:pb-44 lg:pb-52">
     <!-- 1. HERO HEADER (Faded Grid Overlay & Warm Shaded Gradient) -->
     <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">

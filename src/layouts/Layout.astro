@@ -1,31 +1,61 @@
 ---
 import { SITE_CONFIG } from '../lib/constants';
+import SEO from '../components/seo/SEO.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
 import { Navbar } from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer.astro';
 import { MagneticCursor } from '../components/effects/MagneticCursor';
 import { FloatingBackToTop } from '../components/ui/FloatingBackToTop';
 import { type Locale, getLocaleFromUrl } from '../i18n/utils';
+import type {
+  SEOProps,
+  BreadcrumbItem,
+  ArticleMetadata,
+  FAQItem,
+  ServiceMetadata,
+  CaseStudyMetadata,
+  PageType,
+} from '../types/seo';
 import '../styles/globals.css';
 
 interface Props {
   title?: string;
   description?: string;
+  canonicalUrl?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   locale?: Locale;
+  pageType?: PageType;
+  noindex?: boolean;
+  nofollow?: boolean;
   alternateUrls?: { en: string; id: string };
+  breadcrumbs?: BreadcrumbItem[];
+  article?: ArticleMetadata;
+  faqs?: FAQItem[];
+  services?: ServiceMetadata[];
+  caseStudy?: CaseStudyMetadata;
 }
 
 const {
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
+  canonicalUrl,
   ogImage = SITE_CONFIG.ogImage,
+  ogImageAlt,
+  pageType = 'website',
+  noindex = false,
+  nofollow = false,
   alternateUrls,
+  breadcrumbs,
+  article,
+  faqs,
+  services,
+  caseStudy,
 } = Astro.props;
 
 const url = Astro.url;
 const locale = Astro.props.locale || getLocaleFromUrl(url);
 const pathname = url.pathname;
-const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
 ---
 
 <!doctype html>
@@ -53,44 +83,28 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
         rel="stylesheet"
       />
     </noscript>
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content="Web Development, Mobile Apps, Desktop Apps, AI Automation, Astro, GSAP, Creative Agency, ALTIA DEV" />
-    <meta name="author" content="ALTIA DEV" />
 
-    <!-- Canonical & Language Alternates -->
-    <link rel="canonical" href={url.href} />
-    {alternateUrls ? (
-      <>
-        <link rel="alternate" hreflang="en" href={`${SITE_CONFIG.url}${alternateUrls.en}`} />
-        <link rel="alternate" hreflang="id" href={`${SITE_CONFIG.url}${alternateUrls.id}`} />
-        <link rel="alternate" hreflang="x-default" href={`${SITE_CONFIG.url}${alternateUrls.en}`} />
-      </>
-    ) : (() => {
-      const basePath = pathname.replace(/^\/id/, '') || '/';
-      return (
-        <>
-          <link rel="alternate" hreflang="en" href={`${SITE_CONFIG.url}${basePath}`} />
-          <link rel="alternate" hreflang="id" href={`${SITE_CONFIG.url}/id${basePath === '/' ? '' : basePath}`} />
-          <link rel="alternate" hreflang="x-default" href={`${SITE_CONFIG.url}${basePath}`} />
-        </>
-      );
-    })()}
+    <!-- Master SEO, GEO & Schema.org Graph Engine -->
+    <SEO
+      title={title}
+      description={description}
+      canonicalUrl={canonicalUrl}
+      locale={locale}
+      pageType={pageType}
+      ogImage={ogImage}
+      ogImageAlt={ogImageAlt}
+      noindex={noindex}
+      nofollow={nofollow}
+      alternateUrls={alternateUrls}
+      breadcrumbs={breadcrumbs}
+      article={article}
+      faqs={faqs}
+      services={services}
+      caseStudy={caseStudy}
+    />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={url.href} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content={SITE_CONFIG.name} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:creator" content="@altiadev" />
+    <!-- Google Analytics / Google Tag Manager -->
+    <GoogleAnalytics />
   </head>
   <body class="bg-ivory text-charcoal font-sans min-h-screen flex flex-col selection:bg-vermilion selection:text-ivory">
     <MagneticCursor client:idle />

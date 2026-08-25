@@ -1,0 +1,35 @@
+# Cloudflare Pages Security & Cache Headers
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  X-XSS-Protection: 1; mode=block
+
+# Long-term Cache for Immutable Bundled Assets
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/uploads/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static WebP, PNG, Fonts
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# Sitemap & Robots
+/sitemap*.xml
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Cache-Control: public, max-age=86400

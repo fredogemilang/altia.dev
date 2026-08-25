@@ -1,0 +1,139 @@
+---
+import { SITE_CONFIG } from '../../lib/constants';
+import OpenGraph from './OpenGraph.astro';
+import TwitterCard from './TwitterCard.astro';
+import JsonLd from './JsonLd.astro';
+import type { Locale } from '../../i18n/utils';
+import type {
+  SEOProps,
+  BreadcrumbItem,
+  ArticleMetadata,
+  FAQItem,
+  ServiceMetadata,
+  CaseStudyMetadata,
+  PageType,
+} from '../../types/seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  locale?: Locale;
+  pageType?: PageType;
+  ogImage?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  alternateUrls?: {
+    en: string;
+    id: string;
+  };
+  breadcrumbs?: BreadcrumbItem[];
+  article?: ArticleMetadata;
+  faqs?: FAQItem[];
+  services?: ServiceMetadata[];
+  caseStudy?: CaseStudyMetadata;
+}
+
+const {
+  title = SITE_CONFIG.title,
+  description = SITE_CONFIG.description,
+  canonicalUrl,
+  locale = 'en',
+  pageType = 'website',
+  ogImage = SITE_CONFIG.ogImage,
+  ogImageAlt,
+  noindex = false,
+  nofollow = false,
+  alternateUrls,
+  breadcrumbs,
+  article,
+  faqs,
+  services,
+  caseStudy,
+} = Astro.props;
+
+// Formatting title
+const formattedTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
+
+// URL handling
+const currentUrlObj = Astro.url;
+const rawPathname = currentUrlObj.pathname;
+const siteBaseUrl = SITE_CONFIG.url;
+
+// Construct absolute canonical URL
+const finalCanonical = canonicalUrl || `${siteBaseUrl}${rawPathname === '/' ? '' : rawPathname.replace(/\/$/, '')}`;
+
+// Robots directive
+const robotsContent = [
+  noindex ? 'noindex' : 'index',
+  nofollow ? 'nofollow' : 'follow',
+  'max-snippet:-1',
+  'max-image-preview:large',
+  'max-video-preview:-1',
+].join(', ');
+---
+
+<!-- Core Meta -->
+<title>{formattedTitle}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robotsContent} />
+<meta name="googlebot" content={robotsContent} />
+<meta name="author" content={SITE_CONFIG.name} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={finalCanonical} />
+
+<!-- Multilingual Alternates / hreflang -->
+{alternateUrls ? (
+  <>
+    <link rel="alternate" hreflang="en" href={`${siteBaseUrl}${alternateUrls.en}`} />
+    <link rel="alternate" hreflang="id" href={`${siteBaseUrl}${alternateUrls.id}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteBaseUrl}${alternateUrls.en}`} />
+  </>
+) : (() => {
+  const basePath = rawPathname.replace(/^\/id/, '') || '/';
+  const cleanBase = basePath === '/' ? '' : basePath.replace(/\/$/, '');
+  return (
+    <>
+      <link rel="alternate" hreflang="en" href={`${siteBaseUrl}${cleanBase || '/'}`} />
+      <link rel="alternate" hreflang="id" href={`${siteBaseUrl}/id${cleanBase}`} />
+      <link rel="alternate" hreflang="x-default" href={`${siteBaseUrl}${cleanBase || '/'}`} />
+    </>
+  );
+})()}
+
+<!-- Open Graph Protocol -->
+<OpenGraph
+  title={formattedTitle}
+  description={description}
+  url={finalCanonical}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+  locale={locale}
+  pageType={pageType}
+  article={article}
+/>
+
+<!-- Twitter / X Card -->
+<TwitterCard
+  title={formattedTitle}
+  description={description}
+  image={ogImage}
+/>
+
+<!-- Schema.org JSON-LD Entity Knowledge Graph -->
+<JsonLd
+  title={formattedTitle}
+  description={description}
+  url={finalCanonical}
+  locale={locale}
+  pageType={pageType}
+  ogImage={ogImage}
+  breadcrumbs={breadcrumbs}
+  article={article}
+  faqs={faqs}
+  services={services}
+  caseStudy={caseStudy}
+/>

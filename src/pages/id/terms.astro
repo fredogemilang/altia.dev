@@ -6,7 +6,15 @@ const locale = 'id';
 const lastUpdated = '25 Agustus 2026';
 ---
 
-<Layout title="Syarat & Ketentuan" description="Syarat & Ketentuan ALTIA DEV — aturan dan pedoman penggunaan situs web dan layanan kami." locale={locale}>
+<Layout
+  title="Syarat & Ketentuan"
+  description="Syarat & Ketentuan ALTIA DEV — aturan dan pedoman penggunaan situs web dan layanan kami."
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Beranda', url: '/id' },
+    { name: 'Syarat & Ketentuan', url: '/id/terms' },
+  ]}
+>
   <section class="py-16 sm:py-24">
     <Container size="small">
       <div class="prose prose-lg prose-neutral max-w-none text-charcoal">

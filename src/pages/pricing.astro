@@ -59,7 +59,17 @@ const ongoingServices = [
 ];
 ---
 
-<Layout title={t(locale, 'Pricing.title')} locale={locale}>
+<Layout
+  title={t(locale, 'Pricing.title')}
+  description={t(locale, 'Pricing.subtitle')}
+  locale={locale}
+  pageType="faq"
+  faqs={faqItems}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: t(locale, 'Pricing.title'), url: '/pricing' },
+  ]}
+>
   <div class="flex flex-col gap-20 sm:gap-28 pb-36 sm:pb-44 lg:pb-52">
     <!-- 1. Header (Faded Grid Overlay & Warm Shaded Gradient) -->
     <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">

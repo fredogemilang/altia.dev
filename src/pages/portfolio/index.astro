@@ -11,7 +11,15 @@ const locale: Locale = 'en';
 const projects = await getProjects();
 ---
 
-<Layout title={t(locale, 'Portfolio.title')} locale={locale}>
+<Layout
+  title={t(locale, 'Portfolio.title')}
+  description={t(locale, 'Portfolio.subtitle')}
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: t(locale, 'Portfolio.title'), url: '/portfolio' },
+  ]}
+>
   <div class="flex flex-col gap-16 pb-36 sm:pb-44 lg:pb-52">
     <!-- Page Header (Faded Grid Overlay & Warm Shaded Gradient) -->
     <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">

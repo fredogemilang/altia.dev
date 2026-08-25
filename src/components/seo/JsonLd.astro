@@ -1,0 +1,290 @@
+---
+import { SITE_CONFIG } from '../../lib/constants';
+import { TEAM_MEMBERS } from '../../data/team';
+import type { Locale } from '../../i18n/utils';
+import type {
+  SEOProps,
+  BreadcrumbItem,
+  ArticleMetadata,
+  FAQItem,
+  ServiceMetadata,
+  CaseStudyMetadata,
+  PageType,
+} from '../../types/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  locale: Locale;
+  pageType?: PageType;
+  ogImage?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  article?: ArticleMetadata;
+  faqs?: FAQItem[];
+  services?: ServiceMetadata[];
+  caseStudy?: CaseStudyMetadata;
+}
+
+const {
+  title,
+  description,
+  url,
+  locale,
+  pageType = 'website',
+  ogImage = SITE_CONFIG.ogImage,
+  breadcrumbs,
+  article,
+  faqs,
+  services,
+  caseStudy,
+} = Astro.props;
+
+const languageTag = locale === 'id' ? 'id-ID' : 'en-US';
+const siteBaseUrl = SITE_CONFIG.url;
+
+// Absolute image URL
+const absoluteImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteBaseUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
+// 1. Organization Entity (Primary Node)
+const organizationSchema = {
+  '@type': 'Organization',
+  '@id': `${siteBaseUrl}/#organization`,
+  name: SITE_CONFIG.name,
+  legalName: SITE_CONFIG.legalName,
+  url: siteBaseUrl,
+  logo: {
+    '@type': 'ImageObject',
+    '@id': `${siteBaseUrl}/#logo`,
+    url: SITE_CONFIG.logo,
+    caption: SITE_CONFIG.name,
+  },
+  image: `${siteBaseUrl}/og.jpg`,
+  description: locale === 'id' ? SITE_CONFIG.descriptionId : SITE_CONFIG.description,
+  foundingDate: SITE_CONFIG.foundingDate,
+  sameAs: [
+    SITE_CONFIG.links.twitter,
+    SITE_CONFIG.links.github,
+    SITE_CONFIG.links.linkedin,
+    SITE_CONFIG.links.instagram,
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      email: SITE_CONFIG.contact.email,
+      telephone: SITE_CONFIG.contact.whatsapp,
+      contactType: 'Customer Service / Sales',
+      areaServed: 'Worldwide',
+      availableLanguage: ['English', 'Indonesian'],
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE_CONFIG.contact.postalAddress.streetAddress,
+    addressLocality: SITE_CONFIG.contact.postalAddress.addressLocality,
+    addressRegion: SITE_CONFIG.contact.postalAddress.addressRegion,
+    postalCode: SITE_CONFIG.contact.postalAddress.postalCode,
+    addressCountry: SITE_CONFIG.contact.postalAddress.addressCountry,
+  },
+  knowsAbout: SITE_CONFIG.knowsAbout,
+  founder: {
+    '@type': 'Person',
+    name: 'Alfredo Gemilang',
+    jobTitle: 'Lead Software Engineer',
+    url: `${siteBaseUrl}/about`,
+    sameAs: 'https://github.com/fredogemilang',
+  },
+  member: TEAM_MEMBERS.map((member) => ({
+    '@type': 'Person',
+    name: member.name,
+    jobTitle: member.role[locale] || member.role.en,
+    description: member.bio[locale] || member.bio.en,
+    image: `${siteBaseUrl}${member.avatar}`,
+    sameAs: member.socials.github || member.socials.linkedin || member.socials.twitter,
+  })),
+};
+
+// 2. WebSite Entity
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${siteBaseUrl}/#website`,
+  url: siteBaseUrl,
+  name: SITE_CONFIG.name,
+  description: locale === 'id' ? SITE_CONFIG.descriptionId : SITE_CONFIG.description,
+  publisher: {
+    '@id': `${siteBaseUrl}/#organization`,
+  },
+  inLanguage: ['en-US', 'id-ID'],
+};
+
+// Determine WebPage specific @type
+let webPageType = 'WebPage';
+if (pageType === 'profile') webPageType = 'AboutPage';
+if (url.includes('/contact')) webPageType = 'ContactPage';
+if (pageType === 'faq') webPageType = 'FAQPage';
+if (url.includes('/blog') && !article) webPageType = 'CollectionPage';
+if (url.includes('/portfolio') && !caseStudy) webPageType = 'CollectionPage';
+if (article) webPageType = 'ItemPage';
+if (caseStudy) webPageType = 'ItemPage';
+
+// 3. WebPage Entity
+const webPageSchema: Record<string, any> = {
+  '@type': webPageType,
+  '@id': `${url}#webpage`,
+  url: url,
+  name: title,
+  description: description,
+  isPartOf: {
+    '@id': `${siteBaseUrl}/#website`,
+  },
+  about: {
+    '@id': `${siteBaseUrl}/#organization`,
+  },
+  inLanguage: languageTag,
+};
+
+if (breadcrumbs && breadcrumbs.length > 0) {
+  webPageSchema.breadcrumb = {
+    '@id': `${url}#breadcrumb`,
+  };
+}
+
+// Graph Array Collector
+const graphNodes: any[] = [organizationSchema, websiteSchema, webPageSchema];
+
+// 4. BreadcrumbList Entity
+if (breadcrumbs && breadcrumbs.length > 0) {
+  const breadcrumbListSchema = {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: breadcrumbs.map((crumb, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: crumb.name,
+      item: crumb.url.startsWith('http') ? crumb.url : `${siteBaseUrl}${crumb.url}`,
+    })),
+  };
+  graphNodes.push(breadcrumbListSchema);
+}
+
+// 5. Article / BlogPosting Entity
+if (article) {
+  const articleSchema = {
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    isPartOf: {
+      '@id': `${url}#webpage`,
+    },
+    headline: article.headline,
+    description: article.description,
+    image: article.image
+      ? (article.image.startsWith('http') ? article.image : `${siteBaseUrl}${article.image}`)
+      : absoluteImage,
+    datePublished: new Date(article.publishedTime).toISOString(),
+    dateModified: new Date(article.modifiedTime || article.publishedTime).toISOString(),
+    mainEntityOfPage: {
+      '@id': `${url}#webpage`,
+    },
+    inLanguage: languageTag,
+    publisher: {
+      '@id': `${siteBaseUrl}/#organization`,
+    },
+    author: article.authors?.map((author) => ({
+      '@type': 'Person',
+      name: author.name,
+      jobTitle: author.role || 'Software Engineer',
+      image: author.avatar ? `${siteBaseUrl}${author.avatar}` : undefined,
+      url: author.url || `${siteBaseUrl}/about`,
+    })) || [
+      {
+        '@type': 'Person',
+        name: 'ALTIA DEV Team',
+        url: `${siteBaseUrl}/about`,
+      },
+    ],
+    articleSection: article.section,
+    keywords: article.tags?.join(', '),
+    wordCount: article.wordCount,
+  };
+  graphNodes.push(articleSchema);
+}
+
+// 6. FAQPage Entity
+if (faqs && faqs.length > 0) {
+  const faqSchema = {
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    isPartOf: {
+      '@id': `${url}#webpage`,
+    },
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+  graphNodes.push(faqSchema);
+}
+
+// 7. Services Entity
+if (services && services.length > 0) {
+  services.forEach((service) => {
+    graphNodes.push({
+      '@type': 'Service',
+      '@id': `${siteBaseUrl}/services#${service.id}`,
+      name: service.name,
+      description: service.description,
+      serviceType: service.serviceType,
+      provider: {
+        '@id': `${siteBaseUrl}/#organization`,
+      },
+      areaServed: 'Worldwide',
+      offers: service.offers
+        ? {
+            '@type': 'Offer',
+            name: service.offers.name || service.name,
+            price: service.offers.price || 'Contact for Quote',
+            priceCurrency: service.offers.priceCurrency || 'USD',
+          }
+        : undefined,
+    });
+  });
+}
+
+// 8. Case Study / CreativeWork Entity
+if (caseStudy) {
+  const caseStudyImg = caseStudy.image
+    ? (caseStudy.image.startsWith('http') ? caseStudy.image : `${siteBaseUrl}${caseStudy.image}`)
+    : absoluteImage;
+
+  const caseStudySchema = {
+    '@type': 'SoftwareApplication',
+    '@id': `${url}#case-study`,
+    name: caseStudy.title,
+    description: caseStudy.tagline,
+    applicationCategory: caseStudy.services?.length ? caseStudy.services.join(', ') : 'Custom Software Engineering',
+    image: caseStudyImg,
+    creator: {
+      '@id': `${siteBaseUrl}/#organization`,
+    },
+    sponsor: {
+      '@type': 'Organization',
+      name: caseStudy.client,
+    },
+  };
+  graphNodes.push(caseStudySchema);
+}
+
+const completeSchema = {
+  '@context': 'https://schema.org',
+  '@graph': graphNodes,
+};
+---
+
+<!-- JSON-LD Entity Knowledge Graph -->
+<script type="application/ld+json" set:html={JSON.stringify(completeSchema)} />

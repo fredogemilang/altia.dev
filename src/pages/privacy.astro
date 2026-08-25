@@ -6,7 +6,15 @@ const locale = 'en';
 const lastUpdated = 'August 25, 2026';
 ---
 
-<Layout title="Privacy Policy" description="ALTIA DEV Privacy Policy — how we collect, use, and protect your personal information." locale={locale}>
+<Layout
+  title="Privacy Policy"
+  description="ALTIA DEV Privacy Policy — how we collect, use, and protect your personal information."
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Privacy Policy', url: '/privacy' },
+  ]}
+>
   <section class="py-16 sm:py-24">
     <Container size="small">
       <div class="prose prose-lg prose-neutral max-w-none text-charcoal">

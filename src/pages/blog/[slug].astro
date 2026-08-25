@@ -9,6 +9,7 @@ import { RelatedArticles } from '../../components/blog/RelatedArticles';
 import { getBlogPosts, getBlogPostBySlug } from '../../lib/b10cks';
 import { parseMarkdown } from '../../lib/markdown';
 import { t, type Locale, getLocalizedPath } from '../../i18n/utils';
+import Breadcrumb from '../../components/seo/Breadcrumb.astro';
 import { ArrowLeft, Clock, Calendar, Sparkles } from 'lucide-react';
 
 export async function getStaticPaths() {
@@ -39,6 +40,28 @@ const currentUrl = Astro.url.href;
 const currentSlug = typeof post.slug === 'object' ? post.slug.en : post.slug;
 const enSlug = typeof post.slug === 'object' ? post.slug.en : post.slug;
 const idSlug = typeof post.slug === 'object' ? post.slug.id : post.slug;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: post.title[locale], url: `/blog/${enSlug}` },
+];
+
+const articleData = {
+  headline: post.title[locale],
+  description: post.excerpt[locale],
+  publishedTime: post.publishedAt,
+  authors: [
+    {
+      name: post.author.name,
+      role: post.author.role,
+      avatar: post.author.avatar,
+    },
+  ],
+  section: post.category,
+  tags: post.tags,
+  image: post.coverImage,
+};
 ---
 
 <Layout
@@ -46,6 +69,9 @@ const idSlug = typeof post.slug === 'object' ? post.slug.id : post.slug;
   description={post.excerpt[locale]}
   ogImage={post.coverImage}
   locale={locale}
+  pageType="article"
+  article={articleData}
+  breadcrumbs={breadcrumbs}
   alternateUrls={{
     en: `/blog/${enSlug}`,
     id: `/id/blog/${idSlug}`,
@@ -60,6 +86,9 @@ const idSlug = typeof post.slug === 'object' ? post.slug.id : post.slug;
 
       <Container size="large" className="relative z-10">
         <div class="max-w-5xl">
+          <!-- Breadcrumb Navigation -->
+          <Breadcrumb items={breadcrumbs} className="mb-6" />
+
           {/* Back to Blog */}
           <a
             href={getLocalizedPath('/blog', locale)}

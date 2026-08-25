@@ -6,7 +6,15 @@ const locale = 'id';
 const lastUpdated = '25 Agustus 2026';
 ---
 
-<Layout title="Kebijakan Privasi" description="Kebijakan Privasi ALTIA DEV — bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda." locale={locale}>
+<Layout
+  title="Kebijakan Privasi"
+  description="Kebijakan Privasi ALTIA DEV — bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+  locale={locale}
+  breadcrumbs={[
+    { name: 'Beranda', url: '/id' },
+    { name: 'Kebijakan Privasi', url: '/id/privacy' },
+  ]}
+>
   <section class="py-16 sm:py-24">
     <Container size="small">
       <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
