@@ -95,7 +95,8 @@ export function normalizeWizardAnswers(
 
   // Design
   const designStatus = (answers["design_status"] as DesignStatus) || "needs_design";
-  const animationLevel = (answers["animation_level"] as AnimationLevel) || "subtle";
+  // Auto-derive animation level: if user selected "animation" feature → advanced, otherwise none
+  const animationLevel: AnimationLevel = features.includes("animation") ? "advanced" : "none";
 
   // Content
   const pages = typeof answers["page_count"] === "number" ? answers["page_count"] : undefined;

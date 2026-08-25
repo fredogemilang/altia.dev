@@ -782,7 +782,9 @@
       "ctaSubtitle": "Lead architect kami telah menerima brief proyek Anda dan siap membahas jadwal milestone, ketersediaan tim, dan proposal arsitektur.",
       "chatWhatsApp": "Diskusi via WhatsApp",
       "bookCall": "Jadwalkan Discovery Call",
-      "recalculate": "Ubah Kebutuhan & Hitung Ulang"
+      "recalculate": "Ubah Kebutuhan & Hitung Ulang",
+      "budgetNoticeTitle": "Investasi Melebihi Anggaran yang Dipilih",
+      "budgetNoticeDesc": "Estimasi terkalibrasi ini lebih tinggi dari kisaran anggaran yang Anda pilih. Ini umum terjadi untuk proyek dengan fitur lengkap — saat sesi discovery, kami dapat mengeksplorasi opsi pengiriman bertahap atau optimasi cakupan agar sesuai dengan kapasitas investasi Anda."
     }
   },
   "Common": {

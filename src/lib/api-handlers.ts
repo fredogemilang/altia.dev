@@ -229,16 +229,42 @@ export async function handleLeadCapture(
   const calcRes = handleEstimateCalculation(answers);
   const { requirements, estimate } = calcRes.body as any;
 
+  // Enhanced Lead Scoring
   let score = 50;
-  if (company) score += 15;
-  if ((estimate?.pricing?.max || estimate?.maxPrice || 0) >= 8000) score += 20;
-  if (phone) score += 15;
+  if (company) score += 10;
+  if (phone) score += 10;
+
+  // Estimate value scoring
+  const estimateMax = estimate?.pricing?.max || estimate?.maxPrice || 0;
+  if (estimateMax >= 10000) score += 20;
+  else if (estimateMax >= 5000) score += 15;
+  else if (estimateMax >= 2000) score += 10;
+
+  // Budget alignment scoring
+  const budgetRange = requirements?.budget?.range || answers?.budget_range;
+  const budgetMaxMap: Record<string, number> = {
+    under_1000: 1000, '1000_2500': 2500, '2500_5000': 5000,
+    '5000_10000': 10000, '10000_plus': Infinity, not_sure: Infinity,
+  };
+  const budgetMax = budgetMaxMap[budgetRange as string] ?? Infinity;
+  const estimateMin = estimate?.pricing?.min || estimate?.minPrice || 0;
+  const budgetAligned = budgetMax >= estimateMin;
+  if (budgetAligned && budgetRange !== 'not_sure') score += 10;
+
+  // Timeline urgency scoring
+  const timelinePref = requirements?.timeline?.preference || answers?.timeline_preference;
+  if (timelinePref === 'asap') score += 10;
+  else if (timelinePref === 'under_1_month') score += 5;
+
+  // Complexity bonus
+  if (estimate?.complexity?.level === 'high') score += 5;
 
   const tier = score >= 80 ? 'hot' : score >= 60 ? 'warm' : 'qualified';
   const qualification = {
     score: Math.min(100, score),
     tier,
-    recommendedAction: tier === 'hot' ? 'Priority 30-min discovery call' : 'Standard email follow-up',
+    budgetAligned,
+    recommendedAction: tier === 'hot' ? 'Priority 30-min discovery call' : tier === 'warm' ? 'Email follow-up within 24h' : 'Add to nurture sequence',
   };
 
   const leadId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
@@ -311,18 +337,66 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   const tierLabel = lead.tier === 'hot' ? '🔥 HOT' : lead.tier === 'warm' ? '🟡 WARM' : '🟢 QUALIFIED';
   const waNumber = '6282147709084';
 
-  // --- Build answers summary ---
+  // --- Build answers summary with human-readable labels ---
   const answerLabels: Record<string, string> = {
-    service: 'Service Type', web_project_type: 'Project Type', app_platforms: 'Platforms',
-    ai_solution_type: 'AI Solution', scale: 'Scale / Scope', design_level: 'Design Level',
-    features: 'Features', integrations: 'Integrations', content_volume: 'Content Volume',
-    timeline: 'Timeline Urgency', budget_range: 'Budget Range',
+    service: 'Service Type', web_project_type: 'Web Project Type', app_project_type: 'App Project Type',
+    ai_project_type: 'AI Project Type', app_platforms: 'Target Platforms',
+    web_features: 'Web Features', app_features: 'App Features', ai_features: 'AI Features',
+    ai_workflow_depth: 'AI Workflow Depth', integrations_level: 'Integration Level',
+    design_status: 'Design Status', animation_level: 'Animation Level',
+    timeline_preference: 'Timeline Preference', budget_range: 'Budget Range',
+    additional_notes: 'Additional Notes',
   };
+
+  // Human-readable value mappings
+  const valueLabels: Record<string, string> = {
+    // Services
+    web: 'Web Development', app: 'App Development', ai: 'AI / Automation',
+    // Web project types
+    landing_page: 'Landing Page', company_profile: 'Company Profile',
+    corporate_website: 'Corporate Website', custom_web_app: 'Custom Web App',
+    saas_mvp: 'SaaS MVP', ecommerce: 'E-Commerce Store',
+    // App project types
+    mobile_app: 'Mobile App', desktop_app: 'Desktop App', mobile_web_bundle: 'Mobile + Web Bundle',
+    // AI project types
+    ai_chatbot: 'AI Chatbot', document_processing: 'Document Processing',
+    rag_knowledge_base: 'RAG Knowledge Base', custom_ai_agent: 'Custom AI Agent',
+    ai_integration: 'AI Integration',
+    // Platforms
+    ios: 'iOS', android: 'Android', macos: 'macOS', windows: 'Windows',
+    recommended_mobile: 'iOS & Android (Recommended)',
+    // Features
+    cms: 'Content Management (CMS)', auth: 'User Authentication', payments: 'Payment Gateway',
+    multilingual: 'Multi-language (i18n)', realtime: 'Real-time Updates', animation: 'Advanced Animations',
+    push_notifications: 'Push Notifications', offline: 'Offline Support', not_sure: 'Not Sure Yet',
+    // AI workflow depth
+    single_step: 'Single Step (Simple)', multi_step: 'Multi-Step Agent',
+    human_in_the_loop: 'Human-in-the-Loop', multi_data_source: 'Multi Data Source',
+    // Integration level
+    none: 'No Integrations', one_two: '1–2 Standard Integrations',
+    multiple: 'Multiple Third-Party APIs', complex_custom: 'Complex / Enterprise Custom',
+    // Design status
+    ready: 'Design Ready (Figma)', needs_refinement: 'Needs Refinement', needs_design: 'Needs Full Design',
+    // Timeline
+    no_deadline: 'No Fixed Deadline', '1_3_months': '1–3 Months',
+    under_1_month: 'Under 1 Month (Rush)', asap: 'ASAP (Critical)',
+    // Budget
+    under_1000: 'Under $1,000', '1000_2500': '$1,000 – $2,500',
+    '2500_5000': '$2,500 – $5,000', '5000_10000': '$5,000 – $10,000',
+    '10000_plus': '$10,000+',
+  };
+
+  const humanize = (val: unknown): string => {
+    if (Array.isArray(val)) return val.map(v => valueLabels[String(v)] || String(v).replace(/_/g, ' ')).join(', ');
+    const s = String(val);
+    return valueLabels[s] || s.replace(/_/g, ' ');
+  };
+
   const answersRows = Object.entries(lead.answers || {})
     .filter(([_, v]) => v !== undefined && v !== null && v !== '')
     .map(([key, val]) => {
-      const label = answerLabels[key] || key.replace(/_/g, ' ');
-      const value = Array.isArray(val) ? val.join(', ') : String(val);
+      const label = answerLabels[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const value = humanize(val);
       return `<tr><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3;">${e(label)}</td><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3; font-weight: 600;">${e(value)}</td></tr>`;
     }).join('');
 

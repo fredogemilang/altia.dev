@@ -782,7 +782,9 @@
       "ctaSubtitle": "Our lead architect has received your brief and is ready to discuss milestone schedules, team availability, and architecture proposals.",
       "chatWhatsApp": "Discuss via WhatsApp",
       "bookCall": "Schedule Discovery Call",
-      "recalculate": "Adjust Scope & Recalculate"
+      "recalculate": "Adjust Scope & Recalculate",
+      "budgetNoticeTitle": "Investment Exceeds Indicated Budget",
+      "budgetNoticeDesc": "Your calibrated estimate is higher than the budget range you selected. This is common for feature-rich projects — during discovery, we can explore phased delivery or scope optimization to align with your investment capacity."
     }
   },
   "Common": {

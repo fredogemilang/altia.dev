@@ -71,6 +71,15 @@ export function EstimateResult({
   );
   const waLink = `https://wa.me/${whatsappNumber}?text=${waMessage}`;
 
+  // Budget alignment check
+  const budgetMaxMap: Record<string, number> = {
+    under_1000: 1000, '1000_2500': 2500, '2500_5000': 5000,
+    '5000_10000': 10000, '10000_plus': Infinity, not_sure: Infinity,
+  };
+  const budgetRange = requirements?.budget?.range || '';
+  const budgetCeiling = budgetMaxMap[budgetRange] ?? Infinity;
+  const budgetMismatch = budgetRange && budgetRange !== 'not_sure' && minPrice > budgetCeiling;
+
   const renderComplexityBadge = () => {
     switch (complexityLevel) {
       case "low":
@@ -222,6 +231,23 @@ export function EstimateResult({
           </p>
         </Card>
       </div>
+
+      {/* Budget Alignment Notice */}
+      {budgetMismatch && (
+        <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3.5 sm:gap-4 shadow-sm">
+          <div className="w-9 h-9 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <AlertCircle className="w-5 h-5 text-amber-700" />
+          </div>
+          <div className="flex-1">
+            <span className="text-xs font-bold font-display uppercase tracking-wider text-amber-800 block mb-1">
+              {t("budgetNoticeTitle")}
+            </span>
+            <p className="text-xs sm:text-sm text-amber-900/85 leading-relaxed">
+              {t("budgetNoticeDesc")}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* 3. Technical Solution & Rationale */}
       <Card className="p-6 sm:p-8 bg-warm-card border-warm-border">
