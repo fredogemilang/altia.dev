@@ -96,6 +96,7 @@ export async function getBlogPosts(category?: string): Promise<BlogPost[]> {
   if (category) {
     posts = posts.filter((p) => p.category.toLowerCase() === category.toLowerCase());
   }
+  posts.sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''));
   return posts;
 }
 

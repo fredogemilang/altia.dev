@@ -200,4 +200,27 @@ const currentUrl = Astro.url.href;
       viewAllLabel={t(locale, 'Blog.viewAll')}
     />
   </article>
+
+  <!-- Mermaid.js Diagram Rendering -->
+  <script type="module">
+    import mermaid from '/node_modules/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#FFF6E8',
+        primaryTextColor: '#2F2A26',
+        primaryBorderColor: '#E8DED0',
+        lineColor: '#E34234',
+        secondaryColor: '#F5EDE0',
+        tertiaryColor: '#FFFDF9',
+        fontFamily: '"DM Sans", system-ui, sans-serif',
+        fontSize: '14px',
+      },
+      flowchart: {
+        curve: 'basis',
+        padding: 20,
+      },
+    });
+  </script>
 </Layout>

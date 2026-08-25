@@ -23,14 +23,36 @@ export function RelatedArticles({
   sectionSubtitle = "Continue exploring our latest insights on software architecture, AI, and design systems.",
   viewAllLabel = "View all articles",
 }: RelatedArticlesProps) {
+  // Find the current post to access its metadata
+  const currentPost = posts.find((p) => p.slug === currentSlug);
+
   // Filter out current post
   const otherPosts = posts.filter((p) => p.slug !== currentSlug);
 
-  // Prioritize same category first
-  const sameCategoryPosts = otherPosts.filter((p) => p.category === currentCategory);
-  const differentCategoryPosts = otherPosts.filter((p) => p.category !== currentCategory);
+  // Build a scored list for relevance matching
+  const scored = otherPosts.map((post) => {
+    let score = 0;
 
-  const related = [...sameCategoryPosts, ...differentCategoryPosts].slice(0, 3);
+    // Highest priority: explicit editorial links
+    if (currentPost?.relatedSlugs?.includes(post.slug)) score += 100;
+
+    // Same pillar
+    if (currentPost?.pillar && post.pillar === currentPost.pillar) score += 30;
+
+    // Same cluster
+    if (currentPost?.cluster && post.cluster === currentPost.cluster) score += 20;
+
+    // Same category (fallback)
+    if (post.category === currentCategory) score += 10;
+
+    return { post, score };
+  });
+
+  // Sort by score descending, then take top 3
+  const related = scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((s) => s.post);
 
   if (related.length === 0) return null;
 

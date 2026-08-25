@@ -49,19 +49,28 @@ export function parseMarkdown(content: string): ParsedMarkdown {
       if (inCodeBlock) {
         // End of code block
         const rawCode = codeBuffer.join('\n');
-        result.push(`
-          <div class="relative my-6 rounded-2xl overflow-hidden bg-charcoal text-ivory border border-charcoal-600/50 shadow-xl font-mono text-xs sm:text-sm">
-            <div class="flex items-center justify-between px-4 py-2.5 bg-charcoal-700/60 border-b border-ivory/10 text-ivory/60 text-xs">
-              <span class="font-mono uppercase tracking-wider text-[11px] text-vermilion font-bold">${codeLanguage || 'CODE'}</span>
-              <div class="flex items-center gap-1.5">
-                <div class="w-2.5 h-2.5 rounded-full bg-vermilion/70"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></div>
-                <div class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></div>
+
+        if (codeLanguage === 'mermaid') {
+          // Render Mermaid diagram — Mermaid.js picks up <pre class="mermaid"> tags
+          result.push(`
+            <pre class="mermaid my-8 flex justify-center">${rawCode}</pre>
+          `);
+        } else {
+          result.push(`
+            <div class="relative my-6 rounded-2xl overflow-hidden bg-charcoal text-ivory border border-charcoal-600/50 shadow-xl font-mono text-xs sm:text-sm">
+              <div class="flex items-center justify-between px-4 py-2.5 bg-charcoal-700/60 border-b border-ivory/10 text-ivory/60 text-xs">
+                <span class="font-mono uppercase tracking-wider text-[11px] text-vermilion font-bold">${codeLanguage || 'CODE'}</span>
+                <div class="flex items-center gap-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-vermilion/70"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></div>
+                </div>
               </div>
+              <pre class="p-4 sm:p-6 overflow-x-auto text-ivory/90 leading-relaxed font-mono"><code>${escapeHtml(rawCode)}</code></pre>
             </div>
-            <pre class="p-4 sm:p-6 overflow-x-auto text-ivory/90 leading-relaxed font-mono"><code>${escapeHtml(rawCode)}</code></pre>
-          </div>
-        `);
+          `);
+        }
+
         codeBuffer = [];
         inCodeBlock = false;
       } else {
