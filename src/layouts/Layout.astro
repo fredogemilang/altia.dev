@@ -1,7 +1,7 @@
 ---
 import { SITE_CONFIG } from '../lib/constants';
 import { Navbar } from '../components/layout/Navbar';
-import { Footer } from '../components/layout/Footer';
+import Footer from '../components/layout/Footer.astro';
 import { MagneticCursor } from '../components/effects/MagneticCursor';
 import { FloatingBackToTop } from '../components/ui/FloatingBackToTop';
 import { type Locale, getLocaleFromUrl } from '../i18n/utils';
@@ -100,6 +100,57 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
       import Lenis from 'lenis';
       import { gsap, ScrollTrigger } from '../lib/gsapConfig';
 
+      let lastScrollY = window.scrollY || 0;
+      let isVisible = true;
+
+      const updateNavbar = (scrollY: number) => {
+        const nav = document.getElementById('main-navbar');
+        if (!nav) return;
+
+        // Scrolled background style
+        if (scrollY > 20) {
+          nav.classList.add('navbar-scrolled');
+          nav.setAttribute('data-scrolled', 'true');
+        } else {
+          nav.classList.remove('navbar-scrolled');
+          nav.removeAttribute('data-scrolled');
+        }
+
+        // Smart sticky auto-hide logic
+        const delta = scrollY - lastScrollY;
+        const scrollThreshold = 8;
+
+        if (scrollY <= 60) {
+          // Always visible at the top
+          isVisible = true;
+          nav.classList.remove('-translate-y-full', 'pointer-events-none');
+          nav.classList.add('translate-y-0');
+          nav.setAttribute('data-visible', 'true');
+        } else if (delta > scrollThreshold && isVisible) {
+          // Scrolling down -> hide navbar
+          isVisible = false;
+          nav.classList.remove('translate-y-0');
+          nav.classList.add('-translate-y-full', 'pointer-events-none');
+          nav.setAttribute('data-visible', 'false');
+        } else if (delta < -scrollThreshold && !isVisible) {
+          // Scrolling up -> show navbar
+          isVisible = true;
+          nav.classList.remove('-translate-y-full', 'pointer-events-none');
+          nav.classList.add('translate-y-0');
+          nav.setAttribute('data-visible', 'true');
+        }
+
+        lastScrollY = scrollY;
+      };
+
+      // Native scroll listener for instant feedback
+      const onScroll = () => {
+        const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        updateNavbar(scrollY);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const lenis = new Lenis({
           duration: 1.2,
@@ -114,8 +165,11 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
         // Expose lenis instance globally for smooth programmatic scrolling
         (window as any).__lenis = lenis;
 
-        // Sync Lenis scroll updates with GSAP ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
+        // Sync Lenis scroll updates with GSAP ScrollTrigger and Navbar
+        lenis.on('scroll', (e: any) => {
+          ScrollTrigger.update();
+          updateNavbar(e.scroll || window.scrollY || 0);
+        });
 
         // Sync requestAnimationFrame ticker with GSAP ticker loop
         const updateTicker = (time: number) => {

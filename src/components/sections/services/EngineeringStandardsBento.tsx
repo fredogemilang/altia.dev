@@ -95,7 +95,7 @@ export function EngineeringStandardsBento({
         ref={(el) => {
           cardRefs.current[0] = el;
         }}
-        className="lg:col-span-7 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 transition-all duration-300 relative overflow-hidden group"
+        className="lg:col-span-7 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out relative overflow-hidden group will-change-transform"
       >
         {/* Subtle top blueprint grid */}
         <div className="absolute inset-0 texture-blueprint-grid opacity-40 pointer-events-none" />
@@ -145,7 +145,7 @@ export function EngineeringStandardsBento({
         ref={(el) => {
           cardRefs.current[1] = el;
         }}
-        className="lg:col-span-5 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 transition-all duration-300 relative overflow-hidden group"
+        className="lg:col-span-5 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out relative overflow-hidden group will-change-transform"
       >
         <div className="absolute inset-0 texture-editorial-lines opacity-40 pointer-events-none" />
         <div className="absolute top-0 right-0 w-40 h-40 bg-terracotta/5 rounded-full blur-2xl pointer-events-none" />
@@ -192,7 +192,7 @@ export function EngineeringStandardsBento({
         ref={(el) => {
           cardRefs.current[2] = el;
         }}
-        className="lg:col-span-5 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 transition-all duration-300 relative overflow-hidden group"
+        className="lg:col-span-5 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out relative overflow-hidden group will-change-transform"
       >
         <div className="absolute inset-0 texture-blueprint-grid opacity-30 pointer-events-none" />
 
@@ -231,7 +231,7 @@ export function EngineeringStandardsBento({
         ref={(el) => {
           cardRefs.current[3] = el;
         }}
-        className="lg:col-span-7 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 transition-all duration-300 relative overflow-hidden group"
+        className="lg:col-span-7 rounded-4xl bg-warm-card border border-warm-border p-8 sm:p-10 flex flex-col justify-between shadow-warm-sm hover:shadow-warm-md hover:border-vermilion/30 hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out relative overflow-hidden group will-change-transform"
       >
         <div className="absolute inset-0 texture-editorial-lines opacity-30 pointer-events-none" />
 

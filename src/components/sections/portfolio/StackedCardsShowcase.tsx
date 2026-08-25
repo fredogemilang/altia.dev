@@ -5,6 +5,7 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
+import { getLocalizedPath } from "@/i18n/utils";
 
 interface StackedCardsShowcaseProps {
   projects: Project[];
@@ -133,7 +134,7 @@ export function StackedCardsShowcase({
                     data-cursor-text="VIEW"
                   >
                     <span>{exploreText}</span>
-                    <ArrowUpRight className="w-4 h-4 text-vermilion transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4 h-4 text-vermilion transition-transform duration-200 ease-emil-out group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
@@ -149,9 +150,10 @@ export function StackedCardsShowcase({
                   src={project.image}
                   alt={project.title[lang]}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-emil-out group-hover:scale-105 will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-emil-out" />
               </a>
             </div>
           </div>

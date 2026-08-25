@@ -119,13 +119,13 @@ export function ScrollReveal({
     return () => ctx.revert();
   }, [variant, delay, duration, stagger, start, end, scrub]);
 
-  return (
-    <Component
-      ref={elRef}
-      className={cn("will-change-transform", className)}
-    >
-      {children}
-    </Component>
+  return React.createElement(
+    Component,
+    {
+      ref: elRef,
+      className: cn("will-change-transform", className),
+    },
+    children
   );
 }
 

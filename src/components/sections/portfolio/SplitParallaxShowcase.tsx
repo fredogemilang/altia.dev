@@ -6,6 +6,7 @@ import { Project } from "@/data/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
+import { getLocalizedPath } from "@/i18n/utils";
 
 interface SplitParallaxShowcaseProps {
   projects: Project[];

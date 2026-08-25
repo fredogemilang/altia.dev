@@ -88,26 +88,26 @@ export function MagneticCursor() {
       {/* Center dot */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-vermilion pointer-events-none z-50 transition-opacity duration-150 hidden md:block ${
+        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-vermilion pointer-events-none z-50 transition-[transform,opacity] duration-160 ease-emil-out hidden md:block will-change-transform ${
           isVisible ? "opacity-100" : "opacity-0"
-        } ${isHovered ? "scale-0 opacity-0" : "scale-100"}`}
+        } ${isHovered ? "scale-[0.8] opacity-0" : "scale-100"}`}
       />
 
       {/* Trailing magnetic ring & label */}
       <div
         ref={followerRef}
-        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-50 flex items-center justify-center transition-[width,height,background-color,border-color,opacity] duration-200 ease-out hidden md:flex ${
+        className={`fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-50 flex items-center justify-center transition-[transform,background-color,border-color,opacity] duration-200 ease-emil-out hidden md:flex will-change-transform ${
           isVisible ? "opacity-100" : "opacity-0"
         } ${
           cursorText
-            ? "w-20 h-20 bg-charcoal text-ivory text-[10px] font-display font-bold uppercase tracking-widest border border-charcoal/20 shadow-warm-lg"
+            ? "w-20 h-20 bg-charcoal text-ivory text-[10px] font-display font-bold uppercase tracking-widest border border-charcoal/20 shadow-warm-lg scale-100"
             : isHovered
-            ? "w-12 h-12 bg-vermilion/15 border-2 border-vermilion"
-            : "w-8 h-8 border border-charcoal/30"
+            ? "w-10 h-10 bg-vermilion/15 border-2 border-vermilion scale-125"
+            : "w-8 h-8 border border-charcoal/30 scale-100"
         }`}
       >
         {cursorText && (
-          <span ref={textRef} className="animate-pulse-soft">
+          <span ref={textRef} className="animate-pulse-soft select-none">
             {cursorText}
           </span>
         )}

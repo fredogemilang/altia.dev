@@ -90,6 +90,10 @@ const currentUrl = Astro.url.href;
                 <img
                   src={post.author.avatar}
                   alt={post.author.name}
+                  width={48}
+                  height={48}
+                  loading="eager"
+                  decoding="async"
                   class="w-full h-full object-cover"
                 />
               </div>
@@ -118,6 +122,9 @@ const currentUrl = Astro.url.href;
               <img
                 src={post.coverImage}
                 alt={post.title[locale]}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
                 class="w-full h-full object-cover"
               />
             </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import type { RefObject } from "react";
+import { useEffect, type RefObject } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
 export type AnimationCallback = (
@@ -18,10 +17,10 @@ export function useScrollAnimation(
   callback: AnimationCallback,
   dependencies: unknown[] = []
 ) {
-  useGSAP(
-    () => {
-      if (!scopeRef.current) return;
+  useEffect(() => {
+    if (!scopeRef.current) return;
 
+    const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
       mm.add(
@@ -60,7 +59,11 @@ export function useScrollAnimation(
       return () => {
         mm.revert();
       };
-    },
-    { scope: scopeRef, dependencies }
-  );
+    }, scopeRef);
+
+    return () => {
+      ctx.revert();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scopeRef, ...dependencies]);
 }

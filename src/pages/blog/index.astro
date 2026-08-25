@@ -44,7 +44,7 @@ const posts = await getBlogPosts();
     <section>
       <Container size="large">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <Card
               key={post.slug}
               className="flex flex-col justify-between h-full bg-warm-card border-warm-border group hover:border-vermilion"
@@ -59,6 +59,8 @@ const posts = await getBlogPosts();
                   <img
                     src={post.coverImage}
                     alt={post.title[locale]}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    decoding="async"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </a>
@@ -95,6 +97,10 @@ const posts = await getBlogPosts();
                     <img
                       src={post.author.avatar}
                       alt={post.author.name}
+                      width={28}
+                      height={28}
+                      loading="lazy"
+                      decoding="async"
                       class="w-full h-full object-cover"
                     />
                   </div>

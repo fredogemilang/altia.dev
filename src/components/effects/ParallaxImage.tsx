@@ -10,6 +10,8 @@ interface ParallaxImageProps {
   className?: string;
   aspectRatio?: string;
   speed?: number; // e.g. 15 for 15% parallax shift
+  priority?: boolean;
+  loading?: "eager" | "lazy";
 }
 
 export function ParallaxImage({
@@ -18,6 +20,8 @@ export function ParallaxImage({
   className,
   aspectRatio = "aspect-[16/10]",
   speed = 12,
+  priority = false,
+  loading,
 }: ParallaxImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
@@ -63,7 +67,8 @@ export function ParallaxImage({
         <img
           src={src}
           alt={alt}
-          loading="lazy"
+          loading={priority ? "eager" : (loading || "lazy")}
+          fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           className="w-full h-full object-cover object-top"
         />

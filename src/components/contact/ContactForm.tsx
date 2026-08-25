@@ -153,10 +153,10 @@ export function ContactForm({ locale }: ContactFormProps) {
                     setFormData({ ...formData, service: opt.id })
                   }
                   className={cn(
-                    "px-4 py-3 rounded-2xl text-xs font-display font-medium text-left border transition-all duration-200 flex items-center justify-between",
+                    "px-4 py-3 rounded-2xl text-xs font-display font-medium text-left border transition-[transform,background-color,border-color,color,box-shadow] duration-160 ease-emil-out active:scale-[0.97] flex items-center justify-between will-change-transform",
                     formData.service === opt.id
-                      ? "bg-charcoal text-ivory border-charcoal shadow-sm"
-                      : "bg-ivory text-charcoal-muted border-warm-border hover:border-charcoal/30"
+                      ? "bg-charcoal text-ivory border-charcoal shadow-sm -translate-y-0.5"
+                      : "bg-ivory text-charcoal-muted border-warm-border hover:border-charcoal/30 hover:bg-ivory/90 hover:-translate-y-0.5"
                   )}
                   data-cursor
                 >
@@ -183,10 +183,10 @@ export function ContactForm({ locale }: ContactFormProps) {
                     setFormData({ ...formData, budget: opt.id })
                   }
                   className={cn(
-                    "px-3 py-2.5 rounded-2xl text-xs font-display font-medium text-center border transition-all duration-200",
+                    "px-3 py-2.5 rounded-2xl text-xs font-display font-medium text-center border transition-[transform,background-color,border-color,color,box-shadow] duration-160 ease-emil-out active:scale-[0.97] will-change-transform",
                     formData.budget === opt.id
-                      ? "bg-vermilion text-ivory border-vermilion shadow-sm"
-                      : "bg-ivory text-charcoal-muted border-warm-border hover:border-charcoal/30"
+                      ? "bg-vermilion text-ivory border-vermilion shadow-sm -translate-y-0.5"
+                      : "bg-ivory text-charcoal-muted border-warm-border hover:border-charcoal/30 hover:bg-ivory/90 hover:-translate-y-0.5"
                   )}
                   data-cursor
                 >
@@ -209,7 +209,7 @@ export function ContactForm({ locale }: ContactFormProps) {
                 setFormData({ ...formData, message: e.target.value })
               }
               placeholder={t("messagePlaceholder")}
-              className="w-full px-4 py-3.5 rounded-2xl bg-ivory border border-warm-border text-charcoal text-sm focus:outline-none focus:border-vermilion transition-colors leading-relaxed resize-none"
+              className="w-full px-4 py-3.5 rounded-2xl bg-ivory border border-warm-border text-charcoal text-sm focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out leading-relaxed resize-none"
             />
           </div>
 

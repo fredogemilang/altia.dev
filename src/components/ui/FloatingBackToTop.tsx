@@ -77,16 +77,16 @@ export function FloatingBackToTop() {
       data-cursor="TOP"
       className={cn(
         "fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50",
-        "w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ease-out group backdrop-blur-md",
+        "w-12 h-12 rounded-2xl flex items-center justify-center transition-[transform,opacity,background-color,border-color,box-shadow] duration-220 ease-emil-out active:scale-[0.93] group backdrop-blur-md will-change-transform",
         isOverDark
-          ? "bg-vermilion hover:bg-vermilion-light text-ivory border border-vermilion/80 shadow-vermilion-glow ring-2 ring-vermilion/40"
-          : "bg-charcoal/90 hover:bg-vermilion text-ivory border border-charcoal-500/40 hover:border-vermilion/60 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.45)]",
+          ? "bg-vermilion hover:bg-vermilion-light text-ivory border border-vermilion/80 shadow-vermilion-glow ring-2 ring-vermilion/40 hover:-translate-y-0.5"
+          : "bg-charcoal/90 hover:bg-vermilion text-ivory border border-charcoal-500/40 hover:border-vermilion/60 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.45)] hover:-translate-y-0.5",
         isVisible
           ? "opacity-100 translate-y-0 pointer-events-auto scale-100"
-          : "opacity-0 translate-y-6 pointer-events-none scale-90"
+          : "opacity-0 translate-y-4 pointer-events-none scale-[0.92]"
       )}
     >
-      <ArrowUp className="w-5 h-5 text-ivory transition-transform duration-300 group-hover:-translate-y-1" />
+      <ArrowUp className="w-5 h-5 text-ivory transition-transform duration-200 ease-emil-out group-hover:-translate-y-0.5" />
     </button>
   );
 }

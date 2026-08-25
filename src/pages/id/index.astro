@@ -1,22 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Container } from '../../components/ui/Container';
-import { Card } from '../../components/ui/Card';
-import { Badge } from '../../components/ui/Badge';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { SplitGlobeHero } from '../../components/sections/SplitGlobeHero';
 import { ServicesCardGrid, type ServiceCardItem } from '../../components/sections/services/ServicesCardGrid';
 import { StatsGrid, type StatItem } from '../../components/sections/StatsGrid';
 import { ScrollReveal } from '../../components/effects/ScrollReveal';
 import { StackedCardsSection } from '../../components/sections/portfolio/StackedCardsSection';
-import { getProjects, getTestimonials } from '../../lib/b10cks';
+import { ClientsGridShowcase } from '../../components/sections/clients/ClientsGridShowcase';
+import { getProjects } from '../../lib/b10cks';
 import { t, type Locale } from '../../i18n/utils';
-import { Zap } from 'lucide-react';
 
 const locale: Locale = 'id';
 const allProjects = await getProjects();
 const featuredProjects = allProjects.filter((p) => p.featured);
-const testimonials = await getTestimonials();
 
 const statsData: StatItem[] = [
   {
@@ -142,66 +139,23 @@ const serviceItems: ServiceCardItem[] = [
     </section>
 
     <!-- 5. CLIENT STORIES & TESTIMONIALS -->
-    <section class="relative py-12 sm:py-16 overflow-hidden">
-      {/* Seamless Editorial Diagonal Texture & Ambient Terracotta Glow */}
+    {/* Selected Clients Section */}
+    <section class="relative py-16 sm:py-20 overflow-hidden">
+      {/* Seamless Editorial Diagonal Texture & Ambient Glow */}
       <div class="absolute inset-0 texture-editorial-lines opacity-80 pointer-events-none" />
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-terracotta/4 rounded-full blur-3xl pointer-events-none" />
 
       <Container size="large" className="relative z-10">
         <SectionHeading
           client:visible
-          tag={t(locale, 'Testimonials.tag')}
-          title={t(locale, 'Testimonials.title')}
-          subtitle={t(locale, 'Testimonials.subtitle')}
+          tag={t(locale, 'Clients.tag')}
+          title={t(locale, 'Clients.title')}
+          subtitle={t(locale, 'Clients.subtitle')}
         />
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-          {testimonials.map((item, index) => (
-            <ScrollReveal
-              client:visible
-              key={item.id}
-              variant="fade-up"
-              delay={index * 0.15}
-              className="h-full"
-            >
-              <Card className="p-8 sm:p-10 h-full flex flex-col justify-between bg-warm-card border-warm-border rounded-3xl">
-                <div>
-                  {item.metric && (
-                    <Badge
-                      variant="vermilion"
-                      size="sm"
-                      className="mb-8 font-bold uppercase tracking-wider text-[11px] px-3 py-1 inline-flex items-center gap-1.5"
-                    >
-                      <Zap className="w-3.5 h-3.5" />
-                      <span>{item.metric[locale]}</span>
-                    </Badge>
-                  )}
-                  <p class="text-base sm:text-lg text-charcoal leading-relaxed mb-10 italic">
-                    &ldquo;{item.quote[locale]}&rdquo;
-                  </p>
-                </div>
-
-                <div class="flex items-center gap-3.5 pt-6 border-t border-warm-border">
-                  <div class="w-11 h-11 rounded-full bg-cream overflow-hidden relative flex-shrink-0">
-                    <img
-                      src={item.avatar}
-                      alt={item.author}
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm sm:text-base text-charcoal leading-tight">
-                      {item.author}
-                    </span>
-                    <span class="text-xs sm:text-sm text-charcoal-muted leading-tight mt-0.5">
-                      {item.role[locale]}, {item.company}
-                    </span>
-                  </div>
-                </div>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
+        <ScrollReveal client:visible variant="fade-up">
+          <ClientsGridShowcase client:visible locale={locale} />
+        </ScrollReveal>
       </Container>
     </section>
   </div>

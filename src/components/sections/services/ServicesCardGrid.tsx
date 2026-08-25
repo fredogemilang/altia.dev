@@ -175,10 +175,16 @@ export function ServicesCardGrid({ items, exploreText }: ServicesCardGridProps) 
           }}
           className="will-change-transform h-full"
         >
-          <Card className="p-8 sm:p-10 h-full flex flex-col justify-between group hover:border-vermilion/80 transition-all duration-300 rounded-3xl bg-[#FFFDF9] border-2 border-warm-border shadow-[0_12px_30px_rgba(47,42,38,0.06)] hover:shadow-[0_20px_45px_rgba(227,66,52,0.12)]">
+          <Card className="p-8 sm:p-10 h-full flex flex-col justify-between group hover:border-vermilion/80 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out rounded-3xl bg-[#FFFDF9] border-2 border-warm-border shadow-[0_12px_30px_rgba(47,42,38,0.06)] hover:shadow-[0_20px_45px_rgba(227,66,52,0.12)]">
             <div>
-              <a href={item.href} className="inline-block" data-cursor data-cursor-text="EXPLORE">
-                <div className="service-icon-badge w-14 h-14 rounded-2xl bg-cream flex items-center justify-center text-vermilion mb-8 group-hover:scale-110 group-hover:bg-vermilion group-hover:text-ivory transition-all duration-300 shadow-sm will-change-transform">
+              <a
+                href={item.href}
+                aria-label={`Explore ${item.title}`}
+                className="inline-block"
+                data-cursor
+                data-cursor-text="EXPLORE"
+              >
+                <div className="service-icon-badge w-14 h-14 rounded-2xl bg-cream flex items-center justify-center text-vermilion mb-8 group-hover:scale-110 group-hover:bg-vermilion group-hover:text-ivory transition-[transform,background-color,color] duration-200 ease-emil-out shadow-sm will-change-transform">
                   {renderIcon(item.icon)}
                 </div>
               </a>
@@ -186,7 +192,7 @@ export function ServicesCardGrid({ items, exploreText }: ServicesCardGridProps) 
                 {item.number}
               </span>
               <a href={item.href} className="block group/title" data-cursor data-cursor-text="EXPLORE">
-                <h3 className="font-display text-2xl sm:text-3xl font-black text-charcoal mb-4 group-hover:text-vermilion transition-colors">
+                <h3 className="font-display text-2xl sm:text-3xl font-black text-charcoal mb-4 group-hover:text-vermilion transition-colors duration-160">
                   {item.title}
                 </h3>
               </a>
@@ -201,7 +207,7 @@ export function ServicesCardGrid({ items, exploreText }: ServicesCardGridProps) 
               </span>
               <a
                 href={item.href}
-                className="text-xs font-display font-bold text-vermilion flex items-center gap-1.5 group-hover:translate-x-1 transition-transform"
+                className="text-xs font-display font-bold text-vermilion flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-200 ease-emil-out"
                 data-cursor
                 data-cursor-text="EXPLORE"
               >

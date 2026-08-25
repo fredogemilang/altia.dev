@@ -81,7 +81,7 @@ export function Footer({ locale = "en" }: FooterProps) {
                 href={SITE_CONFIG.links.twitter}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-colors duration-200"
+                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-[background-color,transform] duration-160 ease-emil-out hover:scale-105 active:scale-[0.94] will-change-transform"
                 aria-label="Twitter"
               >
                 <Twitter className="w-4 h-4" />
@@ -90,7 +90,7 @@ export function Footer({ locale = "en" }: FooterProps) {
                 href={SITE_CONFIG.links.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-colors duration-200"
+                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-[background-color,transform] duration-160 ease-emil-out hover:scale-105 active:scale-[0.94] will-change-transform"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -99,7 +99,7 @@ export function Footer({ locale = "en" }: FooterProps) {
                 href={SITE_CONFIG.links.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-colors duration-200"
+                className="w-9 h-9 rounded-full bg-charcoal-500/40 hover:bg-vermilion flex items-center justify-center text-ivory transition-[background-color,transform] duration-160 ease-emil-out hover:scale-105 active:scale-[0.94] will-change-transform"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -116,7 +116,7 @@ export function Footer({ locale = "en" }: FooterProps) {
               <a
                 key={link.href}
                 href={getLocalizedPath(link.href, locale)}
-                className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
+                className="text-sm text-ivory/60 hover:text-vermilion hover:translate-x-0.5 transition-[color,transform] duration-160 ease-emil-out w-fit will-change-transform"
               >
                 {t(locale, `Navigation.${link.labelKey}`)}
               </a>
@@ -130,25 +130,25 @@ export function Footer({ locale = "en" }: FooterProps) {
             </h4>
             <a
               href={getLocalizedPath("/services#web", locale)}
-              className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
+              className="text-sm text-ivory/60 hover:text-vermilion hover:translate-x-0.5 transition-[color,transform] duration-160 ease-emil-out w-fit will-change-transform"
             >
               Web Development
             </a>
             <a
               href={getLocalizedPath("/services#app", locale)}
-              className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
+              className="text-sm text-ivory/60 hover:text-vermilion hover:translate-x-0.5 transition-[color,transform] duration-160 ease-emil-out w-fit will-change-transform"
             >
               Mobile & Desktop Apps
             </a>
             <a
               href={getLocalizedPath("/services#ai", locale)}
-              className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
+              className="text-sm text-ivory/60 hover:text-vermilion hover:translate-x-0.5 transition-[color,transform] duration-160 ease-emil-out w-fit will-change-transform"
             >
               AI Automation & Systems
             </a>
             <a
               href={getLocalizedPath("/pricing", locale)}
-              className="text-sm text-ivory/60 hover:text-vermilion transition-colors w-fit"
+              className="text-sm text-ivory/60 hover:text-vermilion hover:translate-x-0.5 transition-[color,transform] duration-160 ease-emil-out w-fit will-change-transform"
             >
               Pricing & Packages
             </a>

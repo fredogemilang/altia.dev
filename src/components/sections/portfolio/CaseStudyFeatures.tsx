@@ -30,10 +30,10 @@ export function CaseStudyFeatures({ features, lang }: CaseStudyFeaturesProps) {
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="p-8 sm:p-9 rounded-3xl bg-[#FFFDF9] border border-warm-border shadow-[0_12px_30px_rgba(47,42,38,0.05)] hover:border-vermilion/50 transition-all duration-300 flex flex-col justify-between group"
+              className="p-8 sm:p-9 rounded-3xl bg-[#FFFDF9] border border-warm-border shadow-[0_12px_30px_rgba(47,42,38,0.05)] hover:border-vermilion/50 hover:shadow-warm-lg hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-250 ease-emil-out flex flex-col justify-between group will-change-transform"
             >
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-cream flex items-center justify-center text-vermilion mb-6 group-hover:scale-110 group-hover:bg-vermilion group-hover:text-ivory transition-all duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-cream flex items-center justify-center text-vermilion mb-6 group-hover:scale-110 group-hover:bg-vermilion group-hover:text-ivory transition-[transform,background-color,color] duration-200 ease-emil-out will-change-transform">
                   <Zap className="w-6 h-6" />
                 </div>
 

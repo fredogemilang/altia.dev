@@ -49,7 +49,7 @@ export function CaseStudyArchitecture({
           {architecture.nodes.map((node, index) => (
             <div
               key={index}
-              className="p-6 sm:p-7 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-vermilion/60 transition-all duration-300 flex flex-col justify-between group hover:bg-white/[0.08]"
+              className="p-6 sm:p-7 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-vermilion/60 hover:-translate-y-1 transition-[transform,border-color,background-color] duration-250 ease-emil-out flex flex-col justify-between group hover:bg-white/[0.08] will-change-transform"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">

@@ -164,7 +164,7 @@ export function EstimateResult({
         <button
           type="button"
           onClick={onRecalculate}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-bold text-charcoal hover:text-vermilion hover:border-vermilion/40 transition-all self-start sm:self-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-bold text-charcoal hover:text-vermilion hover:border-vermilion/40 active:scale-[0.96] transition-[color,border-color,transform] duration-160 ease-emil-out self-start sm:self-auto"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>{t("recalculate")}</span>
@@ -318,7 +318,7 @@ export function EstimateResult({
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-ivory font-display font-bold text-sm sm:text-base shadow-lg transition-all"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-ivory font-display font-bold text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-160 ease-emil-out will-change-transform"
             data-cursor="WHATSAPP"
           >
             <MessageSquare className="w-4 h-4" />

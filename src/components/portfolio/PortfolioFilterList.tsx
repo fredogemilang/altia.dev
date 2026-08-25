@@ -26,13 +26,31 @@ export function PortfolioFilterList({
   const [activeCategory, setActiveCategory] = useState<
     "all" | "web" | "app" | "ai"
   >("all");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filteredProjects =
-    activeCategory === "all"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tagParam = params.get("tag") || params.get("company");
+      if (tagParam) {
+        setSelectedTag(tagParam);
+      }
+    }
+  }, []);
+
+  const filteredProjects = projects.filter((p) => {
+    const matchesCategory =
+      activeCategory === "all" || p.category === activeCategory;
+    const matchesTag =
+      !selectedTag ||
+      p.tags?.some((t) => t.toLowerCase() === selectedTag.toLowerCase()) ||
+      p.client.toLowerCase().includes(selectedTag.toLowerCase()) ||
+      p.title.en.toLowerCase().includes(selectedTag.toLowerCase()) ||
+      p.title.id.toLowerCase().includes(selectedTag.toLowerCase());
+    return matchesCategory && matchesTag;
+  });
 
   useEffect(() => {
     const el = containerRef.current;
@@ -44,32 +62,24 @@ export function PortfolioFilterList({
     if (!cards.length) return;
 
     const ctx = gsap.context(() => {
-      cards.forEach((card) => {
-        gsap.set(card, { opacity: 0.15, y: 60, scale: 0.95 });
-      });
+      // Set initial state
+      gsap.set(cards, { opacity: 0, y: 36, scale: 0.97 });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          end: "bottom 20%",
-          scrub: 1.0,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      cards.forEach((card, index) => {
-        tl.to(
-          card,
-          {
+      // Domino Wave Reveal via ScrollTrigger Batch
+      ScrollTrigger.batch(cards, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) => {
+          gsap.to(batch, {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          index === 0 ? 0 : ">-0.45"
-        );
+            duration: 0.5,
+            stagger: 0.12, // Snappy domino delay between adjacent cards
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+        },
       });
     }, el);
 
@@ -86,25 +96,56 @@ export function PortfolioFilterList({
   return (
     <div className="flex flex-col gap-10">
       {/* Category Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-warm-border">
-        {categories.map((cat) => {
-          const isActive = activeCategory === cat.id;
-          return (
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-warm-border">
+        <div className="flex flex-wrap items-center gap-2">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={cn(
+                  "px-5 py-2 rounded-full font-display text-xs sm:text-sm font-semibold transition-[background-color,color,box-shadow,transform] duration-160 ease-emil-out active:scale-[0.96] select-none",
+                  isActive
+                    ? "bg-vermilion text-ivory shadow-warm hover:-translate-y-0.5"
+                    : "bg-cream text-charcoal-500 hover:text-charcoal hover:bg-ivory hover:-translate-y-0.5"
+                )}
+                data-cursor
+              >
+                {t(cat.labelKey)}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Tag Filter Badge */}
+        {selectedTag && (
+          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cream border border-warm-border text-xs font-display animate-popover-enter">
+            <span className="text-charcoal-muted">
+              {lang === "id" ? "Tag:" : "Tag:"}
+            </span>
+            <span className="font-bold text-charcoal font-mono bg-warm-border/50 px-2 py-0.5 rounded-md text-[11px]">
+              #{selectedTag}
+            </span>
+            <span className="text-[11px] text-charcoal-muted font-mono">
+              ({filteredProjects.length})
+            </span>
             <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={cn(
-                "px-5 py-2 rounded-full font-display text-xs sm:text-sm font-semibold transition-all duration-200",
-                isActive
-                  ? "bg-vermilion text-ivory shadow-sm"
-                  : "bg-cream text-charcoal-500 hover:text-charcoal hover:bg-ivory"
-              )}
-              data-cursor
+              type="button"
+              onClick={() => {
+                setSelectedTag(null);
+                const url = new URL(window.location.href);
+                url.searchParams.delete("tag");
+                url.searchParams.delete("company");
+                window.history.replaceState({}, "", url.toString());
+              }}
+              className="ml-1 w-4 h-4 rounded-full bg-charcoal/10 hover:bg-vermilion hover:text-ivory inline-flex items-center justify-center text-[10px] font-bold transition-colors"
+              title={lang === "id" ? "Hapus filter tag" : "Clear tag filter"}
             >
-              {t(cat.labelKey)}
+              ×
             </button>
-          );
-        })}
+          </div>
+        )}
       </div>
 
       {/* Projects Grid */}
@@ -132,6 +173,7 @@ export function PortfolioFilterList({
                   alt={project.title[lang]}
                   aspectRatio="aspect-[16/10]"
                   className="w-full"
+                  priority={index < 2}
                 />
               </a>
               <div className="flex items-center justify-between mb-3">

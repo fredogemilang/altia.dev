@@ -63,7 +63,7 @@ export function RelatedArticles({
             <a
               key={post.slug}
               href={getLocalizedPath(`/blog/${post.slug}`, locale)}
-              className="group flex flex-col h-full bg-gradient-to-b from-[#FFFDF9] to-[#FAF4EB] border border-warm-border rounded-3xl overflow-hidden hover:border-vermilion/50 hover:shadow-lg transition-all duration-300"
+              className="group flex flex-col h-full bg-gradient-to-b from-[#FFFDF9] to-[#FAF4EB] border border-warm-border rounded-3xl overflow-hidden hover:border-vermilion/50 hover:shadow-warm-lg hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] transition-[border-color,box-shadow,transform] duration-250 ease-emil-out will-change-transform"
               data-cursor
             >
               {/* Cover Image Container */}
@@ -71,7 +71,7 @@ export function RelatedArticles({
                 <img
                   src={post.coverImage}
                   alt={post.title[locale]}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-emil-out group-hover:scale-105 will-change-transform"
                   loading="lazy"
                 />
                 <div className="absolute top-4 left-4">
@@ -106,6 +106,10 @@ export function RelatedArticles({
                     <img
                       src={post.author.avatar}
                       alt={post.author.name}
+                      width={28}
+                      height={28}
+                      loading="lazy"
+                      decoding="async"
                       className="w-7 h-7 rounded-full object-cover border border-warm-border"
                     />
                     <span className="font-display font-medium text-xs text-charcoal">

@@ -29,7 +29,7 @@ export function QuestionStep({ question, value, locale = "en", onChange }: Quest
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full animate-popover-enter origin-top">
       {/* Question Header */}
       <div className="mb-6 sm:mb-8">
         <h3 className="font-display font-black text-2xl sm:text-3xl text-charcoal tracking-tight leading-tight mb-2.5">
@@ -93,7 +93,7 @@ export function QuestionStep({ question, value, locale = "en", onChange }: Quest
             onChange={(e) => onChange(e.target.value)}
             rows={5}
             placeholder={question.placeholderKey ? t(question.placeholderKey) : ""}
-            className="w-full px-5 py-4 rounded-2xl bg-cream/50 border border-warm-border/80 text-charcoal placeholder:text-charcoal-muted/60 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion transition-all text-sm sm:text-base resize-y"
+            className="w-full px-5 py-4 rounded-2xl bg-cream/50 border border-warm-border/80 text-charcoal placeholder:text-charcoal-muted/60 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out text-sm sm:text-base resize-y"
           />
         </div>
       )}

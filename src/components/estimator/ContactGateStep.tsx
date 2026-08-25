@@ -117,7 +117,7 @@ export function ContactGateStep({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t("namePlaceholder")}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-all"
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out"
               />
             </div>
           </div>
@@ -135,7 +135,7 @@ export function ContactGateStep({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t("emailPlaceholder")}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-all"
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out"
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ export function ContactGateStep({
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t("phonePlaceholder")}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-all"
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out"
               />
             </div>
             <p className="text-[11px] text-charcoal-muted mt-1.5 pl-1">
@@ -178,7 +178,7 @@ export function ContactGateStep({
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 placeholder={t("companyPlaceholder")}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-all"
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-cream/50 border border-warm-border text-charcoal placeholder:text-charcoal-muted/50 focus:outline-none focus:border-vermilion focus:ring-1 focus:ring-vermilion text-sm transition-[border-color,box-shadow,background-color] duration-160 ease-emil-out"
               />
             </div>
           </div>
@@ -190,7 +190,7 @@ export function ContactGateStep({
             type="button"
             onClick={onBack}
             disabled={isSubmitting}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-display font-bold text-charcoal-muted hover:text-charcoal hover:bg-cream transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-display font-bold text-charcoal-muted hover:text-charcoal hover:bg-cream transition-[color,background-color,transform] duration-160 ease-emil-out active:scale-[0.96]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{t("back")}</span>

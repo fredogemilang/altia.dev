@@ -25,7 +25,7 @@ export function EstimatorProgressBar({
       </div>
       <div className="w-full h-2 rounded-full bg-cream border border-warm-border/60 overflow-hidden p-0.5">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-vermilion to-terracotta transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-vermilion to-terracotta transition-[width] duration-300 ease-emil-out"
           style={{ width: `${percentage}%` }}
         />
       </div>

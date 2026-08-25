@@ -14,6 +14,7 @@ import { ContactGateStep, type ContactData } from "./ContactGateStep";
 import { EstimateResult } from "./EstimateResult";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight, Lock, Loader2 } from "lucide-react";
 
 interface EstimatorWizardProps {
@@ -193,11 +194,12 @@ export function EstimatorWizard({ locale = "en" }: EstimatorWizardProps) {
                 type="button"
                 onClick={handleBack}
                 disabled={isFirstStep}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-display font-bold transition-all ${
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-display font-bold transition-[color,background-color,transform] duration-160 ease-emil-out active:scale-[0.96]",
                   isFirstStep
                     ? "opacity-0 pointer-events-none"
                     : "text-charcoal-muted hover:text-charcoal hover:bg-cream"
-                }`}
+                )}
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>{t("back")}</span>

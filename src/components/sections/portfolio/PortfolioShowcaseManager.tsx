@@ -63,8 +63,9 @@ export function PortfolioShowcaseManager({
               return (
                 <button
                   key={opt.id}
+                  type="button"
                   onClick={() => setMode(opt.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-display text-xs font-bold transition-all duration-200 ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-display text-xs font-bold transition-[background-color,color,box-shadow,transform] duration-160 ease-emil-out active:scale-[0.96] will-change-transform ${
                     isActive
                       ? "bg-charcoal text-ivory shadow-sm"
                       : "text-charcoal-500 hover:text-charcoal hover:bg-ivory"
@@ -98,14 +99,16 @@ export function PortfolioShowcaseManager({
                 {projects.map((project) => (
                   <Card
                     key={project.slug}
-                    className="p-6 sm:p-8 h-full flex flex-col justify-between group hover:border-vermilion transition-all duration-300 rounded-3xl bg-warm-card border-2 border-warm-border shadow-warm"
+                    className="p-6 sm:p-8 h-full flex flex-col justify-between group hover:border-vermilion transition-[transform,border-color,box-shadow] duration-250 ease-emil-out rounded-3xl bg-warm-card border-2 border-warm-border shadow-warm will-change-transform"
                   >
                     <div>
                       <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-charcoal">
                         <img
                           src={project.image}
                           alt={project.title[lang]}
-                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover transition-transform duration-500 ease-emil-out group-hover:scale-105 will-change-transform"
                         />
                       </div>
                       <div className="flex items-center justify-between mb-2">

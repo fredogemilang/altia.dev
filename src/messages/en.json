@@ -207,6 +207,11 @@
       "description": "Startups, agencies, and mid-size companies worldwide"
     }
   },
+  "Clients": {
+    "tag": "Our Clients",
+    "title": "Trusted by visionary teams & industry leaders",
+    "subtitle": "From emerging startups to established enterprises across global markets."
+  },
   "Testimonials": {
     "tag": "Testimony",
     "title": "What they say",

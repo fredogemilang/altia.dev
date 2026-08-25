@@ -116,14 +116,14 @@ export function TableOfContents({ toc, title = "Table of Contents" }: TableOfCon
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => scrollToHeading(e, item.id)}
-                className={`group flex items-start gap-2.5 py-1.5 px-2 rounded-xl text-xs sm:text-[13px] leading-snug transition-all duration-200 ${
+                className={`group flex items-start gap-2.5 py-1.5 px-2 rounded-xl text-xs sm:text-[13px] leading-snug transition-[transform,color,background-color] duration-160 ease-emil-out will-change-transform ${
                   isActive
                     ? "text-vermilion font-bold bg-vermilion/5 translate-x-1"
                     : "text-charcoal-muted hover:text-charcoal hover:translate-x-0.5"
                 } ${item.level === 3 ? "pl-5 text-xs opacity-90" : ""}`}
               >
                 <span
-                  className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 transition-colors ${
+                  className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 transition-[background-color,transform] duration-160 ease-emil-out ${
                     isActive ? "bg-vermilion scale-125" : "bg-warm-border group-hover:bg-charcoal-muted"
                   }`}
                 />

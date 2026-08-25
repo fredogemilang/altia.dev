@@ -54,7 +54,9 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
             <img
               src={gallery[activeImageIndex] || gallery[0]}
               alt={`${title} screenshot ${activeImageIndex + 1}`}
-              className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-top transition-transform duration-500 ease-emil-out group-hover:scale-[1.02] will-change-transform"
             />
           </div>
         </div>
@@ -65,8 +67,9 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
             {gallery.map((img, idx) => (
               <button
                 key={idx}
+                type="button"
                 onClick={() => setActiveImageIndex(idx)}
-                className={`relative aspect-[16/9] rounded-2xl overflow-hidden border-2 transition-all duration-200 group text-left ${
+                className={`relative aspect-[16/9] rounded-2xl overflow-hidden border-2 transition-[transform,border-color,opacity,box-shadow] duration-200 ease-emil-out active:scale-[0.97] group text-left will-change-transform ${
                   activeImageIndex === idx
                     ? "border-vermilion shadow-vermilion-glow scale-[1.02]"
                     : "border-warm-border opacity-70 hover:opacity-100 hover:border-charcoal/40"

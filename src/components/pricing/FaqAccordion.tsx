@@ -76,30 +76,40 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
               itemRefs.current[index] = el;
             }}
             className={cn(
-              "rounded-2xl border transition-all duration-200 overflow-hidden",
+              "rounded-2xl border transition-[border-color,background-color,box-shadow] duration-220 ease-emil-out overflow-hidden will-change-transform",
               isOpen
-                ? "bg-warm-card border-vermilion/40 shadow-sm"
-                : "bg-cream/40 border-warm-border hover:border-charcoal/20"
+                ? "bg-warm-card border-vermilion/50 shadow-warm"
+                : "bg-cream/40 border-warm-border hover:border-charcoal/30 hover:bg-cream/70"
             )}
           >
             <button
+              type="button"
               onClick={() => toggle(index)}
-              className="w-full p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-charcoal"
+              aria-expanded={isOpen}
+              className="w-full p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-charcoal transition-[color,transform] duration-160 ease-emil-out active:scale-[0.99] select-none group"
               data-cursor
             >
-              <span>{item.question}</span>
-              <ChevronDown
+              <span className={cn("transition-colors duration-160 ease-emil-out", isOpen ? "text-vermilion" : "text-charcoal")}>
+                {item.question}
+              </span>
+              <div
                 className={cn(
-                  "w-5 h-5 text-vermilion flex-shrink-0 transition-transform duration-300",
-                  isOpen && "rotate-180"
+                  "w-8 h-8 rounded-full flex items-center justify-center transition-[transform,background-color,color] duration-220 ease-emil-out flex-shrink-0",
+                  isOpen
+                    ? "bg-vermilion/15 text-vermilion rotate-180"
+                    : "bg-cream text-charcoal-muted group-hover:text-charcoal"
                 )}
-              />
-            </button>
-            {isOpen && (
-              <div className="px-6 pb-6 text-sm sm:text-base text-charcoal-muted leading-relaxed border-t border-warm-border/40 pt-4">
-                {item.answer}
+              >
+                <ChevronDown className="w-4 h-4" />
               </div>
-            )}
+            </button>
+            <div className={cn("accordion-grid-container", isOpen && "is-open")}>
+              <div className="accordion-grid-content">
+                <div className="px-6 pb-6 text-sm sm:text-base text-charcoal-muted leading-relaxed border-t border-warm-border/40 pt-4">
+                  {item.answer}
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}

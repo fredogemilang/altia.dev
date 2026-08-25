@@ -28,7 +28,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-3xl p-6 sm:p-8 transition-all duration-300 relative overflow-hidden",
+          "rounded-3xl p-6 sm:p-8 transition-[transform,box-shadow,border-color,background-color] duration-250 ease-emil-out relative overflow-hidden",
           variantStyles[variant],
           hoverEffect &&
             "hover:shadow-warm-lg hover:-translate-y-1 hover:border-vermilion/40",

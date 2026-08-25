@@ -91,7 +91,7 @@ export function ShareArticle({
           href={twitterUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-charcoal hover:bg-ivory hover:border-charcoal/30 hover:scale-105 transition-all shadow-xs"
+          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-charcoal hover:bg-ivory hover:border-charcoal/30 hover:scale-105 active:scale-[0.94] transition-[transform,background-color,border-color,color] duration-160 ease-emil-out shadow-xs will-change-transform"
           title="Share on X / Twitter"
           aria-label="Share on X"
         >
@@ -103,7 +103,7 @@ export function ShareArticle({
           href={linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-[#0077B5] hover:bg-ivory hover:border-[#0077B5]/40 hover:scale-105 transition-all shadow-xs"
+          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-[#0077B5] hover:bg-ivory hover:border-[#0077B5]/40 hover:scale-105 active:scale-[0.94] transition-[transform,background-color,border-color,color] duration-160 ease-emil-out shadow-xs will-change-transform"
           title="Share on LinkedIn"
           aria-label="Share on LinkedIn"
         >
@@ -115,7 +115,7 @@ export function ShareArticle({
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-[#25D366] hover:bg-ivory hover:border-[#25D366]/40 hover:scale-105 transition-all shadow-xs"
+          className="w-10 h-10 rounded-2xl bg-cream border border-warm-border flex items-center justify-center text-charcoal-muted hover:text-[#25D366] hover:bg-ivory hover:border-[#25D366]/40 hover:scale-105 active:scale-[0.94] transition-[transform,background-color,border-color,color] duration-160 ease-emil-out shadow-xs will-change-transform"
           title="Share on WhatsApp"
           aria-label="Share on WhatsApp"
         >
@@ -124,8 +124,9 @@ export function ShareArticle({
 
         {/* Copy Link Button */}
         <button
+          type="button"
           onClick={handleCopy}
-          className={`flex-1 min-w-[130px] h-10 px-3.5 rounded-2xl border flex items-center justify-center gap-2 text-xs font-mono font-bold transition-all shadow-xs ${
+          className={`flex-1 min-w-[130px] h-10 px-3.5 rounded-2xl border flex items-center justify-center gap-2 text-xs font-mono font-bold transition-[transform,background-color,border-color,color] duration-160 ease-emil-out active:scale-[0.96] shadow-xs will-change-transform ${
             copied
               ? "bg-emerald-500 text-ivory border-emerald-600 scale-[1.02]"
               : "bg-cream border-warm-border text-charcoal-muted hover:text-charcoal hover:bg-ivory hover:border-charcoal/30"

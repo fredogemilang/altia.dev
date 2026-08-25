@@ -3,14 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { Container } from '../components/ui/Container';
 import { Button } from '../components/ui/Button';
 import { getLocaleFromUrl } from '../i18n/utils';
-import { t } from '../i18n/translations';
 
 const locale = getLocaleFromUrl(Astro.url);
 ---
 
 <Layout title="404 — Page Not Found" locale={locale}>
   <section class="flex-1 flex items-center justify-center min-h-[60vh] py-20">
-    <Container size="small" class="text-center">
+    <Container size="small" className="text-center">
       <!-- Animated 404 number -->
       <div class="relative mb-8">
         <h1 class="font-display text-[120px] sm:text-[180px] lg:text-[220px] font-black text-vermilion/10 leading-none select-none">

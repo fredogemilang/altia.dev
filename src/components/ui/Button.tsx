@@ -32,19 +32,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "relative inline-flex items-center justify-center font-display font-medium rounded-full transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none group overflow-hidden select-none";
+      "relative inline-flex items-center justify-center font-display font-medium rounded-full transition-[transform,background-color,border-color,box-shadow,color,opacity] duration-160 ease-emil-out active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none group overflow-hidden select-none will-change-transform";
 
     const variantStyles = {
       primary:
-        "bg-vermilion text-ivory hover:bg-vermilion-hover shadow-warm hover:shadow-vermilion-glow",
+        "bg-vermilion text-ivory hover:bg-vermilion-hover shadow-warm hover:shadow-vermilion-glow hover:-translate-y-0.5 active:translate-y-0",
       secondary:
-        "bg-cream text-charcoal border border-warm-border hover:bg-ivory hover:border-charcoal/40 shadow-warm",
+        "bg-cream text-charcoal border border-warm-border hover:bg-ivory hover:border-charcoal/40 shadow-warm hover:-translate-y-0.5 active:translate-y-0",
       dark:
-        "bg-charcoal text-ivory hover:bg-charcoal-500 shadow-warm",
+        "bg-charcoal text-ivory hover:bg-charcoal-500 shadow-warm hover:-translate-y-0.5 active:translate-y-0",
       ghost:
-        "bg-transparent text-charcoal hover:bg-cream/70",
+        "bg-transparent text-charcoal hover:bg-cream/70 active:bg-cream",
       outline:
-        "bg-transparent border border-vermilion text-vermilion hover:bg-vermilion hover:text-ivory",
+        "bg-transparent border border-vermilion text-vermilion hover:bg-vermilion hover:text-ivory hover:-translate-y-0.5 active:translate-y-0",
     };
 
     const sizeStyles = {

@@ -49,10 +49,10 @@ export function OptionCard({
       type="button"
       onClick={() => onSelect(value)}
       className={cn(
-        "w-full text-left p-5 sm:p-6 rounded-2xl border transition-all duration-200 flex flex-col justify-between group relative select-none",
+        "w-full text-left p-5 sm:p-6 rounded-2xl border transition-[transform,background-color,border-color,box-shadow] duration-160 ease-emil-out active:scale-[0.98] flex flex-col justify-between group relative select-none will-change-transform",
         isSelected
-          ? "bg-ivory border-vermilion shadow-vermilion-glow ring-1 ring-vermilion/50"
-          : "bg-cream/50 border-warm-border/80 hover:bg-ivory hover:border-vermilion/40 hover:shadow-sm"
+          ? "bg-ivory border-vermilion shadow-vermilion-glow ring-1 ring-vermilion/50 -translate-y-0.5"
+          : "bg-cream/50 border-warm-border/80 hover:bg-ivory hover:border-vermilion/40 hover:shadow-sm hover:-translate-y-0.5"
       )}
       data-cursor={isSelected ? "ACTIVE" : "SELECT"}
     >
@@ -62,8 +62,8 @@ export function OptionCard({
             {icon && (
               <div
                 className={cn(
-                  "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
-                  isSelected ? "bg-vermilion/15" : "bg-cream group-hover:bg-vermilion/10"
+                  "w-10 h-10 rounded-xl flex items-center justify-center transition-[background-color,transform] duration-160 ease-emil-out",
+                  isSelected ? "bg-vermilion/15 scale-105" : "bg-cream group-hover:bg-vermilion/10"
                 )}
               >
                 {renderIcon()}
@@ -84,17 +84,17 @@ export function OptionCard({
             {/* Selection Checkmark Indicator */}
             <div
               className={cn(
-                "w-6 h-6 rounded-full flex items-center justify-center border transition-all",
+                "w-6 h-6 flex items-center justify-center border transition-[transform,background-color,border-color,color] duration-160 ease-emil-out",
                 isMulti ? "rounded-lg" : "rounded-full",
                 isSelected
-                  ? "bg-vermilion border-vermilion text-ivory"
-                  : "border-warm-border/80 bg-cream/60 group-hover:border-vermilion/40 text-transparent"
+                  ? "bg-vermilion border-vermilion text-ivory scale-105 shadow-xs"
+                  : "border-warm-border/80 bg-cream/60 group-hover:border-vermilion/40 text-transparent scale-100"
               )}
             >
               {isMulti ? (
                 <Check className="w-3.5 h-3.5 stroke-[3]" />
               ) : (
-                <div className={cn("w-2 h-2 rounded-full", isSelected ? "bg-ivory" : "bg-transparent")} />
+                <div className={cn("w-2 h-2 rounded-full transition-transform duration-160", isSelected ? "bg-ivory scale-100" : "bg-transparent scale-50")} />
               )}
             </div>
           </div>
