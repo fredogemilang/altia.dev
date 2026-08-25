@@ -763,7 +763,7 @@ Sistem perlu mengenali hal-hal seperti:
 - informasi mana yang layak menjadi category
 - bagian mana yang sebenarnya masih memiliki hubungan satu sama lain
 
-Di sinilah AI-assisted processing dapat memberikan nilai yang cukup besar.
+Di sinilah AI-assisted processing dapat memberikan nilai tambah yang signifikan.
 
 Daripada seluruh interpretasi bergantung pada rule yang sudah ditentukan sebelumnya, AI dapat membantu memahami struktur semantik dokumen.
 
@@ -836,7 +836,7 @@ Human review menjadi quality gate terakhir sebelum knowledge masuk ke sistem.
 
 ---
 
-## Di Mana AI Memberikan Nilai?
+## Di Mana AI Memberikan Nilai Tambah?
 
 AI sangat berguna ketika proses transformasi membutuhkan interpretation, bukan sekadar extraction.
 
@@ -862,9 +862,9 @@ Dengan kata lain, AI seharusnya bekerja **di dalam workflow yang sudah didefinis
 
 ## Kenapa Human Review Tetap Penting?
 
-Automation tidak menghilangkan kebutuhan terhadap judgment.
+Automation tidak menghilangkan kebutuhan terhadap penilaian.
 
-Automation hanya mengubah di mana judgment tersebut dilakukan.
+Automation hanya mengubah di mana penilaian tersebut dilakukan.
 
 Model yang lebih masuk akal adalah:
 
@@ -1136,7 +1136,7 @@ Yang penting adalah kompleksitas tersebut digunakan untuk menyelesaikan business
 
 ## Kesimpulan
 
-Mengubah PDF kompleks menjadi structured knowledge sebenarnya bukan terutama masalah PDF.
+Mengubah PDF kompleks menjadi structured knowledge sebenarnya bukan seutuhnya masalah PDF.
 
 Ini adalah **knowledge workflow problem**.
 

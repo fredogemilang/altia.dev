@@ -626,13 +626,13 @@ That keeps the architecture simple where simplicity is enough, and introduces AI
 export const ARTICLE_002_ID = `
 # Meilisearch vs Vector Search: Mana yang Sebaiknya Digunakan?
 
-Ketika sebuah tim mulai membangun knowledge system yang menggunakan AI, ada satu pertanyaan architecture yang biasanya muncul cukup cepat:
+Ketika sebuah tim mulai membangun knowledge system yang menggunakan AI, ada satu pertanyaan architecture yang biasanya seringkali muncul:
 
 > **Haruskah kita menggunakan traditional search atau vector search?**
 
 Pertanyaannya terlihat sederhana, tetapi sebenarnya perbandingan tersebut sedikit menyesatkan.
 
-Meilisearch dan vector search bukan selalu dua kategori yang saling berlawanan.
+Meilisearch dan vector search tidak serta-merta dua kategori yang saling berlawanan.
 
 Meilisearch adalah search engine yang menyediakan full-text search sekaligus mendukung vector dan hybrid retrieval. Sementara vector search adalah teknik retrieval yang menggunakan semantic similarity. Search system modern dapat menggabungkan keduanya.
 
@@ -654,9 +654,7 @@ Diskusi architecture sering dimulai seperti ini:
 
 > "Haruskah kita menggunakan vector search karena ini project AI?"
 
-Itu justru terbalik.
-
-Mulailah dari user.
+Itu justru terbalik. Mulailah dari user.
 
 Tanyakan:
 
@@ -729,7 +727,7 @@ Semantic similarity belum tentu lebih baik untuk query seperti ini.
 
 Vector search menggunakan pendekatan yang berbeda.
 
-Alih-alih terutama bertanya:
+Alih-alih bertanya:
 
 > "Apakah dokumen ini mengandung kata-kata tersebut?"
 

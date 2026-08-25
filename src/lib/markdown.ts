@@ -27,8 +27,43 @@ function escapeHtml(unsafe: string): string {
     .replace(/'/g, '&#039;');
 }
 
+function isTableRow(line: string): boolean {
+  const trimmed = line.trim();
+  return trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.length > 2;
+}
+
+function isTableDelimiter(line: string): boolean {
+  const trimmed = line.trim();
+  if (!isTableRow(trimmed)) return false;
+  const cells = splitTableRow(trimmed);
+  return cells.length > 0 && cells.every((c) => /^:?-+:?$/.test(c.trim()));
+}
+
+function splitTableRow(line: string): string[] {
+  const trimmed = line.trim();
+  const inner = trimmed.replace(/^\|/, '').replace(/\|$/, '');
+  return inner.split('|').map((cell) => cell.trim());
+}
+
+function getColumnAlignments(delimiterCells: string[]): ('left' | 'center' | 'right')[] {
+  return delimiterCells.map((cell) => {
+    const trimmed = cell.trim();
+    const startColon = trimmed.startsWith(':');
+    const endColon = trimmed.endsWith(':');
+    if (startColon && endColon) return 'center';
+    if (endColon) return 'right';
+    return 'left';
+  });
+}
+
+const alignClass = (align: 'left' | 'center' | 'right') => {
+  if (align === 'center') return 'text-center';
+  if (align === 'right') return 'text-right';
+  return 'text-left';
+};
+
 /**
- * Parses markdown text to HTML with extracted Table of Contents (TOC) headings.
+ * Parses markdown text to HTML with extracted Table of Contents (TOC) headings and full GFM table support.
  */
 export function parseMarkdown(content: string): ParsedMarkdown {
   if (!content) return { html: '', toc: [] };
@@ -51,7 +86,7 @@ export function parseMarkdown(content: string): ParsedMarkdown {
         const rawCode = codeBuffer.join('\n');
 
         if (codeLanguage === 'mermaid') {
-          // Render Mermaid diagram — Mermaid.js picks up <pre class="mermaid"> tags
+          // Render Mermaid diagram - Mermaid.js picks up <pre class="mermaid"> tags
           result.push(`
             <div class="my-8 overflow-x-auto">
               <pre class="mermaid flex justify-center min-w-0">${rawCode}</pre>
@@ -89,6 +124,60 @@ export function parseMarkdown(content: string): ParsedMarkdown {
 
     // Skip top H1 if it matches article title
     if (line.startsWith('# ')) {
+      continue;
+    }
+
+    // Handle Markdown Tables
+    if (isTableRow(line) && i + 1 < lines.length && isTableDelimiter(lines[i + 1])) {
+      const headerCells = splitTableRow(line);
+      const delimiterCells = splitTableRow(lines[i + 1]);
+      const alignments = getColumnAlignments(delimiterCells);
+      i += 1; // Advance past delimiter
+
+      const bodyRows: string[][] = [];
+      while (i + 1 < lines.length && isTableRow(lines[i + 1]) && !isTableDelimiter(lines[i + 1])) {
+        i += 1;
+        bodyRows.push(splitTableRow(lines[i]));
+      }
+
+      result.push(`
+        <div class="my-8 overflow-x-auto rounded-2xl border border-warm-border bg-warm-card shadow-sm">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead class="bg-cream/90 border-b border-warm-border text-charcoal font-display font-bold uppercase tracking-wider text-[11px] sm:text-xs">
+              <tr>
+                ${headerCells
+                  .map(
+                    (h, idx) =>
+                      `<th class="py-3.5 px-4 sm:px-6 font-bold ${alignClass(alignments[idx] || 'left')} text-charcoal">${parseInlineFormatting(h)}</th>`
+                  )
+                  .join('')}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-warm-border/60 font-sans">
+              ${bodyRows
+                .map(
+                  (row) => `
+                <tr class="hover:bg-cream/40 transition-colors">
+                  ${row
+                    .map(
+                      (cell, idx) =>
+                        `<td class="py-3.5 px-4 sm:px-6 text-charcoal/90 leading-relaxed ${alignClass(alignments[idx] || 'left')}">${parseInlineFormatting(cell)}</td>`
+                    )
+                    .join('')}
+                </tr>
+              `
+                )
+                .join('')}
+            </tbody>
+          </table>
+        </div>
+      `);
+      continue;
+    }
+
+    // Handle Horizontal Rules (--- or ***)
+    if (line.trim() === '---' || line.trim() === '***') {
+      result.push('<hr class="my-10 border-t border-warm-border/80" />');
       continue;
     }
 
@@ -174,21 +263,33 @@ export function parseMarkdown(content: string): ParsedMarkdown {
 }
 
 /**
- * Parses inline formatting like bold, italic, and inline code.
+ * Parses inline formatting like bold, italic, links, and inline code.
  */
 function parseInlineFormatting(text: string): string {
-  let output = escapeHtml(text);
+  // Clean up any stray citation tokens
+  let output = text.replace(/[\uE200-\uE2FF\?]?cite[^\s\uE200-\uE2FF\?]+[\uE200-\uE2FF\?]?/g, '');
+
+  output = escapeHtml(output);
+
+  // Markdown links: [text](url)
+  output = output.replace(
+    /\[(.*?)\]\((.*?)\)/g,
+    '<a href="$2" class="text-vermilion hover:underline underline-offset-4 font-medium transition-colors" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
 
   // Bold (**text** or __text__)
   output = output.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-charcoal">$1</strong>');
   output = output.replace(/__(.*?)__/g, '<strong class="font-bold text-charcoal">$1</strong>');
 
   // Italic (*text* or _text_)
-  output = output.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
-  output = output.replace(/_(.*?)_/g, '<em class="italic">$1</em>');
+  output = output.replace(/(?<!\w)\*([^*]+)\*(?!\w)/g, '<em class="italic">$1</em>');
+  output = output.replace(/(?<!\w)_([^_]+)_(?!\w)/g, '<em class="italic">$1</em>');
 
   // Inline code (`code`)
-  output = output.replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 rounded bg-cream border border-warm-border font-mono text-xs text-charcoal font-semibold">$1</code>');
+  output = output.replace(
+    /`(.*?)`/g,
+    '<code class="px-1.5 py-0.5 rounded bg-cream border border-warm-border font-mono text-xs text-charcoal font-semibold">$1</code>'
+  );
 
   return output;
 }
