@@ -529,12 +529,12 @@
             "desc": "Dukungan multi-bahasa dengan tombol switch bahasa (misal: ID / EN)."
           },
           "realtime": {
-            "label": "Pembaruan Real-Time",
-            "desc": "Feed data langsung, notifikasi instan, atau live chat via WebSockets."
+            "label": "Chat & Notifikasi Langsung",
+            "desc": "Pesan instan, notifikasi langsung, atau update data real-time di situs Anda."
           },
           "animation": {
-            "label": "Animasi Kinetik Tingkat Lanjut",
-            "desc": "Koreografi scroll GSAP 3D dan mikro-interaksi kustom."
+            "label": "Animasi & Efek Visual Premium",
+            "desc": "Efek scroll halus, transisi interaktif, dan desain motion yang memukau."
           },
           "not_sure": {
             "label": "Belum Yakin / Butuh Rekomendasi",
@@ -602,98 +602,98 @@
         }
       },
       "ai_project_type": {
-        "title": "Sistem AI seperti apa yang ingin Anda bangun?",
-        "desc": "Pilih tujuan fungsional utama untuk otomatisasi Anda.",
+        "title": "Solusi AI seperti apa yang Anda butuhkan?",
+        "desc": "Pilih opsi yang paling mendekati kebutuhan bisnis Anda.",
         "options": {
           "ai_chatbot": {
-            "label": "Chatbot AI & Asisten Support",
-            "desc": "Chatbot berbasis LLM untuk customer support atau knowledge base internal."
+            "label": "Chatbot AI & Asisten Virtual",
+            "desc": "Asisten pintar di website atau aplikasi yang menjawab pertanyaan pelanggan 24/7."
           },
           "document_processing": {
             "label": "Pemrosesan Dokumen Otomatis",
-            "desc": "Pipeline OCR dan AI untuk mengekstrak serta menata data dari dokumen."
+            "desc": "Membaca dan mengekstrak data dari faktur, kontrak, dan dokumen PDF secara otomatis."
           },
           "rag_knowledge_base": {
-            "label": "RAG Enterprise Knowledge Base",
-            "desc": "Knowledge base internal dengan semantic dan hybrid search."
+            "label": "Basis Pengetahuan Internal Cerdas",
+            "desc": "Tim Anda bisa langsung mencari dan menemukan jawaban dari seluruh dokumen perusahaan."
           },
           "custom_ai_agent": {
-            "label": "Agen AI Otonom Kustom",
-            "desc": "Workflow AI multi-langkah untuk riset, lead qualification, agregasi data, dan operasional."
+            "label": "Agen AI Workflow Kustom",
+            "desc": "AI yang melakukan tugas bertahap seperti riset, analisis data, atau pemrosesan lead."
           },
           "ai_integration": {
-            "label": "Integrasi API AI ke Sistem Existing",
-            "desc": "Integrasikan kemampuan AI ke CRM, ERP, database, atau software internal."
+            "label": "Tambahkan AI ke Sistem yang Sudah Ada",
+            "desc": "Hubungkan kemampuan AI ke software bisnis, CRM, atau database Anda saat ini."
           }
         }
       },
       "ai_workflow_depth": {
-        "title": "Seberapa kompleks alur kerja AI?",
-        "desc": "Tentukan tingkat kedalaman keputusan otomatisasi.",
+        "title": "Apa yang harus bisa dilakukan AI-nya?",
+        "desc": "Ini membantu kami memahami seberapa canggih AI yang dibutuhkan.",
         "options": {
           "single_step": {
-            "label": "Otomatisasi Tugas Satu Langkah",
-            "desc": "Generasi teks langsung dari prompt atau klasifikasi sederhana."
+            "label": "Tugas Sederhana",
+            "desc": "Menjawab pertanyaan, mengklasifikasikan item, atau membuat respons singkat."
           },
           "multi_step": {
-            "label": "Rantai Keputusan Multi-Langkah",
-            "desc": "Langkah penalaran berantai dengan pengambilan data dinamis."
+            "label": "Tugas Bertahap",
+            "desc": "Riset, membandingkan opsi, merangkum temuan, dan mengambil tindakan bertahap."
           },
           "human_in_the_loop": {
-            "label": "Persetujuan Human-in-the-Loop",
-            "desc": "AI membuat draf; operator manusia memeriksa sebelum dieksekusi."
+            "label": "AI Menyusun, Manusia Menyetujui",
+            "desc": "AI menyiapkan rekomendasi atau aksi, tapi seseorang mereview sebelum dijalankan."
           },
           "multi_data_source": {
-            "label": "Pengambilan Multi-Sumber Pengetahuan",
-            "desc": "Kombinasi database vektor, data SQL, PDF, dan live API."
+            "label": "Cari dari Banyak Sumber",
+            "desc": "Temukan jawaban dari dokumen, database, website, dan file sekaligus."
           },
           "not_sure": {
-            "label": "Belum Yakin / Butuh Konsultasi Solusi AI",
-            "desc": "Kami bantu analisis alur kerja operasional Anda dan rekomendasikan arsitektur AI yang paling pas."
+            "label": "Belum Yakin — Bantu Saya Memilih",
+            "desc": "Kami akan review kebutuhan Anda dan merekomendasikan pendekatan terbaik saat konsultasi gratis."
           }
         }
       },
       "integrations_level": {
-        "title": "Integrasi Sistem Eksternal & API",
-        "desc": "Apakah sistem perlu terhubung dengan software atau database pihak ketiga?",
+        "title": "Apakah proyek Anda perlu terhubung dengan tools lain?",
+        "desc": "Pikirkan tentang pembayaran, layanan email, CRM, atau software bisnis lainnya.",
         "options": {
           "none": {
-            "label": "Sistem Mandiri (Standalone)",
-            "desc": "Tidak memerlukan integrasi API pihak ketiga eksternal."
+            "label": "Tidak — Berdiri Sendiri",
+            "desc": "Proyek mandiri tanpa koneksi ke platform lain."
           },
           "one_two": {
-            "label": "1–2 Integrasi Standar",
-            "desc": "API umum seperti Stripe/Midtrans, SendGrid, Google Analytics."
+            "label": "Ya — Beberapa Koneksi Dasar",
+            "desc": "Pemrosesan pembayaran, pengiriman email, atau analitik (misal: Stripe, Google Analytics)."
           },
           "multiple": {
-            "label": "Beberapa Layanan Pihak Ketiga",
-            "desc": "CRM (HubSpot/Salesforce), ERP, webhook kustom, database eksternal."
+            "label": "Ya — Beberapa Tools Bisnis",
+            "desc": "CRM, akuntansi, tools marketing, atau platform bisnis lainnya."
           },
           "complex_custom": {
-            "label": "Sistem Enterprise Legacy Kompleks",
-            "desc": "Sinkronisasi dua arah mendalam, message queue kustom, enterprise SSO."
+            "label": "Ya — Sistem Enterprise Kompleks",
+            "desc": "Koneksi skala besar ke software lama, ERP, atau sistem internal kustom."
           },
           "not_sure": {
-            "label": "Belum Yakin / Butuh Rekomendasi Teknis",
-            "desc": "Kami akan bantu audit sistem yang ada dan merekomendasikan integrasi yang paling hemat biaya."
+            "label": "Belum Yakin — Bantu Saya",
+            "desc": "Kami akan review tools Anda saat ini dan merekomendasikan koneksi terbaik."
           }
         }
       },
       "design_status": {
-        "title": "Kesiapan Desain UI/UX",
-        "desc": "Bagaimana status desain produk Anda saat ini?",
+        "title": "Apakah Anda sudah punya desain untuk proyek ini?",
+        "desc": "Ini membantu kami memahami apakah pekerjaan desain diperlukan.",
         "options": {
           "ready": {
-            "label": "Desain Sudah Siap di Figma",
-            "desc": "Kami sudah memiliki tampilan UI lengkap dan siap di-coding."
+            "label": "Ya — Desain Saya Sudah Lengkap & Siap",
+            "desc": "Saya sudah punya tampilan layar dan layout visual yang siap dibangun."
           },
           "needs_refinement": {
-            "label": "Desain yang Ada Perlu Dipoles",
-            "desc": "Kami punya wireframe kasar atau UI lama yang perlu ditingkatkan."
+            "label": "Sudah Ada, Tapi Perlu Diperbaiki",
+            "desc": "Saya punya sketsa, ide, atau desain lama yang perlu diperbarui."
           },
           "needs_design": {
-            "label": "Desain Dikerjakan Penuh oleh ALTIA DEV",
-            "desc": "Mulai dari nol: riset UX, wireframe, desain UI lengkap, dan prototipe."
+            "label": "Belum — Desainkan Semuanya untuk Saya",
+            "desc": "Mulai dari nol: ALTIA DEV akan membuat tampilan dan nuansa lengkap untuk proyek Anda."
           }
         }
       },
