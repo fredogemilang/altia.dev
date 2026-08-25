@@ -31,5 +31,11 @@
 /sitemap*.xml
   Cache-Control: public, max-age=86400
 
+/*-sitemap.xml
+  Cache-Control: public, max-age=86400
+
+/sitemap.xsl
+  Cache-Control: public, max-age=86400
+
 /robots.txt
   Cache-Control: public, max-age=86400
