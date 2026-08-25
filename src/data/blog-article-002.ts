@@ -361,7 +361,7 @@ ask:
 
 For example:
 
-### Scenario A — Internal Documentation
+### Scenario A: Internal Documentation
 
 Users search:
 
@@ -373,7 +373,7 @@ DNS configuration
 
 Keyword search may already solve a large part of the problem.
 
-### Scenario B — Large Knowledge Base
+### Scenario B: Large Knowledge Base
 
 Users ask:
 
@@ -383,7 +383,7 @@ What should an employee do when a customer cannot provide the required documents
 
 Semantic retrieval becomes more attractive.
 
-### Scenario C — Enterprise Knowledge System
+### Scenario C: Enterprise Knowledge System
 
 Users search both:
 
@@ -611,19 +611,18 @@ The better question is:
 
 > **What kind of relevance does your application need?**
 
-Keyword retrieval is excellent when exact terms matter.
+Keyword retrieval is great when exact terms matter.
 
-Vector retrieval is valuable when meaning matters more than wording.
+Vector retrieval is useful when meaning matters more than wording.
 
-Hybrid retrieval combines the two when users need both.
+Hybrid retrieval combines both when users need both signals.
 
 And Meilisearch should not be framed as the opposite of vector search. Modern Meilisearch supports full-text, vector, and hybrid retrieval capabilities, so the architecture decision is really about choosing the right retrieval strategy for the application.
 
 For business knowledge systems, I would start with the users' actual queries, build a small evaluation set, and only add semantic retrieval where it solves a demonstrated problem.
 
-That keeps the architecture simple where simplicity is enough—and introduces AI where it genuinely improves retrieval.
+That keeps the architecture simple where simplicity is enough, and introduces AI where it genuinely improves retrieval.
 `;
-
 export const ARTICLE_002_ID = `
 # Meilisearch vs Vector Search: Mana yang Sebaiknya Digunakan?
 
@@ -980,7 +979,7 @@ tanyakan:
 
 Misalnya:
 
-### Scenario A — Internal Documentation
+### Scenario A: Internal Documentation
 
 User mencari:
 
@@ -992,7 +991,7 @@ DNS configuration
 
 Keyword search mungkin sudah menyelesaikan sebagian besar kebutuhan.
 
-### Scenario B — Large Knowledge Base
+### Scenario B: Large Knowledge Base
 
 User bertanya:
 
@@ -1002,7 +1001,7 @@ Apa yang harus dilakukan employee ketika customer tidak dapat menyediakan dokume
 
 Semantic retrieval menjadi lebih menarik.
 
-### Scenario C — Enterprise Knowledge System
+### Scenario C: Enterprise Knowledge System
 
 User mencari:
 
@@ -1242,5 +1241,5 @@ Dan Meilisearch tidak seharusnya dianggap sebagai lawan dari vector search. Meil
 
 Untuk business knowledge system, saya akan mulai dari real user queries, membuat evaluation set kecil, lalu menambahkan semantic retrieval hanya ketika memang ada masalah yang terbukti tidak dapat diselesaikan dengan retrieval yang lebih sederhana.
 
-Dengan begitu architecture tetap sederhana ketika simplicity sudah cukup — dan AI digunakan ketika memang memberikan improvement yang nyata pada retrieval.
+Dengan begitu architecture tetap sederhana ketika simplicity sudah cukup, dan AI digunakan ketika memang memberikan improvement yang nyata pada retrieval.
 `;

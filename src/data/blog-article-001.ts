@@ -561,7 +561,7 @@ flowchart LR
     F --> G["Use"]
 \`\`\`
 
-That shift—from extracting documents to engineering a knowledge workflow—is where AI-assisted document processing becomes genuinely useful.
+That shift, from extracting documents to engineering a knowledge workflow, is where AI-assisted document processing becomes genuinely useful.
 `;
 
 export const ARTICLE_001_ID = `
@@ -898,7 +898,7 @@ Modelnya menjadi:
 
 > **AI-assisted knowledge production dengan human control.**
 
-Pendekatan human + AI seperti ini juga sejalan dengan arah riset knowledge management modern, yang menempatkan AI sebagai pendukung proses knowledge creation, storage, retrieval, dan application—bukan sebagai pengganti penuh judgment manusia.
+Pendekatan human + AI seperti ini juga sejalan dengan arah riset knowledge management modern, yang menempatkan AI sebagai pendukung proses knowledge creation, storage, retrieval, dan application, bukan sebagai pengganti penuh judgment manusia.
 
 ---
 

@@ -321,7 +321,7 @@ flowchart TD
 
 Every additional layer introduces another potential failure mode.
 
-That means RAG should be added because it solves a real product problem—not because it is currently popular.
+That means RAG should be added because it solves a real product problem, not because it is currently popular.
 
 ---
 
@@ -962,7 +962,7 @@ flowchart TD
 
 Setiap layer tambahan memperkenalkan potensi failure mode baru.
 
-Artinya RAG harus ditambahkan karena menyelesaikan masalah produk yang nyata — bukan karena sedang populer.
+Artinya RAG harus ditambahkan karena menyelesaikan masalah produk yang nyata, bukan karena sedang populer.
 
 ---
 
