@@ -55,6 +55,8 @@ export class WebPricingStrategy implements PricingStrategy {
       if (animMod) {
         minPrice += animMod.min;
         maxPrice += animMod.max;
+        minWeeks += animMod.weeks;
+        maxWeeks += animMod.weeks;
         complexityScore += animMod.score;
         if (requirements.design.animationLevel === "advanced") {
           highlights.push("Advanced GSAP 3D kinetic animations & interactive scroll choreography");
@@ -101,6 +103,16 @@ export class WebPricingStrategy implements PricingStrategy {
       maxWeeks += mod.weeks;
       complexityScore += mod.score;
       highlights.push("Real-time WebSockets / SSE reactive updates");
+    }
+
+    if (requirements.features.includes("multilingual")) {
+      const mod = PRICING_MODIFIERS.features.multilingual;
+      minPrice += mod.min;
+      maxPrice += mod.max;
+      minWeeks += mod.weeks;
+      maxWeeks += mod.weeks;
+      complexityScore += mod.score;
+      highlights.push("Full internationalization (i18n) with multi-language content management");
     }
 
     if (requirements.features.includes("not_sure")) {
@@ -186,8 +198,8 @@ export class WebPricingStrategy implements PricingStrategy {
       },
       pricing: {
         currency: "USD",
-        min: minPrice,
-        max: maxPrice,
+        min: Math.min(minPrice, maxPrice),
+        max: Math.max(minPrice, maxPrice),
       },
       timeline: {
         minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),

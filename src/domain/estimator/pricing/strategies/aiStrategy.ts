@@ -31,7 +31,24 @@ export class AIPricingStrategy implements PricingStrategy {
     };
     highlights.push(projectLabels[requirements.projectType] || "Automated AI system engineering");
 
-    // 2. Feature & Workflow Modifiers
+    // 2. Design modifier
+    const designMod =
+      PRICING_MODIFIERS.design[requirements.design.status] ||
+      PRICING_MODIFIERS.design.needs_design;
+    minPrice += designMod.min;
+    maxPrice += designMod.max;
+    minWeeks += designMod.weeks;
+    maxWeeks += designMod.weeks;
+    complexityScore += designMod.score;
+
+    if (requirements.design.status === "ready") {
+      assumptions.push("Client provides production-ready UI mockups for AI dashboard/interface.");
+    } else if (requirements.design.status === "needs_design") {
+      highlights.push("Custom AI interface design with data visualization dashboard");
+      assumptions.push("Includes wireframing, AI-specific UX patterns, and interactive prototype.");
+    }
+
+    // 3. Feature & Workflow Modifiers
     if (requirements.projectType === "custom_ai_agent" || requirements.features.includes("multi_step")) {
       const mod = PRICING_MODIFIERS.aiWorkflow.multi_step;
       minPrice += mod.min;
@@ -142,8 +159,8 @@ export class AIPricingStrategy implements PricingStrategy {
       },
       pricing: {
         currency: "USD",
-        min: minPrice,
-        max: maxPrice,
+        min: Math.min(minPrice, maxPrice),
+        max: Math.max(minPrice, maxPrice),
       },
       timeline: {
         minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),

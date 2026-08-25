@@ -42,6 +42,17 @@ export function normalizeWizardAnswers(
     features.push(...(answers["ai_features"] as string[]));
   }
 
+  // AI workflow depth → push into features so pricing strategy can detect it
+  if (typeof answers["ai_workflow_depth"] === "string" && answers["ai_workflow_depth"] !== "single_step" && answers["ai_workflow_depth"] !== "not_sure") {
+    const depth = answers["ai_workflow_depth"] as string;
+    if (!features.includes(depth)) {
+      features.push(depth);
+    }
+  }
+  if (answers["ai_workflow_depth"] === "not_sure" && !features.includes("not_sure")) {
+    features.push("not_sure");
+  }
+
   // Derive integrations
   const integrations: IntegrationRequirement[] = [];
   const rawIntegrations = answers["integrations_level"] as string;
@@ -55,7 +66,8 @@ export function normalizeWizardAnswers(
   } else if (rawIntegrations === "complex_custom") {
     integrations.push(
       { name: "Custom enterprise legacy integrations", category: "custom" },
-      { name: "Complex webhooks & message queues", category: "custom" }
+      { name: "Complex webhooks & message queues", category: "custom" },
+      { name: "Multi-system data orchestration layer", category: "database" }
     );
   } else if (rawIntegrations === "not_sure") {
     integrations.push({

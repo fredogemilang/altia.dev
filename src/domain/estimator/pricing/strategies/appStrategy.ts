@@ -205,8 +205,8 @@ export class AppPricingStrategy implements PricingStrategy {
       },
       pricing: {
         currency: "USD",
-        min: minPrice,
-        max: maxPrice,
+        min: Math.min(minPrice, maxPrice),
+        max: Math.max(minPrice, maxPrice),
       },
       timeline: {
         minWeeks: Math.round(Math.min(minWeeks, maxWeeks)),
