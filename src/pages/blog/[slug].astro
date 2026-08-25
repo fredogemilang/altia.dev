@@ -202,10 +202,11 @@ const currentUrl = Astro.url.href;
   </article>
 
   <!-- Mermaid.js Diagram Rendering -->
-  <script type="module">
+  <script>
     import mermaid from 'mermaid';
+
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: 'base',
       themeVariables: {
         primaryColor: '#FFF6E8',
@@ -222,5 +223,26 @@ const currentUrl = Astro.url.href;
         padding: 20,
       },
     });
+
+    const renderMermaidDiagrams = async () => {
+      const elements = document.querySelectorAll('pre.mermaid');
+      if (elements.length > 0) {
+        try {
+          await mermaid.run({
+            nodes: Array.from(elements) as HTMLElement[],
+          });
+        } catch (err) {
+          console.error('Failed to render Mermaid diagrams:', err);
+        }
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+    } else {
+      renderMermaidDiagrams();
+    }
+
+    document.addEventListener('astro:page-load', renderMermaidDiagrams);
   </script>
 </Layout>
