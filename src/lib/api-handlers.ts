@@ -312,7 +312,48 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
     return;
   }
 
+  const isId = lead.locale === 'id';
   const e = escapeHtml;
+
+  // ── Email i18n dictionary ──────────────────────────────────
+  const i18n = {
+    // Client email
+    clientTitle: isId ? 'Estimasi Proyek Anda' : 'Your Project Estimate',
+    clientSubject: (price: string) => isId
+      ? `Estimasi Proyek Anda dari ALTIA DEV — ${price}`
+      : `Your Project Estimate from ALTIA DEV — ${price}`,
+    clientGreeting: (name: string) => isId
+      ? `Halo <strong>${e(name)}</strong>, terima kasih telah menggunakan Project Estimator kami. Berikut estimasi terkalibrasi Anda:`
+      : `Hi <strong>${e(name)}</strong>, thank you for using our Project Estimator. Here is your calibrated estimate:`,
+    investmentRange: isId ? 'Kisaran Investasi' : 'Investment Range',
+    timeline: isId ? 'Timeline' : 'Timeline',
+    complexity: isId ? 'Kompleksitas' : 'Complexity',
+    recommendedApproach: isId ? 'Pendekatan Teknis yang Direkomendasikan' : 'Recommended Technical Approach',
+    keyHighlights: isId ? 'Sorotan Utama' : 'Key Highlights',
+    assumptions: isId ? 'Asumsi' : 'Assumptions',
+    ctaText: isId ? 'Jadwalkan Discovery Call →' : 'Book a Discovery Call →',
+    ctaWaMessage: (ref: string) => isId
+      ? `Halo ALTIA DEV, saya menerima estimasi proyek (${ref}). Saya ingin mendiskusikan langkah selanjutnya.`
+      : `Hi ALTIA DEV, I received my project estimate (${ref}). I'd like to discuss next steps.`,
+    disclaimer: isId
+      ? 'Estimasi ini dihitung berdasarkan jawaban yang Anda berikan dan berfungsi sebagai acuan perencanaan terkalibrasi.<br/>Cakupan final, jadwal milestone, dan ketentuan komersial disepakati saat discovery awal.'
+      : 'This estimate is calculated based on your selections and serves as a calibrated planning baseline.<br/>Final deliverables, milestone schedules, and commercial terms are agreed during initial discovery.',
+    // Admin email (always English)
+    adminContactInfo: 'Contact Information',
+    adminFormSelections: 'Form Selections',
+    adminEstimateResult: 'Project Estimate Result',
+    adminRecommendedApproach: 'Recommended Approach',
+    adminHighlights: 'Key Architectural Highlights',
+    adminAssumptions: 'Technical &amp; Commercial Assumptions',
+    // Timeline units
+    weeks: (n: number, m: number) => {
+      const unit = isId ? 'minggu' : 'weeks';
+      return n === m ? `${n} ${unit}` : `${n} – ${m} ${unit}`;
+    },
+    weeksOnly: (n: number) => `${n} ${isId ? 'minggu' : 'weeks'}`,
+  };
+
+  // ── Shared data extraction ─────────────────────────────────
   const priceRange = lead.estimate?.pricing
     ? `$${lead.estimate.pricing.min?.toLocaleString()} – $${lead.estimate.pricing.max?.toLocaleString()}`
     : 'N/A';
@@ -322,81 +363,114 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   if (typeof rawMinWeeks === 'number' && typeof rawMaxWeeks === 'number') {
     const minW = Math.min(rawMinWeeks, rawMaxWeeks);
     const maxW = Math.max(rawMinWeeks, rawMaxWeeks);
-    timelineStr = minW === maxW ? `${minW} weeks` : `${minW} – ${maxW} weeks`;
+    timelineStr = i18n.weeks(minW, maxW);
   } else if (rawMinWeeks) {
-    timelineStr = `${rawMinWeeks} weeks`;
+    timelineStr = i18n.weeksOnly(rawMinWeeks);
   }
   const serviceType = lead.requirements?.service || 'N/A';
   const projectType = (lead.estimate?.projectType || lead.requirements?.projectType || serviceType).replace(/_/g, ' ');
   const complexity = lead.estimate?.complexity?.level || 'medium';
-  const solution = lead.estimate?.recommendation?.solution || 'Custom Digital Solution';
+  const solution = lead.estimate?.recommendation?.solution || (isId ? 'Solusi Digital Kustom' : 'Custom Digital Solution');
   const rationale = lead.estimate?.recommendation?.rationale || '';
   const highlights: string[] = lead.estimate?.highlights || [];
   const assumptions: string[] = lead.estimate?.assumptions || [];
-  const nextSteps: string[] = lead.estimate?.nextSteps || [];
   const tierLabel = lead.tier === 'hot' ? '🔥 HOT' : lead.tier === 'warm' ? '🟡 WARM' : '🟢 QUALIFIED';
   const waNumber = '6282147709084';
 
-  // --- Build answers summary with human-readable labels ---
-  const answerLabels: Record<string, string> = {
+  // ── Answer labels (locale-aware for client, English for admin) ──
+  const answerLabelsEn: Record<string, string> = {
     service: 'Service Type', web_project_type: 'Web Project Type', app_project_type: 'App Project Type',
     ai_project_type: 'AI Project Type', app_platforms: 'Target Platforms',
     web_features: 'Web Features', app_features: 'App Features', ai_features: 'AI Features',
     ai_workflow_depth: 'AI Workflow Depth', integrations_level: 'Integration Level',
-    design_status: 'Design Status', animation_level: 'Animation Level',
-    timeline_preference: 'Timeline Preference', budget_range: 'Budget Range',
-    additional_notes: 'Additional Notes',
+    design_status: 'Design Status', timeline_preference: 'Timeline Preference',
+    budget_range: 'Budget Range', additional_notes: 'Additional Notes',
+  };
+  const answerLabelsId: Record<string, string> = {
+    service: 'Jenis Layanan', web_project_type: 'Tipe Proyek Web', app_project_type: 'Tipe Proyek Aplikasi',
+    ai_project_type: 'Tipe Proyek AI', app_platforms: 'Platform Target',
+    web_features: 'Fitur Web', app_features: 'Fitur Aplikasi', ai_features: 'Fitur AI',
+    ai_workflow_depth: 'Kedalaman Workflow AI', integrations_level: 'Level Integrasi',
+    design_status: 'Status Desain', timeline_preference: 'Preferensi Timeline',
+    budget_range: 'Kisaran Anggaran', additional_notes: 'Catatan Tambahan',
   };
 
-  // Human-readable value mappings
-  const valueLabels: Record<string, string> = {
-    // Services
+  // ── Value labels (locale-aware) ────────────────────────────
+  const valueLabelsEn: Record<string, string> = {
     web: 'Web Development', app: 'App Development', ai: 'AI / Automation',
-    // Web project types
     landing_page: 'Landing Page', company_profile: 'Company Profile',
     corporate_website: 'Corporate Website', custom_web_app: 'Custom Web App',
     saas_mvp: 'SaaS MVP', ecommerce: 'E-Commerce Store',
-    // App project types
     mobile_app: 'Mobile App', desktop_app: 'Desktop App', mobile_web_bundle: 'Mobile + Web Bundle',
-    // AI project types
     ai_chatbot: 'AI Chatbot', document_processing: 'Document Processing',
-    rag_knowledge_base: 'RAG Knowledge Base', custom_ai_agent: 'Custom AI Agent',
+    rag_knowledge_base: 'Smart Knowledge Base', custom_ai_agent: 'Custom AI Agent',
     ai_integration: 'AI Integration',
-    // Platforms
     ios: 'iOS', android: 'Android', macos: 'macOS', windows: 'Windows',
     recommended_mobile: 'iOS & Android (Recommended)',
-    // Features
     cms: 'Content Management (CMS)', auth: 'User Authentication', payments: 'Payment Gateway',
-    multilingual: 'Multi-language (i18n)', realtime: 'Real-time Updates', animation: 'Advanced Animations',
+    multilingual: 'Multi-language (i18n)', realtime: 'Live Chat & Notifications', animation: 'Premium Animations',
     push_notifications: 'Push Notifications', offline: 'Offline Support', not_sure: 'Not Sure Yet',
-    // AI workflow depth
-    single_step: 'Single Step (Simple)', multi_step: 'Multi-Step Agent',
-    human_in_the_loop: 'Human-in-the-Loop', multi_data_source: 'Multi Data Source',
-    // Integration level
-    none: 'No Integrations', one_two: '1–2 Standard Integrations',
-    multiple: 'Multiple Third-Party APIs', complex_custom: 'Complex / Enterprise Custom',
-    // Design status
-    ready: 'Design Ready (Figma)', needs_refinement: 'Needs Refinement', needs_design: 'Needs Full Design',
-    // Timeline
+    single_step: 'Simple Tasks', multi_step: 'Multi-Step Tasks',
+    human_in_the_loop: 'AI Drafts, Human Approves', multi_data_source: 'Search Across Many Sources',
+    none: 'No Integrations', one_two: 'A Few Basic Connections',
+    multiple: 'Several Business Tools', complex_custom: 'Complex Enterprise Systems',
+    ready: 'Design Complete & Ready', needs_refinement: 'Needs Refinement', needs_design: 'Full Design Needed',
     no_deadline: 'No Fixed Deadline', '1_3_months': '1–3 Months',
     under_1_month: 'Under 1 Month (Rush)', asap: 'ASAP (Critical)',
-    // Budget
     under_1000: 'Under $1,000', '1000_2500': '$1,000 – $2,500',
     '2500_5000': '$2,500 – $5,000', '5000_10000': '$5,000 – $10,000',
     '10000_plus': '$10,000+',
   };
-
-  const humanize = (val: unknown): string => {
-    if (Array.isArray(val)) return val.map(v => valueLabels[String(v)] || String(v).replace(/_/g, ' ')).join(', ');
-    const s = String(val);
-    return valueLabels[s] || s.replace(/_/g, ' ');
+  const valueLabelsId: Record<string, string> = {
+    web: 'Pengembangan Web', app: 'Pengembangan Aplikasi', ai: 'AI / Otomatisasi',
+    landing_page: 'Landing Page', company_profile: 'Profil Perusahaan',
+    corporate_website: 'Website Korporat', custom_web_app: 'Aplikasi Web Kustom',
+    saas_mvp: 'SaaS MVP', ecommerce: 'Toko Online',
+    mobile_app: 'Aplikasi Mobile', desktop_app: 'Aplikasi Desktop', mobile_web_bundle: 'Mobile + Web Bundle',
+    ai_chatbot: 'Chatbot AI', document_processing: 'Pemrosesan Dokumen',
+    rag_knowledge_base: 'Basis Pengetahuan Cerdas', custom_ai_agent: 'Agen AI Kustom',
+    ai_integration: 'Integrasi AI',
+    ios: 'iOS', android: 'Android', macos: 'macOS', windows: 'Windows',
+    recommended_mobile: 'iOS & Android (Rekomendasi)',
+    cms: 'Manajemen Konten (CMS)', auth: 'Autentikasi Pengguna', payments: 'Gerbang Pembayaran',
+    multilingual: 'Multi-bahasa (i18n)', realtime: 'Chat & Notifikasi Langsung', animation: 'Animasi Premium',
+    push_notifications: 'Notifikasi Push', offline: 'Dukungan Offline', not_sure: 'Belum Yakin',
+    single_step: 'Tugas Sederhana', multi_step: 'Tugas Bertahap',
+    human_in_the_loop: 'AI Menyusun, Manusia Menyetujui', multi_data_source: 'Cari dari Banyak Sumber',
+    none: 'Tanpa Integrasi', one_two: 'Beberapa Koneksi Dasar',
+    multiple: 'Beberapa Tools Bisnis', complex_custom: 'Sistem Enterprise Kompleks',
+    ready: 'Desain Lengkap & Siap', needs_refinement: 'Perlu Perbaikan', needs_design: 'Butuh Desain Penuh',
+    no_deadline: 'Tanpa Deadline', '1_3_months': '1–3 Bulan',
+    under_1_month: 'Kurang dari 1 Bulan (Cepat)', asap: 'Secepatnya (Kritis)',
+    under_1000: 'Di bawah $1.000', '1000_2500': '$1.000 – $2.500',
+    '2500_5000': '$2.500 – $5.000', '5000_10000': '$5.000 – $10.000',
+    '10000_plus': '$10.000+',
   };
 
-  const answersRows = Object.entries(lead.answers || {})
+  const clientAnswerLabels = isId ? answerLabelsId : answerLabelsEn;
+  const clientValueLabels = isId ? valueLabelsId : valueLabelsEn;
+
+  const humanize = (val: unknown, labels: Record<string, string>): string => {
+    if (Array.isArray(val)) return val.map(v => labels[String(v)] || String(v).replace(/_/g, ' ')).join(', ');
+    const s = String(val);
+    return labels[s] || s.replace(/_/g, ' ');
+  };
+
+  // Admin answers (always English)
+  const adminAnswersRows = Object.entries(lead.answers || {})
     .filter(([_, v]) => v !== undefined && v !== null && v !== '')
     .map(([key, val]) => {
-      const label = answerLabels[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-      const value = humanize(val);
+      const label = answerLabelsEn[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const value = humanize(val, valueLabelsEn);
+      return `<tr><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3;">${e(label)}</td><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3; font-weight: 600;">${e(value)}</td></tr>`;
+    }).join('');
+
+  // Client answers (locale-aware)
+  const clientAnswersRows = Object.entries(lead.answers || {})
+    .filter(([_, v]) => v !== undefined && v !== null && v !== '')
+    .map(([key, val]) => {
+      const label = clientAnswerLabels[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const value = humanize(val, clientValueLabels);
       return `<tr><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3;">${e(label)}</td><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3; font-weight: 600;">${e(value)}</td></tr>`;
     }).join('');
 
@@ -407,12 +481,9 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   const assumptionsHtml = assumptions.length > 0
     ? assumptions.map(a => `<li style="padding: 4px 0;">${e(a)}</li>`).join('')
     : '';
-  const nextStepsHtml = nextSteps.length > 0
-    ? nextSteps.map(s => `<li style="padding: 4px 0;">${e(s)}</li>`).join('')
-    : '';
 
   // ═══════════════════════════════════════════════════════════
-  // ADMIN EMAIL (to hello@altia.dev) — includes lead scoring
+  // ADMIN EMAIL (to hello@altia.dev) — always English
   // ═══════════════════════════════════════════════════════════
   const adminHtml = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 640px; margin: 0 auto; padding: 0; color: #2F2A26;">
@@ -423,7 +494,7 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
 
       <div style="padding: 24px; border: 1px solid #E8DFD3; border-top: none; border-radius: 0 0 16px 16px; background: #FFF6E8;">
         <!-- Contact Info -->
-        <h3 style="margin: 0 0 12px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Contact Information</h3>
+        <h3 style="margin: 0 0 12px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">${i18n.adminContactInfo}</h3>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
           <tr><td style="padding: 6px 8px; font-weight: bold; width: 120px; border-bottom: 1px solid #E8DFD3;">Name</td><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3;">${e(lead.name)}</td></tr>
           <tr><td style="padding: 6px 8px; font-weight: bold; border-bottom: 1px solid #E8DFD3;">Email</td><td style="padding: 6px 8px; border-bottom: 1px solid #E8DFD3;"><a href="mailto:${e(lead.email)}" style="color: #E34234;">${e(lead.email)}</a></td></tr>
@@ -432,12 +503,12 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
         </table>
 
         <!-- What they selected -->
-        <h3 style="margin: 0 0 12px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Form Selections</h3>
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">${answersRows}</table>
+        <h3 style="margin: 0 0 12px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">${i18n.adminFormSelections}</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">${adminAnswersRows}</table>
 
         <!-- Estimate Result -->
         <div style="background: #2F2A26; border-radius: 12px; padding: 20px; color: #F5F0E8; margin-bottom: 20px;">
-          <h3 style="margin: 0 0 16px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Project Estimate Result</h3>
+          <h3 style="margin: 0 0 16px; color: #E34234; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">${i18n.adminEstimateResult}</h3>
           <table style="width: 100%; border-collapse: collapse;">
             <tr><td style="padding: 6px 0; color: #B0A898;">Investment Range</td><td style="padding: 6px 0; font-weight: bold; color: #E34234; font-size: 18px;">${e(priceRange)}</td></tr>
             <tr><td style="padding: 6px 0; color: #B0A898;">Timeline</td><td style="padding: 6px 0; font-weight: bold;">${e(timelineStr)}</td></tr>
@@ -449,19 +520,19 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
         <!-- Recommendation -->
         ${solution ? `
         <div style="padding: 16px; background: #FAF4E9; border-radius: 8px; border-left: 4px solid #E34234; margin-bottom: 16px;">
-          <p style="margin: 0 0 4px; font-weight: bold; color: #E34234; font-size: 13px; text-transform: uppercase;">Recommended Approach</p>
+          <p style="margin: 0 0 4px; font-weight: bold; color: #E34234; font-size: 13px; text-transform: uppercase;">${i18n.adminRecommendedApproach}</p>
           <p style="margin: 0 0 4px; font-weight: bold;">${e(solution)}</p>
           ${rationale ? `<p style="margin: 0; color: #8A8078; font-size: 14px;">${e(rationale)}</p>` : ''}
         </div>` : ''}
 
         <!-- Highlights -->
         ${highlightsHtml ? `
-        <h3 style="margin: 16px 0 8px; font-size: 14px;">Key Architectural Highlights</h3>
+        <h3 style="margin: 16px 0 8px; font-size: 14px;">${i18n.adminHighlights}</h3>
         <ul style="margin: 0; padding-left: 20px; color: #2F2A26;">${highlightsHtml}</ul>` : ''}
 
         <!-- Assumptions -->
         ${assumptionsHtml ? `
-        <h3 style="margin: 16px 0 8px; font-size: 14px;">Technical &amp; Commercial Assumptions</h3>
+        <h3 style="margin: 16px 0 8px; font-size: 14px;">${i18n.adminAssumptions}</h3>
         <ul style="margin: 0; padding-left: 20px; color: #8A8078;">${assumptionsHtml}</ul>` : ''}
 
         <p style="font-size: 12px; color: #8A8078; margin-top: 24px; border-top: 1px solid #E8DFD3; padding-top: 12px;">
@@ -472,33 +543,39 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   `;
 
   // ═══════════════════════════════════════════════════════════
-  // CLIENT EMAIL (to lead's email) — professional estimate copy
+  // CLIENT EMAIL (to lead's email) — locale-aware
   // ═══════════════════════════════════════════════════════════
+  const refId = lead.leadId.replace('lead_', '#');
   const clientHtml = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 640px; margin: 0 auto; padding: 0; color: #2F2A26;">
       <!-- Header -->
       <div style="background: #2F2A26; padding: 24px; border-radius: 16px 16px 0 0; text-align: center;">
-        <h1 style="color: #F5F0E8; margin: 0; font-size: 20px;">Your Project Estimate</h1>
-        <p style="color: #B0A898; margin: 8px 0 0; font-size: 14px;">from ALTIA DEV · Ref: ${lead.leadId.replace('lead_', '#')}</p>
+        <h1 style="color: #F5F0E8; margin: 0; font-size: 20px;">${i18n.clientTitle}</h1>
+        <p style="color: #B0A898; margin: 8px 0 0; font-size: 14px;">from ALTIA DEV · Ref: ${refId}</p>
       </div>
 
       <div style="padding: 24px; border: 1px solid #E8DFD3; border-top: none; border-radius: 0 0 16px 16px; background: #FFF6E8;">
-        <p style="margin: 0 0 20px;">Hi <strong>${e(lead.name)}</strong>, thank you for using our Project Estimator. Here is your calibrated estimate:</p>
+        <p style="margin: 0 0 20px;">${i18n.clientGreeting(lead.name)}</p>
+
+        <!-- What you selected -->
+        ${clientAnswersRows ? `
+        <h3 style="margin: 0 0 12px; color: #E34234; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">${isId ? 'Yang Anda Pilih' : 'Your Selections'}</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">${clientAnswersRows}</table>` : ''}
 
         <!-- Estimate Summary Cards -->
         <div style="background: #2F2A26; border-radius: 12px; padding: 20px; color: #F5F0E8; margin-bottom: 20px;">
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px; text-align: center; width: 33%;">
-                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Investment Range</p>
+                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">${i18n.investmentRange}</p>
                 <p style="margin: 4px 0 0; font-weight: bold; color: #E34234; font-size: 20px;">${e(priceRange)}</p>
               </td>
               <td style="padding: 8px; text-align: center; width: 33%; border-left: 1px solid #444; border-right: 1px solid #444;">
-                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Timeline</p>
+                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">${i18n.timeline}</p>
                 <p style="margin: 4px 0 0; font-weight: bold; font-size: 20px;">${e(timelineStr)}</p>
               </td>
               <td style="padding: 8px; text-align: center; width: 33%;">
-                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Complexity</p>
+                <p style="margin: 0; color: #B0A898; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">${i18n.complexity}</p>
                 <p style="margin: 4px 0 0; font-weight: bold; font-size: 16px; text-transform: uppercase;">${e(complexity)}</p>
               </td>
             </tr>
@@ -508,7 +585,7 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
         <!-- Recommendation -->
         ${solution ? `
         <div style="padding: 16px; background: #FAF4E9; border-radius: 8px; border-left: 4px solid #E34234; margin-bottom: 20px;">
-          <p style="margin: 0 0 4px; font-weight: bold; color: #E34234; font-size: 12px; text-transform: uppercase;">Recommended Technical Approach</p>
+          <p style="margin: 0 0 4px; font-weight: bold; color: #E34234; font-size: 12px; text-transform: uppercase;">${i18n.recommendedApproach}</p>
           <p style="margin: 0 0 4px; font-weight: bold; font-size: 15px;">${e(solution)}</p>
           ${rationale ? `<p style="margin: 0; color: #8A8078; font-size: 14px;">${e(rationale)}</p>` : ''}
         </div>` : ''}
@@ -517,11 +594,11 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
           <tr>
             ${highlightsHtml ? `<td style="vertical-align: top; padding-right: 10px; width: 50%;">
-              <h4 style="margin: 0 0 8px; font-size: 13px; color: #E34234;">Key Highlights</h4>
+              <h4 style="margin: 0 0 8px; font-size: 13px; color: #E34234;">${i18n.keyHighlights}</h4>
               <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #2F2A26;">${highlightsHtml}</ul>
             </td>` : ''}
             ${assumptionsHtml ? `<td style="vertical-align: top; padding-left: 10px; width: 50%;">
-              <h4 style="margin: 0 0 8px; font-size: 13px; color: #8A8078;">Assumptions</h4>
+              <h4 style="margin: 0 0 8px; font-size: 13px; color: #8A8078;">${i18n.assumptions}</h4>
               <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #8A8078;">${assumptionsHtml}</ul>
             </td>` : ''}
           </tr>
@@ -529,12 +606,11 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
 
         <!-- CTA -->
         <div style="text-align: center; margin: 24px 0;">
-          <a href="https://wa.me/${waNumber}?text=${encodeURIComponent(`Hi ALTIA DEV, I received my project estimate (${lead.leadId.replace('lead_', '#')}). I'd like to discuss next steps.`)}" style="display: inline-block; background: #E34234; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 15px;">Book a Discovery Call →</a>
+          <a href="https://wa.me/${waNumber}?text=${encodeURIComponent(i18n.ctaWaMessage(refId))}" style="display: inline-block; background: #E34234; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 15px;">${i18n.ctaText}</a>
         </div>
 
         <p style="font-size: 13px; color: #8A8078; text-align: center; margin: 16px 0 0;">
-          This estimate is calculated based on your selections and serves as a calibrated planning baseline.<br/>
-          Final deliverables, milestone schedules, and commercial terms are agreed during initial discovery.
+          ${i18n.disclaimer}
         </p>
 
         <p style="font-size: 12px; color: #B0A898; margin-top: 24px; border-top: 1px solid #E8DFD3; padding-top: 12px; text-align: center;">
@@ -568,17 +644,17 @@ async function sendLeadEmails(lead: LeadEmailData, env: EnvBindings = {}) {
   };
 
   await Promise.all([
-    // Admin email
+    // Admin email (always English subject)
     sendEmail(
       { email: receiverEmail, name: 'ALTIA DEV Leads' },
       `[${lead.tier.toUpperCase()} Lead] ${lead.name} — ${projectType} (${priceRange})`,
       adminHtml,
       { email: lead.email, name: lead.name }
     ),
-    // Client email
+    // Client email (locale-aware subject)
     sendEmail(
       { email: lead.email, name: lead.name },
-      `Your Project Estimate from ALTIA DEV — ${priceRange}`,
+      i18n.clientSubject(priceRange),
       clientHtml
     ),
   ]);
