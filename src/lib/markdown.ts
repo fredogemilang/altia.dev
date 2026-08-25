@@ -53,7 +53,9 @@ export function parseMarkdown(content: string): ParsedMarkdown {
         if (codeLanguage === 'mermaid') {
           // Render Mermaid diagram — Mermaid.js picks up <pre class="mermaid"> tags
           result.push(`
-            <pre class="mermaid my-8 flex justify-center">${rawCode}</pre>
+            <div class="my-8 overflow-x-auto">
+              <pre class="mermaid flex justify-center min-w-0">${rawCode}</pre>
+            </div>
           `);
         } else {
           result.push(`
