@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 interface NavbarProps {
   locale?: Locale;
   pathname?: string;
+  alternateUrls?: { en: string; id: string };
 }
 
 interface LanguageOption {
@@ -35,7 +36,7 @@ const LANGUAGES: LanguageOption[] = [
   { code: "id", label: "Bahasa Indonesia", subLabel: "ID (Indonesia)", flag: "🇮🇩" },
 ];
 
-export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
+export function Navbar({ locale = "en", pathname = "/", alternateUrls }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -403,7 +404,9 @@ export function Navbar({ locale = "en", pathname = "/" }: NavbarProps) {
                       <div className="space-y-1">
                         {LANGUAGES.map((lang) => {
                           const isSelected = locale === lang.code;
-                          const targetUrl = getLocalizedPath(cleanPath, lang.code);
+                          const targetUrl = alternateUrls
+                            ? (alternateUrls[lang.code] || getLocalizedPath(cleanPath, lang.code))
+                            : getLocalizedPath(cleanPath, lang.code);
 
                           return (
                             <a

@@ -12,12 +12,14 @@ interface Props {
   description?: string;
   ogImage?: string;
   locale?: Locale;
+  alternateUrls?: { en: string; id: string };
 }
 
 const {
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
   ogImage = SITE_CONFIG.ogImage,
+  alternateUrls,
 } = Astro.props;
 
 const url = Astro.url;
@@ -58,7 +60,13 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
 
     <!-- Canonical & Language Alternates -->
     <link rel="canonical" href={url.href} />
-    {(() => {
+    {alternateUrls ? (
+      <>
+        <link rel="alternate" hreflang="en" href={`${SITE_CONFIG.url}${alternateUrls.en}`} />
+        <link rel="alternate" hreflang="id" href={`${SITE_CONFIG.url}${alternateUrls.id}`} />
+        <link rel="alternate" hreflang="x-default" href={`${SITE_CONFIG.url}${alternateUrls.en}`} />
+      </>
+    ) : (() => {
       const basePath = pathname.replace(/^\/id/, '') || '/';
       return (
         <>
@@ -86,7 +94,7 @@ const fullTitle = title.includes('ALTIA DEV') ? title : `${title} | ALTIA DEV`;
   </head>
   <body class="bg-ivory text-charcoal font-sans min-h-screen flex flex-col selection:bg-vermilion selection:text-ivory">
     <MagneticCursor client:idle />
-    <Navbar client:load locale={locale} pathname={pathname} />
+    <Navbar client:load locale={locale} pathname={pathname} alternateUrls={alternateUrls} />
 
     <main class="flex-1 pt-20 pb-16 sm:pb-20 lg:pb-24 flex flex-col">
       <slot />

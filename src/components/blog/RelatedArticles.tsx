@@ -24,17 +24,30 @@ export function RelatedArticles({
   viewAllLabel = "View all articles",
 }: RelatedArticlesProps) {
   // Find the current post to access its metadata
-  const currentPost = posts.find((p) => p.slug === currentSlug);
+  const currentPost = posts.find((p) =>
+    typeof p.slug === 'object'
+      ? p.slug.en === currentSlug || p.slug.id === currentSlug
+      : p.slug === currentSlug
+  );
 
   // Filter out current post
-  const otherPosts = posts.filter((p) => p.slug !== currentSlug);
+  const otherPosts = posts.filter((p) =>
+    typeof p.slug === 'object'
+      ? p.slug.en !== currentSlug && p.slug.id !== currentSlug
+      : p.slug !== currentSlug
+  );
 
   // Build a scored list for relevance matching
   const scored = otherPosts.map((post) => {
     let score = 0;
 
     // Highest priority: explicit editorial links
-    if (currentPost?.relatedSlugs?.includes(post.slug)) score += 100;
+    const isRelated = currentPost?.relatedSlugs?.some((rel) =>
+      typeof post.slug === 'object'
+        ? rel === post.slug.en || rel === post.slug.id
+        : rel === post.slug
+    );
+    if (isRelated) score += 100;
 
     // Same pillar
     if (currentPost?.pillar && post.pillar === currentPost.pillar) score += 30;
@@ -81,13 +94,18 @@ export function RelatedArticles({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {related.map((post) => (
-            <a
-              key={post.slug}
-              href={getLocalizedPath(`/blog/${post.slug}`, locale)}
-              className="group flex flex-col h-full bg-gradient-to-b from-[#FFFDF9] to-[#FAF4EB] border border-warm-border rounded-3xl overflow-hidden hover:border-vermilion/50 hover:shadow-warm-lg hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] transition-[border-color,box-shadow,transform] duration-250 ease-emil-out will-change-transform"
-              data-cursor
-            >
+          {related.map((post) => {
+            const relSlug = typeof post.slug === 'object' ? post.slug[locale] : post.slug;
+            const keySlug = typeof post.slug === 'object' ? post.slug.en : post.slug;
+            const postHref = locale === 'id' ? `/id/blog/${relSlug}` : `/blog/${relSlug}`;
+
+            return (
+              <a
+                key={keySlug}
+                href={postHref}
+                className="group flex flex-col h-full bg-gradient-to-b from-[#FFFDF9] to-[#FAF4EB] border border-warm-border rounded-3xl overflow-hidden hover:border-vermilion/50 hover:shadow-warm-lg hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] transition-[border-color,box-shadow,transform] duration-250 ease-emil-out will-change-transform"
+                data-cursor
+              >
               {/* Cover Image Container */}
               <div className="aspect-[16/10] overflow-hidden bg-cream relative">
                 <img
@@ -145,7 +163,8 @@ export function RelatedArticles({
                 </div>
               </div>
             </a>
-          ))}
+          );
+        })}
         </div>
       </Container>
     </section>

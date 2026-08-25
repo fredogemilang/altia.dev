@@ -118,7 +118,12 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefi
     console.warn(`[B10cks API] Fetch post [${slug}] fallback to static:`, err);
   }
 
-  return BLOG_POSTS.find((p) => p.slug === slug);
+  return BLOG_POSTS.find((p) => {
+    if (p.slug && typeof p.slug === 'object') {
+      return p.slug.en === slug || p.slug.id === slug;
+    }
+    return (p.slug as any) === slug;
+  });
 }
 
 /**

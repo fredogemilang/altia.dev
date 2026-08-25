@@ -14,7 +14,7 @@ import { ArrowLeft, Clock, Calendar, Sparkles } from 'lucide-react';
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: typeof post.slug === 'object' ? post.slug.id : post.slug },
   }));
 }
 
@@ -27,13 +27,18 @@ if (!post) {
 }
 
 const allPosts = await getBlogPosts();
-const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+const currentIndex = allPosts.findIndex((p) =>
+  typeof p.slug === 'object' ? p.slug.en === slug || p.slug.id === slug : p.slug === slug
+);
 // Chronological order: allPosts is sorted descending by publishedAt (0 = newest)
 const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : undefined; // Older post
 const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined; // Newer post
 
 const { html, toc } = parseMarkdown(post.content[locale]);
 const currentUrl = Astro.url.href;
+const currentSlug = typeof post.slug === 'object' ? post.slug.id : post.slug;
+const enSlug = typeof post.slug === 'object' ? post.slug.en : post.slug;
+const idSlug = typeof post.slug === 'object' ? post.slug.id : post.slug;
 ---
 
 <Layout
@@ -41,6 +46,10 @@ const currentUrl = Astro.url.href;
   description={post.excerpt[locale]}
   ogImage={post.coverImage}
   locale={locale}
+  alternateUrls={{
+    en: `/blog/${enSlug}`,
+    id: `/id/blog/${idSlug}`,
+  }}
 >
   <article class="flex flex-col gap-12 sm:gap-16 pb-36 sm:pb-44 lg:pb-52">
     <!-- 1. Article Header (Matches Nav Container Width with Faded Grid & Warm Shaded Gradient) -->
@@ -192,7 +201,7 @@ const currentUrl = Astro.url.href;
     <RelatedArticles
       client:visible
       posts={allPosts}
-      currentSlug={post.slug}
+      currentSlug={currentSlug}
       currentCategory={post.category}
       locale={locale}
       sectionTitle={t(locale, 'Blog.relatedTitle')}

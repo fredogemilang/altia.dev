@@ -18,7 +18,10 @@ export const PILLAR_LABELS: Record<Pillar, { en: string; id: string }> = {
 };
 
 export interface BlogPost {
-  slug: string;
+  slug: {
+    en: string;
+    id: string;
+  };
   title: {
     en: string;
     id: string;
@@ -54,14 +57,22 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: "how-to-turn-complex-pdfs-into-structured-knowledge",
+    slug: {
+      en: "how-to-turn-complex-pdfs-into-structured-knowledge",
+      id: "mengubah-pdf-kompleks-menjadi-knowledge-yang-terstruktur",
+    },
     category: "AI",
     pillar: "ai-engineering",
     cluster: "AI-Assisted Document Processing",
     articleType: "Deep Dive",
     searchIntent: "Problem Solving",
     tags: ["ai", "document-processing", "knowledge-management", "pdf", "human-in-the-loop"],
-    relatedSlugs: ["meilisearch-vs-vector-search", "rag-vs-search-business-knowledge-system"],
+    relatedSlugs: [
+      "meilisearch-vs-vector-search-which-should-you-use",
+      "rag-vs-search-what-should-a-business-knowledge-system-use",
+      "meilisearch-vs-vector-search-mana-yang-sebaiknya-digunakan",
+      "rag-vs-search-apa-yang-sebaiknya-digunakan-untuk-business-knowledge-system",
+    ],
     relatedProject: "vads-knowledge-management",
     primaryCta: "Explore how ALTIA DEV approaches AI-powered knowledge systems.",
     publishedAt: "2026-08-11",
@@ -86,14 +97,22 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: "/uploads/blog/complex-pdfs-to-knowledge.webp",
   },
   {
-    slug: "meilisearch-vs-vector-search",
+    slug: {
+      en: "meilisearch-vs-vector-search-which-should-you-use",
+      id: "meilisearch-vs-vector-search-mana-yang-sebaiknya-digunakan",
+    },
     category: "AI",
     pillar: "ai-engineering",
     cluster: "Search + AI",
     articleType: "Comparison",
     searchIntent: "Commercial Investigation / Decision",
     tags: ["meilisearch", "vector-search", "hybrid-search", "semantic-search", "knowledge-management", "enterprise-search"],
-    relatedSlugs: ["how-to-turn-complex-pdfs-into-structured-knowledge", "rag-vs-search-business-knowledge-system"],
+    relatedSlugs: [
+      "how-to-turn-complex-pdfs-into-structured-knowledge",
+      "rag-vs-search-what-should-a-business-knowledge-system-use",
+      "mengubah-pdf-kompleks-menjadi-knowledge-yang-terstruktur",
+      "rag-vs-search-apa-yang-sebaiknya-digunakan-untuk-business-knowledge-system",
+    ],
     relatedProject: "vads-knowledge-management",
     primaryCta: "Explore how ALTIA DEV approaches search and AI engineering.",
     publishedAt: "2026-08-18",
@@ -118,14 +137,22 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: "/uploads/blog/meilisearch-vs-vector-search.webp",
   },
   {
-    slug: "rag-vs-search-business-knowledge-system",
+    slug: {
+      en: "rag-vs-search-what-should-a-business-knowledge-system-use",
+      id: "rag-vs-search-apa-yang-sebaiknya-digunakan-untuk-business-knowledge-system",
+    },
     category: "AI",
     pillar: "ai-engineering",
     cluster: "AI Knowledge Systems",
     articleType: "Decision Guide",
-    searchIntent: "Commercial Investigation / Problem Solving",
+    searchIntent: "Problem Solving",
     tags: ["rag", "retrieval-augmented-generation", "search", "knowledge-management", "ai-assistant", "enterprise-search"],
-    relatedSlugs: ["meilisearch-vs-vector-search", "how-to-turn-complex-pdfs-into-structured-knowledge"],
+    relatedSlugs: [
+      "meilisearch-vs-vector-search-which-should-you-use",
+      "how-to-turn-complex-pdfs-into-structured-knowledge",
+      "meilisearch-vs-vector-search-mana-yang-sebaiknya-digunakan",
+      "mengubah-pdf-kompleks-menjadi-knowledge-yang-terstruktur",
+    ],
     relatedProject: "vads-knowledge-management",
     primaryCta: "Explore how ALTIA DEV builds AI knowledge systems.",
     publishedAt: "2026-08-25",

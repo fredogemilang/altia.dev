@@ -23,52 +23,60 @@ export function NextPrevArticles({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 border-t border-warm-border/80">
       {/* Previous Article */}
-      {prevPost ? (
-        <a
-          href={getLocalizedPath(`/blog/${prevPost.slug}`, locale)}
-          className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF4EB] border border-warm-border hover:border-vermilion/50 hover:shadow-warm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-[border-color,box-shadow,transform] duration-200 ease-emil-out will-change-transform"
-          data-cursor
-        >
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-charcoal-muted group-hover:text-vermilion mb-4 transition-colors duration-160">
-            <ArrowLeft className="w-4 h-4 transition-transform duration-200 ease-emil-out group-hover:-translate-x-1" />
-            <span>{prevLabel}</span>
-          </div>
+      {prevPost ? (() => {
+        const prevSlug = typeof prevPost.slug === 'object' ? prevPost.slug[locale] : prevPost.slug;
+        const prevHref = locale === 'id' ? `/id/blog/${prevSlug}` : `/blog/${prevSlug}`;
+        return (
+          <a
+            href={prevHref}
+            className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF4EB] border border-warm-border hover:border-vermilion/50 hover:shadow-warm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-[border-color,box-shadow,transform] duration-200 ease-emil-out will-change-transform"
+            data-cursor
+          >
+            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-charcoal-muted group-hover:text-vermilion mb-4 transition-colors duration-160">
+              <ArrowLeft className="w-4 h-4 transition-transform duration-200 ease-emil-out group-hover:-translate-x-1" />
+              <span>{prevLabel}</span>
+            </div>
 
-          <div>
-            <Badge variant="vermilion" size="sm" className="mb-2.5 uppercase font-bold text-[10px]">
-              {prevPost.category}
-            </Badge>
-            <h4 className="font-display font-bold text-base sm:text-lg text-charcoal group-hover:text-vermilion transition-colors duration-160 line-clamp-2 leading-snug">
-              {prevPost.title[locale]}
-            </h4>
-          </div>
-        </a>
-      ) : (
+            <div>
+              <Badge variant="vermilion" size="sm" className="mb-2.5 uppercase font-bold text-[10px]">
+                {prevPost.category}
+              </Badge>
+              <h4 className="font-display font-bold text-base sm:text-lg text-charcoal group-hover:text-vermilion transition-colors duration-160 line-clamp-2 leading-snug">
+                {prevPost.title[locale]}
+              </h4>
+            </div>
+          </a>
+        );
+      })() : (
         <div className="hidden md:block" />
       )}
 
       {/* Next Article */}
-      {nextPost ? (
-        <a
-          href={getLocalizedPath(`/blog/${nextPost.slug}`, locale)}
-          className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF4EB] border border-warm-border hover:border-vermilion/50 hover:shadow-warm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-[border-color,box-shadow,transform] duration-200 ease-emil-out will-change-transform text-right items-end"
-          data-cursor
-        >
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-charcoal-muted group-hover:text-vermilion mb-4 transition-colors duration-160">
-            <span>{nextLabel}</span>
-            <ArrowRight className="w-4 h-4 transition-transform duration-200 ease-emil-out group-hover:translate-x-1" />
-          </div>
+      {nextPost ? (() => {
+        const nextSlug = typeof nextPost.slug === 'object' ? nextPost.slug[locale] : nextPost.slug;
+        const nextHref = locale === 'id' ? `/id/blog/${nextSlug}` : `/blog/${nextSlug}`;
+        return (
+          <a
+            href={nextHref}
+            className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#FFFDF9] to-[#FAF4EB] border border-warm-border hover:border-vermilion/50 hover:shadow-warm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-[border-color,box-shadow,transform] duration-200 ease-emil-out will-change-transform text-right items-end"
+            data-cursor
+          >
+            <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-charcoal-muted group-hover:text-vermilion mb-4 transition-colors duration-160">
+              <span>{nextLabel}</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 ease-emil-out group-hover:translate-x-1" />
+            </div>
 
-          <div className="flex flex-col items-end">
-            <Badge variant="vermilion" size="sm" className="mb-2.5 uppercase font-bold text-[10px]">
-              {nextPost.category}
-            </Badge>
-            <h4 className="font-display font-bold text-base sm:text-lg text-charcoal group-hover:text-vermilion transition-colors line-clamp-2 leading-snug">
-              {nextPost.title[locale]}
-            </h4>
-          </div>
-        </a>
-      ) : (
+            <div className="flex flex-col items-end">
+              <Badge variant="vermilion" size="sm" className="mb-2.5 uppercase font-bold text-[10px]">
+                {nextPost.category}
+              </Badge>
+              <h4 className="font-display font-bold text-base sm:text-lg text-charcoal group-hover:text-vermilion transition-colors line-clamp-2 leading-snug">
+                {nextPost.title[locale]}
+              </h4>
+            </div>
+          </a>
+        );
+      })() : (
         <div className="hidden md:block" />
       )}
     </div>

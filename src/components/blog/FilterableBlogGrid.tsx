@@ -41,60 +41,65 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
             </p>
           </div>
         ) : (
-          filteredPosts.map((post, index) => (
-            <div
-              key={post.slug}
-              className="flex flex-col justify-between h-full bg-warm-card border border-warm-border rounded-3xl p-5 group hover:border-vermilion transition-colors duration-300"
-            >
-              <div>
-                <a
-                  href={getLocalizedPath(`/blog/${post.slug}`, locale)}
-                  className="block aspect-[16/10] w-full rounded-2xl bg-cream overflow-hidden mb-6 relative cursor-pointer"
-                  data-cursor
-                  data-cursor-text="READ"
-                >
-                  <img
-                    src={post.coverImage}
-                    alt={post.title[locale]}
-                    loading={index < 2 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </a>
+          filteredPosts.map((post, index) => {
+            const postSlug = typeof post.slug === 'object' ? post.slug[locale] : post.slug;
+            const postHref = locale === 'id' ? `/id/blog/${postSlug}` : `/blog/${postSlug}`;
+            const keySlug = typeof post.slug === 'object' ? post.slug.en : post.slug;
 
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <Badge
-                    variant="vermilion"
-                    size="sm"
-                    className="uppercase font-bold tracking-wider"
+            return (
+              <div
+                key={keySlug}
+                className="flex flex-col justify-between h-full bg-warm-card border border-warm-border rounded-3xl p-5 group hover:border-vermilion transition-colors duration-300"
+              >
+                <div>
+                  <a
+                    href={postHref}
+                    className="block aspect-[16/10] w-full rounded-2xl bg-cream overflow-hidden mb-6 relative cursor-pointer"
+                    data-cursor
+                    data-cursor-text="READ"
                   >
-                    {post.pillar
-                      ? PILLAR_LABELS[post.pillar]?.[locale] || post.category
-                      : post.category}
-                  </Badge>
-                  <div className="flex items-center gap-1.5 text-xs text-charcoal-muted">
-                    <Clock className="w-3.5 h-3.5 text-vermilion" />
-                    <span>
-                      {post.readTime} {t(locale, 'Blog.readTime')}
-                    </span>
+                    <img
+                      src={post.coverImage}
+                      alt={post.title[locale]}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </a>
+
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <Badge
+                      variant="vermilion"
+                      size="sm"
+                      className="uppercase font-bold tracking-wider"
+                    >
+                      {post.pillar
+                        ? PILLAR_LABELS[post.pillar]?.[locale] || post.category
+                        : post.category}
+                    </Badge>
+                    <div className="flex items-center gap-1.5 text-xs text-charcoal-muted">
+                      <Clock className="w-3.5 h-3.5 text-vermilion" />
+                      <span>
+                        {post.readTime} {t(locale, 'Blog.readTime')}
+                      </span>
+                    </div>
                   </div>
+
+                  <a
+                    href={postHref}
+                    className="block group/title"
+                    data-cursor
+                    data-cursor-text="READ"
+                  >
+                    <h3 className="font-display text-2xl font-bold text-charcoal mb-3 group-hover:text-vermilion transition-colors">
+                      {post.title[locale]}
+                    </h3>
+                  </a>
+
+                  <p className="text-sm text-charcoal-muted leading-relaxed mb-6">
+                    {post.excerpt[locale]}
+                  </p>
                 </div>
-
-                <a
-                  href={getLocalizedPath(`/blog/${post.slug}`, locale)}
-                  className="block group/title"
-                  data-cursor
-                  data-cursor-text="READ"
-                >
-                  <h3 className="font-display text-2xl font-bold text-charcoal mb-3 group-hover:text-vermilion transition-colors">
-                    {post.title[locale]}
-                  </h3>
-                </a>
-
-                <p className="text-sm text-charcoal-muted leading-relaxed mb-6">
-                  {post.excerpt[locale]}
-                </p>
-              </div>
 
               <div className="pt-4 border-t border-warm-border flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -115,7 +120,7 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
                 </div>
 
                 <Button
-                  href={getLocalizedPath(`/blog/${post.slug}`, locale)}
+                  href={postHref}
                   variant="ghost"
                   size="sm"
                   className="text-vermilion font-bold p-0 hover:bg-transparent"
@@ -126,8 +131,8 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
                 </Button>
               </div>
             </div>
-          ))
-        )}
+          );
+        }))}
       </div>
     </div>
   );
