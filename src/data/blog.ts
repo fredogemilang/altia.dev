@@ -1,6 +1,7 @@
 import { ARTICLE_001_EN, ARTICLE_001_ID } from './blog-article-001';
 import { ARTICLE_002_EN, ARTICLE_002_ID } from './blog-article-002';
 import { ARTICLE_003_EN, ARTICLE_003_ID } from './blog-article-003';
+import { ARTICLE_004_EN, ARTICLE_004_ID } from './blog-article-004';
 
 export type Pillar =
   | 'engineering'
@@ -175,5 +176,56 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/uploads/team/Alfredo-Gemilang.webp",
     },
     coverImage: "/uploads/blog/rag-vs-search.webp",
+  },
+  {
+    slug: {
+      en: "human-in-the-loop-ai",
+      id: "human-in-the-loop-ai-mengapa-otomasi-tidak-berarti-tanpa-review",
+    },
+    category: "AI",
+    pillar: "ai-engineering",
+    cluster: "AI Knowledge Systems",
+    articleType: "Engineering Deep Dive",
+    searchIntent: "Problem Solving / Commercial Investigation",
+    tags: [
+      "human-in-the-loop",
+      "ai-automation",
+      "ai-workflow",
+      "ai-knowledge-management",
+      "ai-document-processing",
+      "ai-engineering",
+      "human-oversight",
+    ],
+    relatedSlugs: [
+      "how-to-turn-complex-pdfs-into-structured-knowledge",
+      "mengubah-pdf-kompleks-menjadi-knowledge-yang-terstruktur",
+      "meilisearch-vs-vector-search-which-should-you-use",
+      "meilisearch-vs-vector-search-mana-yang-sebaiknya-digunakan",
+      "rag-vs-search-what-should-a-business-knowledge-system-use",
+      "rag-vs-search-apa-yang-sebaiknya-digunakan-untuk-business-knowledge-system",
+    ],
+    relatedProject: "vads-knowledge-management",
+    primaryCta:
+      "Have a similar workflow? Let's discuss how ALTIA DEV approaches human-in-the-loop AI.",
+    publishedAt: "2026-08-27",
+    readTime: "9",
+    title: {
+      en: "Human-in-the-Loop AI: Why Automation Should Not Mean No Review",
+      id: "Human-in-the-Loop AI: Mengapa Otomasi Tidak Berarti Tanpa Review",
+    },
+    excerpt: {
+      en: "Learn when AI should decide and when humans must stay in control — and how to design review workflows that automate the repetitive without removing accountability.",
+      id: "Pelajari kapan AI boleh mengambil keputusan dan kapan manusia harus tetap memegang kendali — serta cara mendesain review workflow yang mengotomatisasi pekerjaan repetitif tanpa menghilangkan accountability.",
+    },
+    content: {
+      en: ARTICLE_004_EN,
+      id: ARTICLE_004_ID,
+    },
+    author: {
+      name: "Alfredo Gemilang",
+      role: "Founder & Lead Engineer",
+      avatar: "/uploads/team/Alfredo-Gemilang.webp",
+    },
+    coverImage: "/uploads/blog/004-human-in-the-loop-ai.webp",
   },
 ];
