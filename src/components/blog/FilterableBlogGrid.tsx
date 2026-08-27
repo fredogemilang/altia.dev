@@ -6,7 +6,19 @@ import type { Locale } from '../../i18n/utils';
 import { t, getLocalizedPath } from '../../i18n/utils';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Clock, ArrowUpRight } from 'lucide-react';
+import { Clock, Calendar, ArrowUpRight } from 'lucide-react';
+
+function formatPublishedDate(dateStr: string, locale: Locale): string {
+  if (!dateStr) return '';
+  const date = new Date(dateStr + 'T00:00:00Z');
+  if (isNaN(date.getTime())) return dateStr;
+  return new Intl.DateTimeFormat(locale, {
+    day: 'numeric',
+    month: locale === 'id' ? 'long' : 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
 
 interface FilterableBlogGridProps {
   posts: BlogPost[];
@@ -77,11 +89,19 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
                         ? PILLAR_LABELS[post.pillar]?.[locale] || post.category
                         : post.category}
                     </Badge>
-                    <div className="flex items-center gap-1.5 text-xs text-charcoal-muted">
-                      <Clock className="w-3.5 h-3.5 text-vermilion" />
-                      <span>
-                        {post.readTime} {t(locale, 'Blog.readTime')}
-                      </span>
+                    <div className="flex items-center gap-3 text-xs text-charcoal-muted">
+                      {post.publishedAt && (
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-vermilion" />
+                          <span>{formatPublishedDate(post.publishedAt, locale)}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-vermilion" />
+                        <span>
+                          {post.readTime} {t(locale, 'Blog.readTime')}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
