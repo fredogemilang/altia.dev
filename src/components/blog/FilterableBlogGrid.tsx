@@ -77,6 +77,14 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
                       decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
+                    {post.readTime && (
+                      <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-charcoal/70 backdrop-blur-md text-ivory text-xs font-medium pointer-events-none border border-white/10 shadow-sm">
+                        <Clock className="w-3.5 h-3.5 text-vermilion" />
+                        <span>
+                          {post.readTime} {t(locale, 'Blog.readTime')}
+                        </span>
+                      </div>
+                    )}
                   </a>
 
                   <div className="flex items-center justify-between gap-2 mb-3">
@@ -89,20 +97,12 @@ export function FilterableBlogGrid({ posts, locale }: FilterableBlogGridProps) {
                         ? PILLAR_LABELS[post.pillar]?.[locale] || post.category
                         : post.category}
                     </Badge>
-                    <div className="flex items-center gap-3 text-xs text-charcoal-muted">
-                      {post.publishedAt && (
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-vermilion" />
-                          <span>{formatPublishedDate(post.publishedAt, locale)}</span>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-vermilion" />
-                        <span>
-                          {post.readTime} {t(locale, 'Blog.readTime')}
-                        </span>
+                    {post.publishedAt && (
+                      <div className="flex items-center gap-1.5 text-xs text-charcoal-muted">
+                        <Calendar className="w-3.5 h-3.5 text-vermilion" />
+                        <span>{formatPublishedDate(post.publishedAt, locale)}</span>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <a
