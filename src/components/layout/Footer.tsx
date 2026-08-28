@@ -60,7 +60,13 @@ export function Footer({ locale = "en" }: FooterProps) {
             <a href={getLocalizedPath("/", locale)} className="flex items-center group">
               <img
                 src="/uploads/altia-dev-logo-white.webp"
+                srcSet="/uploads/altia-dev-logo-white-sm.webp 420w, /uploads/altia-dev-logo-white.webp 840w"
+                sizes="(max-width: 767px) 160px, 190px"
                 alt="ALTIA DEV"
+                width={190}
+                height={45}
+                loading="lazy"
+                decoding="async"
                 className="h-8 sm:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>

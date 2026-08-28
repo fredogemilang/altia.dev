@@ -215,8 +215,10 @@ export function Navbar({ locale = "en", pathname = "/", alternateUrls }: NavbarP
             >
               <img
                 src="/uploads/altia-dev-logo.webp"
+                srcSet="/uploads/altia-dev-logo-sm.webp 420w, /uploads/altia-dev-logo.webp 840w"
+                sizes="(max-width: 767px) 150px, 210px"
                 alt="ALTIA DEV"
-                width={250}
+                width={210}
                 height={50}
                 loading="eager"
                 fetchPriority="high"

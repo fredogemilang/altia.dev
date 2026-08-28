@@ -4,6 +4,20 @@ import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 
+/**
+ * Builds a srcSet for portfolio images.
+ * Expects /uploads/portfolio/{project}/1.webp
+ * and references pre-generated -sm (640w) and -md (960w) variants.
+ */
+function buildPortfolioSrcSet(src: string): string | undefined {
+  if (!src || !src.includes('/uploads/portfolio/')) return undefined;
+  const ext = src.lastIndexOf('.');
+  if (ext === -1) return undefined;
+  const base = src.slice(0, ext);
+  const suffix = src.slice(ext);
+  return `${base}-sm${suffix} 640w, ${base}-md${suffix} 960w, ${src} 2560w`;
+}
+
 interface CaseStudyGalleryProps {
   gallery?: string[];
   title: string;
@@ -53,6 +67,8 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
           <div className="relative aspect-[16/9] w-full bg-charcoal overflow-hidden">
             <img
               src={gallery[activeImageIndex] || gallery[0]}
+              srcSet={buildPortfolioSrcSet(gallery[activeImageIndex] || gallery[0])}
+              sizes="(max-width: 767px) 100vw, (max-width: 1200px) 90vw, 1200px"
               alt={`${title} screenshot ${activeImageIndex + 1}`}
               loading="lazy"
               decoding="async"
@@ -77,8 +93,11 @@ export function CaseStudyGallery({ gallery, title, lang }: CaseStudyGalleryProps
               >
                 <img
                   src={img}
+                  srcSet={buildPortfolioSrcSet(img)}
+                  sizes="(max-width: 767px) 33vw, 400px"
                   alt={`Thumbnail ${idx + 1}`}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">

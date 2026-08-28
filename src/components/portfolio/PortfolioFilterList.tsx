@@ -12,6 +12,24 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 
+/**
+ * Builds a srcSet string for portfolio card images.
+ * Expects images in the form /uploads/portfolio/{project}/1.webp
+ * and will reference generated -sm (640w) and -md (960w) variants.
+ */
+function buildPortfolioSrcSet(src: string): string | undefined {
+  if (!src) return undefined;
+  const ext = src.lastIndexOf('.');
+  if (ext === -1) return undefined;
+  const base = src.slice(0, ext);
+  const suffix = src.slice(ext);
+  return [
+    `${base}-sm${suffix} 640w`,
+    `${base}-md${suffix} 960w`,
+    `${src} 2560w`,
+  ].join(', ');
+}
+
 interface PortfolioFilterListProps {
   projects: Project[];
   locale?: string;
@@ -174,6 +192,8 @@ export function PortfolioFilterList({
                   aspectRatio="aspect-[16/10]"
                   className="w-full"
                   priority={index < 2}
+                  srcSet={buildPortfolioSrcSet(project.image)}
+                  sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 620px"
                 />
               </a>
               <div className="flex items-center justify-between mb-3">

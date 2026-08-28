@@ -12,6 +12,8 @@ interface ParallaxImageProps {
   speed?: number; // e.g. 15 for 15% parallax shift
   priority?: boolean;
   loading?: "eager" | "lazy";
+  srcSet?: string;
+  sizes?: string;
 }
 
 export function ParallaxImage({
@@ -22,6 +24,8 @@ export function ParallaxImage({
   speed = 12,
   priority = false,
   loading,
+  srcSet,
+  sizes,
 }: ParallaxImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
@@ -66,6 +70,8 @@ export function ParallaxImage({
       >
         <img
           src={src}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt}
           loading={priority ? "eager" : (loading || "lazy")}
           fetchPriority={priority ? "high" : "auto"}
