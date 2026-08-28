@@ -1,0 +1,74 @@
+---
+import { Container } from '@/components/ui/Container';
+import { Badge } from '@/components/ui/Badge';
+import type { ProjectTestimonial } from '@/data/projects';
+
+interface Props {
+  testimonial?: ProjectTestimonial;
+  lang: 'id' | 'en';
+}
+
+const { testimonial, lang } = Astro.props;
+if (!testimonial) return;
+---
+
+<section class="relative py-8 sm:py-16">
+  <Container size="large">
+    <div class="p-8 sm:p-14 lg:p-16 rounded-4xl bg-gradient-to-br from-[#FFFDF9] via-cream/40 to-[#F0E8DC]/60 border-2 border-warm-border shadow-[0_20px_50px_rgba(47,42,38,0.08)] relative overflow-hidden">
+      {/* Subtle Background Quote Watermark */}
+      <svg
+        class="absolute -bottom-6 -right-6 w-48 h-48 text-charcoal/[0.04] pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+      </svg>
+
+      <div class="relative z-10 max-w-4xl">
+        <div class="flex items-center gap-3 mb-6">
+          <Badge variant="vermilion" size="sm" className="uppercase font-bold tracking-wider text-[10px]">
+            {lang === 'id' ? 'TESTIMONIAL RESMI KLIEN' : 'VERIFIED CLIENT IMPACT'}
+          </Badge>
+          <div class="flex items-center gap-1 text-amber-500">
+            {Array.from({ length: 5 }).map(() => (
+              <svg class="w-3.5 h-3.5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            ))}
+          </div>
+        </div>
+
+        <blockquote class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-charcoal tracking-tight leading-[1.25] mb-8 sm:mb-10">
+          "{testimonial.quote[lang]}"
+        </blockquote>
+
+        <div class="flex items-center gap-4 pt-6 border-t border-warm-border/80">
+          <div class="w-12 h-12 rounded-full bg-vermilion text-ivory flex items-center justify-center font-display font-black text-lg shadow-md">
+            {testimonial.author.charAt(0)}
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h4 class="font-display font-black text-lg text-charcoal">
+                {testimonial.author}
+              </h4>
+              <svg class="w-4 h-4 text-vermilion" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <p class="text-xs sm:text-sm text-charcoal-muted font-normal">
+              {testimonial.role} · <span class="font-semibold text-charcoal">{testimonial.company}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

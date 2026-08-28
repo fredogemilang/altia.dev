@@ -7,7 +7,7 @@ import { ServicesCardGrid, type ServiceCardItem } from '../components/sections/s
 import { StatsGrid, type StatItem } from '../components/sections/StatsGrid';
 import { ScrollReveal } from '../components/effects/ScrollReveal';
 import { StackedCardsSection } from '../components/sections/portfolio/StackedCardsSection';
-import { ClientsGridShowcase } from '../components/sections/clients/ClientsGridShowcase';
+import ClientsGridShowcase from '../components/sections/clients/ClientsGridShowcase.astro';
 import { getProjects } from '../lib/b10cks';
 import { SITE_CONFIG } from '../lib/constants';
 import { t, type Locale } from '../i18n/utils';
@@ -159,7 +159,7 @@ const serviceItems: ServiceCardItem[] = [
         />
 
         <ScrollReveal client:visible variant="fade-up">
-          <ClientsGridShowcase client:visible locale={locale} />
+          <ClientsGridShowcase locale={locale} />
         </ScrollReveal>
       </Container>
     </section>
