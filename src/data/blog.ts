@@ -2,6 +2,7 @@ import { ARTICLE_001_EN, ARTICLE_001_ID } from './blog-article-001';
 import { ARTICLE_002_EN, ARTICLE_002_ID } from './blog-article-002';
 import { ARTICLE_003_EN, ARTICLE_003_ID } from './blog-article-003';
 import { ARTICLE_004_EN, ARTICLE_004_ID } from './blog-article-004';
+import { ARTICLE_005_EN, ARTICLE_005_ID } from './blog-article-005';
 
 export type Pillar =
   | 'engineering'
@@ -227,5 +228,27 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/uploads/team/Alfredo-Gemilang.webp",
     },
     coverImage: "/uploads/blog/004-human-in-the-loop-ai.webp",
+  },
+  {
+    slug: { en: "what-is-design-engineering", id: "apa-itu-design-engineering" },
+    category: "Design Engineering",
+    pillar: "creative-development",
+    cluster: "Creative Development",
+    articleType: "Perspective",
+    searchIntent: "Informational",
+    tags: ["design-engineering","creative-engineering","design-intent","frontend","interaction-design","digital-experience","creative-development"],
+    relatedSlugs: [],
+    relatedProject: "mansor-customs",
+    primaryCta: "Explore how ALTIA DEV combines design and engineering to build digital experiences.",
+    publishedAt: "2026-08-31",
+    readTime: "9",
+    title: { en: "What Is Design Engineering?", id: "Apa Itu Design Engineering?" },
+    excerpt: {
+      en: "What is design engineering? Learn how design, content, interaction, and engineering work together to create digital experiences that are visually coherent, interactive, usable, and technically sound.",
+      id: "Apa itu design engineering? Pelajari bagaimana design, content, interaction, dan engineering bekerja bersama untuk menciptakan digital experience yang visual konsisten, interaktif, usable, dan secara teknis sound."
+    },
+    author: { name: "Alfredo Gemilang", role: "Founder & Lead Engineer", avatar: "/uploads/team/Alfredo-Gemilang.webp" },
+    coverImage: "/uploads/blog/005-design-engineering.webp",
+    content: { en: ARTICLE_005_EN, id: ARTICLE_005_ID },
   },
 ];
