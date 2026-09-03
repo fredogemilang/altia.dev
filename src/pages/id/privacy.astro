@@ -1,96 +1,472 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Container } from '../../components/ui/Container';
+import { Badge } from '../../components/ui/Badge';
+import {
+  ShieldCheck,
+  Lock,
+  Key,
+  FileText,
+  ExternalLink,
+  Mail,
+  Globe,
+  Trash2,
+  Server,
+} from 'lucide-react';
 
 const locale = 'id';
-const lastUpdated = '25 Agustus 2026';
+const lastUpdated = '3 September 2026';
+
+const sections = [
+  { id: 'cakupan', label: '1. Ruang Lingkup & Domain' },
+  { id: 'data-dikumpulkan', label: '2. Informasi yang Dikumpulkan' },
+  { id: 'google-oauth', label: '3. Google Sign-In & OAuth' },
+  { id: 'limited-use', label: '4. Kepatuhan Google Limited Use' },
+  { id: 'penggunaan-data', label: '5. Cara Penggunaan Informasi' },
+  { id: 'subprosesor', label: '6. Layanan Pihak Ketiga' },
+  { id: 'keamanan-data', label: '7. Langkah Keamanan Data' },
+  { id: 'retensi-penghapusan', label: '8. Retensi & Penghapusan Data' },
+  { id: 'hak-pengguna', label: '9. Hak Privasi Anda (UU PDP)' },
+  { id: 'cookie', label: '10. Cookie & Penyimpanan Sesi' },
+  { id: 'kontak', label: '11. Kontak & Entitas Resmi' },
+];
+
+const highlights = [
+  {
+    icon: ShieldCheck,
+    title: 'Tersertifikasi Google OAuth',
+    description: 'Kepatuhan ketat terhadap Google API Services User Data Policy, termasuk klausul Limited Use.',
+  },
+  {
+    icon: Lock,
+    title: 'Bebas Penjualan Data',
+    description: 'Kami tidak pernah menjual, menyewakan, atau memperdagangkan data pribadi ke pihak ketiga.',
+  },
+  {
+    icon: Key,
+    title: 'Tanpa Pelatihan Model AI',
+    description: 'Data profil Google dan pesan Anda tidak pernah digunakan untuk melatih model umum AI/ML.',
+  },
+  {
+    icon: Trash2,
+    title: 'Hak Hapus Kapan Saja',
+    description: 'Cabut izin Google via setelan akun atau ajukan penghapusan data permanen melalui email.',
+  },
+];
 ---
 
 <Layout
   title="Kebijakan Privasi"
-  description="Kebijakan Privasi ALTIA DEV — bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+  description="Kebijakan Privasi ALTIA DEV — cara kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda di seluruh situs web dan aplikasi subdomain."
   locale={locale}
   breadcrumbs={[
     { name: 'Beranda', url: '/id' },
     { name: 'Kebijakan Privasi', url: '/id/privacy' },
   ]}
 >
+  <!-- 1. Hero Header -->
+  <section class="relative pt-16 sm:pt-24 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+    <div class="hero-grid-faded" />
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-terracotta/5 rounded-full blur-2xl pointer-events-none" />
+
+    <Container size="large" className="relative z-10">
+      <div class="max-w-3xl">
+        <Badge
+          variant="vermilion"
+          size="md"
+          className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-vermilion" />
+          <span>Privasi & Perlindungan Data</span>
+        </Badge>
+        <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-5">
+          Kebijakan Privasi
+        </h1>
+        <p class="text-charcoal-muted text-base sm:text-lg leading-relaxed mb-6">
+          Kebijakan ini menjelaskan bagaimana ALTIA DEV mengumpulkan, menggunakan, dan melindungi data pribadi Anda saat mengunjungi <strong class="text-charcoal font-semibold">altia.dev</strong>, mengisi formulir estimasi proyek, atau masuk ke layanan digital dan portal aplikasi di subdomain kami.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-xs font-display text-charcoal/70 border-t border-warm-border/60 pt-4">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Tanggal Berlaku: <strong>{lastUpdated}</strong></span>
+          </div>
+          <span class="text-warm-border">•</span>
+          <div class="flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-terracotta" />
+            <span>Cakupan: <strong>altia.dev & seluruh subdomain (*.altia.dev)</strong></span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. Trust Highlights Grid -->
+  <section class="py-12 border-b border-warm-border/40 bg-cream/40">
+    <Container size="large">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {highlights.map((item) => (
+          <div class="p-5 rounded-2xl bg-ivory border border-warm-border/70 shadow-sm flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center mb-3">
+              <item.icon className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 class="font-display text-sm font-bold text-charcoal mb-1">{item.title}</h3>
+              <p class="text-xs text-charcoal-muted leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Policy Content with Sticky Navigation -->
   <section class="py-16 sm:py-24">
-    <Container size="small">
-      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
-        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Kebijakan Privasi</h1>
-        <p class="text-warm-text text-sm">Terakhir diperbarui: {lastUpdated}</p>
+    <Container size="large">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <div class="p-6 rounded-2xl bg-ivory border border-warm-border/80 shadow-sm">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-warm-border/60">
+                <FileText className="w-4 h-4 text-vermilion" />
+                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-charcoal">Daftar Isi</h2>
+              </div>
+              <nav class="space-y-1">
+                {sections.map((sec) => (
+                  <a
+                    href={`#${sec.id}`}
+                    class="block py-1.5 px-2.5 rounded-lg text-xs font-medium text-charcoal-muted hover:text-vermilion hover:bg-cream/70 transition-colors"
+                  >
+                    {sec.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
 
-        <h2>1. Pendahuluan</h2>
-        <p>
-          ALTIA DEV ("kami") berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda saat mengunjungi situs web <strong>altia.dev</strong> dan menggunakan layanan kami.
-        </p>
+            <!-- Quick Contact Box -->
+            <div class="p-5 rounded-2xl bg-cream/60 border border-warm-border/80">
+              <div class="flex items-center gap-2 text-charcoal font-display font-bold text-xs uppercase tracking-wider mb-2">
+                <Mail className="w-3.5 h-3.5 text-vermilion" />
+                <span>Petugas Perlindungan Data</span>
+              </div>
+              <p class="text-xs text-charcoal-muted leading-relaxed mb-3">
+                Memiliki pertanyaan mengenai privasi data atau ingin menghapus akun Anda? Hubungi kami kapan saja.
+              </p>
+              <a
+                href="mailto:hello@altia.dev"
+                class="inline-flex items-center gap-1.5 text-xs font-display font-semibold text-vermilion hover:underline"
+              >
+                <span>hello@altia.dev</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </aside>
 
-        <h2>2. Informasi yang Kami Kumpulkan</h2>
-        <h3>Informasi yang Anda Berikan</h3>
-        <ul>
-          <li><strong>Formulir Kontak:</strong> Nama, alamat email, layanan yang diminati, kisaran anggaran, dan deskripsi proyek.</li>
-          <li><strong>Estimator Proyek:</strong> Nama, email, nomor telepon/WhatsApp, nama perusahaan, dan kebutuhan proyek.</li>
-        </ul>
-        <h3>Informasi yang Dikumpulkan Secara Otomatis</h3>
-        <ul>
-          <li><strong>Data Penggunaan:</strong> Halaman yang dikunjungi, waktu yang dihabiskan, jenis browser, jenis perangkat, dan URL perujuk.</li>
-          <li><strong>Alamat IP:</strong> Dikumpulkan untuk tujuan keamanan dan analitik.</li>
-        </ul>
+        <!-- Main Document Body -->
+        <main class="lg:col-span-8">
+          <div class="prose prose-neutral prose-headings:font-display prose-headings:font-bold prose-headings:text-charcoal max-w-none text-charcoal/90 leading-relaxed">
+            
+            <!-- Section 1 -->
+            <div id="cakupan" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">1. Ruang Lingkup & Domain yang Dicakup</h2>
+              <p>
+                ALTIA DEV ("kami") menyediakan layanan rekayasa perangkat lunak kustom, solusi konsultasi teknologi, dan sistem otomasi AI. Kebijakan Privasi ini mencakup seluruh aset daring ALTIA DEV, khususnya:
+              </p>
+              <ul>
+                <li>Situs web utama: <strong>https://altia.dev</strong></li>
+                <li>Seluruh portal klien, aplikasi web, dashboard analitik, layanan API, dan lingkungan pengujian di subdomain kami (termasuk <strong>*.altia.dev</strong>)</li>
+                <li>Fitur interaktif, termasuk formulir kontak dan kalkulator estimasi proyek daring</li>
+                <li>Layanan Single Sign-On (SSO) dan otentikasi pihak ketiga yang terintegrasi pada aplikasi kami</li>
+              </ul>
+              <p>
+                Dengan mengakses situs web kami, mengirimkan informasi melalui formulir apa pun, atau masuk ke portal subdomain kami, Anda memahami dan menyetujui ketentuan yang tercantum dalam Kebijakan Privasi ini.
+              </p>
+            </div>
 
-        <h2>3. Cara Kami Menggunakan Informasi Anda</h2>
-        <ul>
-          <li>Untuk menanggapi pertanyaan Anda dan memberikan layanan yang diminta.</li>
-          <li>Untuk mengirimkan estimasi proyek dan komunikasi tindak lanjut.</li>
-          <li>Untuk meningkatkan situs web dan layanan kami.</li>
-          <li>Untuk mematuhi kewajiban hukum.</li>
-        </ul>
+            <!-- Section 2 -->
+            <div id="data-dikumpulkan" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">2. Informasi yang Kami Kumpulkan</h2>
+              <p>
+                Kami hanya mengumpulkan data pribadi yang benar-benar dibutuhkan demi operasional layanan yang sah dan transparan:
+              </p>
+              
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">A. Data yang Anda Berikan Melalui Formulir Situs Web</h3>
+              <ul>
+                <li>
+                  <strong>Formulir Kontak (altia.dev/id/contact):</strong> Nama lengkap, alamat email bisnis, layanan yang diminati (Web, Mobile/Desktop App, AI Automation), perkiraan anggaran, dan deskripsi kebutuhan proyek.
+                </li>
+                <li>
+                  <strong>Estimator Proyek Interaktif (altia.dev/id/estimator):</strong> Nama, email, nomor telepon / WhatsApp, nama perusahaan/brand, fitur arsitektur yang dipilih, serta target waktu pengerjaan.
+                </li>
+              </ul>
 
-        <h2>4. Layanan Pihak Ketiga</h2>
-        <p>Kami menggunakan layanan pihak ketiga berikut:</p>
-        <ul>
-          <li><strong>Brevo (Sendinblue):</strong> Pengiriman email transaksional untuk pengiriman formulir kontak.</li>
-          <li><strong>Cloudflare:</strong> Hosting situs web, CDN, dan analitik web.</li>
-          <li><strong>Telegram:</strong> Pengiriman notifikasi lead ke tim kami.</li>
-          <li><strong>Google Fonts:</strong> Tipografi web (font dimuat dengan pengaturan yang menjaga privasi).</li>
-        </ul>
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">B. Data yang Dikumpulkan Melalui Google Sign-In (OAuth 2.0)</h3>
+              <p>
+                Untuk aplikasi dan portal klien di subdomain kami (seperti <code>*.altia.dev</code>), kami menyediakan opsi otentikasi menggunakan Google Sign-In. Kami hanya meminta izin akses dasar (<code>openid</code>, <code>profile</code>, <code>email</code>). Atas persetujuan eksplisit Anda, Google memberikan:
+              </p>
+              <ul>
+                <li><strong>Pengenal Unik Google (sub / User ID):</strong> Token unik yang tidak dapat diubah untuk menghubungkan sesi login Anda secara aman dengan akun pengguna.</li>
+                <li><strong>Alamat Email Utama:</strong> Digunakan untuk validasi akun, pengiriman notifikasi transaksional, dan komunikasi penting.</li>
+                <li><strong>Nama Lengkap & Nama Depan:</strong> Untuk personalisasi profil dan tampilan antarmuka dashboard.</li>
+                <li><strong>URL Foto Profil:</strong> Digunakan semata-mata untuk menampilkan avatar profil Anda di dalam sistem aplikasi.</li>
+              </ul>
+              <p class="text-sm bg-cream/70 p-4 rounded-xl border border-warm-border">
+                <strong>Pemberitahuan Penting:</strong> Kami <em>tidak pernah</em> meminta, mengakses, atau menyimpan kata sandi Google Anda, daftar kontak, agenda kalender, file Google Drive, atau izin sensitif lain di luar profil dasar.
+              </p>
 
-        <h2>5. Penyimpanan Data</h2>
-        <p>
-          Kami menyimpan informasi pribadi Anda hanya selama diperlukan untuk memenuhi tujuan pengumpulannya, biasanya selama hubungan bisnis berlangsung dan sebagaimana diwajibkan oleh hukum.
-        </p>
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">C. Data Teknis & Diagnostik</h3>
+              <ul>
+                <li><strong>Log Sistem:</strong> Alamat IP, jenis dan versi peramban, kategori perangkat, URL perujuk, sistem operasi, serta stempel waktu akses.</li>
+                <li><strong>Keamanan & Firewall:</strong> Penghitung pembatasan laju permintaan (rate limiting), riwayat tantangan bot, dan log galat guna mencegah penyalahgunaan sistem.</li>
+              </ul>
+            </div>
 
-        <h2>6. Hak Anda</h2>
-        <p>Anda berhak untuk:</p>
-        <ul>
-          <li>Mengakses data pribadi yang kami simpan tentang Anda.</li>
-          <li>Meminta koreksi data yang tidak akurat.</li>
-          <li>Meminta penghapusan data Anda.</li>
-          <li>Menarik persetujuan untuk pemrosesan data.</li>
-        </ul>
-        <p>Untuk menggunakan hak ini, hubungi kami di <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a>.</p>
+            <!-- Section 3 -->
+            <div id="google-oauth" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">3. Google Sign-In & Otentikasi Pihak Ketiga</h2>
+              <p>
+                Aplikasi di subdomain kami menyediakan tombol "Sign in with Google" untuk kemudahan dan keamanan akses. Alur prosesnya:
+              </p>
+              <ol>
+                <li>Anda diarahkan ke layar persetujuan OAuth resmi milik Google.</li>
+                <li>Google memvalidasi kredensial login Anda di server mereka yang terenkripsi; kami tidak pernah memproses kata sandi Anda.</li>
+                <li>Setelah Anda memberikan izin, Google menerbitkan token terenkripsi yang memuat data profil dasar Anda.</li>
+                <li>Server kami memverifikasi tanda tangan digital token tersebut, mendaftarkan/masuk ke akun Anda di subdomain, dan menerbitkan cookie sesi yang aman.</li>
+              </ol>
+            </div>
 
-        <h2>7. Keamanan Data</h2>
-        <p>
-          Kami menerapkan langkah-langkah teknis dan organisasi yang tepat untuk melindungi informasi pribadi Anda. Semua transmisi data dienkripsi menggunakan SSL/TLS.
-        </p>
+            <!-- Section 4 -->
+            <div id="limited-use" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">4. Kepatuhan Kebijakan Data Pengguna Layanan API Google (Limited Use)</h2>
+              
+              <div class="my-6 p-6 rounded-2xl bg-ivory border-2 border-vermilion/30 shadow-sm relative overflow-hidden">
+                <div class="flex items-start gap-3">
+                  <ShieldCheck class="w-6 h-6 text-vermilion flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 class="text-base font-bold text-charcoal mb-2">Komitmen Kepatuhan Google Limited Use</h3>
+                    <p class="text-sm text-charcoal leading-relaxed">
+                      Penggunaan dan transfer ALTIA DEV ke aplikasi lain atas informasi yang diterima dari Google API akan sepenuhnya mematuhi <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" class="text-vermilion font-semibold underline">Kebijakan Data Pengguna Layanan API Google (Google API Services User Data Policy)</a>, termasuk persyaratan <strong>Penggunaan Terbatas (Limited Use)</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-        <h2>8. Cookie</h2>
-        <p>
-          Situs web kami tidak menggunakan cookie pelacakan. Kami mungkin menggunakan cookie esensial untuk fungsionalitas situs saja.
-        </p>
+              <p>Sesuai dengan pedoman Limited Use Google, kami berkomitmen pada prinsip berikut:</p>
+              <ul>
+                <li><strong>Dilarang Menjual Data:</strong> Kami tidak pernah menjual, menyewakan, atau memperdagangkan data pengguna Google kepada broker data, biro iklan, atau agregator komersial pihak ketiga.</li>
+                <li><strong>Dilarang untuk Periklanan:</strong> Kami tidak menggunakan atau mentransfer data pengguna Google untuk kebutuhan penayangan iklan, termasuk iklan yang ditargetkan ulang (retargeting) atau iklan berbasis minat.</li>
+                <li><strong>Dilarang untuk Pelatihan Model AI Umum:</strong> Data pengguna Google tidak pernah dimasukkan sebagai bahan pelatihan atau fine-tuning model kecerdasan buatan (AI) / machine learning (ML) umum tanpa persetujuan eksplisit.</li>
+                <li><strong>Pembatasan Akses Manusia:</strong> Tidak ada staf atau individu yang diperkenankan membaca data pengguna Google, kecuali jika:
+                  <ol class="list-decimal pl-5 mt-1 space-y-1">
+                    <li>Anda memberikan persetujuan eksplisit untuk tujuan perbaikan bug atau investigasi teknis;</li>
+                    <li>Diperlukan untuk tujuan keamanan darurat (seperti investigasi insiden serangan siber);</li>
+                    <li>Diwajibkan oleh ketentuan perundang-undangan yang berlaku; atau</li>
+                    <li>Data telah diagregasi dan dianonimkan secara menyeluruh untuk metrik performa internal.</li>
+                  </ol>
+                </li>
+              </ul>
+            </div>
 
-        <h2>9. Perubahan Kebijakan</h2>
-        <p>
-          Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan akan diposting di halaman ini dengan tanggal revisi yang diperbarui.
-        </p>
+            <!-- Section 5 -->
+            <div id="penggunaan-data" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">5. Cara Kami Menggunakan Informasi Anda</h2>
+              <p>Data pribadi Anda diproses secara eksklusif untuk tujuan operasional berikut:</p>
+              <ul>
+                <li><strong>Otentikasi & Manajemen Akun:</strong> Memverifikasi identitas, mengelola sesi aktif, dan menyediakan hak akses pada aplikasi di subdomain kami.</li>
+                <li><strong>Tindak Lanjut Pertanyaan Proyek:</strong> Meninjau kebutuhan solusi digital yang dikirimkan via formulir kontak dan menyusun proposal arsitektur teknis.</li>
+                <li><strong>Pemrosesan Estimator:</strong> Mengkalkulasi kompleksitas teknis, menyusun estimasi biaya, dan mengonfirmasi jadwal konsultasi.</li>
+                <li><strong>Keamanan Infrastruktur:</strong> Mencegah serangan brute-force, mendeteksi bot berbahaya, dan menjaga integritas operasional server.</li>
+                <li><strong>Komunikasi Resmi:</strong> Mengirimkan pemberitahuan penting mengenai status akun, konfirmasi pemesanan, atau pembaruan keamanan.</li>
+              </ul>
+            </div>
 
-        <h2>10. Hubungi Kami</h2>
-        <p>
-          Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, hubungi kami di:<br />
-          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
-          <strong>Lokasi:</strong> Jakarta, Indonesia
-        </p>
+            <!-- Section 6 -->
+            <div id="subprosesor" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">6. Layanan Pihak Ketiga & Subprosesor Data</h2>
+              <p>
+                Kami bermitra dengan penyedia infrastruktur terpercaya yang memproses data berdasarkan perjanjian kerahasiaan dan keamanan yang ketat:
+              </p>
+              <div class="overflow-x-auto my-4">
+                <table class="w-full text-xs text-left border border-warm-border rounded-xl">
+                  <thead class="bg-cream/70 text-charcoal font-display font-bold">
+                    <tr>
+                      <th class="p-3 border-b border-warm-border">Penyedia</th>
+                      <th class="p-3 border-b border-warm-border">Tujuan</th>
+                      <th class="p-3 border-b border-warm-border">Data yang Diproses</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-warm-border/60 bg-ivory">
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Google Identity</td>
+                      <td class="p-3 text-charcoal-muted">Otentikasi OAuth 2.0 & Validasi Token</td>
+                      <td class="p-3 text-charcoal-muted">Google ID, Email, Nama, Avatar</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Brevo (Sendinblue)</td>
+                      <td class="p-3 text-charcoal-muted">Pengiriman Email Notifikasi Transaksional</td>
+                      <td class="p-3 text-charcoal-muted">Nama, Email, Pesan Kebutuhan Proyek</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Cloudflare</td>
+                      <td class="p-3 text-charcoal-muted">CDN Global, Proteksi DDoS & Firewall</td>
+                      <td class="p-3 text-charcoal-muted">Alamat IP, Metadata Permintaan</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Telegram API</td>
+                      <td class="p-3 text-charcoal-muted">Notifikasi Lead Internal Tim Engineering</td>
+                      <td class="p-3 text-charcoal-muted">Data Formulir Kontak / Estimator</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Google Fonts</td>
+                      <td class="p-3 text-charcoal-muted">Penyajian Tipografi Web Berstandar Privasi</td>
+                      <td class="p-3 text-charcoal-muted">Header Permintaan Browser (tanpa cookie)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div id="keamanan-data" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">7. Langkah Keamanan Data</h2>
+              <p>
+                Kami menerapkan perlindungan teknis dan tata kelola berlapis demi menjaga keamanan data Anda:
+              </p>
+              <ul>
+                <li><strong>Enkripsi Transportasi Data:</strong> Seluruh komunikasi antara peramban Anda, <code>altia.dev</code>, dan seluruh subdomain dilindungi enkripsi standar TLS 1.3.</li>
+                <li><strong>Keamanan Sesi:</strong> Token otentikasi disimpan dalam cookie dengan atribut HTTP-Only, Secure, dan SameSite untuk mencegah serangan XSS serta pencurian sesi.</li>
+                <li><strong>Kontrol Akses Terbatas:</strong> Akses ke database produksi dilindungi autentikasi multi-faktor (MFA) dan prinsip hak akses terendah (least privilege).</li>
+              </ul>
+            </div>
+
+            <!-- Section 8 -->
+            <div id="retensi-penghapusan" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">8. Retensi & Penghapusan Data Pengguna</h2>
+              <p>
+                Kami menyimpan informasi pribadi hanya selama diperlukan untuk tujuan yang tercantum dalam kebijakan ini:
+              </p>
+              <ul>
+                <li><strong>Data Formulir Proyek:</strong> Disimpan selama proses diskusi konsultasi atau pengerjaan proyek berlangsung, lalu diarsipkan secara aman.</li>
+                <li><strong>Akun Aplikasi (Subdomain):</strong> Disimpan selama akun Anda berstatus aktif pada platform kami.</li>
+              </ul>
+
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-3">Cara Mencabut Akses Google atau Menghapus Data Anda:</h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose my-4">
+                <div class="p-5 rounded-2xl bg-ivory border border-warm-border flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 text-vermilion font-display font-bold text-xs uppercase tracking-wider mb-2">
+                      <Key className="w-4 h-4" />
+                      <span>Metode 1: Cabut via Google</span>
+                    </div>
+                    <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                      Anda dapat mencabut izin akses ALTIA DEV dari Akun Google Anda kapan saja melalui konsol keamanan resmi Google.
+                    </p>
+                  </div>
+                  <a
+                    href="https://myaccount.google.com/permissions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-semibold text-charcoal hover:border-vermilion transition-colors"
+                  >
+                    <span>Setelan Keamanan Google</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-vermilion" />
+                  </a>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-ivory border border-warm-border flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 text-vermilion font-display font-bold text-xs uppercase tracking-wider mb-2">
+                      <Trash2 className="w-4 h-4" />
+                      <span>Metode 2: Hapus Data Permanen</span>
+                    </div>
+                    <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                      Untuk menghapus akun Anda beserta seluruh catatan database terkait secara permanen, kirimkan permohonan ke email tim kami.
+                    </p>
+                  </div>
+                  <a
+                    href="mailto:hello@altia.dev?subject=Permohonan%20Penghapusan%20Data"
+                    class="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-semibold text-charcoal hover:border-vermilion transition-colors"
+                  >
+                    <span>Kirim Email ke hello@altia.dev</span>
+                    <Mail className="w-3.5 h-3.5 text-vermilion" />
+                  </a>
+                </div>
+              </div>
+
+              <p class="text-xs text-charcoal-muted mt-2">
+                * Seluruh permintaan penghapusan data yang valid akan diproses dan dieksekusi dari database produksi kami dalam waktu maksimal <strong>30 hari</strong> sejak permohonan diterima.
+              </p>
+            </div>
+
+            <!-- Section 9 -->
+            <div id="hak-pengguna" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">9. Hak Privasi Anda (Berdasarkan UU PDP)</h2>
+              <p>
+                Sesuai dengan <strong>Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Perlindungan Data Pribadi (UU PDP)</strong> serta regulasi privasi global, Anda berhak untuk:
+              </p>
+              <ul>
+                <li>Mendapatkan konfirmasi dan kejelasan mengenai pemrosesan data pribadi Anda.</li>
+                <li>Memperoleh akses dan salinan data pribadi yang tersimpan di sistem kami.</li>
+                <li>Mengajukan pembetulan atas data pribadi yang keliru, tidak akurat, atau tidak lengkap.</li>
+                <li>Mengajukan penghapusan atau pemusnahan data pribadi Anda dari database kami.</li>
+                <li>Menarik kembali persetujuan pemrosesan data pribadi yang sebelumnya telah diberikan.</li>
+              </ul>
+              <p>
+                Untuk menggunakan hak-hak tersebut, silakan hubungi kami melalui <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a>.
+              </p>
+            </div>
+
+            <!-- Section 10 -->
+            <div id="cookie" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">10. Cookie & Penyimpanan Sesi</h2>
+              <p>
+                Kami memegang teguh prinsip perlindungan privasi. Situs kami <strong>tidak</strong> menyematkan cookie pelacak iklan pihak ketiga yang mengawasi aktivitas Anda lintas platform.
+              </p>
+              <p>
+                Kami hanya memanfaatkan <strong>cookie esensial dan penyimpanan peramban lokal</strong> yang mutlak dibutuhkan untuk:
+              </p>
+              <ul>
+                <li>Menjaga status sesi login terotentikasi saat Anda menggunakan aplikasi di subdomain</li>
+                <li>Menyimpan token keamanan CSRF untuk melindungi pengiriman formulir dari ancaman siber</li>
+                <li>Mengingat preferensi bahasa pilihan Anda (Bahasa Indonesia atau Inggris)</li>
+              </ul>
+            </div>
+
+            <!-- Section 11 -->
+            <div id="kontak" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">11. Kontak & Entitas Resmi</h2>
+              <p>
+                Apabila Anda memiliki pertanyaan, saran, atau permohonan terkait Kebijakan Privasi ini dan otentikasi Google OAuth, silakan hubungi kami di:
+              </p>
+              <div class="p-6 rounded-2xl bg-ivory border border-warm-border not-prose mt-4">
+                <h4 class="font-display font-bold text-charcoal text-base mb-2">ALTIA DEV</h4>
+                <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                  Creative Software & AI Engineering Studio
+                </p>
+                <div class="space-y-2 text-xs text-charcoal">
+                  <div class="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-vermilion" />
+                    <span>Email: <a href="mailto:hello@altia.dev" class="text-vermilion font-semibold hover:underline">hello@altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-terracotta" />
+                    <span>Website: <a href="https://altia.dev/id" class="text-charcoal font-semibold hover:underline">https://altia.dev/id</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Server className="w-4 h-4 text-charcoal-muted" />
+                    <span>Lokasi: Jakarta, Indonesia</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </main>
       </div>
     </Container>
   </section>

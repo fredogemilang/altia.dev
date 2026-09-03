@@ -1,88 +1,349 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Container } from '../components/ui/Container';
+import { Badge } from '../components/ui/Badge';
+import {
+  FileText,
+  Scale,
+  ShieldCheck,
+  Globe,
+  Key,
+  Calculator,
+  AlertTriangle,
+  Mail,
+  ExternalLink,
+  Server,
+  Sparkles,
+} from 'lucide-react';
 
 const locale = 'en';
-const lastUpdated = 'August 25, 2026';
+const lastUpdated = 'September 3, 2026';
+
+const sections = [
+  { id: 'agreement', label: '1. Agreement to Terms & Scope' },
+  { id: 'services', label: '2. Professional Services & Portals' },
+  { id: 'accounts', label: '3. Accounts & Google Sign-In' },
+  { id: 'forms-estimator', label: '4. Form Submissions & Estimator' },
+  { id: 'acceptable-use', label: '5. Acceptable Use & Prohibitions' },
+  { id: 'intellectual-property', label: '6. Intellectual Property Rights' },
+  { id: 'payment-terms', label: '7. Payment & Engagement Terms' },
+  { id: 'liability', label: '8. Disclaimers & Liability Limits' },
+  { id: 'termination', label: '9. Suspension & Termination' },
+  { id: 'governing-law', label: '10. Governing Law & Jurisdiction' },
+  { id: 'changes', label: '11. Changes to Terms' },
+  { id: 'contact', label: '12. Contact Information' },
+];
+
+const highlights = [
+  {
+    icon: Globe,
+    title: 'Domain & Subdomain Scope',
+    description: 'Enforceable across altia.dev and all affiliated applications and client portals on *.altia.dev.',
+  },
+  {
+    icon: Key,
+    title: 'Secure Google Sign-In',
+    description: 'Clear rules governing user authentication, account responsibility, and session integrity.',
+  },
+  {
+    icon: Calculator,
+    title: 'Non-Binding Estimates',
+    description: 'Online estimator figures provide indicative scoping; final terms are formalized in project contracts.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Full IP Protection',
+    description: 'Client ownership of custom deliverables upon payment in full, backed by Indonesian contract law.',
+  },
+];
 ---
 
 <Layout
   title="Terms of Service"
-  description="ALTIA DEV Terms of Service — rules and guidelines for using our website and services."
+  description="ALTIA DEV Terms of Service — legal terms and operating guidelines governing the use of altia.dev, our subdomain applications, and custom engineering services."
   locale={locale}
   breadcrumbs={[
     { name: 'Home', url: '/' },
     { name: 'Terms of Service', url: '/terms' },
   ]}
 >
+  <!-- 1. Hero Header -->
+  <section class="relative pt-16 sm:pt-24 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+    <div class="hero-grid-faded" />
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-terracotta/5 rounded-full blur-2xl pointer-events-none" />
+
+    <Container size="large" className="relative z-10">
+      <div class="max-w-3xl">
+        <Badge
+          variant="vermilion"
+          size="md"
+          className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+        >
+          <Scale className="w-3.5 h-3.5 text-vermilion" />
+          <span>Legal Agreement & User Terms</span>
+        </Badge>
+        <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-5">
+          Terms of Service
+        </h1>
+        <p class="text-charcoal-muted text-base sm:text-lg leading-relaxed mb-6">
+          These Terms of Service govern your access to and use of <strong class="text-charcoal font-semibold">altia.dev</strong>, our interactive tools, and all custom applications, staging environments, and client portals operating under our subdomains.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-xs font-display text-charcoal/70 border-t border-warm-border/60 pt-4">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Last Updated: <strong>{lastUpdated}</strong></span>
+          </div>
+          <span class="text-warm-border">•</span>
+          <div class="flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-terracotta" />
+            <span>Applicable Scope: <strong>altia.dev & all subdomains (*.altia.dev)</strong></span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. Highlights Grid -->
+  <section class="py-12 border-b border-warm-border/40 bg-cream/40">
+    <Container size="large">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {highlights.map((item) => (
+          <div class="p-5 rounded-2xl bg-ivory border border-warm-border/70 shadow-sm flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center mb-3">
+              <item.icon className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 class="font-display text-sm font-bold text-charcoal mb-1">{item.title}</h3>
+              <p class="text-xs text-charcoal-muted leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Terms Body with Sticky Navigation -->
   <section class="py-16 sm:py-24">
-    <Container size="small">
-      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
-        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Terms of Service</h1>
-        <p class="text-warm-text text-sm">Last updated: {lastUpdated}</p>
+    <Container size="large">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <div class="p-6 rounded-2xl bg-ivory border border-warm-border/80 shadow-sm">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-warm-border/60">
+                <FileText className="w-4 h-4 text-vermilion" />
+                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-charcoal">Sections</h2>
+              </div>
+              <nav class="space-y-1">
+                {sections.map((sec) => (
+                  <a
+                    href={`#${sec.id}`}
+                    class="block py-1.5 px-2.5 rounded-lg text-xs font-medium text-charcoal-muted hover:text-vermilion hover:bg-cream/70 transition-colors"
+                  >
+                    {sec.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
 
-        <h2>1. Agreement to Terms</h2>
-        <p>
-          By accessing and using the ALTIA DEV website (<strong>altia.dev</strong>), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.
-        </p>
+            <!-- Quick Legal Notice Box -->
+            <div class="p-5 rounded-2xl bg-cream/60 border border-warm-border/80">
+              <div class="flex items-center gap-2 text-charcoal font-display font-bold text-xs uppercase tracking-wider mb-2">
+                <Mail className="w-3.5 h-3.5 text-vermilion" />
+                <span>Legal & Inquiries</span>
+              </div>
+              <p class="text-xs text-charcoal-muted leading-relaxed mb-3">
+                Need enterprise licensing, custom contract reviews, or NDA executions?
+              </p>
+              <a
+                href="mailto:hello@altia.dev"
+                class="inline-flex items-center gap-1.5 text-xs font-display font-semibold text-vermilion hover:underline"
+              >
+                <span>hello@altia.dev</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </aside>
 
-        <h2>2. Services</h2>
-        <p>
-          ALTIA DEV provides custom software development services including web development, mobile and desktop applications, and AI automation solutions. Project scope, deliverables, timeline, and pricing are defined in individual project agreements.
-        </p>
+        <!-- Main Document Body -->
+        <main class="lg:col-span-8">
+          <div class="prose prose-neutral prose-headings:font-display prose-headings:font-bold prose-headings:text-charcoal max-w-none text-charcoal/90 leading-relaxed">
+            
+            <!-- Section 1 -->
+            <div id="agreement" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">1. Agreement to Terms & Scope</h2>
+              <p>
+                These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "Client", or "you") and <strong>ALTIA DEV</strong> ("we", "us", or "our"). These Terms apply to all digital interactions across:
+              </p>
+              <ul>
+                <li>Our primary studio website: <strong>https://altia.dev</strong></li>
+                <li>All affiliated web applications, software tools, client portals, and staging environments hosted on our subdomains (including <strong>*.altia.dev</strong>)</li>
+                <li>All interactive estimators, form submissions, and software engineering consultations</li>
+              </ul>
+              <p>
+                By visiting our website, submitting an inquiry, or authenticating via Google Sign-In to access any subdomain application, you express your unconditional acceptance of these Terms. If you do not agree, you must immediately discontinue use of our site and services.
+              </p>
+            </div>
 
-        <h2>3. Intellectual Property</h2>
-        <ul>
-          <li>All content on this website (text, graphics, logos, code) is the property of ALTIA DEV and is protected by intellectual property laws.</li>
-          <li>Upon full payment, clients receive ownership of custom deliverables as specified in their project agreement.</li>
-          <li>ALTIA DEV retains the right to showcase completed projects in our portfolio unless otherwise agreed.</li>
-        </ul>
+            <!-- Section 2 -->
+            <div id="services" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">2. Professional Services & Subdomain Portals</h2>
+              <p>
+                ALTIA DEV provides high-performance custom software engineering, cloud architecture consulting, and enterprise AI automation. Our services encompass:
+              </p>
+              <ul>
+                <li><strong>Web Engineering:</strong> High-performance marketing sites, e-commerce platforms, headless CMS implementations, and custom web applications.</li>
+                <li><strong>Mobile & Desktop Applications:</strong> Cross-platform software built with modern native and hybrid technologies (Flutter, React Native, Rust, Electron).</li>
+                <li><strong>AI Automation & Systems:</strong> Retrieval-Augmented Generation (RAG), autonomous workflow agents, and custom machine learning pipelines.</li>
+                <li><strong>Client Portals & Subdomain Tools:</strong> Proprietary applications hosted under <code>*.altia.dev</code> for client communication, project delivery, and software staging.</li>
+              </ul>
+              <p>
+                Formal project scopes, technical milestones, payment terms, and delivery schedules are established under individual, written Project Service Agreements ("Statement of Work").
+              </p>
+            </div>
 
-        <h2>4. Project Estimator</h2>
-        <p>
-          The Project Estimator tool provides indicative pricing and timelines based on your inputs. These estimates are not binding quotes. Final pricing is determined through a detailed discovery process and formalized in a project agreement.
-        </p>
+            <!-- Section 3 -->
+            <div id="accounts" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">3. User Accounts & Third-Party Authentication (Sign in with Google)</h2>
+              <p>
+                Certain portals and applications hosted on our subdomains require account authentication. To provide a seamless and secure experience, we offer third-party authentication via Google OAuth 2.0:
+              </p>
+              <ul>
+                <li><strong>Account Accuracy:</strong> When signing in with Google, you authorize us to receive your verified identity details (Name, Email, Google User ID, Avatar). You warrant that your credentials are valid and belong to you.</li>
+                <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your credentials and all activities occurring under your authenticated session.</li>
+                <li><strong>Prohibited Account Sharing:</strong> You may not sell, transfer, or share access credentials with unauthorized third parties.</li>
+                <li><strong>Revocation:</strong> You can disconnect your Google account from our systems at any time via your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="text-vermilion hover:underline">Google Security Settings</a>.</li>
+              </ul>
+            </div>
 
-        <h2>5. User Responsibilities</h2>
-        <p>When using our website and services, you agree to:</p>
-        <ul>
-          <li>Provide accurate and truthful information.</li>
-          <li>Not use the website for any unlawful purpose.</li>
-          <li>Not attempt to interfere with the website's functionality.</li>
-          <li>Not scrape, crawl, or use automated means to access the website without permission.</li>
-        </ul>
+            <!-- Section 4 -->
+            <div id="forms-estimator" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">4. Form Submissions & Project Estimator</h2>
+              <p>
+                When you use our discovery forms or interactive project estimator on <code>altia.dev</code>:
+              </p>
+              <ul>
+                <li><strong>Truthful Information:</strong> You agree to provide accurate, up-to-date contact and project information. Submitting false data, fraudulent emails, or malicious payloads is strictly prohibited.</li>
+                <li><strong>Indicative Nature of Estimates:</strong> Calculations and figures generated by our Project Estimator tool are indicative estimates based on typical architectural baselines. They do <em>not</em> constitute a binding quotation or fixed commercial offer. Final contractual pricing is determined following an engineering discovery session and formalized in a written agreement.</li>
+                <li><strong>Confidentiality of Inquiries:</strong> Any proprietary business information shared in your project briefs is treated in accordance with our <a href="/privacy" class="text-vermilion hover:underline">Privacy Policy</a> and will never be shared with competitors.</li>
+              </ul>
+            </div>
 
-        <h2>6. Limitation of Liability</h2>
-        <p>
-          ALTIA DEV shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or services. Our total liability shall not exceed the fees paid by you for the specific service in question.
-        </p>
+            <!-- Section 5 -->
+            <div id="acceptable-use" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">5. Acceptable Use & Prohibited Activities</h2>
+              <p>
+                When accessing <code>altia.dev</code> and any of our subdomain portals or API endpoints, you strictly agree <strong>not</strong> to:
+              </p>
+              <ul>
+                <li>Attempt unauthorized access to our backend servers, hosting infrastructure, databases, or client accounts.</li>
+                <li>Perform automated scraping, crawling, or data extraction without explicit prior written authorization from ALTIA DEV.</li>
+                <li>Launch Denial-of-Service (DoS) attacks, flood requests, or disrupt normal system operations.</li>
+                <li>Reverse-engineer, decompile, or disassemble proprietary source code, internal software tools, or algorithms.</li>
+                <li>Upload or transmit malware, viruses, ransomware, or malicious scripts.</li>
+                <li>Use our platforms or subdomains for any unlawful, defamatory, infringing, or fraudulent activities.</li>
+              </ul>
+            </div>
 
-        <h2>7. Payment Terms</h2>
-        <p>
-          Payment terms, milestones, and schedules are defined in individual project agreements. Standard terms include an upfront deposit with milestone-based payments.
-        </p>
+            <!-- Section 6 -->
+            <div id="intellectual-property" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">6. Intellectual Property Rights</h2>
+              <ul>
+                <li><strong>ALTIA DEV Assets:</strong> All trademarks, design assets, brand identity, layout structures, visual components, documentation, and proprietary software hosted on <code>altia.dev</code> and its subdomains are the exclusive property of ALTIA DEV and protected by international intellectual property treaties.</li>
+                <li><strong>Custom Client Deliverables:</strong> Ownership of custom software code and design assets created specifically for a client will be transferred to the client upon receipt of <strong>100% full payment</strong> of all agreed project milestones, as defined in the individual Project Agreement.</li>
+                <li><strong>Portfolio Showcase:</strong> ALTIA DEV reserves the customary industry right to showcase non-confidential deliverables and client case studies within our portfolio and marketing channels, unless an explicit Non-Disclosure Agreement (NDA) states otherwise.</li>
+              </ul>
+            </div>
 
-        <h2>8. Termination</h2>
-        <p>
-          Either party may terminate a project engagement as specified in the project agreement. We reserve the right to suspend or terminate website access for violations of these terms.
-        </p>
+            <!-- Section 7 -->
+            <div id="payment-terms" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">7. Payment & Engagement Terms</h2>
+              <p>
+                Standard software consulting and engineering engagements follow these commercial terms unless otherwise specified in your Statement of Work:
+              </p>
+              <ul>
+                <li><strong>Deposit & Milestones:</strong> Projects typically require an upfront commitment retainer before development commences, with milestone-based billings tied to sprint deliverables.</li>
+                <li><strong>Invoicing & Net Terms:</strong> Invoices are payable in IDR (Indonesian Rupiah) or USD via bank transfer or official corporate payment gateways within 14 calendar days of issuance.</li>
+                <li><strong>Late Payments:</strong> Late payments may result in the temporary suspension of development sprints or deployment to staging environments.</li>
+              </ul>
+            </div>
 
-        <h2>9. Governing Law</h2>
-        <p>
-          These Terms of Service are governed by the laws of the Republic of Indonesia. Any disputes shall be resolved through the courts of Jakarta, Indonesia.
-        </p>
+            <!-- Section 8 -->
+            <div id="liability" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">8. Disclaimers & Limitation of Liability</h2>
+              <p>
+                Our website, interactive tools, estimators, and subdomain applications are provided on an <strong>"as-is"</strong> and <strong>"as-available"</strong> basis without warranties of any kind, whether express or implied.
+              </p>
+              <p>
+                To the maximum extent permitted by applicable law:
+              </p>
+              <ul>
+                <li>ALTIA DEV shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, goodwill, or operational interruptions.</li>
+                <li>Our total aggregate liability arising out of or related to these Terms or your use of our digital platforms shall not exceed the amount actually paid by you to ALTIA DEV for the specific service in dispute during the three (3) months preceding the claim.</li>
+              </ul>
+            </div>
 
-        <h2>10. Changes to Terms</h2>
-        <p>
-          We reserve the right to modify these terms at any time. Changes will be posted on this page with an updated date. Continued use of the website constitutes acceptance of modified terms.
-        </p>
+            <!-- Section 9 -->
+            <div id="termination" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">9. Suspension & Termination</h2>
+              <p>
+                We reserve the right, without prior notice or liability, to suspend, restrict, or terminate your access to <code>altia.dev</code> and any subdomain applications if we determine in our sole discretion that you have violated these Terms, engaged in abusive conduct, or posed a security threat to our systems or users.
+              </p>
+            </div>
 
-        <h2>11. Contact Us</h2>
-        <p>
-          For questions about these Terms of Service, contact us at:<br />
-          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
-          <strong>Location:</strong> Jakarta, Indonesia
-        </p>
+            <!-- Section 10 -->
+            <div id="governing-law" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">10. Governing Law & Dispute Resolution</h2>
+              <p>
+                These Terms of Service and any dispute arising from them shall be governed by and construed in accordance with the substantive laws of the <strong>Republic of Indonesia</strong>, without giving effect to any principles of conflicts of law.
+              </p>
+              <p>
+                Any dispute, controversy, or claim arising out of or relating to these Terms shall first be settled amicably through good-faith consultation. If no settlement is reached within thirty (30) days, the dispute shall be resolved through the exclusive jurisdiction of the competent courts of <strong>Jakarta, Indonesia</strong>.
+              </p>
+            </div>
+
+            <!-- Section 11 -->
+            <div id="changes" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">11. Changes to Terms</h2>
+              <p>
+                We may revise and update these Terms from time to time to align with technological, regulatory, or business developments. Material updates will be indicated by the "Last Updated" date at the top of this page. Your continued use of <code>altia.dev</code> or our subdomain applications after the posting of revised Terms constitutes your acceptance of the modifications.
+              </p>
+            </div>
+
+            <!-- Section 12 -->
+            <div id="contact" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">12. Contact Information</h2>
+              <p>
+                For questions, legal notices, or clarifications regarding these Terms of Service, please reach out to:
+              </p>
+              <div class="p-6 rounded-2xl bg-ivory border border-warm-border not-prose mt-4">
+                <h4 class="font-display font-bold text-charcoal text-base mb-2">ALTIA DEV</h4>
+                <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                  Creative Software & AI Engineering Studio
+                </p>
+                <div class="space-y-2 text-xs text-charcoal">
+                  <div class="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-vermilion" />
+                    <span>Email: <a href="mailto:hello@altia.dev" class="text-vermilion font-semibold hover:underline">hello@altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-terracotta" />
+                    <span>Website: <a href="https://altia.dev" class="text-charcoal font-semibold hover:underline">https://altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Server className="w-4 h-4 text-charcoal-muted" />
+                    <span>Location: Jakarta, Indonesia</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </main>
       </div>
     </Container>
   </section>

@@ -1,96 +1,472 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Container } from '../components/ui/Container';
+import { Badge } from '../components/ui/Badge';
+import {
+  ShieldCheck,
+  Lock,
+  Key,
+  FileText,
+  ExternalLink,
+  Mail,
+  Globe,
+  Trash2,
+  Server,
+} from 'lucide-react';
 
 const locale = 'en';
-const lastUpdated = 'August 25, 2026';
+const lastUpdated = 'September 3, 2026';
+
+const sections = [
+  { id: 'scope', label: '1. Scope & Covered Domains' },
+  { id: 'information-collected', label: '2. Information We Collect' },
+  { id: 'google-oauth', label: '3. Google Sign-In & OAuth' },
+  { id: 'limited-use', label: '4. Google Limited Use Compliance' },
+  { id: 'how-we-use-data', label: '5. How We Use Information' },
+  { id: 'subprocessors', label: '6. Third-Party Subprocessors' },
+  { id: 'security', label: '7. Data Security Measures' },
+  { id: 'retention-deletion', label: '8. Data Retention & Deletion' },
+  { id: 'user-rights', label: '9. Your Privacy Rights' },
+  { id: 'cookies', label: '10. Cookies & Tracking' },
+  { id: 'contact', label: '11. Contact & Legal Entity' },
+];
+
+const highlights = [
+  {
+    icon: ShieldCheck,
+    title: 'Google OAuth Certified',
+    description: 'Strict adherence to Google API Services User Data Policy, including Limited Use requirements.',
+  },
+  {
+    icon: Lock,
+    title: 'Zero Data Sold',
+    description: 'We never sell, monetize, or lease your personal data or OAuth credentials to data brokers.',
+  },
+  {
+    icon: Key,
+    title: 'No AI Training on Your Data',
+    description: 'Google profile data and private inquiries are never ingested to train generalized AI/ML models.',
+  },
+  {
+    icon: Trash2,
+    title: 'Full Deletion on Demand',
+    description: 'Easily revoke Google access via security settings or request full account deletion via email.',
+  },
+];
 ---
 
 <Layout
   title="Privacy Policy"
-  description="ALTIA DEV Privacy Policy — how we collect, use, and protect your personal information."
+  description="ALTIA DEV Privacy Policy — how we collect, use, and protect your personal information across altia.dev and all subdomain applications."
   locale={locale}
   breadcrumbs={[
     { name: 'Home', url: '/' },
     { name: 'Privacy Policy', url: '/privacy' },
   ]}
 >
+  <!-- 1. Hero Header -->
+  <section class="relative pt-16 sm:pt-24 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+    <div class="hero-grid-faded" />
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-terracotta/5 rounded-full blur-2xl pointer-events-none" />
+
+    <Container size="large" className="relative z-10">
+      <div class="max-w-3xl">
+        <Badge
+          variant="vermilion"
+          size="md"
+          className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-vermilion" />
+          <span>Privacy & Data Protection</span>
+        </Badge>
+        <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-5">
+          Privacy Policy
+        </h1>
+        <p class="text-charcoal-muted text-base sm:text-lg leading-relaxed mb-6">
+          This policy outlines how ALTIA DEV collects, uses, and safeguards information when you visit <strong class="text-charcoal font-semibold">altia.dev</strong>, use interactive tools and forms, or sign in to digital services and portals hosted across our subdomains.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-xs font-display text-charcoal/70 border-t border-warm-border/60 pt-4">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Effective Date: <strong>{lastUpdated}</strong></span>
+          </div>
+          <span class="text-warm-border">•</span>
+          <div class="flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-terracotta" />
+            <span>Scope: <strong>altia.dev & all subdomains (*.altia.dev)</strong></span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. Trust Highlights Grid -->
+  <section class="py-12 border-b border-warm-border/40 bg-cream/40">
+    <Container size="large">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {highlights.map((item) => (
+          <div class="p-5 rounded-2xl bg-ivory border border-warm-border/70 shadow-sm flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center mb-3">
+              <item.icon className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 class="font-display text-sm font-bold text-charcoal mb-1">{item.title}</h3>
+              <p class="text-xs text-charcoal-muted leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Policy Content with Sticky Navigation -->
   <section class="py-16 sm:py-24">
-    <Container size="small">
-      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
-        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Privacy Policy</h1>
-        <p class="text-warm-text text-sm">Last updated: {lastUpdated}</p>
+    <Container size="large">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <div class="p-6 rounded-2xl bg-ivory border border-warm-border/80 shadow-sm">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-warm-border/60">
+                <FileText className="w-4 h-4 text-vermilion" />
+                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-charcoal">Table of Contents</h2>
+              </div>
+              <nav class="space-y-1">
+                {sections.map((sec) => (
+                  <a
+                    href={`#${sec.id}`}
+                    class="block py-1.5 px-2.5 rounded-lg text-xs font-medium text-charcoal-muted hover:text-vermilion hover:bg-cream/70 transition-colors"
+                  >
+                    {sec.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
 
-        <h2>1. Introduction</h2>
-        <p>
-          ALTIA DEV ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>altia.dev</strong> and use our services.
-        </p>
+            <!-- Quick Contact Box -->
+            <div class="p-5 rounded-2xl bg-cream/60 border border-warm-border/80">
+              <div class="flex items-center gap-2 text-charcoal font-display font-bold text-xs uppercase tracking-wider mb-2">
+                <Mail className="w-3.5 h-3.5 text-vermilion" />
+                <span>Privacy Officer</span>
+              </div>
+              <p class="text-xs text-charcoal-muted leading-relaxed mb-3">
+                Have questions about data privacy or need your account deleted? Reach out anytime.
+              </p>
+              <a
+                href="mailto:hello@altia.dev"
+                class="inline-flex items-center gap-1.5 text-xs font-display font-semibold text-vermilion hover:underline"
+              >
+                <span>hello@altia.dev</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </aside>
 
-        <h2>2. Information We Collect</h2>
-        <h3>Information You Provide</h3>
-        <ul>
-          <li><strong>Contact Form:</strong> Name, email address, service of interest, budget range, and project description.</li>
-          <li><strong>Project Estimator:</strong> Name, email, phone/WhatsApp number, company name, and project requirements.</li>
-        </ul>
-        <h3>Information Collected Automatically</h3>
-        <ul>
-          <li><strong>Usage Data:</strong> Pages visited, time spent, browser type, device type, and referring URL.</li>
-          <li><strong>IP Address:</strong> Collected for security and analytics purposes.</li>
-        </ul>
+        <!-- Main Document Body -->
+        <main class="lg:col-span-8">
+          <div class="prose prose-neutral prose-headings:font-display prose-headings:font-bold prose-headings:text-charcoal max-w-none text-charcoal/90 leading-relaxed">
+            
+            <!-- Section 1 -->
+            <div id="scope" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">1. Scope & Covered Domains</h2>
+              <p>
+                ALTIA DEV ("we", "our", or "us") operates digital software engineering services, consulting solutions, and custom software platforms. This Privacy Policy applies to personal data collected across all ALTIA DEV online assets, specifically including:
+              </p>
+              <ul>
+                <li>Our primary promotional and studio website: <strong>https://altia.dev</strong></li>
+                <li>All affiliated client portals, web applications, dashboards, API services, and staging environments operating under subdomains (including <strong>*.altia.dev</strong>)</li>
+                <li>Interactive features, such as our project inquiry forms and instant project estimators</li>
+                <li>Single Sign-On (SSO) and third-party authentication services integrated into our applications</li>
+              </ul>
+              <p>
+                By visiting our website, submitting your details via any of our forms, or signing in to any of our subdomain portals, you acknowledge the terms described in this Privacy Policy.
+              </p>
+            </div>
 
-        <h2>3. How We Use Your Information</h2>
-        <ul>
-          <li>To respond to your inquiries and provide requested services.</li>
-          <li>To send project estimates and follow-up communications.</li>
-          <li>To improve our website and services.</li>
-          <li>To comply with legal obligations.</li>
-        </ul>
+            <!-- Section 2 -->
+            <div id="information-collected" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">2. Information We Collect</h2>
+              <p>
+                We only gather personal information when there is a clear, legitimate operational purpose. The data collected falls into three categories:
+              </p>
+              
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">A. Information Provided via Website Forms</h3>
+              <ul>
+                <li>
+                  <strong>Contact & Discovery Form (altia.dev/contact):</strong> Your name, business email address, selected service domain (Web, Mobile/Desktop App, AI Automation), estimated budget tier, and project brief.
+                </li>
+                <li>
+                  <strong>Project Estimator Wizard (altia.dev/estimator):</strong> Your name, email, phone / WhatsApp number, company name, selected architectural features, and timeline specifications.
+                </li>
+              </ul>
 
-        <h2>4. Third-Party Services</h2>
-        <p>We use the following third-party services:</p>
-        <ul>
-          <li><strong>Brevo (Sendinblue):</strong> Transactional email delivery for contact form submissions.</li>
-          <li><strong>Cloudflare:</strong> Website hosting, CDN, and web analytics.</li>
-          <li><strong>Telegram:</strong> Lead notification delivery to our team.</li>
-          <li><strong>Google Fonts:</strong> Web typography (fonts are loaded with privacy-preserving settings).</li>
-        </ul>
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">B. Information Collected via Authentication (Google Sign-In)</h3>
+              <p>
+                For client portals and specialized software tools hosted on our subdomains (such as <code>*.altia.dev</code>), we offer authentication via Google OAuth 2.0. We request only the basic identity scopes:
+              </p>
+              <ul>
+                <li><strong>Unique Google Identifier (sub):</strong> An immutable token used to securely link your login session with your user account.</li>
+                <li><strong>Primary Email Address:</strong> Used for account identity, service access validation, and transactional notifications.</li>
+                <li><strong>Full Name & Given Name:</strong> Used to display your name across the application dashboard.</li>
+                <li><strong>Profile Picture URL:</strong> Used strictly to display your user avatar within the platform interface.</li>
+              </ul>
+              <p class="text-sm bg-cream/70 p-4 rounded-xl border border-warm-border">
+                <strong>Important Notice:</strong> We do <em>not</em> request, access, or store your Google account password, contact lists, calendar events, Google Drive documents, or any sensitive scopes beyond basic profile identification.
+              </p>
 
-        <h2>5. Data Retention</h2>
-        <p>
-          We retain your personal information only as long as necessary to fulfill the purposes for which it was collected, typically for the duration of any business relationship and as required by law.
-        </p>
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-2">C. Technical & Diagnostic Information</h3>
+              <ul>
+                <li><strong>System Logs:</strong> IP address, browser type and version, device category, referring URLs, operating system, and timestamp of requests.</li>
+                <li><strong>Security Diagnostics:</strong> Rate-limit counters, firewall challenge records, and runtime error logs to prevent unauthorized access.</li>
+              </ul>
+            </div>
 
-        <h2>6. Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul>
-          <li>Access the personal data we hold about you.</li>
-          <li>Request correction of inaccurate data.</li>
-          <li>Request deletion of your data.</li>
-          <li>Withdraw consent for data processing.</li>
-        </ul>
-        <p>To exercise these rights, contact us at <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a>.</p>
+            <!-- Section 3 -->
+            <div id="google-oauth" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">3. Google Sign-In & Third-Party Authentication</h2>
+              <p>
+                Our subdomain applications provide a streamlined "Sign in with Google" button. When you authorize access:
+              </p>
+              <ol>
+                <li>You are redirected securely to Google's official OAuth consent screen.</li>
+                <li>Google authenticates your credentials directly on their secure servers; we never see or handle your password.</li>
+                <li>Upon your consent, Google issues a secure cryptographic token returning your basic profile details (Name, Email, Google User ID, Avatar).</li>
+                <li>Our backend verifies this token, registers or logs you into the subdomain application, and creates a cryptographically signed session cookie.</li>
+              </ol>
+            </div>
 
-        <h2>7. Data Security</h2>
-        <p>
-          We implement appropriate technical and organizational measures to protect your personal information. All data transmissions are encrypted using SSL/TLS. However, no method of electronic transmission or storage is 100% secure.
-        </p>
+            <!-- Section 4 -->
+            <div id="limited-use" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">4. Google API Services User Data Policy Compliance (Limited Use)</h2>
+              
+              <div class="my-6 p-6 rounded-2xl bg-ivory border-2 border-vermilion/30 shadow-sm relative overflow-hidden">
+                <div class="flex items-start gap-3">
+                  <ShieldCheck class="w-6 h-6 text-vermilion flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 class="text-base font-bold text-charcoal mb-2">Google Limited Use Commitment</h3>
+                    <p class="text-sm text-charcoal leading-relaxed">
+                      ALTIA DEV's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" class="text-vermilion font-semibold underline">Google API Services User Data Policy</a>, including the <strong>Limited Use</strong> requirements.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-        <h2>8. Cookies</h2>
-        <p>
-          Our website does not use tracking cookies. We may use essential cookies for site functionality only.
-        </p>
+              <p>In accordance with the Google Limited Use specifications, we adhere to the following strict guidelines:</p>
+              <ul>
+                <li><strong>No Commercial Sale:</strong> We never sell, license, rent, or trade Google user data to third-party data brokers, marketing firms, or advertising networks.</li>
+                <li><strong>No Advertising Use:</strong> We do not use or transfer Google user data for serving advertisements, including retargeting, interest-based, or personalized advertisements.</li>
+                <li><strong>No Generalized AI Training:</strong> We do not use Google user data to train, fine-tune, or validate generalized artificial intelligence (AI) or machine learning (ML) models.</li>
+                <li><strong>Restricted Human Inspection:</strong> No human is permitted to read Google user data unless:
+                  <ol class="list-decimal pl-5 mt-1 space-y-1">
+                    <li>You provide explicit, affirmative consent for technical troubleshooting of a specific issue;</li>
+                    <li>It is necessary for security purposes (such as diagnosing abuse or investigating security incidents);</li>
+                    <li>Required to comply with applicable statutory laws; or</li>
+                    <li>The data is aggregated and anonymized for internal performance metrics.</li>
+                  </ol>
+                </li>
+              </ul>
+            </div>
 
-        <h2>9. Changes to This Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.
-        </p>
+            <!-- Section 5 -->
+            <div id="how-we-use-data" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">5. How We Use Your Information</h2>
+              <p>Your information is processed strictly for legitimate business and technical operations:</p>
+              <ul>
+                <li><strong>Authentication & Account Management:</strong> Validating identity, issuing secure sessions, and maintaining accounts across subdomain portals.</li>
+                <li><strong>Responding to Inquiries:</strong> Reviewing project briefs submitted via our contact forms and preparing architectural proposals.</li>
+                <li><strong>Project Estimator Processing:</strong> Calculating scope complexity, scheduling discovery calls, and providing technical estimates.</li>
+                <li><strong>Platform Security:</strong> Detecting bot abuse, preventing brute-force login attempts, and maintaining server integrity.</li>
+                <li><strong>Service Notifications:</strong> Sending critical administrative updates, security notices, or project milestone reports.</li>
+              </ul>
+            </div>
 
-        <h2>10. Contact Us</h2>
-        <p>
-          If you have questions about this Privacy Policy, please contact us at:<br />
-          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
-          <strong>Location:</strong> Jakarta, Indonesia
-        </p>
+            <!-- Section 6 -->
+            <div id="subprocessors" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">6. Third-Party Service Providers & Subprocessors</h2>
+              <p>
+                We do not sell personal data. To provide high-availability digital solutions, we rely on established third-party infrastructure providers who process data under confidentiality agreements:
+              </p>
+              <div class="overflow-x-auto my-4">
+                <table class="w-full text-xs text-left border border-warm-border rounded-xl">
+                  <thead class="bg-cream/70 text-charcoal font-display font-bold">
+                    <tr>
+                      <th class="p-3 border-b border-warm-border">Provider</th>
+                      <th class="p-3 border-b border-warm-border">Purpose</th>
+                      <th class="p-3 border-b border-warm-border">Data Processed</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-warm-border/60 bg-ivory">
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Google Identity</td>
+                      <td class="p-3 text-charcoal-muted">OAuth 2.0 Sign-In & Token Validation</td>
+                      <td class="p-3 text-charcoal-muted">Google ID, Email, Name, Avatar</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Brevo (Sendinblue)</td>
+                      <td class="p-3 text-charcoal-muted">Transactional Email Delivery</td>
+                      <td class="p-3 text-charcoal-muted">Name, Email, Message Brief</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Cloudflare</td>
+                      <td class="p-3 text-charcoal-muted">CDN, DDoS Mitigation, Edge Security</td>
+                      <td class="p-3 text-charcoal-muted">IP Address, Request Metadata</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Telegram API</td>
+                      <td class="p-3 text-charcoal-muted">Internal Team Lead Notifications</td>
+                      <td class="p-3 text-charcoal-muted">Form Inquiries, Project Requests</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-semibold text-charcoal">Google Fonts</td>
+                      <td class="p-3 text-charcoal-muted">Web Typography Rendering</td>
+                      <td class="p-3 text-charcoal-muted">Browser Request Headers (no cookies)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div id="security" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">7. Data Security Measures</h2>
+              <p>
+                We implement modern, industry-recognized technical and organizational controls to protect your data:
+              </p>
+              <ul>
+                <li><strong>Transport Layer Security:</strong> All data transmitted between your browser, <code>altia.dev</code>, and our subdomains is encrypted via modern TLS 1.3.</li>
+                <li><strong>Session Protection:</strong> Authentication tokens are stored using HTTP-only, secure, same-site cookies to mitigate cross-site scripting (XSS) and CSRF attacks.</li>
+                <li><strong>Access Control:</strong> Administrative and database access requires multi-factor authentication (MFA) and strict role-based access controls (RBAC).</li>
+              </ul>
+            </div>
+
+            <!-- Section 8 -->
+            <div id="retention-deletion" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">8. Data Retention & User Data Deletion</h2>
+              <p>
+                We retain personal information only for the duration required to satisfy the purposes outlined in this policy:
+              </p>
+              <ul>
+                <li><strong>Website Form Inquiries:</strong> Stored for the duration of the business relationship or project scoping cycle. Inactive inquiries are purged periodically.</li>
+                <li><strong>Application Accounts:</strong> Retained as long as your account remains active on our subdomain platforms.</li>
+              </ul>
+
+              <h3 class="text-lg font-semibold text-charcoal mt-6 mb-3">How to Delete Your Data or Revoke Google Access:</h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose my-4">
+                <div class="p-5 rounded-2xl bg-ivory border border-warm-border flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 text-vermilion font-display font-bold text-xs uppercase tracking-wider mb-2">
+                      <Key className="w-4 h-4" />
+                      <span>Method 1: Revoke via Google</span>
+                    </div>
+                    <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                      You can instantly disconnect ALTIA DEV from your Google Account at any time through Google's official permissions console.
+                    </p>
+                  </div>
+                  <a
+                    href="https://myaccount.google.com/permissions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-semibold text-charcoal hover:border-vermilion transition-colors"
+                  >
+                    <span>Google Security Settings</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-vermilion" />
+                  </a>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-ivory border border-warm-border flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 text-vermilion font-display font-bold text-xs uppercase tracking-wider mb-2">
+                      <Trash2 className="w-4 h-4" />
+                      <span>Method 2: Permanent Deletion</span>
+                    </div>
+                    <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                      To permanently delete your user account and all associated database records, email our team directly.
+                    </p>
+                  </div>
+                  <a
+                    href="mailto:hello@altia.dev?subject=Data%20Deletion%20Request"
+                    class="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-cream border border-warm-border text-xs font-display font-semibold text-charcoal hover:border-vermilion transition-colors"
+                  >
+                    <span>Email hello@altia.dev</span>
+                    <Mail className="w-3.5 h-3.5 text-vermilion" />
+                  </a>
+                </div>
+              </div>
+
+              <p class="text-xs text-charcoal-muted mt-2">
+                * All verified deletion requests are executed across our active production databases within <strong>30 days</strong> of receipt.
+              </p>
+            </div>
+
+            <!-- Section 9 -->
+            <div id="user-rights" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">9. Your Privacy Rights</h2>
+              <p>
+                In compliance with global standards and Indonesia's Personal Data Protection Law (<strong>Undang-Undang No. 27 Tahun 2022 tentang Perlindungan Data Pribadi / UU PDP</strong>), you have the right to:
+              </p>
+              <ul>
+                <li>Request confirmation of whether we process your personal data.</li>
+                <li>Access and obtain an electronic copy of personal data associated with your account.</li>
+                <li>Request rectification of inaccurate, incomplete, or out-of-date information.</li>
+                <li>Request the permanent erasure or anonymization of your data.</li>
+                <li>Withdraw consent previously granted for data processing without prejudice.</li>
+              </ul>
+              <p>
+                To exercise any of these statutory rights, please write to us at <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a>.
+              </p>
+            </div>
+
+            <!-- Section 10 -->
+            <div id="cookies" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">10. Cookies & Tracking Technologies</h2>
+              <p>
+                We believe in privacy by default. We do <strong>not</strong> employ invasive third-party cross-site advertising cookies, behavioral tracking pixels, or data profiling tools.
+              </p>
+              <p>
+                We only use <strong>essential session cookies and local storage</strong> strictly necessary to:
+              </p>
+              <ul>
+                <li>Maintain your authenticated login state when browsing subdomain applications</li>
+                <li>Store CSRF tokens to safeguard form submissions against cross-site forged requests</li>
+                <li>Remember your preferred language locale (English or Indonesian)</li>
+              </ul>
+            </div>
+
+            <!-- Section 11 -->
+            <div id="contact" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">11. Contact & Legal Entity</h2>
+              <p>
+                If you have inquiries, complaints, or feedback regarding this Privacy Policy, our data handling practices, or Google OAuth integration, please contact our privacy representative:
+              </p>
+              <div class="p-6 rounded-2xl bg-ivory border border-warm-border not-prose mt-4">
+                <h4 class="font-display font-bold text-charcoal text-base mb-2">ALTIA DEV</h4>
+                <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                  Creative Software & AI Engineering Studio
+                </p>
+                <div class="space-y-2 text-xs text-charcoal">
+                  <div class="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-vermilion" />
+                    <span>Email: <a href="mailto:hello@altia.dev" class="text-vermilion font-semibold hover:underline">hello@altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-terracotta" />
+                    <span>Website: <a href="https://altia.dev" class="text-charcoal font-semibold hover:underline">https://altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Server className="w-4 h-4 text-charcoal-muted" />
+                    <span>Location: Jakarta, Indonesia</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </main>
       </div>
     </Container>
   </section>

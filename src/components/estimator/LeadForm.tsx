@@ -208,6 +208,47 @@ export function LeadForm({ requirements, estimate, onReset }: LeadFormProps) {
             <span>Reset & recalculate</span>
           </button>
         </div>
+
+        {/* Legal Consent Disclaimer */}
+        <p className="text-[11px] text-center sm:text-left text-charcoal-muted/80 leading-relaxed pt-2">
+          {locale === "id" ? (
+            <>
+              Dengan mengirimkan estimasi ini, Anda menyetujui{" "}
+              <a
+                href="/id/privacy"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Kebijakan Privasi
+              </a>{" "}
+              dan{" "}
+              <a
+                href="/id/terms"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Syarat & Ketentuan
+              </a>{" "}
+              kami.
+            </>
+          ) : (
+            <>
+              By submitting this estimate, you agree to our{" "}
+              <a
+                href="/privacy"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="/terms"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Terms of Service
+              </a>
+              .
+            </>
+          )}
+        </p>
       </form>
     </Card>
   );

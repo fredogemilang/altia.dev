@@ -1,88 +1,349 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Container } from '../../components/ui/Container';
+import { Badge } from '../../components/ui/Badge';
+import {
+  FileText,
+  Scale,
+  ShieldCheck,
+  Globe,
+  Key,
+  Calculator,
+  AlertTriangle,
+  Mail,
+  ExternalLink,
+  Server,
+  Sparkles,
+} from 'lucide-react';
 
 const locale = 'id';
-const lastUpdated = '25 Agustus 2026';
+const lastUpdated = '3 September 2026';
+
+const sections = [
+  { id: 'perjanjian', label: '1. Kesepakatan & Ruang Lingkup' },
+  { id: 'layanan', label: '2. Layanan Profesional & Portal' },
+  { id: 'akun', label: '3. Akun Pengguna & Google Sign-In' },
+  { id: 'formulir-estimator', label: '4. Pengisian Formulir & Estimator' },
+  { id: 'penggunaan-wajar', label: '5. Ketentuan Penggunaan & Larangan' },
+  { id: 'kekayaan-intelektual', label: '6. Hak Kekayaan Intelektual' },
+  { id: 'pembayaran', label: '7. Ketentuan Kontrak & Pembayaran' },
+  { id: 'tanggung-jawab', label: '8. Batasan Tanggung Jawab' },
+  { id: 'pengakhiran', label: '9. Penangguhan & Pengakhiran' },
+  { id: 'hukum-berlaku', label: '10. Hukum yang Berlaku & Yurisdiksi' },
+  { id: 'perubahan', label: '11. Perubahan Ketentuan' },
+  { id: 'kontak', label: '12. Informasi Kontak' },
+];
+
+const highlights = [
+  {
+    icon: Globe,
+    title: 'Cakupan Domain & Subdomain',
+    description: 'Berlaku mengikat untuk altia.dev serta seluruh aplikasi dan portal klien di *.altia.dev.',
+  },
+  {
+    icon: Key,
+    title: 'Google Sign-In Terproteksi',
+    description: 'Pedoman keamanan akses otentikasi akun pengguna dan perlindungan kredensial.',
+  },
+  {
+    icon: Calculator,
+    title: 'Estimasi Bersifat Indikatif',
+    description: 'Kalkulator daring memberikan estimasi awal; kesepakatan final dituangkan dalam kontrak proyek.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Perlindungan HKI Penuh',
+    description: 'Kepemilikan deliverables diserahkan kepada klien setelah pelunasan pembayaran sesuai hukum RI.',
+  },
+];
 ---
 
 <Layout
   title="Syarat & Ketentuan"
-  description="Syarat & Ketentuan ALTIA DEV — aturan dan pedoman penggunaan situs web dan layanan kami."
+  description="Syarat & Ketentuan Layanan ALTIA DEV — pedoman hukum dan operasional penggunaan situs altia.dev, portal aplikasi subdomain, dan layanan rekayasa perangkat lunak."
   locale={locale}
   breadcrumbs={[
     { name: 'Beranda', url: '/id' },
     { name: 'Syarat & Ketentuan', url: '/id/terms' },
   ]}
 >
+  <!-- 1. Hero Header -->
+  <section class="relative pt-16 sm:pt-24 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-ivory to-[#EDE3D2] border-b border-warm-border/60">
+    <div class="hero-grid-faded" />
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-terracotta/5 rounded-full blur-2xl pointer-events-none" />
+
+    <Container size="large" className="relative z-10">
+      <div class="max-w-3xl">
+        <Badge
+          variant="vermilion"
+          size="md"
+          className="mb-4 uppercase tracking-widest text-[11px] font-bold"
+        >
+          <Scale className="w-3.5 h-3.5 text-vermilion" />
+          <span>Perjanjian Hukum & Ketentuan Pengguna</span>
+        </Badge>
+        <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-charcoal leading-[1.12] mb-5">
+          Syarat & Ketentuan
+        </h1>
+        <p class="text-charcoal-muted text-base sm:text-lg leading-relaxed mb-6">
+          Syarat & Ketentuan ini mengatur hak dan kewajiban Anda saat mengakses <strong class="text-charcoal font-semibold">altia.dev</strong>, menggunakan fitur estimasi kami, atau masuk ke portal aplikasi kustom di seluruh subdomain kami.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-xs font-display text-charcoal/70 border-t border-warm-border/60 pt-4">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500" />
+            <span>Terakhir Diperbarui: <strong>{lastUpdated}</strong></span>
+          </div>
+          <span class="text-warm-border">•</span>
+          <div class="flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-terracotta" />
+            <span>Cakupan: <strong>altia.dev & seluruh subdomain (*.altia.dev)</strong></span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. Highlights Grid -->
+  <section class="py-12 border-b border-warm-border/40 bg-cream/40">
+    <Container size="large">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {highlights.map((item) => (
+          <div class="p-5 rounded-2xl bg-ivory border border-warm-border/70 shadow-sm flex flex-col justify-between">
+            <div class="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center mb-3">
+              <item.icon className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 class="font-display text-sm font-bold text-charcoal mb-1">{item.title}</h3>
+              <p class="text-xs text-charcoal-muted leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Terms Body with Sticky Navigation -->
   <section class="py-16 sm:py-24">
-    <Container size="small">
-      <div class="prose prose-lg prose-neutral max-w-none text-charcoal">
-        <h1 class="font-display text-4xl sm:text-5xl font-black text-charcoal tracking-tight mb-4">Syarat & Ketentuan</h1>
-        <p class="text-warm-text text-sm">Terakhir diperbarui: {lastUpdated}</p>
+    <Container size="large">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <div class="p-6 rounded-2xl bg-ivory border border-warm-border/80 shadow-sm">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-warm-border/60">
+                <FileText className="w-4 h-4 text-vermilion" />
+                <h2 class="font-display text-xs font-bold uppercase tracking-wider text-charcoal">Daftar Bagian</h2>
+              </div>
+              <nav class="space-y-1">
+                {sections.map((sec) => (
+                  <a
+                    href={`#${sec.id}`}
+                    class="block py-1.5 px-2.5 rounded-lg text-xs font-medium text-charcoal-muted hover:text-vermilion hover:bg-cream/70 transition-colors"
+                  >
+                    {sec.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
 
-        <h2>1. Persetujuan Ketentuan</h2>
-        <p>
-          Dengan mengakses dan menggunakan situs web ALTIA DEV (<strong>altia.dev</strong>), Anda setuju untuk terikat oleh Syarat & Ketentuan ini. Jika Anda tidak menyetujuinya, harap jangan gunakan situs web kami.
-        </p>
+            <!-- Quick Legal Notice Box -->
+            <div class="p-5 rounded-2xl bg-cream/60 border border-warm-border/80">
+              <div class="flex items-center gap-2 text-charcoal font-display font-bold text-xs uppercase tracking-wider mb-2">
+                <Mail className="w-3.5 h-3.5 text-vermilion" />
+                <span>Konsultasi Hukum & Kontrak</span>
+              </div>
+              <p class="text-xs text-charcoal-muted leading-relaxed mb-3">
+                Membutuhkan perjanjian lisensi khusus, penandatanganan NDA, atau peninjauan kontrak enterprise?
+              </p>
+              <a
+                href="mailto:hello@altia.dev"
+                class="inline-flex items-center gap-1.5 text-xs font-display font-semibold text-vermilion hover:underline"
+              >
+                <span>hello@altia.dev</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </aside>
 
-        <h2>2. Layanan</h2>
-        <p>
-          ALTIA DEV menyediakan layanan pengembangan perangkat lunak kustom termasuk pengembangan web, aplikasi mobile dan desktop, serta solusi otomasi AI. Ruang lingkup proyek, deliverables, timeline, dan harga ditentukan dalam perjanjian proyek individual.
-        </p>
+        <!-- Main Document Body -->
+        <main class="lg:col-span-8">
+          <div class="prose prose-neutral prose-headings:font-display prose-headings:font-bold prose-headings:text-charcoal max-w-none text-charcoal/90 leading-relaxed">
+            
+            <!-- Section 1 -->
+            <div id="perjanjian" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">1. Kesepakatan Ketentuan & Ruang Lingkup</h2>
+              <p>
+                Syarat & Ketentuan ini ("Ketentuan") merupakan kesepakatan hukum yang mengikat antara Anda ("Pengguna", "Klien", atau "Anda") dengan <strong>ALTIA DEV</strong> ("kami"). Ketentuan ini berlaku bagi seluruh aktivitas pada:
+              </p>
+              <ul>
+                <li>Situs web utama studio kami: <strong>https://altia.dev</strong></li>
+                <li>Seluruh aplikasi web, dashboard analitik, portal klien, dan lingkungan staging di subdomain kami (termasuk <strong>*.altia.dev</strong>)</li>
+                <li>Fitur interaktif, kalkulator estimasi biaya, dan formulir pengajuan proyek</li>
+              </ul>
+              <p>
+                Dengan mengunjungi situs web, mengirimkan pertanyaan proyek, atau masuk menggunakan Google Sign-In ke portal subdomain kami, Anda menyatakan persetujuan tanpa syarat terhadap Ketentuan ini. Apabila Anda tidak menyetujuinya, harap segera hentikan penggunaan situs dan layanan kami.
+              </p>
+            </div>
 
-        <h2>3. Hak Kekayaan Intelektual</h2>
-        <ul>
-          <li>Semua konten di situs web ini (teks, grafik, logo, kode) adalah milik ALTIA DEV dan dilindungi oleh hukum kekayaan intelektual.</li>
-          <li>Setelah pembayaran penuh, klien menerima kepemilikan deliverables kustom sesuai yang ditentukan dalam perjanjian proyek.</li>
-          <li>ALTIA DEV berhak menampilkan proyek yang telah selesai di portofolio kami kecuali disepakati lain.</li>
-        </ul>
+            <!-- Section 2 -->
+            <div id="layanan" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">2. Layanan Profesional & Portal Subdomain</h2>
+              <p>
+                ALTIA DEV berfokus pada pengembangan rekayasa perangkat lunak kustom berkinerja tinggi, konsultasi arsitektur komputasi awan, dan otomatisasi AI. Lingkup keahlian kami meliputi:
+              </p>
+              <ul>
+                <li><strong>Rekayasa Web:</strong> Situs korporat berkecepatan tinggi, e-commerce, implementasi headless CMS, dan sistem web kustom.</li>
+                <li><strong>Aplikasi Mobile & Desktop:</strong> Solusi lintas platform modern menggunakan Flutter, React Native, Rust, dan Electron.</li>
+                <li><strong>Otomasi AI & Sistem Cerdas:</strong> Retrieval-Augmented Generation (RAG), agen alur kerja otonom, dan integrasi pipeline AI/ML.</li>
+                <li><strong>Portal Klien & Alat Subdomain:</strong> Platform internal di <code>*.altia.dev</code> untuk kolaborasi, manajemen progres, dan uji coba aplikasi.</li>
+              </ul>
+              <p>
+                Ruang lingkup kerja formal, milestone teknis, termin pembayaran, dan jadwal serah terima diatur dalam Perjanjian Kerja Sama Proyek (Statement of Work) tertulis tersendiri.
+              </p>
+            </div>
 
-        <h2>4. Estimator Proyek</h2>
-        <p>
-          Alat Estimator Proyek memberikan harga dan timeline indikatif berdasarkan masukan Anda. Estimasi ini bukan penawaran harga yang mengikat. Harga final ditentukan melalui proses discovery detail dan diformalkan dalam perjanjian proyek.
-        </p>
+            <!-- Section 3 -->
+            <div id="akun" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">3. Akun Pengguna & Otentikasi Pihak Ketiga (Google Sign-In)</h2>
+              <p>
+                Beberapa portal dan aplikasi di subdomain kami memerlukan otentikasi login. Kami menyediakan integrasi Google OAuth 2.0 demi keamanan dan kenyamanan:
+              </p>
+              <ul>
+                <li><strong>Keabsahan Data:</strong> Saat masuk menggunakan Google, Anda memberikan wewenang kepada kami untuk menerima data profil terverifikasi (Nama, Email, User ID Google, Avatar). Anda menjamin kredensial tersebut sah dan milik Anda sendiri.</li>
+                <li><strong>Keamanan Akun:</strong> Anda bertanggung jawab penuh atas kerahasiaan sesi login Anda dan segala aktivitas yang terjadi di bawah akun terdaftar Anda.</li>
+                <li><strong>Larangan Berbagi Akun:</strong> Anda dilarang memindahtangankan, menjual, atau meminjamkan akun Anda kepada pihak ketiga yang tidak berwenang.</li>
+                <li><strong>Pencabutan Izin:</strong> Anda dapat mencabut akses login aplikasi kami dari akun Google Anda kapan saja melalui <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="text-vermilion hover:underline">Setelan Keamanan Akun Google</a>.</li>
+              </ul>
+            </div>
 
-        <h2>5. Tanggung Jawab Pengguna</h2>
-        <p>Saat menggunakan situs web dan layanan kami, Anda setuju untuk:</p>
-        <ul>
-          <li>Memberikan informasi yang akurat dan jujur.</li>
-          <li>Tidak menggunakan situs web untuk tujuan yang melanggar hukum.</li>
-          <li>Tidak mencoba mengganggu fungsionalitas situs web.</li>
-          <li>Tidak melakukan scraping, crawling, atau menggunakan cara otomatis untuk mengakses situs web tanpa izin.</li>
-        </ul>
+            <!-- Section 4 -->
+            <div id="formulir-estimator" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">4. Pengisian Formulir & Estimator Proyek</h2>
+              <p>
+                Saat Anda memanfaatkan formulir konsultasi atau alat kalkulator estimasi di <code>altia.dev</code>:
+              </p>
+              <ul>
+                <li><strong>Kebenaran Informasi:</strong> Anda setuju untuk mengisi data kontak dan rincian proyek secara jujur dan akurat. Dilarang mengirimkan data fiktif, spam, atau berkas berbahaya.</li>
+                <li><strong>Sifat Indikatif Estimator:</strong> Hasil perkiraan biaya dan durasi yang dimunculkan oleh alat Estimator Proyek bersifat indikatif berdasarkan tolok ukur arsitektur standar. Hasil tersebut <em>bukan</em> penawaran harga final yang mengikat. Penawaran resmi disusun setelah tahapan discovery teknis dan diformalkan dalam kontrak tertulis.</li>
+                <li><strong>Kerahasiaan Rencana Proyek:</strong> Ide bisnis dan spesifikasi proyek yang Anda kirimkan diperlakukan secara rahasia sesuai dengan <a href="/id/privacy" class="text-vermilion hover:underline">Kebijakan Privasi</a> kami.</li>
+              </ul>
+            </div>
 
-        <h2>6. Batasan Tanggung Jawab</h2>
-        <p>
-          ALTIA DEV tidak bertanggung jawab atas kerugian tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan situs web atau layanan. Total tanggung jawab kami tidak akan melebihi biaya yang dibayarkan oleh Anda untuk layanan yang bersangkutan.
-        </p>
+            <!-- Section 5 -->
+            <div id="penggunaan-wajar" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">5. Ketentuan Penggunaan & Larangan</h2>
+              <p>
+                Dalam mengakses <code>altia.dev</code>, portal subdomain, maupun endpoint API kami, Anda dilarang keras untuk:
+              </p>
+              <ul>
+                <li>Mencoba menyusup atau mengakses server, database, atau akun klien lain tanpa hak dan wewenang resmi.</li>
+                <li>Melakukan web scraping, crawling massal, atau penarikan data otomatis tanpa izin tertulis dari ALTIA DEV.</li>
+                <li>Melancarkan serangan Denial-of-Service (DoS), membanjiri lalu lintas data, atau merusak stabilitas infrastruktur.</li>
+                <li>Merekacipta ulang (reverse-engineer), mendekompilasi, atau membongkar kode sumber perangkat lunak proprietary kami.</li>
+                <li>Mengunggah virus, malware, script berbahaya, atau melakukan tindakan eksploitasi celah keamanan.</li>
+                <li>Menggunakan sistem kami untuk kegiatan yang bertentangan dengan hukum, penipuan, atau pencemaran nama baik.</li>
+              </ul>
+            </div>
 
-        <h2>7. Ketentuan Pembayaran</h2>
-        <p>
-          Ketentuan pembayaran, milestone, dan jadwal ditentukan dalam perjanjian proyek individual. Ketentuan standar mencakup uang muka dengan pembayaran berbasis milestone.
-        </p>
+            <!-- Section 6 -->
+            <div id="kekayaan-intelektual" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">6. Hak Kekayaan Intelektual</h2>
+              <ul>
+                <li><strong>Aset Milik ALTIA DEV:</strong> Seluruh merek dagang, logo, struktur desain grafis, kode sumber kerangka dasar situs, dan dokumentasi di <code>altia.dev</code> merupakan hak milik eksklusif ALTIA DEV dan dilindungi undang-undang hak cipta.</li>
+                <li><strong>Deliverables Klien:</strong> Hak kepemilikan atas deliverables perangkat lunak kustom yang dipesan oleh klien akan diserahkan secara resmi setelah <strong>pelunasan 100%</strong> seluruh tagihan proyek sesuai kesepakatan kontrak.</li>
+                <li><strong>Hak Portofolio:</strong> ALTIA DEV berhak menampilkan karya dan studi kasus proyek yang telah selesai dalam portofolio promosi kami, kecuali disepakati lain dalam Perjanjian Kerahasiaan (NDA).</li>
+              </ul>
+            </div>
 
-        <h2>8. Pengakhiran</h2>
-        <p>
-          Salah satu pihak dapat mengakhiri keterlibatan proyek sesuai yang ditentukan dalam perjanjian proyek. Kami berhak menangguhkan atau mengakhiri akses situs web untuk pelanggaran ketentuan ini.
-        </p>
+            <!-- Section 7 -->
+            <div id="pembayaran" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">7. Ketentuan Kontrak & Pembayaran</h2>
+              <p>
+                Ketentuan komersial standar untuk kerja sama pengembangan perangkat lunak mencakup:
+              </p>
+              <ul>
+                <li><strong>Uang Muka & Milestone:</strong> Proyek umumnya membutuhkan komitmen uang muka (down payment) sebelum sprint pengerjaan dimulai, disusul penagihan bertahap berdasarkan pencapaian milestone.</li>
+                <li><strong>Mata Uang & Jatuh Tempo:</strong> Tagihan diterbitkan dalam IDR (Rupiah) atau USD dengan batas waktu pembayaran maksimal 14 hari kalender via transfer bank resmi perusahaan.</li>
+                <li><strong>Keterlambatan Pembayaran:</strong> Keterlambatan pelunasan dapat menyebabkan penangguhan sementara pengerjaan sprint atau penghentian sementara akses ke server staging.</li>
+              </ul>
+            </div>
 
-        <h2>9. Hukum yang Berlaku</h2>
-        <p>
-          Syarat & Ketentuan ini diatur oleh hukum Republik Indonesia. Setiap perselisihan akan diselesaikan melalui pengadilan di Jakarta, Indonesia.
-        </p>
+            <!-- Section 8 -->
+            <div id="tanggung-jawab" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">8. Batasan Tanggung Jawab</h2>
+              <p>
+                Situs web, fitur kalkulator, dan aplikasi subdomain kami disediakan atas dasar <strong>"sebagaimana adanya" (as-is)</strong> dan <strong>"sebagaimana tersedia" (as-available)</strong> tanpa jaminan eksplisit maupun implisit.
+              </p>
+              <p>
+                Sepanjang diperbolehkan oleh peraturan perundang-undangan:
+              </p>
+              <ul>
+                <li>ALTIA DEV tidak bertanggung jawab atas kerugian tidak langsung, kerugian insidental, kehilangan keuntungan usaha, hilangnya data, atau gangguan operasional bisnis Anda.</li>
+                <li>Total tanggung jawab kumulatif ALTIA DEV atas segala klaim yang timbul dari Ketentuan ini dibatasi sebesar jumlah aktual yang telah Anda bayarkan kepada ALTIA DEV atas layanan terkait selama tiga (3) bulan sebelum timbulnya klaim.</li>
+              </ul>
+            </div>
 
-        <h2>10. Perubahan Ketentuan</h2>
-        <p>
-          Kami berhak mengubah ketentuan ini kapan saja. Perubahan akan diposting di halaman ini dengan tanggal yang diperbarui. Penggunaan berkelanjutan atas situs web merupakan penerimaan atas ketentuan yang diubah.
-        </p>
+            <!-- Section 9 -->
+            <div id="pengakhiran" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">9. Penangguhan & Pengakhiran Layanan</h2>
+              <p>
+                Kami berhak menangguhkan, membatasi, atau mengakhiri akses Anda ke <code>altia.dev</code> dan aplikasi subdomain kami secara sepihak tanpa pemberitahuan sebelumnya jika Anda terbukti melanggar Ketentuan ini, melakukan tindakan yang membahayakan keamanan siber, atau menyalahgunakan platform.
+              </p>
+            </div>
 
-        <h2>11. Hubungi Kami</h2>
-        <p>
-          Untuk pertanyaan tentang Syarat & Ketentuan ini, hubungi kami di:<br />
-          <strong>Email:</strong> <a href="mailto:hello@altia.dev" class="text-vermilion hover:underline">hello@altia.dev</a><br />
-          <strong>Lokasi:</strong> Jakarta, Indonesia
-        </p>
+            <!-- Section 10 -->
+            <div id="hukum-berlaku" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">10. Hukum yang Berlaku & Yurisdiksi</h2>
+              <p>
+                Syarat & Ketentuan ini diatur, ditafsirkan, dan tunduk sepenuhnya pada hukum yang berlaku di <strong>Republik Indonesia</strong>.
+              </p>
+              <p>
+                Setiap perselisihan atau sengketa yang timbul akan diupayakan untuk diselesaikan terlebih dahulu secara musyawarah mufakat. Apabila dalam waktu 30 (tiga puluh) hari tidak tercapai kesepakatan, sengketa akan diselesaikan melalui yurisdiksi eksklusif <strong>Pengadilan Negeri di wilayah Jakarta, Indonesia</strong>.
+              </p>
+            </div>
+
+            <!-- Section 11 -->
+            <div id="perubahan" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">11. Perubahan Ketentuan</h2>
+              <p>
+                Kami dapat memperbarui Syarat & Ketentuan ini sewaktu-waktu guna menyesuaikan dengan perkembangan teknologi dan regulasi pemerintah. Pembaruan akan ditandai dengan tanggal revisi di bagian atas halaman ini. Keberlanjutan penggunaan situs atau aplikasi subdomain menandakan penerimaan Anda atas perubahan tersebut.
+              </p>
+            </div>
+
+            <!-- Section 12 -->
+            <div id="kontak" class="scroll-mt-28 mb-12">
+              <h2 class="text-2xl font-bold border-b border-warm-border/60 pb-3 mb-4">12. Informasi Kontak</h2>
+              <p>
+                Untuk pertanyaan, klarifikasi legal, atau pembahasan kontrak layanan, silakan hubungi tim kami di:
+              </p>
+              <div class="p-6 rounded-2xl bg-ivory border border-warm-border not-prose mt-4">
+                <h4 class="font-display font-bold text-charcoal text-base mb-2">ALTIA DEV</h4>
+                <p class="text-xs text-charcoal-muted leading-relaxed mb-4">
+                  Creative Software & AI Engineering Studio
+                </p>
+                <div class="space-y-2 text-xs text-charcoal">
+                  <div class="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-vermilion" />
+                    <span>Email: <a href="mailto:hello@altia.dev" class="text-vermilion font-semibold hover:underline">hello@altia.dev</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-terracotta" />
+                    <span>Website: <a href="https://altia.dev/id" class="text-charcoal font-semibold hover:underline">https://altia.dev/id</a></span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <Server className="w-4 h-4 text-charcoal-muted" />
+                    <span>Lokasi: Jakarta, Indonesia</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </main>
       </div>
     </Container>
   </section>

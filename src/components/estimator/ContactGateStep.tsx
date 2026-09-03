@@ -217,6 +217,47 @@ export function ContactGateStep({
             )}
           </Button>
         </div>
+
+        {/* Legal Consent Disclaimer */}
+        <p className="text-[11px] text-center text-charcoal-muted/80 leading-relaxed pt-2">
+          {locale === "id" ? (
+            <>
+              Dengan mengirim data ini, Anda menyetujui{" "}
+              <a
+                href="/id/privacy"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Kebijakan Privasi
+              </a>{" "}
+              dan{" "}
+              <a
+                href="/id/terms"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Syarat & Ketentuan
+              </a>{" "}
+              kami.
+            </>
+          ) : (
+            <>
+              By submitting your details, you agree to our{" "}
+              <a
+                href="/privacy"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="/terms"
+                className="text-charcoal hover:text-vermilion underline decoration-warm-border underline-offset-2 transition-colors"
+              >
+                Terms of Service
+              </a>
+              .
+            </>
+          )}
+        </p>
       </form>
     </div>
   );
