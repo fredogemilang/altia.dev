@@ -2,19 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import { Container } from '../../components/ui/Container';
 import { Badge } from '../../components/ui/Badge';
-import { Card } from '../../components/ui/Card';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { ScrollReveal } from '../../components/effects/ScrollReveal';
-import { TEAM_MEMBERS } from '../../data/team';
 import { t, type Locale } from '../../i18n/utils';
 import {
   Sparkles,
   HeartHandshake,
   Target,
   Eye,
-  Github,
-  Linkedin,
-  Twitter,
 } from 'lucide-react';
 
 const locale: Locale = 'id';
@@ -127,96 +122,6 @@ const locale: Locale = 'id';
               </p>
             </div>
           </ScrollReveal>
-        </div>
-      </Container>
-    </section>
-
-    <!-- 4. Team Members -->
-    <section>
-      <Container size="large">
-        <SectionHeading
-          client:visible
-          tag="Tim Kami"
-          title={t(locale, 'About.teamTitle')}
-          subtitle={t(locale, 'About.teamSubtitle')}
-        />
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {TEAM_MEMBERS.map((member, index) => (
-            <ScrollReveal
-              client:visible
-              key={member.name}
-              variant="fade-up"
-              delay={index * 0.1}
-              className="h-full"
-            >
-              <Card className="h-full flex flex-col justify-between p-6 bg-warm-card border-warm-border group hover:border-vermilion">
-                <div>
-                  <div class="aspect-square w-full rounded-2xl bg-cream overflow-hidden mb-6 relative">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      width={400}
-                      height={400}
-                      loading="lazy"
-                      decoding="async"
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <h3 class="font-display font-bold text-xl text-charcoal mb-1">
-                    {member.name}
-                  </h3>
-                  <span class="text-xs font-display font-bold uppercase tracking-wider text-vermilion block mb-1">
-                    {member.role[locale]}
-                  </span>
-                  {member.focus && (
-                    <span class="text-[11px] font-mono text-charcoal-muted/80 block mb-3">
-                      {member.focus}
-                    </span>
-                  )}
-                  <p class="text-xs text-charcoal-muted leading-relaxed mb-6">
-                    {member.bio[locale]}
-                  </p>
-                </div>
-
-                <div class="flex items-center gap-2 pt-4 border-t border-warm-border text-charcoal-muted">
-                  {member.socials.github && (
-                    <a
-                      href={member.socials.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
-                      aria-label="GitHub"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  )}
-                  {member.socials.twitter && (
-                    <a
-                      href={member.socials.twitter}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
-                      aria-label="Twitter"
-                    >
-                      <Twitter className="w-4 h-4" />
-                    </a>
-                  )}
-                  {member.socials.linkedin && (
-                    <a
-                      href={member.socials.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="p-1.5 rounded-full hover:text-vermilion transition-colors"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              </Card>
-            </ScrollReveal>
-          ))}
         </div>
       </Container>
     </section>
