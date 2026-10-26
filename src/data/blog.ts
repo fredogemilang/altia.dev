@@ -92,11 +92,11 @@ export const BLOG_POSTS: BlogPost[] = [
       id: ARTICLE_001_ID,
     },
     author: {
-      name: "Alfredo Gemilang",
-      role: "Founder & Lead Engineer",
-      avatar: "/uploads/team/Alfredo-Gemilang.webp",
+      name: "Agatha Azi",
+      role: "Technical Content Writer",
+      avatar: "/uploads/team/Agatha-Azi.webp",
     },
-    coverImage: "/uploads/blog/complex-pdfs-to-knowledge.webp",
+    coverImage: "/uploads/blog/pdf-to-structured-knowledge.webp",
   },
   {
     slug: {
@@ -132,9 +132,9 @@ export const BLOG_POSTS: BlogPost[] = [
       id: ARTICLE_002_ID,
     },
     author: {
-      name: "Alfredo Gemilang",
-      role: "Founder & Lead Engineer",
-      avatar: "/uploads/team/Alfredo-Gemilang.webp",
+      name: "Agatha Azi",
+      role: "Technical Content Writer",
+      avatar: "/uploads/team/Agatha-Azi.webp",
     },
     coverImage: "/uploads/blog/meilisearch-vs-vector-search.webp",
   },
@@ -172,9 +172,9 @@ export const BLOG_POSTS: BlogPost[] = [
       id: ARTICLE_003_ID,
     },
     author: {
-      name: "Alfredo Gemilang",
-      role: "Founder & Lead Engineer",
-      avatar: "/uploads/team/Alfredo-Gemilang.webp",
+      name: "Agatha Azi",
+      role: "Technical Content Writer",
+      avatar: "/uploads/team/Agatha-Azi.webp",
     },
     coverImage: "/uploads/blog/rag-vs-search.webp",
   },
@@ -223,11 +223,11 @@ export const BLOG_POSTS: BlogPost[] = [
       id: ARTICLE_004_ID,
     },
     author: {
-      name: "Alfredo Gemilang",
-      role: "Founder & Lead Engineer",
-      avatar: "/uploads/team/Alfredo-Gemilang.webp",
+      name: "Agatha Azi",
+      role: "Technical Content Writer",
+      avatar: "/uploads/team/Agatha-Azi.webp",
     },
-    coverImage: "/uploads/blog/004-human-in-the-loop-ai.webp",
+    coverImage: "/uploads/blog/human-in-the-loop-ai.webp",
   },
   {
     slug: { en: "what-is-design-engineering", id: "apa-itu-design-engineering" },
@@ -247,8 +247,8 @@ export const BLOG_POSTS: BlogPost[] = [
       en: "What is design engineering? Learn how design, content, interaction, and engineering work together to create digital experiences that are visually coherent, interactive, usable, and technically sound.",
       id: "Apa itu design engineering? Pelajari bagaimana design, content, interaction, dan engineering bekerja bersama untuk menciptakan digital experience yang visual konsisten, interaktif, usable, dan secara teknis sound."
     },
-    author: { name: "Alfredo Gemilang", role: "Founder & Lead Engineer", avatar: "/uploads/team/Alfredo-Gemilang.webp" },
-    coverImage: "/uploads/blog/005-design-engineering.webp",
+    author: { name: "Agatha Azi", role: "Technical Content Writer", avatar: "/uploads/team/Agatha-Azi.webp" },
+    coverImage: "/uploads/blog/what-is-design-engineering.webp",
     content: { en: ARTICLE_005_EN, id: ARTICLE_005_ID },
   },
 ];
